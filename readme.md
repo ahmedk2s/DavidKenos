@@ -4,7 +4,7 @@
 
 Run `composer install` inside the root directory, this will create a vendor directory with the dependencies.
 
-Run `symfony new my_project_directory --version="6.3.*"` --webapp to create project symfony.
+Run `symfony new my_project_directory --version="6.3.*" --webapp` to create project symfony.
 
 Create a `.env.local` file inside the root directory with the following information customized to your needs:
 
