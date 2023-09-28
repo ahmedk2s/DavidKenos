@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -52,6 +54,14 @@ class User
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $linkedin_link = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: News::class, orphanRemoval: true)]
+    private Collection $news;
+
+    public function __construct()
+    {
+        $this->news = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -210,6 +220,36 @@ class User
     public function setLinkedinLink(?string $linkedin_link): static
     {
         $this->linkedin_link = $linkedin_link;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, News>
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): static
+    {
+        if (!$this->news->contains($news)) {
+            $this->news->add($news);
+            $news->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): static
+    {
+        if ($this->news->removeElement($news)) {
+            // set the owning side to null (unless already changed)
+            if ($news->getUser() === $this) {
+                $news->setUser(null);
+            }
+        }
 
         return $this;
     }
