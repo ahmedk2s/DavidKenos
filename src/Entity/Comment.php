@@ -23,6 +23,10 @@ class Comment
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_edition = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comment')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Comment
     public function setDateEdition(?\DateTimeInterface $date_edition): static
     {
         $this->date_edition = $date_edition;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
