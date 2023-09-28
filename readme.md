@@ -2,10 +2,6 @@
 
 ## Installation
 
-Run `composer install` inside the root directory, this will create a vendor directory with the dependencies.
-
-Run `symfony new my_project_directory --version="6.3.*"` --webapp to create project symfony.
-
 Create a `.env.local` file inside the root directory with the following information customized to your needs:
 
 ```ini
@@ -14,6 +10,12 @@ APP_SECRET=app_secret
 
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?charset=utf8"
 ```
+
+Run `composer install` inside the root directory, this will create a vendor directory with the dependencies.
+
+Run `php bin/console doctrine:database:create` to create the database.
+
+Run `php bin/console doctrine:migrations:migrate` to create the tables.
 
 ## Contributing
 
