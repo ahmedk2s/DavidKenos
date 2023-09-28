@@ -25,6 +25,7 @@ class Post
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_edition = null;
 
+
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
@@ -36,10 +37,16 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
 
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
+
     public function __construct()
     {
+        $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
     }
+    
+
 
     public function getId(): ?int
     {
@@ -120,7 +127,23 @@ class Post
             $this->likes->add($like);
             $like->setPost($this);
         }
+        return $this;
+    }
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
 
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setPost($this);
+        }
+ 
         return $this;
     }
 
@@ -130,6 +153,16 @@ class Post
             // set the owning side to null (unless already changed)
             if ($like->getPost() === $this) {
                 $like->setPost(null);
+            }
+        }
+        return $this;
+    }
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getPost() === $this) {
+                $comment->setPost(null);
             }
         }
 

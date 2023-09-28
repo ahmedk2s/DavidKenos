@@ -66,6 +66,12 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notification::class, orphanRemoval: true)]
+    private Collection $notification;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ChocolateShop $chocolate_shop = null;
 
     public function __construct()
     {
@@ -73,6 +79,7 @@ class User
         $this->comment = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->notification = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -310,6 +317,22 @@ class User
             $this->posts->add($post);
             $post->setUser($this);
         }
+        return $this;
+    }
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotification(): Collection
+    {
+        return $this->notification;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notification->contains($notification)) {
+            $this->notification->add($notification);
+            $notification->setUser($this);
+        }
 
         return $this;
     }
@@ -320,6 +343,17 @@ class User
             // set the owning side to null (unless already changed)
             if ($post->getUser() === $this) {
                 $post->setUser(null);
+            }
+            return $this;
+        }
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notification->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
             }
         }
 
@@ -351,8 +385,21 @@ class User
             if ($like->getUser() === $this) {
                 $like->setUser(null);
             }
+            return $this;
         }
+    }
+    public function getChocolateShop(): ?ChocolateShop
+    {
+        return $this->chocolate_shop;
+    }
+
+
+
+    public function setChocolateShop(?ChocolateShop $chocolate_shop): static
+    {
+        $this->chocolate_shop = $chocolate_shop;
 
         return $this;
     }
 }
+
