@@ -61,10 +61,18 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comment;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notification::class, orphanRemoval: true)]
+    private Collection $notification;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ChocolateShop $chocolate_shop = null;
+
     public function __construct()
     {
         $this->news = new ArrayCollection();
         $this->comment = new ArrayCollection();
+        $this->notification = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -284,6 +292,48 @@ class User
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotification(): Collection
+    {
+        return $this->notification;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notification->contains($notification)) {
+            $this->notification->add($notification);
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notification->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getChocolateShop(): ?ChocolateShop
+    {
+        return $this->chocolate_shop;
+    }
+
+    public function setChocolateShop(?ChocolateShop $chocolate_shop): static
+    {
+        $this->chocolate_shop = $chocolate_shop;
 
         return $this;
     }
