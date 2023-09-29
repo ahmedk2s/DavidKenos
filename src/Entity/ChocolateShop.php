@@ -15,9 +15,6 @@ class ChocolateShop
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $name = null;
-
     #[ORM\Column(length: 50)]
     private ?string $city = null;
 
@@ -34,17 +31,6 @@ class ChocolateShop
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getCity(): ?string
     {

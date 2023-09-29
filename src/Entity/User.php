@@ -7,9 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -393,13 +397,23 @@ class User
         return $this->chocolate_shop;
     }
 
-
-
     public function setChocolateShop(?ChocolateShop $chocolate_shop): static
     {
         $this->chocolate_shop = $chocolate_shop;
 
         return $this;
     }
+
+    public function eraseCredentials()
+    {
+        // Vous pouvez laisser cette méthode vide si vous n'avez pas de données sensibles à effacer
+    }
+
+    public function getUserIdentifier(): string
+    {
+        // Utilisez l'adresse e-mail comme identifiant de l'utilisateur
+        return $this->email;
+    }
+
 }
 
