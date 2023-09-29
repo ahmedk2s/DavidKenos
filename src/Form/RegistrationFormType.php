@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -48,6 +49,11 @@ class RegistrationFormType extends AbstractType
                     'maxlength' => '255',
                 ],
                 'label' => 'Poste occupé',
+            ])
+            ->add('chocolate_shop', EntityType::class, [
+            'class' => \App\Entity\ChocolateShop::class,
+                'choice_label' => 'city',
+                'label' => 'Chocolaterie',
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
