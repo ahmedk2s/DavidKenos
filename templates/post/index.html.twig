@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Posts{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>La vie des chocolaterie,</h1>
+
+    {% if posts is not empty %}
+        <ul>
+            {% for post in posts %}
+                <li>Date de création : {{ post.dateCreation|date('d/m/Y ') }}</li>
+                <li>Texte : {{ post.text }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun article n'est disponible pour le moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

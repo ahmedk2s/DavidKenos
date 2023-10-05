@@ -40,6 +40,7 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -169,3 +170,4 @@ class Post
         return $this;
     }
 }
+
