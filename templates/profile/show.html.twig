@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ user.lastName }}
+    {{ user.firstName }}
+    {{ user.jobTitle }}
+    {{ user.chocolateShop }}
+    {{ user.facebookLink }}
+    {{ user.instagramLink }}
+    {{ user.twitterLink }}
+    {{ user.linkedinLink }}
+    
+    {# <a href="{{ path('app ...') }}" class="btn">Voir mon profil</a>
+    <a href="{{ path('app ...') }}" class="btn">Modifier mon profil</a>
+    <a href="{{ path('app ...') }}" class="btn">Publier un post</a>
+    <a href="{{ path('app ...') }}" class="btn">Trombinoscope</a>
+    <a href="{{ path('app ...') }}" class="btn">Envoyer un mail</a>  #}
+
+    <a href="{{ path('app_logout') }}">Déconnexion</a>
+
+{% endblock %}
+
