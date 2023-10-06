@@ -1,0 +1,17 @@
+{{ form_errors(form) }}
+
+{{ form_start(form) }}
+    {{ form_row(registrationForm.first_name, {'attr': {'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées'}}) }}
+    {{ form_row(registrationForm.last_name, {'attr': {'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées'}}) }}
+    {{ form_row(form.job_title) }}
+    {{ form_row(form.email) }}
+    {{ form_row(registrationForm.plainPassword, {'attr': {'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$', 'title': 'Au moins 8 caractères, une majuscule, une minuscule et un chiffre'}}) }}
+   {# ^ : Indique que çadoit commencer au début de la chaîne. #}
+   {# (?=.*[a-z]) : Signifie que la chaîne doit contenir au moins une lettre minuscule. #}
+   {# (?=.*[A-Z]) : Signifie que la chaîne doit contenir au moins une lettre majuscule. #}
+   {# (?=.*\d) : Signifie que la chaîne doit contenir au moins un chiffre. #}
+   {# [a-zA-Z\d]{8,} : Signifie que la chaîne doit être composée d'au moins 8 caractères (minuscules, majuscules et chiffres) ou plus. #}
+    {{ form_row(form.chocolate_shop) }}
+    {{ form_row(form.agreeTerms) }}
+    <button type="submit" class="btn">Inscription</button>
+{{ form_end(form) }}
