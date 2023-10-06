@@ -77,6 +77,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?ChocolateShop $chocolate_shop = null;
 
+    #[ORM\Column(type: "boolean")]
+    private $isApproved = false;
+
+
     public function __construct()
     {
         $this->news = new ArrayCollection();
@@ -401,6 +405,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->chocolate_shop = $chocolate_shop;
 
+        return $this;
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
         return $this;
     }
 

@@ -5,7 +5,8 @@
     {{ form_row(registrationForm.last_name, {'attr': {'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées'}}) }}
     {{ form_row(form.job_title) }}
     {{ form_row(form.email) }}
-    {{ form_row(registrationForm.plainPassword, {'attr': {'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$', 'title': 'Au moins 8 caractères, une majuscule, une minuscule et un chiffre'}}) }}
+    {{ form_row(registrationForm.plainPassword) }}
+
    {# ^ : Indique que çadoit commencer au début de la chaîne. #}
    {# (?=.*[a-z]) : Signifie que la chaîne doit contenir au moins une lettre minuscule. #}
    {# (?=.*[A-Z]) : Signifie que la chaîne doit contenir au moins une lettre majuscule. #}
