@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,7 +75,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/employe', name: 'app_register_employe')]
-    public function registerEmployee(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function registerEmployee(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SendMailService $mail): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -90,10 +91,17 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            
             $entityManager->persist($user);
             $entityManager->flush();
            
+            $mail->send(
+                'no-reply@monsite.net',
+                $user->getEmail(),
+                'Activation de votre compte',
+                'Activation',
+                [ 'user' => $user ] 
+            );
 
             return $this->redirectToRoute('app_accueil'); 
         }

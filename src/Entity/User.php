@@ -77,6 +77,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?ChocolateShop $chocolate_shop = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
+    
     public function __construct()
     {
         $this->news = new ArrayCollection();
@@ -400,6 +403,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setChocolateShop(?ChocolateShop $chocolate_shop): static
     {
         $this->chocolate_shop = $chocolate_shop;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    // Setter pour définir la valeur de $is_verified
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->is_verified = $isVerified;
 
         return $this;
     }
