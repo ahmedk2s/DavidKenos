@@ -80,6 +80,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $is_verified = false;
     
+    #[ORM\Column(type: "boolean")]
+    private $isApproved = false;
+
+
     public function __construct()
     {
         $this->news = new ArrayCollection();
@@ -416,7 +420,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->is_verified = $isVerified;
+        return $this;
+    }
 
+    public function isApproved(): bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
         return $this;
     }
 

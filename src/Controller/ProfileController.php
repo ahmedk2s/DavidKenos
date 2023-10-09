@@ -8,9 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileController extends AbstractController
 {
-    /**
-     * @Route("/profil", name="profile")
-     */
+    #[Route('/profil', name: 'profile')]
     public function showProfile(): Response
     {
         // Récupérez l'utilisateur connecté 

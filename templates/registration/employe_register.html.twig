@@ -3,19 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Inscription Employé</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.first_name) }}
-        {{ form_row(registrationForm.last_name) }}
-        {{ form_row(registrationForm.job_title) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-         {{ form_row(registrationForm.chocolate_shop) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Inscription</button>
-    {{ form_end(registrationForm) }}
+    <h1>Inscription Employés</h1>
+    
+    {% include 'registration/base_form.html.twig' with {'form': registrationForm} %}
 {% endblock %}
