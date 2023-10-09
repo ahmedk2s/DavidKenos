@@ -433,7 +433,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isApproved = $isApproved;
         return $this;
     }
-    
+
     public function eraseCredentials()
     {
         // Vous pouvez laisser cette méthode vide si vous n'avez pas de données sensibles à effacer
