@@ -122,22 +122,41 @@ class Post
         return $this->likes;
     }
 
-    public function addLike(Like $like): static
+    public function addLike(Like $like): self
     {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
             $like->setPost($this);
         }
+    
         return $this;
     }
-    /**
+    
+    public function removeLike(\App\Entity\Like $like): self
+    {
+    $this->likes->removeElement($like);
+
+    return $this;
+    }
+
+    public function isLikedByUser(User $user): bool
+    {
+    foreach ($this->likes as $like) {
+        if ($like->getUser() === $user) {
+            return true;
+        }
+    }
+
+    return false;
+    }
+
+     /**
      * @return Collection<int, Comment>
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
-
     public function addComment(Comment $comment): static
     {
         if (!$this->comments->contains($comment)) {
@@ -145,17 +164,6 @@ class Post
             $comment->setPost($this);
         }
  
-        return $this;
-    }
-
-    public function removeLike(Like $like): static
-    {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getPost() === $this) {
-                $like->setPost(null);
-            }
-        }
         return $this;
     }
     public function removeComment(Comment $comment): static

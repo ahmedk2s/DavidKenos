@@ -14,8 +14,14 @@
     {% if posts is not empty %}
         <ul>
             {% for post in posts %}
+                <li>Prénom : {{ post.user.getFirstname }}</li>
+                <li>Nom : {{ post.user.getLastname }}</li>
+                <li>Catégorie : {{ post.category.name }}</li>
+                <li>Titre : {{ post.title }}</li>
                 <li>Date de création : {{ post.dateCreation|date('d/m/Y ') }}</li>
                 <li>Texte : {{ post.text }}</li>
+
+                {% include '_partials/_like.html.twig' %}
             {% endfor %}
         </ul>
     {% else %}
