@@ -1,0 +1,76 @@
+.menu-vertical {
+    background-color: #f7f7f8;
+    width: 250px; 
+    height: 100vh;
+
+    .section-profil {
+        background-color: #1f2547;
+        height: calc(100% / 3);
+        padding: 20px;
+        position: relative;
+        
+        .profile-image {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .name-details {
+            position: absolute; 
+            bottom: 80px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            text-align: center;
+
+            .prenom {
+                font-family: 'FontForPrenom'; // Remplacez par le nom de la police souhaitée
+                color: white;
+            }
+            .nom {
+                font-family: 'FontForNom'; // Remplacez par le nom de la police souhaitée
+                color: white;
+                text-transform: uppercase;
+            }
+        }
+
+        .voir-profil {
+           position: absolute; 
+           width: 80%;
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background-color: #0baa9f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .section-liens {
+        background-color: #191e39;
+        height: calc((100% / 3) * 2);
+
+        .menu-link {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            &:hover {
+                background-color: #15394d;
+            }
+        }
+    }
+
+    .section-logo {
+        padding: 20px;
+        text-align: center;
+        img {
+            max-width: 80%;
+            height: auto;
+        }
+    }
+}

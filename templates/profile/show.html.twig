@@ -2,22 +2,30 @@
 
 {% block body %}
 
-    {{ user.lastName }}
-    {{ user.firstName }}
-    {{ user.jobTitle }}
-    {{ user.chocolateShop }}
-    {{ user.facebookLink }}
-    {{ user.instagramLink }}
-    {{ user.twitterLink }}
-    {{ user.linkedinLink }}
-    
-    {# <a href="{{ path('app ...') }}" class="btn">Voir mon profil</a>
-    <a href="{{ path('app ...') }}" class="btn">Modifier mon profil</a>
-    <a href="{{ path('app ...') }}" class="btn">Publier un post</a>
-    <a href="{{ path('app ...') }}" class="btn">Trombinoscope</a>
-    <a href="{{ path('app ...') }}" class="btn">Envoyer un mail</a>  #}
+<div class="menu-vertical">
+    <!-- Section de profil -->
+    <div class="section-profil">
+        {# <img src="{{ path_to_profile_image }}" alt="Photo de profil" class="profile-image"> #}
+        <div class="name-details">
+            <span class="prenom">{{ user.firstName }}</span>
+            <span class="nom">{{ user.lastName }}</span>
+        </div>
+        <button class="voir-profil">Voir mon profil</button>
+    </div>
 
-    <a href="{{ path('app_logout') }}">Déconnexion</a>
+    <!-- Section des liens -->
+    <div class="section-liens">
+        <a href="#" class="menu-link">Accueil</a>
+        <a href="#" class="menu-link">Actualités de l'entreprise</a>
+        <a href="#" class="menu-link">Trombinoscope</a>
+        <a href="#" class="menu-link">La vie des chocolateries</a>
+        <a href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+    </div>
+
+    <!-- Section du logo -->
+    <div class="section-logo">
+        {# <img src="{{ path_to_company_logo }}" alt="Logo de l'entreprise" class="company-logo"> #}
+    </div>
+</div>
 
 {% endblock %}
-
