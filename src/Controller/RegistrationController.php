@@ -119,7 +119,7 @@ class RegistrationController extends AbstractController
 
             
             $mail->send(
-                'no-reply@monsite.net',
+                'no-reply@davisKenos.net',
                 $user->getEmail(),
                 'Activation de votre compte',
                 'Activation',
@@ -168,7 +168,7 @@ class RegistrationController extends AbstractController
 
         if($user->getIsVerified()){
             $this->addFlash('warning', 'Cet utilisateur est déjà activé');
-            return $this->redirectToRoute('profile_index');    
+            return $this->redirectToRoute('profile');    
         }
 
         

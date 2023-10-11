@@ -149,6 +149,15 @@ class Post
 
     return false;
     }
+    /**
+     * Get the number of likes
+     *
+     * @return integer
+     */
+    public function howManyLikes(): int
+    {
+        return count($this->likes);
+    }
 
      /**
      * @return Collection<int, Comment>

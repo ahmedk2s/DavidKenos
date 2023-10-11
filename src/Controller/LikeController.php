@@ -5,12 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 class LikeController extends AbstractController
 {
     #[Route('/Like/post/{id}', name: 'like.post')]
+    #[IsGranted(('ROLE_EMPLOYE'))]
     public function like(\App\Entity\Post $post, EntityManagerInterface $manager): Response 
 {
     $user = $this->getUser();
@@ -26,7 +28,10 @@ class LikeController extends AbstractController
         $manager->remove($existingLike); // Supprimez le like de la base de données
         $manager->flush();
 
-        return $this->json(['message' => 'Le Like a été supprimé.']);
+        return $this->json([
+            'message' => 'Le Like a été supprimé.',
+            'nbLike' => $post->howManyLikes()
+        ]);
     }
 
     // Créez un nouvel objet Like
@@ -41,6 +46,9 @@ class LikeController extends AbstractController
     $manager->persist($like);
     $manager->flush();
     
-    return $this->json(['message' => 'Le Like a été ajouté.']);
+    return $this->json([
+        'message' => 'Le Like a été ajouté.',
+        'nbLike' => $post->howManyLikes()
+    ]);
 }
 }
