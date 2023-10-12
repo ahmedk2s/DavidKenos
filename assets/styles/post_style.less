@@ -1,0 +1,66 @@
+@colorYellow: #f2bf2c;
+@colorTeal: #0baa9f;
+@colorDarkBlue: #7279A3;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.example-wrapper {
+    background-color: white;
+    font-size: 0.8em;
+    padding: 3px;
+    position: absolute;
+    margin: 1em auto;
+    max-width: 800px;
+    width: 95%;
+
+    ul li {
+        list-style-type: none;
+    }
+
+    .right-part {
+        margin-left: 15%;
+        margin-right: 8%;
+
+        ul li:first-child {
+            background-color: @colorYellow;
+            text-align: center;
+            width: 100px;
+            position: relative;
+            right: -560px;
+            font-weight: bold;
+            padding: 3px 5px;
+        }
+
+        .firstname {
+            font-family: 'Playfair Display', serif;
+        }
+
+        ul li:nth-child(3) {
+            color: @colorTeal;
+            font-weight: 900;
+            margin-top: 2px;
+        }
+
+        ul h4 {
+            font-weight: bold;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        ul p {
+            margin-top: 0px;
+            font-weight: 550;
+        }
+        .like a {
+            color: @colorDarkBlue;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    }
+}
+

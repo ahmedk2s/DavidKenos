@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addStyleEntry("css/app_post", "./assets/styles/post_style.less")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -52,6 +53,8 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
     })
+
+    Encore.enableLessLoader();
 
     // enables Sass/SCSS support
     //.enableSassLoader()
