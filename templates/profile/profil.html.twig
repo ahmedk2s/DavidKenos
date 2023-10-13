@@ -2,6 +2,12 @@
 
 {% block title %} Profil {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/profile_style.css">
+    <link rel="stylesheet" href="/assets/styles/css/post_style.css">
+    <link rel="stylesheet" href="/assets/styles/css/sidebar_style.css">
+{% endblock %}
+
 {% block body %}
     {# Menu vertical #}
     {% include 'profile/base_sidebar.html.twig' %}
@@ -49,6 +55,10 @@
             <a href="{{ user.email }}" class="email-button">Envoyer un mail</a>
         </div>
     </section>
+
+    <div>
+    {% include 'post/post.html.twig' %}
+    </div>
 
     <div class="button-container">
         <a href="#" class="btn">Modifier mon profil</a>

@@ -1,0 +1,101 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+@import"../includes/fonts.less";
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+
+.menu-vertical {
+    background-color: #f7f7f8;
+    width: 250px;
+    height: 100vh;
+
+    .section-profil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        background-color: #1f2547;
+        height: calc(100% / 3);
+        padding: 20px;
+        position: relative;
+
+        .profile-image {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .name-details {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: @colorTextButton;
+            .fullcenter();
+            gap: 10px;
+            font-size: 22px;
+
+            .firstname {
+                font-family: "Playfair Display", serif;
+                color: white;
+            }
+        }
+
+        .voir-profil {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            position: absolute;
+            width: 80%;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: @colorTeal;
+            color: @colorTextButton;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .section-liens {
+        background-color: @colorNightBlue;
+        height: calc((100% / 3) * 2);
+
+        .links-container {
+            padding-top: 30px;
+            padding-left: 10px;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 15px 20px;
+            color: @colorTextButton;
+            text-decoration: none;
+
+            &:hover {
+                background-color: @colorLightTeal;
+            }
+        }
+    }
+
+    .section-logo {
+        padding: 20px;
+        text-align: center;
+
+        img {
+            margin-top: 10px;
+            max-width: 80%;
+            height: auto;
+        }
+    }
+}
