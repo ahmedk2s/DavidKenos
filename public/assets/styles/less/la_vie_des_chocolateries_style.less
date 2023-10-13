@@ -1,0 +1,61 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+
+body {
+  background-color: @lightGray;
+  font-family: "Montserrat", sans-serif;
+
+  header {
+    .fullcenter();
+    align-items: center;
+    margin-left: 20%;
+    width: 80%;
+    letter-spacing: 2px;
+    height: 20vh;
+    padding-left: 6%;
+
+    h1 {
+      width: 100%;
+
+      .part1 {
+        font-weight: 900;
+      }
+      .part2 {
+        font-weight: 5;
+      }
+      .part3 {
+        color: @colorTeal;
+        font-weight: 900;
+      }
+    }
+  }
+
+  section {
+    width: 80%;
+    height: 80vh;
+    margin-left: 20%;
+    padding: 0 70px 0 50px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 20% 50% 26%;
+    grid-gap: 25px;
+    h4 {
+      text-align: center;
+    }
+  }
+
+  .container-latest-registrants {
+    background-color: white;
+    border-top: 5px solid @colorYellow;
+  }
+
+  .container-post {
+    background-color: red;
+  }
+
+  .container-categories {
+    background-color: @colorYellow;
+  }
+}

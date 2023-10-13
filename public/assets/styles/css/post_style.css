@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/playfairdisplay/v36/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtY.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf) format('truetype');
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.example-wrapper {
+  background-color: white;
+  font-size: 0.8em;
+  padding: 3px;
+  position: absolute;
+  margin: 1em auto;
+  max-width: 800px;
+  width: 95%;
+}
+.example-wrapper ul li {
+  list-style-type: none;
+}
+.example-wrapper .right-part {
+  margin-left: 15%;
+  margin-right: 8%;
+}
+.example-wrapper .right-part ul li:first-child {
+  background-color: #f2bf2c;
+  text-align: center;
+  width: 100px;
+  position: relative;
+  right: -560px;
+  font-weight: bold;
+  padding: 3px 5px;
+}
+.example-wrapper .right-part .firstname {
+  font-family: "Playfair Display", serif;
+}
+.example-wrapper .right-part ul li:nth-child(3) {
+  color: #0baa9f;
+  font-weight: 900;
+  margin-top: 2px;
+}
+.example-wrapper .right-part ul h4 {
+  font-weight: bold;
+  margin-top: 7px;
+  margin-bottom: 0px;
+}
+.example-wrapper .right-part ul p {
+  margin-top: 0px;
+  font-weight: 550;
+}
+.example-wrapper .right-part .like a {
+  color: #7279a3;
+  text-decoration: none;
+  font-weight: 700;
+}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Vie Des Chocolateries{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/la_vie_des_chocolateries_style.css">
+    <link rel="stylesheet" href="/assets/styles/css/post_style.css">
+{% endblock %}
+
+{% block body %}
+        {% if categories is not empty %}
+            {% for category in categories %}
+            <header>
+                <h1>
+                    <span class="part1">La vie</span>
+                    <span class="part2">des chocolateries,</span>
+                    <span class="part3">{{ category.name }}</span>
+                </h1>
+            </header>
+            <section>
+                <div class="grid-container">
+
+                    <div class="container-latest-registrants">
+                    <h4>Les derniers inscrits</h4>
+                    </div>
+
+                    <div class="container-post">
+                        {% include 'post/post.html.twig' %}
+                    </div>
+
+                    <div class="container-categories">
+                        <h4>{{ category.name }}</h4>
+                     </div>  
+            </section>
+                
+            {% endfor %}
+        {% else %}
+            <p>Aucune catégorie n'est disponible pour le moment.</p>
+        {% endif %}
+        
+       
+{% endblock %}
+

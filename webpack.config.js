@@ -22,7 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addStyleEntry("css/app_post", "./assets/styles/post_style.less")
-
+    .addStyleEntry('css/app_la_vie_des_chocolateries', './assets/styles/la_vie_des_chocolateries_style.less')
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
