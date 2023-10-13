@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profil {% endblock %}
+
+{% block body %}
+    {# Menu vertical #}
+    {% include 'profile/base_sidebar.html.twig' %}
+
+    <header class="banner-container">
+        <img src="{{ user.coverPicture }}" alt="Image en bandeau" class="banner-image">
+        <img src="{{ user.profilePicture }}" alt="Photo de profil" class="profile-image">
+    </header>
+    
+    <section>
+        <div class="card">
+            <div class="name-details">
+                <span class="firstname">{{ user.firstName }}</span>
+                <span class="lastname">{{ user.lastName }}</span>
+            </div>
+            <p class="header-card"> {{ user.jobTitle }} - <span class="chocolate-shop">{{ user.chocolateShop }}</span></p>
+            <p class="description">{{ user.description }}</p>
+
+            <div class="social-icons">
+                {% if user.facebookLink %}
+                    <a href="{{ user.facebookLink }}" class="icon-facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                {% endif %}
+                
+                {% if user.instagramLink %}
+                    <a href="{{ user.instagramLink }}" class="icon-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                {% endif %}
+                
+                {% if user.twitterLink %}
+                    <a href="{{ user.twitterLink }}" class="icon-twitter">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                {% endif %}
+                
+                {% if user.linkedinLink %}
+                    <a href="{{ user.linkedinLink }}" class="icon-linkedin">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                {% endif %}
+            </div>
+
+            <a href="{{ user.email }}" class="email-button">Envoyer un mail</a>
+        </div>
+    </section>
+
+    <div class="button-container">
+        <a href="#" class="btn">Modifier mon profil</a>
+        <a href="#" class="btn">Publier un post</a>
+        <a href="#" class="btn trombinoscope">Trombinoscope</a>
+    </div>
+{% endblock %}

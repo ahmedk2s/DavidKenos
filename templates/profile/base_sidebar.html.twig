@@ -1,0 +1,30 @@
+<div class="menu-vertical">
+    <!-- Section de profil -->
+    <div class="section-profil">
+        <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile-image">
+        <div class="name-details">
+            <span class="firstname">{{ user.firstName }}</span>
+            <span class="lastname">{{ user.lastName }}</span>
+        </div>
+        <button class="voir-profil">
+            <i class="fa-regular fa-user"></i> Voir mon profil
+        </button>
+    </div>
+
+    <!-- Section des liens -->
+    <div class="section-liens">
+        <div class="links-container">
+            <a href="#" class="menu-link">Accueil</a>
+            <a href="#" class="menu-link">Actualités de l'entreprise</a>
+            <a href="#" class="menu-link">Trombinoscope</a>
+            <a href="#" class="menu-link">La vie des chocolateries</a>
+            <a href="{{ path('app_logout') }}" class="menu-link"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
+        </div>
+
+        <!-- Section du logo -->
+        <div class="section-logo">
+            <img src="{{ asset('images/logo-david-kenos-blanc.png') }}" alt="Logo de David Kenos" class="company-logo">
+        </div>
+    </div>
+</div>
+
