@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="/assets/styles/css/la_vie_des_chocolateries_style.css">
     <link rel="stylesheet" href="/assets/styles/css/post_style.css">
 {% endblock %}
+ {% block javascripts %}
+{# {{ encore_entry_script_tags('app') }} #}
+        {% endblock %}
 
 {% block body %}
         {% if categories is not empty %}

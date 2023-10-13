@@ -2,12 +2,6 @@
   display: flex;
   flex-wrap: wrap;
 }
-.fullcenter {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
 body {
   background-color: #dfdfdf;
   font-family: "Montserrat", sans-serif;
@@ -53,9 +47,6 @@ body .grid-container h4 {
 body .container-latest-registrants {
   background-color: white;
   border-top: 5px solid #f2bf2c;
-}
-body .container-post {
-  background-color: red;
 }
 body .container-categories {
   background-color: #f2bf2c;

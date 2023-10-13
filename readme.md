@@ -17,13 +17,6 @@ Run `php bin/console doctrine:database:create` to create the database.
 
 Run `php bin/console doctrine:migrations:migrate` to create the tables.
 
-
-Run `composer install` inside the root directory, this will create a vendor directory with the dependencies.
-
-Run `php bin/console doctrine:database:create` to create the database.
-
-Run `php bin/console doctrine:migrations:migrate` to create the tables.
-
 ## Contributing
 
 Please respect the following rules:
