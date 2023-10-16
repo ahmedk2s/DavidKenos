@@ -1,0 +1,226 @@
+.dflex {
+  display: flex;
+  flex-wrap: wrap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/playfairdisplay/v36/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtY.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w-.ttf) format('truetype');
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 33.33vh;
+  background: url('/images/bandeau-menu-admin-horizontale.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  border-bottom: 1px solid black;
+  z-index: 1;
+}
+header:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #11a197;
+  opacity: 0.9;
+}
+header .top-container {
+  display: flex;
+  align-items: center;
+}
+header .logo {
+  align-self: flex-start;
+  margin-top: -30px;
+  margin-left: 100px;
+  position: relative;
+  z-index: 1;
+  min-width: 100px;
+  min-height: 100px;
+}
+header .logo img {
+  width: 40%;
+  height: 40%;
+}
+header .title {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -30px;
+}
+header .title h1 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: #fff;
+  font-size: 45px;
+  font-weight: 400;
+}
+header .title p {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 400;
+}
+header nav {
+  position: relative;
+  margin-right: 100px;
+  z-index: 1;
+  margin-top: -150px;
+}
+header nav .nav-container {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: -20px;
+}
+header nav ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+header nav ul li {
+  margin-right: 20px;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: #000;
+}
+header nav .circle-container {
+  margin-top: 10px;
+}
+header nav .circle-container .outer-circle {
+  width: 35px;
+  height: 35px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header nav .circle-container .outer-circle .inner-circle {
+  width: 30px;
+  height: 30px;
+  background-color: #000;
+  border-radius: 50%;
+}
+section {
+  width: 100%;
+  height: 60vh;
+  background-color: #eee;
+  z-index: 2;
+  position: relative;
+}
+section .cards-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: -30px;
+}
+section .card-row {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: calc(100% - 60px);
+  margin-left: 30px;
+}
+section .card {
+  background-color: white;
+  width: 25%;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: -30px;
+}
+section .card .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+section .card .text-and-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+section .card .circle {
+  background-color: #f2bf2c;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+section .card .card-text h3 {
+  margin: 0;
+  font-size: 24px;
+  text-align: left;
+}
+section .card .card-text p {
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: left;
+}
+section .card button {
+  background-color: #191e39;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+footer {
+  background-color: #f2bf2c;
+  width: 100%;
+  height: 6.67%;
+}
