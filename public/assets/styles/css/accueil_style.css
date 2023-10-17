@@ -127,8 +127,9 @@ header nav .circle-container .outer-circle {
   border: 3px solid #fff;
   border-radius: 50%;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 header nav .circle-container .outer-circle .inner-circle {
   width: 30px;
@@ -152,8 +153,8 @@ section .cards-section {
 }
 section .card-row {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 30px;
   width: calc(100% - 60px);
   margin-left: 30px;
@@ -192,8 +193,9 @@ section .card .circle {
   height: 80px;
   border-radius: 50%;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   font-size: 32px;
   margin-bottom: 20px;
   margin-right: 20px;
