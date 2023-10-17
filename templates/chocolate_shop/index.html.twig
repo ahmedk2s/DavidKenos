@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les chocolateries{% endblock %}
+
+{% block body %}
+    <h1>Gérer les chocolateries</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ville</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chocolate_shop in chocolate_shops %}
+            <tr>
+                <td>{{ chocolate_shop.city }}</td>
+                <td>
+                    <a href="{{ path('app_chocolate_shop_show', {'id': chocolate_shop.id}) }}">voir</a>
+                    <a href="{{ path('app_chocolate_shop_edit', {'id': chocolate_shop.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_chocolate_shop_new') }}">Créer un nouveau</a>
+{% endblock %}

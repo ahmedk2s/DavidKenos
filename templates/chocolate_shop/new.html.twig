@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Chocolaterie{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle Chocolaterie</h1>
+
+    {{ include('chocolate_shop/_form.html.twig') }}
+
+    <a href="{{ path('app_chocolate_shop_index') }}">Retour à la liste</a>
+{% endblock %}
