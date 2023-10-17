@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\ChocolateShop;
 
-class UserAdminType extends AbstractType
+class UserCreateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -94,3 +94,4 @@ class UserAdminType extends AbstractType
         ]);
     }
 }
+
