@@ -33,7 +33,7 @@ class ChocolateShopController extends AbstractController
             $entityManager->persist($chocolateShop);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Catégorie ajouté avec succès !');
+            $this->addFlash('success', 'Chocolaterie ajouté avec succès !');
 
             return $this->redirectToRoute('app_chocolate_shop_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -61,7 +61,7 @@ class ChocolateShopController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Catégorie modifié avec succès !');
+            $this->addFlash('success', 'Chocolaterie modifié avec succès !');
 
             return $this->redirectToRoute('app_chocolate_shop_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,7 +80,7 @@ class ChocolateShopController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'La catégorie a été supprimé avec succès.');
+        $this->addFlash('success', 'La chocolaterie a été supprimé avec succès.');
 
         return $this->redirectToRoute('app_chocolate_shop_index', [], Response::HTTP_SEE_OTHER);
     }

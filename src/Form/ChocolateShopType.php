@@ -13,7 +13,8 @@ class ChocolateShopType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('city', TextType::class, [
+        $builder
+        ->add('city', TextType::class, [
             'constraints' => [
                 new Length([
                     'min' => 2,
