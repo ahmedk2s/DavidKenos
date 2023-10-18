@@ -77,13 +77,9 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/employe', name: 'app_register_employe')]
-    public function registerEmployee(
-        Request $request,
-        UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager,
-        SendMailService $mail,
-        JWTService $jwt
-    ): Response {
+    public function registerEmployee(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SendMailService $mail,
+        JWTService $jwt): Response 
+        {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
