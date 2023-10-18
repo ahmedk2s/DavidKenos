@@ -10,9 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AccueilController extends AbstractController
+class AdminController extends AbstractController
 {
-    #[Route('/accueil', name: 'app_accueil')]
+    #[Route('/admin', name: 'app_admin')]
     public function index(
         // UserRepository $userRepository,
         // NewsRepository $newsRepository,
@@ -35,8 +35,8 @@ class AccueilController extends AbstractController
         // Récupérer le nombre de catégories
         // $categoryCount = $categoryRepository->count([]);
 
-        return $this->render('administration/accueil.html.twig', [
-            'controller_name' => 'AccueilController',
+        return $this->render('administration/admin.html.twig', [
+            'controller_name' => 'AdminController',
             'user' => $user,
             // 'connectedUsersCount' => $connectedUsersCount,
             // 'newsCount' => $newsCount,

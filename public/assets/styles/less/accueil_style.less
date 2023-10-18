@@ -2,7 +2,6 @@
 @import "../includes/mixins.less";
 @import "../includes/fonts.less";
 
-
 * {
     margin: 0;
     box-sizing: border-box;
@@ -25,30 +24,33 @@ header {
     position: relative;
     border-bottom: 1px solid black;
     z-index: 1;
+    white-space: nowrap;
     
     &:after {
         content: "";
         position: absolute;
-        top: 0; 
-        left: 0; 
-        right: 0; 
+        top: 0;
+        left: 0;
+        right: 0;
         bottom: 0;
         background-color: #11a197;
         opacity: 0.9;
     }
+    
     .top-container {
-    display: flex;
-    align-items: center; 
-}
+        display: flex;
+        align-items: center;
+    }
     
     .logo {
-        align-self: flex-start; 
-        margin-top: -30px; 
+        align-self: flex-start;
+        margin-top: -30px;
         margin-left: 100px;
         position: relative;
         z-index: 1;
-        min-width: 100px; 
-        min-height: 100px; 
+        min-width: 100px;
+        min-height: 100px;
+        
         img {
             width: 40%;
             height: 40%;
@@ -76,6 +78,7 @@ header {
             color: #fff;
             font-size: 30px;
             font-weight: 400;
+            white-space: nowrap;
         }
     }
     
@@ -98,18 +101,25 @@ header {
             align-items: center;
             gap: 15px;
             margin-top: 10px;
+            
             li {
                 margin-right: 20px;
+                
                 a {
                     text-decoration: none;
                     color: #000;
+                }
+                
+                &.li-flex {
+                    display: flex;
+                    align-items: center;
                 }
             }
         }
         
         .circle-container {
             margin-top: 10px;
-
+            
             .outer-circle {
                 width: 35px;
                 height: 35px;
@@ -134,7 +144,7 @@ section {
     background-color: #eee;
     z-index: 2;
     position: relative;
-
+    
     .cards-section {
         display: flex;
         flex-direction: column;
@@ -142,19 +152,17 @@ section {
         width: 100%;
         margin-top: -30px;
     }
-
+    
     .card-row {
         .dflex();
-        justify-content: flex-start; 
-        
-        gap: 30px; 
-        width: calc(100% - 60px); 
+        justify-content: flex-start;
+        gap: 30px;
         margin-left: 30px;
     }
-
+    
     .card {
         background-color: white;
-        width: 25%;
+        width: 28%;
         padding: 20px;
         text-align: center;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -163,10 +171,9 @@ section {
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
         margin-top: -30px;
-    
-
+        
         .content {
             display: flex;
             flex-direction: row;
@@ -174,7 +181,7 @@ section {
             align-items: center;
             width: 100%;
         }
-
+        
         .text-and-button {
             display: flex;
             flex-direction: column;
@@ -182,7 +189,7 @@ section {
             align-items: flex-start;
             margin-left: 20px;
         }
-
+        
         .circle {
             background-color: @colorYellow;
             width: 80px;
@@ -194,22 +201,23 @@ section {
             margin-top: 20px;
             .fullcenter();
         }
-
+        
         .card-text {
             h3 {
                 margin: 0;
                 font-size: 24px;
                 text-align: left;
             }
-
+            
             p {
                 margin: 0;
                 margin-bottom: 20px;
                 font-size: 18px;
                 text-align: left;
+                white-space: nowrap;
             }
         }
-
+        
         button {
             background-color: @colorNightBlue;
             color: white;
@@ -218,9 +226,24 @@ section {
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            width: 100%;
+            margin-left: auto;
+            width: 100%;
+            
+            &.common-button {
+                
+                margin: 0 auto;
+                display: block;
+                white-space: nowrap;
+            }
         }
     }
+    
+    .card.center-card {
+        width: 37%;
+    }
 }
+
 
 footer {
     background-color: @colorYellow;

@@ -43,6 +43,7 @@ header {
   position: relative;
   border-bottom: 1px solid black;
   z-index: 1;
+  white-space: nowrap;
 }
 header:after {
   content: "";
@@ -91,6 +92,7 @@ header .title p {
   color: #fff;
   font-size: 30px;
   font-weight: 400;
+  white-space: nowrap;
 }
 header nav {
   position: relative;
@@ -117,6 +119,10 @@ header nav ul li {
 header nav ul li a {
   text-decoration: none;
   color: #000;
+}
+header nav ul li.li-flex {
+  display: flex;
+  align-items: center;
 }
 header nav .circle-container {
   margin-top: 10px;
@@ -156,12 +162,11 @@ section .card-row {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 30px;
-  width: calc(100% - 60px);
   margin-left: 30px;
 }
 section .card {
   background-color: white;
-  width: 25%;
+  width: 28%;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -192,14 +197,14 @@ section .card .circle {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   font-size: 32px;
   margin-bottom: 20px;
   margin-right: 20px;
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 section .card .card-text h3 {
   margin: 0;
@@ -211,6 +216,7 @@ section .card .card-text p {
   margin-bottom: 20px;
   font-size: 18px;
   text-align: left;
+  white-space: nowrap;
 }
 section .card button {
   background-color: #191e39;
@@ -220,6 +226,16 @@ section .card button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin-left: auto;
+  width: 100%;
+}
+section .card button.common-button {
+  margin: 0 auto;
+  display: block;
+  white-space: nowrap;
+}
+section .card.center-card {
+  width: 37%;
 }
 footer {
   background-color: #f2bf2c;

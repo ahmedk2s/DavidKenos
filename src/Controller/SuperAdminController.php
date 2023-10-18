@@ -14,7 +14,7 @@ use App\Security\Voter\UserVoter;
 
 class SuperAdminController extends AbstractController
 {
-    #[Route('/super_admin/approve_users', name: 'approve_users')]
+    #[Route('/super_admin_approve_users', name: 'approve_users')]
     public function approveUsers(Request $request, EntityManagerInterface $em): Response
     {
         // QueryBuilder pour récupérer les utilisateurs avec le rôle admin et non approuvés
