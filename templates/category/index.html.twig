@@ -3,6 +3,9 @@
 {% block title %}Gérer les catégories{% endblock %}
 
 {% block body %}
+
+{% include '_partials/_back_office_sidebar.html.twig' %}
+
     <h1>Gérer les catégories</h1>
 
     {% for message in app.flashes('success') %}

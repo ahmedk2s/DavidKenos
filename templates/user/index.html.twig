@@ -2,7 +2,16 @@
 
 {% block title %}Gérer les utilisateurs{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/index_admin_style.css">
+{% endblock %}
+
 {% block body %}
+
+        {% include '_partials/_back_office_sidebar.html.twig' %}   
+    
+
+    <div class="container-table">
     <h1>Gérer les utilisateurs</h1>
 
     {% for message in app.flashes('success') %}
@@ -39,6 +48,7 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
     <a href="{{ path('app_user_new') }}">Créer un utilisateur</a>
 {% endblock %}

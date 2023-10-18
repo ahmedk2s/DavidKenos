@@ -17,8 +17,11 @@ class ChocolateShopController extends AbstractController
     #[Route('/', name: 'app_chocolate_shop_index', methods: ['GET'])]
     public function index(ChocolateShopRepository $chocolateShopRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('chocolate_shop/index.html.twig', [
             'chocolate_shops' => $chocolateShopRepository->findAll(),
+            'user' => $user,
         ]);
     }
 
