@@ -1,0 +1,125 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+@import "../includes/fonts.less";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+body {
+  .dflex();
+}
+
+.container-body {
+  width: 82%;
+  margin-top: 10vh;
+
+  h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+
+  .table,
+  a {
+    font-family: "Montserrat", sans-serif;
+  }
+
+  thead {
+    background-color: @colorYellow;
+    height: 50px;
+    text-align: left;
+
+    th {
+      padding-left: 35px;
+      border-collapse: collapse;
+    }
+  }
+
+  tbody {
+    text-align: left;
+
+    td {
+      height: 50px;
+      padding-left: 3%;
+    }
+  }
+}
+.test {
+    width: 320px;
+}
+.container-table {
+  display: flex;
+  flex-direction: column;
+//   width: 100%;
+  .fullcenter();
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.container-button-create {
+  .dflex();
+  align-items: center;
+  justify-content: flex-end;
+  height: 50px;
+  width: 90%;
+
+  .btn-create {
+    border: solid 2px;
+    padding: 8px;
+    width: 200px;
+    border-radius: 5px;
+    background-color: #11a197;
+    color: white;
+    height: 40px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    right: 100px;
+    margin-bottom: 10px;
+  }
+}
+
+.table {
+  width: 90%;
+
+  .btns {
+    .dflex();
+    align-items: center;
+    padding: 0;
+    padding-left: 35px;
+    width: 320px;
+  }
+  .btn-edit {
+    border: solid 2px;
+    padding: 8px;
+    width: 130px;
+    border-radius: 5px;
+    background-color: #1a1e39;
+    color: white;
+    height: 40px;
+    text-align: center;
+    i {
+      margin-right: 3px;
+    }
+  }
+  .include {
+    border: solid 2px;
+    padding: 8px;
+    width: 130px;
+    border-radius: 5px;
+    background-color: #bc162e;
+    color: white;
+    height: 40px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+
+    i {
+      margin-right: 3px;
+    }
+  }
+}

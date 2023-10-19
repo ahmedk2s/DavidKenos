@@ -61,7 +61,7 @@ public function new(Request $request, EntityManagerInterface $entityManager, Use
 }
 
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    #[Route('/utilisateur-{id}', name: 'app_user_show', requirements:['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
@@ -69,7 +69,7 @@ public function new(Request $request, EntityManagerInterface $entityManager, Use
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/utilisateur-{id}/edit', name: 'app_user_edit', requirements:['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserUpdateType::class, $user);
@@ -89,7 +89,7 @@ public function new(Request $request, EntityManagerInterface $entityManager, Use
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('/utilisateur-{id}', name: 'app_user_delete', requirements:['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
