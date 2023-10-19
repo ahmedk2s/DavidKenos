@@ -45,7 +45,7 @@ class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_news_show', methods: ['GET'])]
+    #[Route('/new-{id}', name: 'app_news_show', requirements:['id' => '[a-zA-Z0-9\-_]+'],  methods: ['GET'])]
     public function show(News $news): Response
     {
         $dateCreation = $news->getDateCreation();
@@ -70,7 +70,7 @@ class NewsController extends AbstractController
     }
 
 
-    #[Route('/{id}/edit', name: 'app_news_edit', methods: ['GET', 'POST'])]
+    #[Route('/new-{id}/edit', name: 'app_news_edit', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, News $news, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(NewsType::class, $news);
@@ -90,7 +90,7 @@ class NewsController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_news_delete', methods: ['POST'])]
+    #[Route('/new-{id}', name: 'app_news_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, News $news, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$news->getId(), $request->request->get('_token'))) {
