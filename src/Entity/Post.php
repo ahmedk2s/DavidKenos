@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -17,6 +18,13 @@ class Post
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: "Le texte ne peut pas être vide")]
+    #[Assert\Length(
+        min: 2,
+        max: 5000,
+        minMessage: "Le texte doit contenir au moins {{ limit }} caractères",
+        maxMessage: "Le texte ne peut pas contenir plus de {{ limit }} caractères"
+    )]
     private ?string $text = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -24,7 +32,6 @@ class Post
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_edition = null;
-
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -41,14 +48,22 @@ class Post
     private Collection $comments;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: "Le titre ne peut pas être vide")]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: "Le titre doit contenir au moins {{ limit }} caractères",
+        maxMessage: "Le titre ne peut pas contenir plus de {{ limit }} caractères"
+    )]
     private ?string $title = null;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->date_creation = new \DateTime();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,7 +77,6 @@ class Post
     public function setText(string $text): static
     {
         $this->text = $text;
-
         return $this;
     }
 
@@ -74,7 +88,6 @@ class Post
     public function setDateCreation(\DateTimeInterface $date_creation): static
     {
         $this->date_creation = $date_creation;
-
         return $this;
     }
 
@@ -86,7 +99,6 @@ class Post
     public function setDateEdition(?\DateTimeInterface $date_edition): static
     {
         $this->date_edition = $date_edition;
-
         return $this;
     }
 
@@ -98,7 +110,6 @@ class Post
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -110,7 +121,6 @@ class Post
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -128,27 +138,27 @@ class Post
             $this->likes->add($like);
             $like->setPost($this);
         }
-    
+
         return $this;
     }
-    
+
     public function removeLike(\App\Entity\Like $like): self
     {
-    $this->likes->removeElement($like);
-
-    return $this;
+        $this->likes->removeElement($like);
+        return $this;
     }
 
     public function isLikedByUser(User $user): bool
     {
-    foreach ($this->likes as $like) {
-        if ($like->getUser() === $user) {
-            return true;
+        foreach ($this->likes as $like) {
+            if ($like->getUser() === $user) {
+                return true;
+            }
         }
+
+        return false;
     }
 
-    return false;
-    }
     /**
      * Get the number of likes
      *
@@ -159,22 +169,24 @@ class Post
         return count($this->likes);
     }
 
-     /**
+    /**
      * @return Collection<int, Comment>
      */
     public function getComments(): Collection
     {
         return $this->comments;
     }
+
     public function addComment(Comment $comment): static
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
             $comment->setPost($this);
         }
- 
+
         return $this;
     }
+
     public function removeComment(Comment $comment): static
     {
         if ($this->comments->removeElement($comment)) {
@@ -186,7 +198,7 @@ class Post
 
         return $this;
     }
-    
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -195,7 +207,6 @@ class Post
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 }

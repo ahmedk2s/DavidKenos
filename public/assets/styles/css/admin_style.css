@@ -227,7 +227,7 @@ section .card button {
   cursor: pointer;
   font-size: 16px;
   margin-left: auto;
-  width: 100%;
+  width: auto;
 }
 section .card button.common-button {
   margin: 0 auto;
