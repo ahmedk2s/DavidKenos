@@ -8,97 +8,116 @@
 {% endblock %}
 
 {% block body %}
-<header>
-    <div class="top-container">
-        <div class="logo">
-            <img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
-        </div>
-        <div class="title">
-            <h1>Bienvenue,</h1>
-            <p>dans votre administration</p>
-        </div>
-    </div>
-    <nav>
-        <div class="nav-container">
-            <ul>
-                <li><a href="{{ path('app_admin') }}">Accueil</a></li>
-                <li class="li-flex">
-                    <a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
-                    <i class="fas fa-sign-out-alt"></i>
-                </li>
-                <li> Chocolaterie {{ user.chocolateShop }}</li>
-            </ul>
-            <div class="circle-container">
-                <div class="outer-circle">
-                    <div class="inner-circle"></div>
-                </div>
+<div>
+    <header>
+        <div class="top-container">
+            <div class="logo">
+                <img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
+            </div>
+            <div class="title">
+                <h1>Bienvenue,</h1>
+                <p>dans votre administration</p>
             </div>
         </div>
-    </nav>
-</header>
+        <nav>
+            <div class="nav-container">
+                <ul>
+                    <li><a href="{{ path('app_admin') }}">Accueil</a></li>
+                    <li class="li-flex">
+                        <a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
+                        <i class="fas fa-sign-out-alt"></i>
+                    </li>
+                    <li>Chocolaterie {{ user.chocolateShop }}</li>
+                </ul>
+                <div class="circle-container">
+                    <div class="outer-circle">
+                        <div class="inner-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-<section class="cards-section">
-    <div class="card-row">
-        <div class="card">
-            <div class="content">
-                <div class="circle">
-                    {# <p>{{ userCount }}</p> #}
-                </div>
-                <div class="text-and-button">
-                    <div class="card-text">
-                        <h3>UTILISATEURS</h3>
-                        <p>sont inscrits</p>
+    <section class="cards-section">
+        <div class="card-row">
+            <div class="card">
+                <div class="content">
+                    <div class="content-circle">
+                        <div class="circle">
+                            <p class="circle-number">{{ registeredUsersCount }}</p>
+                        </div>
                     </div>
-                    <button class="common-button">Gérer les utilisateurs</button>
+                    <div class="text-and-button">
+                        <div class="card-text">
+                            <h3>UTILISATEURS</h3>
+                            <p>sont inscrits</p>
+                        </div>
+                        <div class="button-card">
+                            <button class="common-button">Gérer les utilisateurs</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card center-card">
+                <div class="content">
+                    <div class="content-circle-news">
+                        <div class="circle">
+                            <p class="circle-number">{{ newsCount }}</p>
+                        </div>
+                    </div>
+                    <div class="text-and-button">
+                        <div class="card-text">
+                            <h3>ACTUALITES</h3>
+                            <p>sont disponibles</p>
+                        </div>
+                        <div class="button">
+                        <div class="button-card">
+                            <button class="common-button">Gérer les actualités</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="content-circle">
+                        <div class="circle">
+                            <p class="circle-number">{{ postsCount }}</p>
+                        </div>
+                    </div>
+                    <div class="text-and-button">
+                        <div class="card-text">
+                            <h3>POSTS</h3>
+                            <p>sont disponibles</p>
+                        </div>
+                        <div class="button-card">
+                            <button class="common-button">Gérer les posts</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <div class="content-circle">
+                        <div class="circle">
+                            <p class="circle-number">{{ categoryCount }}</p>
+                        </div>
+                    </div>
+                    <div class="text-and-button">
+                        <div class="card-text">
+                            <h3>CATEGORIES</h3>
+                            <p>de posts sont disponibles</p>
+                        </div>
+                        <div class="button-card">
+                            <button class="common-button category">Gérer les catégories</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card center-card">
-            <div class="content">
-                <div class="circle">
-                    {# <p>{{ newsCount }}</p> #}
-                </div>
-                <div class="text-and-button">
-                    <div class="card-text">
-                        <h3>ACTUALITES</h3>
-                        <p>sont disponibles</p>
-                    </div>
-                    <button class="common-button">Gérer les actualités</button>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <div class="circle">
-                    {# <p>{{ postCount }}</p> #}
-                </div>
-                <div class="text-and-button">
-                    <div class="card-text">
-                        <h3>POSTS</h3>
-                        <p>sont disponibles</p>
-                    </div>
-                    <button class="common-button">Gérer les posts</button>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <div class="circle">
-                    {# <p>{{ categoryCount }}</p> #}
-                </div>
-                <div class="text-and-button">
-                    <div class="card-text">
-                        <h3>CATEGORIES</h3>
-                        <p>de posts sont disponibles</p>
-                    </div>
-                    <button class="common-button category">Gérer les catégories</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-</footer>
-
+    <footer>
+    </footer>
+</div>
 {% endblock %}

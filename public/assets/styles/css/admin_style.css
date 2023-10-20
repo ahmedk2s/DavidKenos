@@ -156,6 +156,7 @@ section .cards-section {
   align-items: center;
   width: 100%;
   margin-top: -30px;
+  height: 25vh;
 }
 section .card-row {
   display: flex;
@@ -163,6 +164,7 @@ section .card-row {
   justify-content: flex-start;
   gap: 30px;
   margin-left: 30px;
+  min-height: max-content;
 }
 section .card {
   background-color: white;
@@ -172,11 +174,13 @@ section .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 30px;
   margin-top: -30px;
+  height: 30%;
 }
 section .card .content {
   display: flex;
@@ -184,6 +188,12 @@ section .card .content {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+}
+section .card .content-circle {
+  width: 26%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 section .card .text-and-button {
   display: flex;
@@ -197,14 +207,20 @@ section .card .circle {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  font-size: 32px;
   margin-bottom: 20px;
-  margin-right: 20px;
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+section .card .circle-number {
+  text-align: center;
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-size: 3em;
+  margin-bottom: 50px;
+  color: #777;
 }
 section .card .card-text h3 {
   margin: 0;
@@ -227,7 +243,6 @@ section .card button {
   cursor: pointer;
   font-size: 16px;
   margin-left: auto;
-  width: auto;
 }
 section .card button.common-button {
   margin: 0 auto;
@@ -236,6 +251,21 @@ section .card button.common-button {
 }
 section .card.center-card {
   width: 37%;
+}
+.content-circle-news {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+.button-card {
+  display: flex;
+  width: auto;
+  justify-content: flex-start;
 }
 footer {
   background-color: #f2bf2c;

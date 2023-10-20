@@ -151,6 +151,7 @@ section {
         align-items: center;
         width: 100%;
         margin-top: -30px;
+        height: 25vh;
     }
     
     .card-row {
@@ -158,6 +159,7 @@ section {
         justify-content: flex-start;
         gap: 30px;
         margin-left: 30px;
+        min-height: max-content;
     }
     
     .card {
@@ -167,12 +169,13 @@ section {
         text-align: center;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
-        display: flex;
+        .dflex();
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 30px;
         margin-top: -30px;
+        height: 30%;
         
         .content {
             display: flex;
@@ -180,6 +183,13 @@ section {
             justify-content: flex-start;
             align-items: center;
             width: 100%;
+        }
+
+        .content-circle{
+            width: 26%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .text-and-button {
@@ -195,11 +205,18 @@ section {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            font-size: 32px;
             margin-bottom: 20px;
-            margin-right: 20px;
             margin-top: 20px;
             .fullcenter();
+        }
+
+        .circle-number{
+            text-align: center;
+            font-family: 'Playfair Display';
+            font-style: italic;
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: #777;
         }
         
         .card-text {
@@ -227,7 +244,6 @@ section {
             cursor: pointer;
             font-size: 16px;
             margin-left: auto;
-            width: auto;
             
             &.common-button {
                 
@@ -241,6 +257,24 @@ section {
     .card.center-card {
         width: 37%;
     }
+}
+
+.content-circle-news{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-card{
+    display: flex;
+    width: auto;
+    justify-content: flex-start;
 }
 
 
