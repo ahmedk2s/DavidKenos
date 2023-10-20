@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
-
+    
 {% block stylesheets %}
     <link rel="stylesheet" href="/assets/styles/css/admin_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 {% endblock %}
 
 {% block body %}
@@ -14,6 +17,7 @@
             <div class="logo">
                 <img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
             </div>
+            
             <div class="title">
                 <h1>Bienvenue,</h1>
                 <p>dans votre administration</p>
