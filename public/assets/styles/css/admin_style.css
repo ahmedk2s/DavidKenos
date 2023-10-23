@@ -284,7 +284,7 @@ section .card.center-card {
   text-align: center;
   font-size: 13px;
 }
-@media (min-width: 761px) {
+@media (min-width: 601px) and (max-width: 1920px) {
   body nav #burger-menu-button {
     display: none;
   }
@@ -306,7 +306,7 @@ section .card.center-card {
     margin-bottom: 5px;
   }
 }
-@media (min-width: 320px) and (max-width: 760px) {
+@media (min-width: 319px) and (max-width: 600px) {
   header .top-container {
     flex-direction: column;
     align-items: center;
@@ -329,6 +329,13 @@ section .card.center-card {
     width: 100%;
     margin: 0 auto;
     align-self: center;
+  }
+  header .title h1 {
+    font-size: 30px;
+  }
+  header .title p {
+    font-size: 25px;
+    justify-content: center;
   }
   nav #burger-menu-button {
     visibility: visible;
@@ -356,9 +363,17 @@ section .card.center-card {
   }
   nav .nav-container ul {
     padding: 10px;
+    margin: 0;
+    gap: 0;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+    align-items: center;
   }
   nav .nav-container ul li {
     margin-bottom: 10px;
+    text-align: center;
+    margin-left: 10px;
   }
   nav .circle-container {
     display: none;
@@ -366,10 +381,31 @@ section .card.center-card {
   section {
     height: auto;
   }
+  section .card-text {
+    width: 100%;
+  }
+  section .content .card-text h3 {
+    font-size: 18px;
+  }
+  section .content .card-text p {
+    font-size: 15px;
+  }
+  .button {
+    width: 90%;
+  }
+  section .card.center-card .button {
+    width: 95%;
+  }
+  .button-card .common-button {
+    font-size: 15px;
+    width: 100%;
+    text-align: left;
+  }
   .card-row {
     flex-direction: column;
     align-items: center;
     margin-left: 0;
+    gap: 0;
   }
   section .card {
     width: 100%;
@@ -380,8 +416,29 @@ section .card.center-card {
   section .card.center-card {
     width: 100%;
   }
+  section .card.center-card .circle {
+    width: 60px;
+    height: 60px;
+  }
   section .card.card-category {
     margin-bottom: 20px;
+  }
+  section .card .content-circle {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  section .card .content-circle .circle {
+    width: 60px;
+    height: 60px;
+  }
+  section .card .content-circle .circle-number {
+    font-size: 2.5em;
+    margin-top: -5px;
+  }
+  section .card.center-card .circle .circle-number {
+    font-size: 2.5em;
+    margin-top: -5px;
   }
   .content-circle-news {
     width: auto;
