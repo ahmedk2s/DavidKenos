@@ -10,6 +10,12 @@
 
 {% endblock %}
 
+ {% block javascripts %}
+    <script src="/assets/styles/javascrypt/admin.js"></script>
+{% endblock %}
+
+
+
 {% block body %}
 <div>
     <header>
@@ -23,24 +29,26 @@
                 <p>dans votre administration</p>
             </div>
         </div>
-        <nav>
-            <div class="nav-container">
-                <ul>
-                    <li><a href="{{ path('app_admin') }}">Accueil</a></li>
-                    <li class="li-flex">
-                        <a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
-                        <i class="fas fa-sign-out-alt"></i>
-                    </li>
-                    <li>Chocolaterie {{ user.chocolateShop }}</li>
-                </ul>
-                <div class="circle-container">
+         <nav>
+        <div id="burger-menu-button"><i class="fa-solid fa-bars"></i></div> 
+        <div class="nav-container" id="nav-container">
+            <ul>
+                <li><a href="{{ path('app_admin') }}">Accueil</a></li>
+                <li class="li-flex">
+                    <a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
+                    <i class="fas fa-sign-out-alt"></i>
+                </li>
+                <li>Chocolaterie {{ user.chocolateShop }}</li>
+            </ul>
+            <div class="circle-container">
                     <div class="outer-circle">
                         <div class="inner-circle"></div>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+</header>
 
     <section class="cards-section">
         <div class="card-row">
@@ -100,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card card-category">
                 <div class="content">
                     <div class="content-circle">
                         <div class="circle">
@@ -121,7 +129,8 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="footer">
+    <p>Administration développé par EILEA - 2021</p>
     </footer>
 </div>
 {% endblock %}
