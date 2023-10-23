@@ -280,11 +280,11 @@ section .card.center-card {
   width: 100%;
   min-height: 6.5vh;
 }
-.footer P {
+.footer p {
   text-align: center;
   font-size: 13px;
 }
-@media (min-width: 601px) and (max-width: 1920px) {
+@media (min-width: 1275px) and (max-width: 1920px) {
   body nav #burger-menu-button {
     display: none;
   }
@@ -306,7 +306,96 @@ section .card.center-card {
     margin-bottom: 5px;
   }
 }
-@media (min-width: 319px) and (max-width: 600px) {
+@media (min-width: 761px) and (max-width: 1274px) {
+  header {
+    display: flex;
+    flex-direction: column;
+  }
+  header .logo {
+    width: 25%;
+    margin-right: -85px;
+    margin-top: 85px;
+    margin-left: -50px;
+  }
+  header .title {
+    order: 1;
+    margin-left: -20px;
+    text-align: center;
+    margin-top: 80px;
+  }
+  header .title h1 {
+    font-size: 65px;
+  }
+  header .title p {
+    font-size: 23px;
+  }
+  nav .nav-container {
+    order: 2;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-left: 30px;
+  }
+  #burger-menu-button {
+    display: none;
+  }
+  nav .nav-container ul {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    color: #fff;
+  }
+  nav .nav-container ul li {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 15px;
+  }
+  nav .nav-container ul li a {
+    color: #fff;
+  }
+  nav .nav-container ul li i {
+    color: #000;
+    vertical-align: auto;
+  }
+  .cards-section .card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .cards-section .card {
+    flex: 0 0 50%;
+    /* Les cartes prendront environ 50% de la largeur de card-row */
+    margin-bottom: 20px;
+    margin-left: -20px;
+  }
+  .card.center-card,
+  .card-category {
+    margin-right: 10px;
+  }
+  .content-circle-news {
+    width: auto;
+  }
+  section .content .content-circle {
+    width: auto;
+  }
+  section .content .text-and-button .card-text h3 {
+    font-size: 25px;
+  }
+  section .content .text-and-button .card-text p {
+    font-size: 19px;
+  }
+  section .button-card .common-button {
+    font-size: 21px;
+  }
+  .footer p {
+    font-size: 20px;
+  }
+}
+@media (min-width: 319px) and (max-width: 760px) {
   header .top-container {
     flex-direction: column;
     align-items: center;
@@ -337,6 +426,9 @@ section .card.center-card {
     font-size: 25px;
     justify-content: center;
   }
+  #nav-container {
+    display: none;
+  }
   nav #burger-menu-button {
     visibility: visible;
     display: block;
@@ -351,24 +443,24 @@ section .card.center-card {
   nav .nav-container {
     display: none;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     position: fixed;
-    top: 70px;
+    top: 85px;
     right: 10px;
-    left: 10px;
+    left: 15px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
     z-index: 1000;
   }
   nav .nav-container ul {
-    padding: 10px;
+    padding: 5px;
     margin: 0;
     gap: 0;
     flex-wrap: wrap;
-    width: auto;
+    width: fit-content;
     justify-content: center;
-    align-items: center;
+    margin-bottom: -10px;
   }
   nav .nav-container ul li {
     margin-bottom: 10px;
@@ -444,6 +536,6 @@ section .card.center-card {
     width: auto;
   }
   .footer p {
-    font-size: 17px;
+    font-size: 13px;
   }
 }
