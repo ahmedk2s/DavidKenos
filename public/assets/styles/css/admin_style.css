@@ -359,7 +359,6 @@ section .card.center-card {
   }
   nav .nav-container ul li i {
     color: #000;
-    vertical-align: auto;
   }
   .cards-section .card-row {
     display: flex;
@@ -405,10 +404,11 @@ section .card.center-card {
     order: 2;
     text-align: center;
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
+    margin-top: 30px;
   }
   header .logo img {
-    max-width: 100px;
+    max-width: 150px;
     display: block;
     margin: 0 auto;
   }
