@@ -27,37 +27,53 @@
 					</div>
 				</li>
 				<li>
-					<a href="">Accueil</a>
+					<a href="">
+						<span>Accueil</span>
+						<i class="fa-solid fa-house"></i>
+					</a>
 				</li>
 				<li>
 					<a href="{{ path('app_logout') }}">
-						Déconnexion
+						<span>Déconnexion</span>
 					</a>
 					<i class="fas fa-right-from-bracket"></i>
 				</li>
-
 			</ul>
 		</div>
 
 		<div class="body-container">
 			<ul class="links-container">
 				<li>
-					<a href="{{ path('app_user_index') }}" class="link">Utilisateurs</a>
+					<a href="{{ path('app_user_index') }}" class="link">
+						<i class="fa-solid fa-user"></i>
+						<span>Utilisateurs</span>
+					</a>
 				</li>
 				<li>
-					<a href="{{ path('app_category_index') }}" class="link">Catégories</a>
+					<a href="{{ path('app_category_index') }}" class="link">
+						<i class="fa-solid fa-list"></i>
+						<span>Catégories</span>
+					</a>
 				</li>
 				<li>
-					<a href="#" class="link">Posts</a>
+					<a href="#" class="link">
+						<i class="fa-solid fa-message"></i>
+						<span>Posts</span>
+					</a>
 				</li>
 				<li>
-					<a href="#" class="link">Actualités</a>
+					<a href="#" class="link">
+						<i class="fa-solid fa-newspaper"></i>
+						<span>Actualités</span>
+					</a>
 				</li>
 				<li>
-					<a href="{{ path('app_chocolate_shop_index') }}" class="link">Chocolateries</a>
+					<a href="{{ path('app_chocolate_shop_index') }}" class="link">
+						<i class="fa-solid fa-shop"></i>
+						<span>Chocolateries</span>
+					</a>
 				</li>
 			</ul>
 		</div>
 	</div>
-
 {% endblock %}
