@@ -1,13 +1,12 @@
 @import "../includes/variables.less";
 @import "../includes/mixins.less";
-@import"../includes/fonts.less";
+@import "../includes/fonts.less";
 
 * {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
 }
-
 
 .menu-vertical {
     background-color: #f7f7f8;
@@ -40,9 +39,10 @@
             transform: translateX(-50%);
             text-align: center;
             color: @colorTextButton;
-            .fullcenter();
+            display: flex;
+            align-items: center;
             gap: 10px;
-            font-size: 22px;
+            font-size: 30px;
 
             .firstname {
                 font-family: "Playfair Display", serif;
