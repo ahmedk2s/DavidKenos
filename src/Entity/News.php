@@ -45,6 +45,9 @@ class News
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +110,17 @@ class News
     {
         $this->user = $user;
 
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 }

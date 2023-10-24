@@ -57,6 +57,9 @@ class Post
     )]
     private ?string $title = null;
 
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -207,6 +210,17 @@ class Post
     public function setTitle(string $title): static
     {
         $this->title = $title;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 }

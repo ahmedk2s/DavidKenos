@@ -271,6 +271,9 @@ section .card.center-card {
   width: auto;
   justify-content: flex-start;
 }
+.button-card a {
+  text-decoration: none;
+}
 .footer {
   display: flex;
   flex-wrap: wrap;
@@ -388,7 +391,7 @@ section .card.center-card {
     font-size: 19px;
   }
   section .button-card .common-button {
-    font-size: 21px;
+    font-size: 17px;
   }
   .footer p {
     font-size: 20px;

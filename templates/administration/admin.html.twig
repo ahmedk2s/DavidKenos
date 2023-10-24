@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil Administration{% endblock %}
     
 {% block stylesheets %}
     <link rel="stylesheet" href="/assets/styles/css/admin_style.css">
@@ -65,7 +65,9 @@
                             <p>sont inscrits</p>
                         </div>
                         <div class="button-card">
+                        <a href="{{ path('app_user_index') }}">
                             <button class="common-button">Gérer les utilisateurs</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,10 @@
                         </div>
                         <div class="button">
                         <div class="button-card">
-                            <button class="common-button">Gérer les actualités</button>
+                            <a href="{{ path('app_news_index') }}">
+                                <button class="common-button">Gérer les actualités</button>
+                            </a>
+
                         </div>
                         </div>
                     </div>
@@ -103,7 +108,9 @@
                             <p>sont disponibles</p>
                         </div>
                         <div class="button-card">
+                        <a href="{{ path('app_post_index') }}">
                             <button class="common-button">Gérer les posts</button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -121,7 +128,9 @@
                             <p>de posts sont disponibles</p>
                         </div>
                         <div class="button-card">
+                        <a href="{{ path('app_category_index') }}">
                             <button class="common-button category">Gérer les catégories</button>
+                            </a>
                         </div>
                     </div>
                 </div>

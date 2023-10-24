@@ -17,21 +17,28 @@
         </thead>
         <tbody>
         {% for news in news %}
-            <tr>
-                <td>{{ news.title }}</td>
-                <td>{{ news.content }}</td>
-                <td>{{ news.dateCreation|date('d/m/Y') }}</td>
-                <td>{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_news_show', {'id': news.id}) }}">Voir</a>
-                    <a href="{{ path('app_news_edit', {'id': news.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Pas d'actualités trouvées</td>
-            </tr>
-        {% endfor %}
+    <tr>
+        <td>{{ news.title }}</td>
+        <td>{{ news.content }}</td>
+        <td>{{ news.dateCreation|date('d/m/Y') }}</td>
+        <td>{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td>
+        <td>
+
+            {# Utilisez le slug pour générer les URLs #}
+            {% if news.slug %}
+                <a href="{{ path('app_news_show', {'slug': news.slug}) }}">Voir</a>
+                <a href="{{ path('app_news_edit', {'slug': news.slug}) }}">Modifier</a>
+            {% else %}
+                <span>Slug manquant</span>
+            {% endif %}
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="5">Pas d'actualités trouvées</td>
+    </tr>
+{% endfor %}
+
         </tbody>
     </table>
 

@@ -83,6 +83,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "boolean")]
     private $isApproved = false;
 
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    private ?string $slug = null;
+
 
     public function __construct()
     {
@@ -432,6 +435,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setApproved(bool $isApproved): self
     {
         $this->isApproved = $isApproved;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 

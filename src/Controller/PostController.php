@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Service\SlugService;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,10 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategoryRepository;
 use IntlDateFormatter;
 
-#[Route('/post')]
+#[Route('/admin/post')]
 class PostController extends AbstractController
 {
-    #[Route('/', name: 'app_post_index', methods: ['GET'])]
+
+    private $slugService;
+
+    public function __construct(SlugService $slugService)
+    {
+        $this->slugService = $slugService;
+    }
+    
+    #[Route('/index-des-posts', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
         return $this->render('post/index.html.twig', [
@@ -24,7 +33,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
+    #[Route('/nouveau-post', name: 'app_post_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
     {
         $post = new Post();
@@ -33,15 +42,19 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($post->getTitle(), Post::class);
+            $post->setSlug($slug);
             $category = $categoryRepository->find(1);
             if ($category !== null) {
                 $post->setCategory($category);
                 $entityManager->persist($post);
                 $entityManager->flush();
 
+                $this->addFlash('success', 'Le post a été ajouté avec succès.');
+
                 return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
             } else {
-                $this->addFlash('error', 'La catégorie spécifiée n\'existe pas.');
+                $this->addFlash('error', 'Le post spécifiée n\'existe pas.');
             }
         }
 
@@ -52,9 +65,7 @@ class PostController extends AbstractController
     }
 
 
-
-
-    #[Route('/post-{id}', name: 'app_post_show', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
+    #[Route('/voir-{slug}', name: 'app_post_show', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
     public function show(Post $post): Response
     {
         $dateCreation = $this->formatDate($post->getDateCreation());
@@ -81,7 +92,7 @@ class PostController extends AbstractController
         return $formatter->format($date->getTimestamp());  
     }
 
-    #[Route('/post-{id}/edit', name: 'app_post_edit', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
+    #[Route('/modifier-{slug}', name: 'app_post_edit', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PostType::class, $post);
@@ -90,6 +101,8 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setDateEdition(new \DateTime());  
             $entityManager->flush();  
+
+            $this->addFlash('success', 'Le post a été modifier avec succès.');
 
             return $this->redirectToRoute('app_post_index');
         }
@@ -101,13 +114,15 @@ class PostController extends AbstractController
     }
 
 
-    #[Route('/post-{id}', name: 'app_post_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
+    #[Route('/supprimer-{slug}', name: 'app_post_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
             $entityManager->remove($post);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Le post a été supprimé avec succès.');
 
         return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
     }

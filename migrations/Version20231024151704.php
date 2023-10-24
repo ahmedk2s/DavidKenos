@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20231020111707 extends AbstractMigration
+final class Version20231024151704 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,16 @@ final class Version20231020111707 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user DROP is_connected');
+        $this->addSql('ALTER TABLE category ADD slug VARCHAR(255) NOT NULL');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_64C19C1989D9B62 ON category (slug)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649989D9B62 ON user (slug)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user ADD is_connected TINYINT(1) NOT NULL');
+        $this->addSql('DROP INDEX UNIQ_64C19C1989D9B62 ON category');
+        $this->addSql('ALTER TABLE category DROP slug');
+        $this->addSql('DROP INDEX UNIQ_8D93D649989D9B62 ON user');
     }
 }

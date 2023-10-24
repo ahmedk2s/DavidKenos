@@ -28,8 +28,8 @@
                 <td>{{ user.jobTitle }}</td>
                 <td>{{ user.chocolateShop.city }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">Voir</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                    <a href="{{ path('app_user_show', {'slug': user.slug}) }}">Voir</a>
+                    <a href="{{ path('app_user_edit', {'slug': user.slug}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
