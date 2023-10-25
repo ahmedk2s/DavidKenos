@@ -23,7 +23,7 @@
                 <td>{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td> 
                 <td>{{ post.title }}</td>
                 <td>
-                    <a href="{{ path('app_post_show', {'slug': post.slug}) }}">Voir</a>
+                   
                     <a href="{{ path('app_post_edit', {'slug': post.slug}) }}">Modifier</a>
                 </td>
             </tr>
