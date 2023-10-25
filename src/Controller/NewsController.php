@@ -40,6 +40,8 @@ class NewsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($news->getTitle(), News::class);
+            $news->setSlug($slug);
             $news->setDateEdition(new \DateTime());
             $entityManager->persist($news);
             $entityManager->flush();

@@ -16,25 +16,25 @@ class SlugService
 
     // Méthode pour créer un slug unique à partir d'une chaîne
     public function createUniqueSlug(string $string, string $entityClass, int $entityId = null): string
-    {
-        // Nettoie la chaîne et la convertit en un slug de base
-        $slug = $this->sanitize($string);
-        
-        // Vérifie si le slug de base est vide, s'il l'est, génère une exception
-        if (empty($slug)) {
-            throw new \Exception('The generated slug is empty.');
-        }
-
-        // Suffixe pour rendre le slug unique
-        $suffix = 1;
-        while ($this->slugExists($slug, $entityClass, $entityId)) {
-            // Ajoute un numéro de suffixe au slug et vérifie à nouveau s'il est unique
-            $slug = $this->sanitize($string) . '-' . $suffix++;
-        }
-
-        // Retourne le slug unique généré
-        return $slug;
+{
+    // Nettoie la chaîne et la convertit en un slug de base
+    $slug = $this->sanitize($string);
+    
+    // Vérifie si le slug de base est vide, s'il l'est, utilise un slug par défaut
+    if (empty($slug)) {
+        $slug = 'undefined-slug';
     }
+
+    // Suffixe pour rendre le slug unique
+    $suffix = 1;
+    while ($this->slugExists($slug, $entityClass, $entityId)) {
+        // Ajoute un numéro de suffixe au slug et vérifie à nouveau s'il est unique
+        $slug = $this->sanitize($string) . '-' . $suffix++;
+    }
+
+    // Retourne le slug unique généré
+    return $slug;
+}
 
     // Méthode pour nettoyer une chaîne et la transformer en slug
     private function sanitize(string $string): string

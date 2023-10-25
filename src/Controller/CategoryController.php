@@ -42,6 +42,8 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($category->getName(), Category::class);
+            $category->setSlug($slug);
             $entityManager->persist($category);
             $entityManager->flush();
 
