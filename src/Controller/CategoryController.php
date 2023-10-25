@@ -58,13 +58,6 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/voir-{slug}', name: 'app_category_show', methods: ['GET'])]
-    public function show(Category $category): Response
-    {
-        return $this->render('category/show.html.twig', [
-            'category' => $category,
-        ]);
-    }
 
     #[Route('/modifier-{slug}', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
@@ -73,6 +66,8 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($category->getName(), Category::class);
+            $category->setSlug($slug);
             $entityManager->flush();
 
             $this->addFlash('success', 'Catégorie modifié avec succès !');

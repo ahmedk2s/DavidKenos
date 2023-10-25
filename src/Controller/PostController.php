@@ -65,18 +65,6 @@ class PostController extends AbstractController
     }
 
 
-    #[Route('/voir-{slug}', name: 'app_post_show', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
-    public function show(Post $post): Response
-    {
-        $dateCreation = $this->formatDate($post->getDateCreation());
-        $dateEdition = $this->formatDate($post->getDateEdition());
-        return $this->render('post/show.html.twig', [
-            'post' => $post,
-            'dateCreation' => $dateCreation,
-            'dateEdition' => $dateEdition,
-        ]);
-    }
-
     private function formatDate(\DateTimeInterface $date = null): string
     {
         if ($date === null) {
@@ -99,6 +87,8 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($post->getTitle(), Post::class);
+            $post->setSlug($slug);
             $post->setDateEdition(new \DateTime());  
             $entityManager->flush();  
 

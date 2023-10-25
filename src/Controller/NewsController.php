@@ -57,29 +57,6 @@ class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/voir-{slug}', name: 'app_news_show', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
-    public function show(News $news): Response
-    {
-        $dateCreation = $news->getDateCreation();
-        if ($dateCreation) {
-            $dateCreation = $dateCreation->format('d/m/Y');
-        } else {
-            $dateCreation = '';
-        }
-
-        $dateEdition = $news->getDateEdition();
-        if ($dateEdition) {
-            $dateEdition = $dateEdition->format('d/m/Y');
-        } else {
-            $dateEdition = '';
-        }
-
-        return $this->render('news/show.html.twig', [
-            'news' => $news,
-            'dateCreation' => $dateCreation,
-            'dateEdition' => $dateEdition,
-        ]);
-    }
 
     #[Route('/modifier-{slug}', name: 'app_news_edit', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, News $news, EntityManagerInterface $entityManager): Response
@@ -88,6 +65,8 @@ class NewsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($news->getTitle(), News::class);
+            $news->setSlug($slug);
             $news->setDateEdition(new \DateTime());
             $entityManager->flush();
 
