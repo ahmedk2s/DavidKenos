@@ -2,31 +2,12 @@
 
 {% block title %}Modifier l'utilisateur{% endblock %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="/assets/styles/css/form_style.css"> 
-{% endblock %}
-
 {% block body %}
     <h1>Modifier l'utilisateur</h1>
 
-    {{ form_start(form) }}
-        <div class="form-row">
-            {{ form_label(form.last_name) }}
-            {{ form_widget(form.last_name) }}
-        </div>
-        <div class="form-row">
-            {{ form_label(form.first_name) }}
-            {{ form_widget(form.first_name) }}
-        </div>
-        <div class="form-row">
-            {{ form_label(form.job_title) }}
-            {{ form_widget(form.job_title) }}
-        </div>
-        <div class="form-row">
-            {{ form_label(form.chocolate_shop) }}
-            {{ form_widget(form.chocolate_shop) }}
-        </div>
-    {{ form_end(form) }}
+    {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
     <a href="{{ path('app_user_index') }}">Retour à la liste</a>
+
+    
 {% endblock %}
