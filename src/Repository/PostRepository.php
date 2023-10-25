@@ -21,6 +21,23 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function countAllPosts(): int
+    {
+        return $this->createQueryBuilder('p')
+        ->select('count(p.id)')
+        ->getQuery()
+            ->getSingleScalarResult();
+    }
+    public function findPostsWithoutSlugs()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.slug IS NULL OR p.slug = :emptyString')
+            ->setParameter('emptyString', '')
+            ->getQuery()
+            ->getResult();
+    }
+
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

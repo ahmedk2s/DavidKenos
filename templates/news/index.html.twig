@@ -1,27 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gérer les catégories
+{% block title %}Gerer les actualités
 {% endblock %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 {% endblock %}
+
 
 {% block body %}
 
 	{% include '_partials/_back_office_sidebar.html.twig' %}
 	<div class="container-body">
 		<div class="container-table">
-			<h1>Gérer les catégories</h1>
+
+			<h1>Gerer les actualités</h1>
 
 			<div class="container-button-create">
-				<a class="btn-create" href="{{ path('app_category_new') }}">
+				<a class="btn-create" href="{{ path('app_user_new') }}">
 					<i class="fa-solid fa-plus"></i>
 					<span>Ajouter</span>
 				</a>
-
 			</div>
-
 
 			{% for message in app.flashes('success') %}
 				<div class="alert alert-success">
@@ -32,19 +33,27 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Nom</th>
+						<th>Titre</th>
+						<th>Contenu</th>
+						<th>Date de création</th>
+						<th>Date d'édition</th>
 						<th class="test">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for category in categories %}
+					{% for news in news %}
 						<tr>
-							<td data-label="Nom">{{ category.name }}</td>
+							<td data-label="Titre">{{ news.title }}</td>
+
+							<td data-label="Texte">{{ news.content }}</td>
+
+							<td data-label="Date de création">{{ news.dateCreation|date('d/m/Y') }}</td>
+
+							<td data-label="Date d'édition">{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td>
 
 							<td data-label="Actions" class="btns">
 
-
-								<a class="btn-edit" href="{{ path('app_category_edit', {'slug': category.slug}) }}">
+								<a class="btn-edit" href="{{ path('app_news_edit', {'slug': news.slug}) }}">
 									<i class="fa-solid fa-pen-to-square"></i>
 									<span>Modifier</span>
 								</a>
@@ -53,7 +62,7 @@
 						</tr>
 					{% else %}
 						<tr>
-							<td colspan="3">Aucun enregistrement trouvé</td>
+							<td colspan="5">Pas d'actualités trouvées</td>
 						</tr>
 					{% endfor %}
 				</tbody>

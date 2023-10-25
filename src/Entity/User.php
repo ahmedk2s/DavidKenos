@@ -83,6 +83,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "boolean")]
     private $isApproved = false;
 
+    #[ORM\Column(type: "string", length: 255, unique: true)]
+    private ?string $slug = null;
+
 
     public function __construct()
     {
@@ -435,6 +438,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
     public function eraseCredentials()
     {
         // Vous pouvez laisser cette méthode vide si vous n'avez pas de données sensibles à effacer
@@ -444,6 +458,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // Utilisez l'adresse e-mail comme identifiant de l'utilisateur
         return $this->email;
+    }
+
+    public function __toString(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
 }

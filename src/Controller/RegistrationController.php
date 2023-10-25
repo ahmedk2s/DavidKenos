@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Service\SendMailService;
+use App\Service\SlugService;
 use App\Repository\UserRepository;
 use App\Service\JWTService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
+     private SlugService $slugService;
+
+    public function __construct(SlugService $slugService)
+    {
+        $this->slugService = $slugService; // Injection du SlugService
+    }
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -24,6 +32,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $user->setSlug($slug);
             // encode the plain password
             $user->setRoles(['ROLE_SUPER_ADMIN']);
             
@@ -54,6 +64,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $user->setSlug($slug);
           
             $user->setRoles(['ROLE_ADMIN']);
 
@@ -85,6 +97,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $user->setSlug($slug);
             $user->setRoles(['ROLE_EMPLOYE']);
 
             $user->setPassword(
