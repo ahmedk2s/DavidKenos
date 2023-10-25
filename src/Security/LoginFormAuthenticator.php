@@ -26,7 +26,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     private UrlGeneratorInterface $urlGenerator;
     private Security $security;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator, Security $security)
+    public function __construct(UrlGeneratorInterface $urlGenerator, Security $security,)
     {
         $this->urlGenerator = $urlGenerator;
         $this->security = $security;
