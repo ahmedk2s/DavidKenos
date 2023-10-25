@@ -17,8 +17,11 @@ class ChocolateShopController extends AbstractController
     #[Route('/', name: 'app_chocolate_shop_index', methods: ['GET'])]
     public function index(ChocolateShopRepository $chocolateShopRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('chocolate_shop/index.html.twig', [
             'chocolate_shops' => $chocolateShopRepository->findAll(),
+            'user' => $user,
         ]);
     }
 
@@ -44,7 +47,7 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_chocolate_shop_show', methods: ['GET'])]
+    #[Route('/chocolaterie-{id}', name: 'app_chocolate_shop_show', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
     public function show(ChocolateShop $chocolateShop): Response
     {
         return $this->render('chocolate_shop/show.html.twig', [
@@ -52,7 +55,7 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_chocolate_shop_edit', methods: ['GET', 'POST'])]
+    #[Route('/chocolaterie-{id}/edit', name: 'app_chocolate_shop_edit', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ChocolateShopType::class, $chocolateShop);
@@ -72,7 +75,7 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_chocolate_shop_delete', methods: ['POST'])]
+    #[Route('/chocolaterie-{id}', name: 'app_chocolate_shop_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$chocolateShop->getId(), $request->request->get('_token'))) {
