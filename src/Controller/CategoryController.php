@@ -81,7 +81,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/supprimer-{slug}', name: 'app_category_delete', methods: ['POST'])]
+    #[Route('/supprimer-{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {

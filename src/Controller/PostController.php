@@ -83,7 +83,7 @@ class PostController extends AbstractController
         return $formatter->format($date->getTimestamp());  
     }
 
-    #[Route('/modifier-{slug}', name: 'app_post_edit', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
+    #[Route('/modifier-{slug}', name: 'app_post_edit', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PostType::class, $post);
@@ -107,7 +107,7 @@ class PostController extends AbstractController
     }
 
 
-    #[Route('/supprimer-{slug}', name: 'app_post_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
+    #[Route('/supprimer-{id}', name: 'app_post_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {

@@ -84,7 +84,7 @@ class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/supprimer-{slug}', name: 'app_news_delete', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
+    #[Route('/supprimer-{id}', name: 'app_news_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, News $news, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $news->getId(), $request->request->get('_token'))) {
