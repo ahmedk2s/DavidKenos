@@ -11,7 +11,7 @@
 
 {% block body %}
     {# Menu vertical #}
-    {% include 'profile/base_sidebar.html.twig' %}
+    {% include '_partials/_base_sidebar.html.twig' %}
 
     <header class="banner-container">
         <img src="{{ user.coverPicture }}" alt="Image en bandeau" class="banner-image">
@@ -63,7 +63,7 @@
         <h2>Les derniers</h2>
             <p>posts publiés</p>
             </div>
-    {% include '_partials/post.html.twig' %}
+    {% include '_partials/_post.html.twig' %}
     </div>
     </div>
     
