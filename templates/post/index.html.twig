@@ -1,39 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index des posts{% endblock %}
+{% block title %}Gerer les posts
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
 
 {% block body %}
-    <h1>Index des posts</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Texte</th>
-                <th>Date de création</th>
-                <th>Date d'édition</th>
-                <th>Titre</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-            <tr>
-                <td>{{ post.text }}</td>
-                <td>{{ post.dateCreation|date('d/m/Y') }}</td>
-                <td>{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td> 
-                <td>{{ post.title }}</td>
-                <td>
-                   
-                    <a href="{{ path('app_post_edit', {'slug': post.slug}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Aucun post enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	{% include '_partials/_back_office_sidebar.html.twig' %}
+	<div class="container-body">
+		<div class="container-table">
 
-    <a href="{{ path('app_post_new') }}">Créer</a>
+			<h1>Gerer les posts</h1>
+
+			<div class="container-button-create">
+				<a class="btn-create" href="{{ path('app_user_new') }}">
+					<i class="fa-solid fa-plus"></i>
+					<span>Ajouter</span>
+				</a>
+			</div>
+
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Titre</th>
+						<th>Texte</th>
+						<th>Date de création</th>
+						<th>Date d'édition</th>
+						<th class="test">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for post in posts %}
+						<tr>
+							<td data-label="Titre">{{ post.title }}</td>
+							<td data-label="Texte">{{ post.text }}</td>
+							<td data-label="Date création">{{ post.dateCreation|date('d/m/Y') }}</td>
+							<td data-label="Date édition">{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td>
+							<td data-label="Actions" class="btns">
+
+								<a class="btn-edit" href="{{ path('app_post_edit', {'slug': post.slug}) }}">
+									<i class="fa-solid fa-pen-to-square"></i>
+									<span>Modifier</span>
+								</a>
+								{{ include('post/_delete_form.html.twig') }}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">Aucun post enregistré</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}

@@ -25,8 +25,11 @@ class NewsController extends AbstractController
     #[Route('/index-des-actualites', name: 'app_news_index', methods: ['GET'])]
     public function index(NewsRepository $newsRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('news/index.html.twig', [
             'news' => $newsRepository->findAll(),
+            'user' => $user,
         ]);
     }
 
