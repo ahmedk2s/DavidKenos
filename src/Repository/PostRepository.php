@@ -28,6 +28,14 @@ class PostRepository extends ServiceEntityRepository
         ->getQuery()
             ->getSingleScalarResult();
     }
+    public function findPostsWithoutSlugs()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.slug IS NULL OR p.slug = :emptyString')
+            ->setParameter('emptyString', '')
+            ->getQuery()
+            ->getResult();
+    }
 
 
 //    /**

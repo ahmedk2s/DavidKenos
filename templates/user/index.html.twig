@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gérer les utilisateurs
+{% block title %}Gerer les utilisateurs
 {% endblock %}
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
 {% endblock %}
 
 {% block body %}
@@ -14,6 +13,7 @@
 	{% include '_partials/_back_office_sidebar.html.twig' %}
 	<div class="container-body">
 		<div class="container-table">
+
 			<h1>Gérer les utilisateurs</h1>
 
 			<div class="container-button-create">
@@ -21,10 +21,7 @@
 					<i class="fa-solid fa-plus"></i>
 					<span>Ajouter</span>
 				</a>
-
-
 			</div>
-
 
 			{% for message in app.flashes('success') %}
 				<div class="alert alert-success">
@@ -62,7 +59,7 @@
 						</tr>
 					{% else %}
 						<tr>
-							<td colspan="4">Aucun enregistrement trouvé</td>
+							<td colspan="4">Aucun utilisateur enregisté</td>
 						</tr>
 					{% endfor %}
 				</tbody>
