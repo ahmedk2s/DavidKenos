@@ -21,6 +21,9 @@ class ChocolateShop
     #[ORM\OneToMany(mappedBy: 'chocolate_shop', targetEntity: User::class, orphanRemoval: true)]
     private Collection $users;
 
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -71,6 +74,17 @@ class ChocolateShop
             }
         }
 
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
         return $this;
     }
 

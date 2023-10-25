@@ -44,7 +44,7 @@
 						<tr>
 							<td data-label="Ville">{{ chocolate_shop.city }}</td>
 							<td data-label="Actions" class="btns">
-								<a class="btn-edit" href="{{ path('app_chocolate_shop_edit', {'id': chocolate_shop.id}) }}">
+								<a class="btn-edit" href="{{ path('app_chocolate_shop_edit', {'slug': chocolate_shop.slug}) }}">
 									<i class="fa-solid fa-pen-to-square"></i>
 									<span>Modifier</span>
 								</a>

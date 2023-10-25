@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\ChocolateShop;
 use App\Form\ChocolateShopType;
+use App\Form\PostType;
+use App\Service\SlugService;
 use App\Repository\ChocolateShopRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,10 +13,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/chocolate-shop')]
+#[Route('/admin/chocolaterie')]
 class ChocolateShopController extends AbstractController
 {
-    #[Route('/', name: 'app_chocolate_shop_index', methods: ['GET'])]
+
+    private $slugService;
+
+    public function __construct(SlugService $slugService)
+    {
+        $this->slugService = $slugService;
+    }
+
+    #[Route('/index-chocolaterie', name: 'app_chocolate_shop_index', methods: ['GET'])]
     public function index(ChocolateShopRepository $chocolateShopRepository): Response
     {
         $user = $this->getUser();
@@ -25,7 +35,7 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_chocolate_shop_new', methods: ['GET', 'POST'])]
+    #[Route('/nouvelle-chocolaterie', name: 'app_chocolate_shop_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $chocolateShop = new ChocolateShop();
@@ -33,6 +43,8 @@ class ChocolateShopController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($chocolateShop->getCity(), ChocolateShop::class);
+            $chocolateShop->setSlug($slug);
             $entityManager->persist($chocolateShop);
             $entityManager->flush();
 
@@ -47,21 +59,16 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/chocolaterie-{id}', name: 'app_chocolate_shop_show', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET'])]
-    public function show(ChocolateShop $chocolateShop): Response
-    {
-        return $this->render('chocolate_shop/show.html.twig', [
-            'chocolate_shop' => $chocolateShop,
-        ]);
-    }
 
-    #[Route('/chocolaterie-{id}/edit', name: 'app_chocolate_shop_edit', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
+    #[Route('/modifier-{slug}', name: 'app_chocolate_shop_edit', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
     public function edit(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ChocolateShopType::class, $chocolateShop);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($chocolateShop->getCity(), ChocolateShop::class);
+            $chocolateShop->setSlug($slug);
             $entityManager->flush();
 
             $this->addFlash('success', 'Chocolaterie modifié avec succès !');
@@ -75,7 +82,7 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/chocolaterie-{id}', name: 'app_chocolate_shop_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
+    #[Route('/supprimer-{id}', name: 'app_chocolate_shop_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
     public function delete(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$chocolateShop->getId(), $request->request->get('_token'))) {
