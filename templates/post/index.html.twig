@@ -47,7 +47,6 @@
 							<td data-label="Date création">{{ post.dateCreation|date('d/m/Y') }}</td>
 							<td data-label="Date édition">{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td>
 							<td data-label="Actions" class="btns">
-
 								<a class="btn-edit" href="{{ path('app_post_edit', {'slug': post.slug}) }}">
 									<i class="fa-solid fa-pen-to-square"></i>
 									<span>Modifier</span>
