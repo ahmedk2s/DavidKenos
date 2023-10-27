@@ -47,7 +47,7 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Catégorie ajouté avec succès !');
+            $this->addFlash('success', 'Catégorie ajouté !');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -70,7 +70,7 @@ class CategoryController extends AbstractController
             $category->setSlug($slug);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Catégorie modifié avec succès !');
+            $this->addFlash('success', 'Catégorie modifié !');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -89,7 +89,7 @@ class CategoryController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'La catégorie a été supprimé avec succès.');
+        $this->addFlash('success', 'Catégorie supprimé.');
 
         return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
     }
