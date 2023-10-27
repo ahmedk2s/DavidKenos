@@ -21,6 +21,14 @@ class ChocolateShopRepository extends ServiceEntityRepository
         parent::__construct($registry, ChocolateShop::class);
     }
 
+    public function countAllChocolate(): int
+    {
+        return $this->createQueryBuilder('cs')
+            ->select('count(cs.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return ChocolateShop[] Returns an array of ChocolateShop objects
 //     */

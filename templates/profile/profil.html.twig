@@ -1,18 +1,17 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_member.html.twig' %}
 
 {% block title %} Profil {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/assets/styles/css/profile_style.css">
     <link rel="stylesheet" href="/assets/styles/css/post_style.css">
-    <link rel="stylesheet" href="/assets/styles/css/sidebar_style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    {# <link rel="stylesheet" href="/assets/styles/css/sidebar_style.css"> #}
 {% endblock %}
 
 {% block body %}
-    {# Menu vertical #}
-    {% include '_partials/_base_sidebar.html.twig' %}
-
+    {# header horizontal #}
+    
     <header class="banner-container">
         <img src="{{ user.coverPicture }}" alt="Image en bandeau" class="banner-image">
         <img src="{{ user.profilePicture }}" alt="Photo de profil" class="profile-image">

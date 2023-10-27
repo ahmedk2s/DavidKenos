@@ -57,36 +57,36 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/admin', name: 'app_register_admin')]
-    public function registerAdmin(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+public function registerAdmin(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+{
+    $user = new User();
+    $form = $this->createForm(RegistrationFormType::class, $user);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
-            $user->setSlug($slug);
-          
-            $user->setRoles(['ROLE_ADMIN']);
+    if ($form->isSubmitted() && $form->isValid()) {
+         $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+        $user->setSlug($slug);
+      
+        $user->setRoles(['ROLE_ADMIN']);
 
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+        $user->setPassword(
+            $userPasswordHasher->hashPassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            )
+        );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-           
-
-            return $this->redirectToRoute('app_login'); 
-        }
-
-        return $this->render('registration/admin_register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        $entityManager->persist($user);
+        $entityManager->flush();
+       
+        // Rediriger vers la page de login avec un paramètre spécifique
+        return $this->redirectToRoute('app_login', ['admin_registered' => true]); 
     }
+
+    return $this->render('registration/admin_register.html.twig', [
+        'registrationForm' => $form->createView(),
+    ]);
+}
 
     #[Route('/register/employe', name: 'app_register_employe')]
     public function registerEmployee(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SendMailService $mail,

@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Security\Voter\UserVoter;
 use App\Service\SlugService;
 use App\Repository\UserRepository;
 use App\Repository\NewsRepository;
 use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\ChocolateShopRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +29,13 @@ class AdminController extends AbstractController
         UserRepository $userRepository,
         NewsRepository $newsRepository,
         PostRepository $postRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        ChocolateShopRepository $chocolateShopRepository
     ): Response {
         $user = $this->getUser();
+
+        // Vérifiez si l'utilisateur a le droit d'accéder à la page d'administration
+        $this->denyAccessUnlessGranted(UserVoter::ACCESS_ADMIN, $user);
 
         // Si aucun slug n'est fourni, crée un slug unique pour l'accueil de l'administration
         if (!$slug) {
@@ -49,6 +55,8 @@ class AdminController extends AbstractController
         
         $categoryCount = $categoryRepository->countAllCategory([]);
 
+        $chocolateCount = $chocolateShopRepository->countAllChocolate([]);
+
         return $this->render('administration/admin.html.twig', [
             'controller_name' => 'AdminController',
             'user' => $user,
@@ -56,6 +64,7 @@ class AdminController extends AbstractController
             'newsCount' => $newsCount,
             'postsCount' => $postsCount,
             'categoryCount' => $categoryCount,
+            'chocolateCount' => $chocolateCount
         ]);
     }
 }
