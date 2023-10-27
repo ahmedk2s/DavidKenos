@@ -2,6 +2,14 @@
   display: flex;
   flex-wrap: wrap;
 }
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/styles/includes/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/styles/includes/fonts/Montserrat-Medium.ttf') format('truetype');
+}
 * {
   margin: 0;
   box-sizing: border-box;

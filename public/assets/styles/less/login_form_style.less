@@ -1,11 +1,6 @@
 @import "../includes/variables.less";
 @import "../includes/mixins.less";
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('/assets/styles/includes/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-}
+@import "../includes/fonts.less";
 
 * {
   margin: 0;
@@ -62,12 +57,12 @@ body {
   }
   p {
     color: #0aaa9e;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-align: center;
     margin-top: 10px;
     position: absolute;
     top: -15px;
-    left: 43px;
+    left: 40px;
   }
 }
 
@@ -81,7 +76,7 @@ body {
 }
 
 .custom-input {
-  width: 350px;
+  width: 400px;
   height: 40px;
   padding: 8px;
   font-size: 0.8rem;
@@ -90,6 +85,7 @@ body {
   padding-left: 20px;
   outline: none;
   color: #b4b4be;
+  font-family: "Montserrat", sans-serif;
 }
 
 .custom-input:focus {
@@ -98,7 +94,6 @@ body {
 
 .custom-input::placeholder {
   color: #b4b4be;
-  font-family: "Montserrat", sans-serif;
 }
 
 .custom-button {
@@ -114,6 +109,7 @@ body {
   border-radius: 3px;
   cursor: pointer;
   margin-top: 15px;
+  font-family: "Montserrat", sans-serif;
 }
 
 @media screen and (max-width: 400px) {
