@@ -1,3 +1,6 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
 * {
-  background-color: red;
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
 }
