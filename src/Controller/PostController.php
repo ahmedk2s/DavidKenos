@@ -53,7 +53,7 @@ class PostController extends AbstractController
                 $entityManager->persist($post);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Le post a été ajouté avec succès.');
+                $this->addFlash('success', 'Post ajouté.');
 
                 return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
             } else {
@@ -95,7 +95,7 @@ class PostController extends AbstractController
             $post->setDateEdition(new \DateTime());  
             $entityManager->flush();  
 
-            $this->addFlash('success', 'Le post a été modifier avec succès.');
+            $this->addFlash('success', 'Post modifier.');
 
             return $this->redirectToRoute('app_post_index');
         }
@@ -115,7 +115,7 @@ class PostController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'Le post a été supprimé avec succès.');
+        $this->addFlash('success', 'Post supprimé.');
 
         return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
     }

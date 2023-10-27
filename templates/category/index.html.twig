@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Gérer les catégories
 {% endblock %}
@@ -9,7 +9,7 @@
 
 {% block body %}
 
-	{% include '_partials/_back_office_sidebar.html.twig' %}
+
 	<div class="container-body">
 		<div class="container-table">
 			<h1>Gérer les catégories</h1>
@@ -19,13 +19,14 @@
 					<i class="fa-solid fa-plus"></i>
 					<span>Ajouter</span>
 				</a>
-
 			</div>
 
-
 			{% for message in app.flashes('success') %}
-				<div class="alert alert-success">
-					{{ message }}
+				<div class="alert alert-success alert-dismissible fade show" id="success-alert">
+					<div class="message">{{ message }}</div>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 			{% endfor %}
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Gerer les actualités
 {% endblock %}
@@ -11,7 +11,6 @@
 
 {% block body %}
 
-	{% include '_partials/_back_office_sidebar.html.twig' %}
 	<div class="container-body">
 		<div class="container-table">
 
@@ -25,8 +24,11 @@
 			</div>
 
 			{% for message in app.flashes('success') %}
-				<div class="alert alert-success">
+				<div class="alert alert-success alert-dismissible fade show" id="success-alert">
 					{{ message }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 			{% endfor %}
 
@@ -35,8 +37,8 @@
 					<tr>
 						<th>Titre</th>
 						<th>Contenu</th>
-						<th>Date de création</th>
-						<th>Date d'édition</th>
+						{# <th>Date de création</th>
+												<th>Date d'édition</th> #}
 						<th class="test">Actions</th>
 					</tr>
 				</thead>
@@ -47,9 +49,9 @@
 
 							<td data-label="Texte">{{ news.content }}</td>
 
-							<td data-label="Date de création">{{ news.dateCreation|date('d/m/Y') }}</td>
-
-							<td data-label="Date d'édition">{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td>
+							{# <td data-label="Date de création">{{ news.dateCreation|date('d/m/Y') }}</td>
+							
+														<td data-label="Date d'édition">{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td> #}
 
 							<td data-label="Actions" class="btns">
 

@@ -1,0 +1,27 @@
+.alert {
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+}
+.alert-success {
+  background-color: #dff0d8;
+  border: 2px solid #91e072;
+}
+.close {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  border: none;
+  cursor: pointer;
+  background-color: #91e072;
+  height: 100%;
+  text-align: center;
+  line-height: 30px;
+  width: 40px;
+}
