@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+	</head>
+</html>
+
+<link rel="stylesheet" href="/assets/styles/css/back_office_sidebar_style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="/assets/styles/css/alertes_style.css"> {% block stylesheets %}{% endblock %}{% block javascripts %}{% endblock %}
+<script src="/assets/styles/js/scripts.js" defer></script>
+
+<div class="sidebar">
+	<div class="logo-container">
+		<div class="img-container">
+			<img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
+		</div>
+	</div>
+
+	<div class="header-container">
+		<ul>
+			<li>
+				Chocolaterie
+				{{ user.chocolateShop }}
+				<div class="circle-container">
+					<div class="outer-circle">
+						<div class="inner-circle"></div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<a href="">
+					<span>Accueil</span>
+					<i class="fa-solid fa-house"></i>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_logout') }}">
+					<span>Déconnexion</span>
+				</a>
+				<i class="fas fa-right-from-bracket"></i>
+			</li>
+		</ul>
+	</div>
+
+	<div class="body-container">
+		<ul class="links-container">
+			<li>
+				<a href="{{ path('app_user_index') }}" class="link">
+					<i class="fa-solid fa-user"></i>
+					<span>Utilisateurs</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_category_index') }}" class="link">
+					<i class="fa-solid fa-list"></i>
+					<span>Catégories</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_post_index') }}" class="link">
+					<i class="fa-solid fa-message"></i>
+					<span>Posts</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_news_index') }}" class="link">
+					<i class="fa-solid fa-newspaper"></i>
+					<span>Actualités</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ path('app_chocolate_shop_index') }}" class="link">
+					<i class="fa-solid fa-shop"></i>
+					<span>Chocolateries</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+{% if app.user and app.user.isVerified == false %}
+	<div class="alert alert-warning alert-dismissible" role="alert">
+		<div class="alert-message">
+			<strong>Votre compte n'est pas activé</strong>,
+			<a href="{{ path('resend_verif') }}">renvoyer le lien d'activation</a>
+		</div>
+	</div>
+{% endif %}
+
+{% block body %}{% endblock %}

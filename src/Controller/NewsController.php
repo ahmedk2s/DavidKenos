@@ -49,7 +49,7 @@ class NewsController extends AbstractController
             $entityManager->persist($news);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Actualité ajouté avec succès !');
+            $this->addFlash('success', 'Actualité ajouté !');
 
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,7 +73,7 @@ class NewsController extends AbstractController
             $news->setDateEdition(new \DateTime());
             $entityManager->flush();
 
-            $this->addFlash('success', 'Actualité modifié avec succès !');
+            $this->addFlash('success', 'Actualité modifié !');
 
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -92,7 +92,7 @@ class NewsController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'L\actualité a été supprimé avec succès.');
+        $this->addFlash('success', 'Actualité supprimé.');
 
         return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
     }

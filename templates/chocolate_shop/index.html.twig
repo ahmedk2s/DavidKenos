@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Gérer les chocolateries
 {% endblock %}
@@ -6,29 +6,29 @@
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
 {% endblock %}
 
 
 {% block body %}
 
-	{% include '_partials/_back_office_sidebar.html.twig' %}
 	<div class="container-body">
 		<div class="container-table">
 			<h1>Gérer les chocolateries</h1>
 
 			<div class="container-button-create">
-				<a class="btn-create" href="{{ path('app_user_new') }}">
+				<a class="btn-create" href="{{ path('app_chocolate_shop_new') }}">
+
 					<i class="fa-solid fa-plus"></i>
 					<span>Ajouter</span>
 				</a>
-
 			</div>
 
-
 			{% for message in app.flashes('success') %}
-				<div class="alert alert-success">
+				<div class="alert alert-success alert-dismissible fade show" id="success-alert">
 					{{ message }}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 			{% endfor %}
 

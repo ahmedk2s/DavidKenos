@@ -48,7 +48,7 @@ class ChocolateShopController extends AbstractController
             $entityManager->persist($chocolateShop);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Chocolaterie ajouté avec succès !');
+            $this->addFlash('success', 'Chocolaterie ajouté !');
 
             return $this->redirectToRoute('app_chocolate_shop_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,7 +71,7 @@ class ChocolateShopController extends AbstractController
             $chocolateShop->setSlug($slug);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Chocolaterie modifié avec succès !');
+            $this->addFlash('success', 'Chocolaterie modifié !');
 
             return $this->redirectToRoute('app_chocolate_shop_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -90,7 +90,7 @@ class ChocolateShopController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'La chocolaterie a été supprimé avec succès.');
+        $this->addFlash('success', 'Chocolaterie supprimé.');
 
         return $this->redirectToRoute('app_chocolate_shop_index', [], Response::HTTP_SEE_OTHER);
     }
