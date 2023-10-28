@@ -1,18 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+</html>
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/registration_form_style.css">
+{% endblock %}
+
 {{ form_errors(form) }}
 
-{{ form_start(form) }}
-    {{ form_row(registrationForm.first_name, {'attr': {'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées'}}) }}
-    {{ form_row(registrationForm.last_name, {'attr': {'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées'}}) }}
-    {{ form_row(form.job_title) }}
-    {{ form_row(form.email) }}
-    {{ form_row(registrationForm.plainPassword) }}
 
-   {# ^ : Indique que çadoit commencer au début de la chaîne. #}
-   {# (?=.*[a-z]) : Signifie que la chaîne doit contenir au moins une lettre minuscule. #}
-   {# (?=.*[A-Z]) : Signifie que la chaîne doit contenir au moins une lettre majuscule. #}
-   {# (?=.*\d) : Signifie que la chaîne doit contenir au moins un chiffre. #}
-   {# [a-zA-Z\d]{8,} : Signifie que la chaîne doit être composée d'au moins 8 caractères (minuscules, majuscules et chiffres) ou plus. #}
-    {{ form_row(form.chocolate_shop) }}
-    {{ form_row(form.agreeTerms) }}
-    <button type="submit" class="btn">Inscription</button>
-{{ form_end(form) }}
+<body>
+
+	<div class="logo-container">
+		<div class="img-container">
+			<img src="{{ asset('/images/logo-david-kenos-blanc.png') }}" alt="Logo de l'entreprise">
+		</div>
+	</div>
+
+	<div class="form-container">
+
+		<h2>Inscris-toi !</h2>
+
+		{{ form_start(form) }}
+		{{ form_row(registrationForm.first_name, {'label': false, 'attr': {'class': 'custom-input', 'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées', 'placeholder': 'Prénom'}}) }}
+		{{ form_row(registrationForm.last_name, {'label': false, 'attr': {'class': 'custom-input', 'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées', 'placeholder': 'Nom'}}) }}
+		{{ form_row(form.job_title, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Poste'}}) }}
+		{{ form_row(form.email, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Adresse e-mail'}}) }}
+		{{ form_row(registrationForm.plainPassword, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Mot de passe'}}) }}
+		{{ form_row(form.chocolate_shop, {'label': false, 'attr': {'class': 'custom-input'}}) }}
+		<div class="termes-contrat">
+			{{ form_label(form.agreeTerms, "Accepter les termes du contrat", {'label_attr': {'class': 'custom-label'}}) }}
+			{{ form_widget(form.agreeTerms, {'attr': {'class': 'custom-checkbox'}}) }}
+		</div>
+		<div class="button-container">
+			<button type="submit" class="custom-btn">Inscription</button>
+		</div>
+		{{ form_end(form) }}
+	</div>
+</body>
+
+
+{# ^ : Indique que çadoit commencer au début de la chaîne. #}
+{# (?=.*[a-z]) : Signifie que la chaîne doit contenir au moins une lettre minuscule. #}
+{# (?=.*[A-Z]) : Signifie que la chaîne doit contenir au moins une lettre majuscule. #}
+{# (?=.*\d) : Signifie que la chaîne doit contenir au moins un chiffre. #}
+{# [a-zA-Z\d]{8,} : Signifie que la chaîne doit être composée d'au moins 8 caractères (minuscules, majuscules et chiffres) ou plus. #}
