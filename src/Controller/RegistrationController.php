@@ -17,56 +17,72 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-     private SlugService $slugService;
+    private SlugService $slugService;
 
     public function __construct(SlugService $slugService)
     {
         $this->slugService = $slugService; // Injection du SlugService
     }
 
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+    // #[Route('/register', name: 'app_register')]
+    // public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->getUser()) {
+    //         if ($this->isGranted('ROLE_ADMIN')) {
+    //             return $this->redirectToRoute('app_admin');
+    //         } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+    //             return $this->redirectToRoute('app_accueil');
+    //         }
+    //     }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
-            $user->setSlug($slug);
-            // encode the plain password
-            $user->setRoles(['ROLE_SUPER_ADMIN']);
-            
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+    //     $user = new User();
+    //     $form = $this->createForm(RegistrationFormType::class, $user);
+    //     $form->handleRequest($request);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+    //         $user->setSlug($slug);
+    //         // encode the plain password
+    //         $user->setRoles(['ROLE_SUPER_ADMIN']);
 
-            return $this->redirectToRoute('app_login');
-        }
+    //         $user->setPassword(
+    //             $userPasswordHasher->hashPassword(
+    //                 $user,
+    //                 $form->get('plainPassword')->getData()
+    //             )
+    //         );
 
-        return $this->render('registration/super_admin_register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
+    //         // do anything else you need here, like send an email
+
+    //         return $this->redirectToRoute('app_login');
+    //     }
+
+    //     return $this->render('registration/super_admin_register.html.twig', [
+    //         'registrationForm' => $form->createView(),
+    //     ]);
+    // }
 
     #[Route('/register/admin', name: 'app_register_admin')]
     public function registerAdmin(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+                return $this->redirectToRoute('app_accueil');
+            }
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
             $user->setSlug($slug);
-          
+
             $user->setRoles(['ROLE_ADMIN']);
 
             $user->setPassword(
@@ -78,9 +94,9 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-           
 
-            return $this->redirectToRoute('app_login'); 
+
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/admin_register.html.twig', [
@@ -89,15 +105,29 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/employe', name: 'app_register_employe')]
-    public function registerEmployee(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, SendMailService $mail,
-        JWTService $jwt): Response 
-        {
+    public function registerEmployee(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager,
+        SendMailService $mail,
+        JWTService $jwt
+    ): Response {
+
+        if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+                return $this->redirectToRoute('app_accueil');
+            }
+        }
+
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
             $user->setSlug($slug);
             $user->setRoles(['ROLE_EMPLOYE']);
 
@@ -108,14 +138,14 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            
+
             $entityManager->persist($user);
             $entityManager->flush();
 
-            
+
             $userId = $user->getId();
 
-            
+
             $header = [
                 'alg' => 'HS256',
                 'typ' => 'JWT'
@@ -127,7 +157,7 @@ class RegistrationController extends AbstractController
 
             $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
-            
+
             $mail->send(
                 'no-reply@davisKenos.net',
                 $user->getEmail(),
@@ -147,23 +177,23 @@ class RegistrationController extends AbstractController
     #[Route('/verif/{token}', name: 'verify_user')]
     public function verifyUser($token, JWTService $jwt, UserRepository $usersRepository, EntityManagerInterface $entityManager): Response
     {
-    
-    $payload = $jwt->getPayload($token);
 
-    
-    $user = $usersRepository->find($payload['user_id']);
+        $payload = $jwt->getPayload($token);
 
-    
-    if ($user && !$user->getIsVerified()) {
-        $user->setIsVerified(true);
-        $entityManager->flush($user); 
-        $this->addFlash('success', 'Utilisateur activé');
-        return $this->redirectToRoute('profile');
-    }
 
-    // Si le token est invalide ou a expiré
-    $this->addFlash('danger', 'Le token est invalide ou a expiré');
-    return $this->redirectToRoute('app_login');
+        $user = $usersRepository->find($payload['user_id']);
+
+
+        if ($user && !$user->getIsVerified()) {
+            $user->setIsVerified(true);
+            $entityManager->flush($user);
+            $this->addFlash('success', 'Utilisateur activé');
+            return $this->redirectToRoute('profile');
+        }
+
+        // Si le token est invalide ou a expiré
+        $this->addFlash('danger', 'Le token est invalide ou a expiré');
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route('/renvoiverif', name: 'resend_verif')]
@@ -171,28 +201,28 @@ class RegistrationController extends AbstractController
     {
         $user = $this->getUser();
 
-        if(!$user){
+        if (!$user) {
             $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
-            return $this->redirectToRoute('app_login');    
+            return $this->redirectToRoute('app_login');
         }
 
-        if($user->getIsVerified()){
+        if ($user->getIsVerified()) {
             $this->addFlash('warning', 'Cet utilisateur est déjà activé');
-            return $this->redirectToRoute('profile');    
+            return $this->redirectToRoute('profile');
         }
 
-        
+
         $header = [
             'typ' => 'JWT',
             'alg' => 'HS256'
         ];
 
-    
+
         $payload = [
             'user_id' => $user->getId()
         ];
 
-        
+
         $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
         // On envoie un mail
@@ -206,10 +236,4 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Email de vérification envoyé');
         return $this->redirectToRoute('profile');
     }
-
 }
-
-
-
-
-
