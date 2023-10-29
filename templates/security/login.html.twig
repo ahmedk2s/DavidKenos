@@ -20,14 +20,15 @@
 
 		<form method="post" class="custom-form">
 
-			{% if error %}
-				<div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
-
 			<div class="title">
 				<p>Hâte de nous retrouver ?</p>
 				<h1>Connectes-toi !</h1>
 			</div>
+
+			{% if error %}
+				<div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+
 
 			<div class="input-group">
 				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="custom-input" autocomplete="email" required autofocus placeholder="Email">
@@ -44,4 +45,5 @@
 			</button>
 		</form>
 	</div>
+	{% include "_partials/_flash.html.twig" %}
 {% endblock %}

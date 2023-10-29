@@ -3,17 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use DateTime;
 use App\Form\RegistrationFormType;
-use App\Service\SendMailService;
 use App\Service\SlugService;
 use App\Repository\UserRepository;
-use App\Service\JWTService;
+use App\Service\MailerService;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -95,7 +98,6 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-
             return $this->redirectToRoute('app_login');
         }
 
@@ -109,8 +111,8 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordHasherInterface $userPasswordHasher,
         EntityManagerInterface $entityManager,
-        SendMailService $mail,
-        JWTService $jwt
+        MailerService $mailerService,
+        TokenGeneratorInterface $tokenGeneratorInterface
     ): Response {
 
         if ($this->getUser()) {
@@ -121,12 +123,14 @@ class RegistrationController extends AbstractController
             }
         }
 
-
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $tokenRegistration = $tokenGeneratorInterface->generateToken();
+
             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
             $user->setSlug($slug);
             $user->setRoles(['ROLE_EMPLOYE']);
@@ -138,33 +142,25 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $user->setTokenRegistration($tokenRegistration);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-
-            $userId = $user->getId();
-
-
-            $header = [
-                'alg' => 'HS256',
-                'typ' => 'JWT'
-            ];
-
-            $payload = [
-                'user_id' => $userId
-            ];
-
-            $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
-
-
-            $mail->send(
-                'no-reply@davisKenos.net',
+            $mailerService->send(
                 $user->getEmail(),
                 'Activation de votre compte',
                 'Activation',
-                compact('user', 'token')
+                [
+                    'user' => $user,
+                    'token' => $tokenRegistration,
+                    'lifeTimeToken' => $user->getTokenRegistrationLifeTime()->format('d/m/y à H/hi')
+                ]
             );
+
+            $userId = $user->getId();
+
+            $this->addFlash('success', 'Votre compte a bien été créé, veuillez vérifier vos emails pour l\'activer.');
 
             return $this->redirectToRoute('app_login');
         }
@@ -174,66 +170,27 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verif/{token}', name: 'verify_user')]
-    public function verifyUser($token, JWTService $jwt, UserRepository $usersRepository, EntityManagerInterface $entityManager): Response
-    {
+    #[Route('/verify{token}/{id<\d+>}', name: 'user_verify', methods: ['GET'])]
+    public function verify (string $token, User $user, EntityManagerInterface $entityManager): Response {
 
-        $payload = $jwt->getPayload($token);
-
-
-        $user = $usersRepository->find($payload['user_id']);
-
-
-        if ($user && !$user->getIsVerified()) {
-            $user->setIsVerified(true);
-            $entityManager->flush($user);
-            $this->addFlash('success', 'Utilisateur activé');
-            return $this->redirectToRoute('profile');
+        if($user->getTokenRegistration() !== $token) {
+            throw new AccessDeniedHttpException();
+        }
+        if($user->getTokenRegistration() === null) {
+            throw new AccessDeniedHttpException();
+        }
+        if(new DateTime('now') > $user->getTokenRegistrationLifeTime()) {
+            throw new AccessDeniedHttpException();
         }
 
-        // Si le token est invalide ou a expiré
-        $this->addFlash('danger', 'Le token est invalide ou a expiré');
+        $user->setIsVerified(true);
+        $user->setTokenRegistration(null);
+        $entityManager->flush();
+
+
+        $this->addFlash('success', 'Votre compte a bien été activé, vous pouvez maintenant vous connecter.');
+
         return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/renvoiverif', name: 'resend_verif')]
-    public function resendVerif(JWTService $jwt, SendMailService $mail, UserRepository $userRepository): Response
-    {
-        $user = $this->getUser();
-
-        if (!$user) {
-            $this->addFlash('danger', 'Vous devez être connecté pour accéder à cette page');
-            return $this->redirectToRoute('app_login');
-        }
-
-        if ($user->getIsVerified()) {
-            $this->addFlash('warning', 'Cet utilisateur est déjà activé');
-            return $this->redirectToRoute('profile');
-        }
-
-
-        $header = [
-            'typ' => 'JWT',
-            'alg' => 'HS256'
-        ];
-
-
-        $payload = [
-            'user_id' => $user->getId()
-        ];
-
-
-        $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
-
-        // On envoie un mail
-        $mail->send(
-            'no-reply@monsite.net',
-            $user->getEmail(),
-            'Activation de votre compte',
-            'activation',
-            compact('user', 'token')
-        );
-        $this->addFlash('success', 'Email de vérification envoyé');
-        return $this->redirectToRoute('profile');
-    }
 }

@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateInterval;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use 
+Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -78,13 +81,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?ChocolateShop $chocolate_shop = null;
 
     #[ORM\Column(type: 'boolean')]
-    private $is_verified = false;
+    private $isVerified = false;
     
     #[ORM\Column(type: "boolean")]
     private $isApproved = false;
 
     #[ORM\Column(type: "string", length: 255, unique: true)]
     private ?string $slug = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $tokenRegistration = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
 
 
     public function __construct()
@@ -94,6 +103,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->posts = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->notification = new ArrayCollection();
+        $this->isVerified = false;
+        $this->tokenRegistrationLifeTime = (new DateTime('now'))->add(new DateInterval('P1D'));
+
     }
 
     public function getId(): ?int
@@ -416,13 +428,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getIsVerified(): ?bool
     {
-        return $this->is_verified;
+        return $this->isVerified;
     }
 
     // Setter pour définir la valeur de $is_verified
     public function setIsVerified(bool $isVerified): self
     {
-        $this->is_verified = $isVerified;
+        $this->isVerified = $isVerified;
         return $this;
     }
 
@@ -463,6 +475,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getTokenRegistration(): ?string
+    {
+        return $this->tokenRegistration;
+    }
+
+    public function setTokenRegistration(?string $tokenRegistration): static
+    {
+        $this->tokenRegistration = $tokenRegistration;
+
+        return $this;
+    }
+
+    public function getTokenRegistrationLifeTime(): ?\DateTimeInterface
+    {
+        return $this->tokenRegistrationLifeTime;
+    }
+
+    public function setTokenRegistrationLifeTime(\DateTimeInterface $tokenRegistrationLifeTime): static
+    {
+        $this->tokenRegistrationLifeTime = $tokenRegistrationLifeTime;
+
+        return $this;
     }
 
 }

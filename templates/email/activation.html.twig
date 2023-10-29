@@ -1,5 +1,6 @@
 <h1>Activer votre compte</h1>
 <p>Bonjour {{ user.getFirstName() }},</p>
 <p>Votre inscription sur le réseau social DavidKenos est à valider en cliquant sur le lien ci-dessous :</p>
-<p><a href="{{ absolute_url(path('verify_user', {token: token})) }}">Activer mon compte</a></p>
-<p>Ce lien expirera dans 5 heures</p>
+<p><a href="{{ absolute_url(path('user_verify', {token: token, id: user.id})) }}">Activer mon compte</a></p>
+<p>Ce lien est valable jusqu'au <strong>{{ lifeTimeToken }}</strong> après cette date il ne sera plus.</p>
+<p>A bientôt sur notre site</p>
