@@ -2,6 +2,7 @@
 
 {% block title %}Modifier l'utilisateur{% endblock %}
 
+
 {% block stylesheets %}
     <link rel="stylesheet" href="/assets/styles/css/form_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -55,6 +56,12 @@
                     {{ form_errors(form.chocolate_shop) }}
                 </div>
             </div>
+
+            <div class="container-button-create">
+            <button type="submit" class="btn-create">
+                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
+            </button>
+        </div>
             
         {{ form_end(form) }}
         
@@ -63,11 +70,7 @@
             <span>Retour à la liste</span>
         </a>
         
-        <div class="container-button-create">
-            <button type="submit" class="btn-create">
-                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
-            </button>
-        </div>
+        
     </div>
 </div>
 

@@ -1,12 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Modifier Catégorie{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/form_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
 
 {% block body %}
     <h1>Modifier Catégorie</h1>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+     {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
 
-    <a href="{{ path('app_category_index') }}">Retour à la liste</a>
+            <div class="form-row">
+                <div class="form-cell-label yellow-background">
+                    {{ form_label(form.name, 'Nom') }}
+                </div>
+                <div class="form-cell">
+                    {{ form_widget(form.name, {'attr': {'class': 'custom-input'}}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+            </div>
+            
+        {{ form_end(form) }}
+        
+        <a href="{{ path('app_category_index') }}"class="btn-edit">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Retour à la liste</span>
+        </a>
+        
+        <div class="container-button-create">
+            <button type="submit" class="btn-create">
+                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
+            </button>
+        </div>
+
 
 {% endblock %}
