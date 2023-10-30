@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccueilController!
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/accueil_style.css">
+	<link rel="stylesheet" href="/assets/styles/css/sidebar_style.css">
+
+{% endblock %}
+
+{% block body %}
+
+	<div class="sidebar-container">
+		{% include "_partials/base_sidebar.html.twig" %}
+	</div>
+	<div class="body-container">
+		<div class="posts-container">
+			<div class="header-container-posts">
+				<h2>Bienvenue sur ton espace,</h2>
+				<p>voici les derniers posts publiés.</p>
+			</div>
+			<div class="grid-container">
+				<div class="div" id="un">1</div>
+				<div class="div" id="deux">2</div>
+				<div class="div" id="trois">3</div>
+				<div class="div" id="quatre">4</div>
+				<div class="div" id="cinq">5</div>
+				<div class="div" id="six">6</div>
+			</div>
+
+		</div>
+		<div class="news-container">
+			<div class="header-container-news">
+				<h2>Les dernières actualités</h2>
+				<p>de l'entreprise</p>
+			</div>
+			<div class="body-container-news">
+				<div class="block-news">
+					<div class="block-img"></div>
+					<div class="block-text">
+						<h3>Title</h3>
+						<p>Text</p>
+					</div>
+				</div>
+				<div class="block-news">
+					<div class="block-img"></div>
+					<div class="block-text">
+						<h3>Title</h3>
+						<p>Text</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

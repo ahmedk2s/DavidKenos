@@ -1,0 +1,183 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/styles/includes/fonts/PlayfairDisplay-Italic.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/styles/includes/fonts/Montserrat-Medium.ttf")
+    format("truetype");
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background-color: @lightGray;
+  font-family: "Montserrat", sans-serif;
+}
+
+.sidebar-container {
+//   width: 25%;
+}
+
+.body-container {
+  .dflex();
+  width: 100%;
+  margin: 3%;
+  gap: 4%;
+}
+
+.posts-container {
+  width: 66%;
+  background-color: white;
+  border-top: 5px solid @colorYellow;
+  padding: 35px 25px;
+}
+
+.header-container-posts {
+  height: 10%;
+  margin-bottom: 15px;
+}
+
+.div {
+  background-color: aqua;
+  border: 1px solid black;
+}
+
+.grid-container {
+  height: 88%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+  grid-template-areas:
+    "un deux trois"
+    "un deux trois"
+    "un cinq trois"
+    "quatre cinq six"
+    "quatre cinq six";
+}
+
+#un {
+  grid-area: un;
+}
+
+#deux {
+  grid-area: deux;
+}
+
+#trois {
+  grid-area: trois;
+}
+
+#quatre {
+  grid-area: quatre;
+}
+
+#cinq {
+  grid-area: cinq;
+}
+
+#six {
+  grid-area: six;
+}
+
+.news-container {
+  width: 30%;
+  background-color: white;
+  border-top: 5px solid @colorYellow;
+  padding: 35px 25px;
+}
+
+.header-container-news {
+  height: 10%;
+  margin-bottom: 15px;
+}
+
+.body-container-news {
+  height: 88%;
+  gap: 15px;
+  padding: 15px 5px 0 5px;
+}
+
+.block-news {
+  height: 50%;
+  padding-bottom: 15px;
+}
+
+.block-img {
+  height: 60%;
+  background-color: aqua;
+  border: 1px solid black;
+}
+
+.block-text {
+  border: 1px solid black;
+  height: 40%;
+}
+
+@media screen and (max-width: 1200px) {
+  .posts-container {
+    width: 62%;
+  }
+  .news-container {
+    width: 34%;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-template-areas:
+      "un deux"
+      "un deux"
+      "un quatre"
+      "trois quatre"
+      "trois quatre";
+
+    #cinq,
+    #six {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar-container {
+    width: 13%;
+    background-color: blue;
+  }
+}
+
+@media screen and (max-width: 800px) {
+    .posts-container {
+    width: 48%;
+  }
+  .news-container {
+    width: 48%;
+  }
+
+  .grid-container {
+    grid-template-columns: (1fr);
+    gap: 20px;
+    grid-template-areas:
+      "un"
+      "un"
+      "un"
+      "deux"
+      "deux";
+
+    #trois,
+    #quatre,
+    #cinq,
+    #six {
+      display: none;
+    }
+  }
+}
