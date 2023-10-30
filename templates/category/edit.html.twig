@@ -8,32 +8,32 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Modifier Catégorie</h1>
+    <div class="container-body"> 
+        <h1>Modifier Catégorie</h1>
 
-     {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+        {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
 
-            <div class="form-row">
-                <div class="form-cell-label yellow-background">
-                    {{ form_label(form.name, 'Nom') }}
+                <div class="form-row">
+                    <div class="form-cell-label yellow-background">
+                        {{ form_label(form.name, 'Nom') }}
+                    </div>
+                    <div class="form-cell">
+                        {{ form_widget(form.name, {'attr': {'class': 'custom-input'}}) }}
+                        {{ form_errors(form.name) }}
+                    </div>
                 </div>
-                <div class="form-cell">
-                    {{ form_widget(form.name, {'attr': {'class': 'custom-input'}}) }}
-                    {{ form_errors(form.name) }}
-                </div>
+                <div class="container-button-create">
+                <button type="submit" class="btn-create">
+                    <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
+                </button>
             </div>
-            
+
         {{ form_end(form) }}
-        
-        <a href="{{ path('app_category_index') }}"class="btn-edit">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Retour à la liste</span>
-        </a>
-        
-        <div class="container-button-create">
-            <button type="submit" class="btn-create">
-                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
-            </button>
-        </div>
 
+            <a href="{{ path('app_category_index') }}" class="btn-edit">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Retour à la liste</span>
+            </a>
 
+    </div>
 {% endblock %}
