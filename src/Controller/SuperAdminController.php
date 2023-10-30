@@ -11,12 +11,18 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Security\Voter\UserVoter;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SuperAdminController extends AbstractController
 {
     #[Route('/super_admin_approve_users', name: 'approve_users')]
     public function approveUsers(Request $request, EntityManagerInterface $em): Response
     {
+        // Vérifiez si l'utilisateur est un super-admin
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            throw new AccessDeniedException('Seuls les super-admins peuvent accéder à cette page.');
+        }
+
         // QueryBuilder pour récupérer les utilisateurs avec le rôle admin et non approuvés
         $repository = $em->getRepository(User::class);
         $queryBuilder = $repository->createQueryBuilder('u');

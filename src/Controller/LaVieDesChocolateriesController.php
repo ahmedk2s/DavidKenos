@@ -13,7 +13,7 @@ class LaVieDesChocolateriesController extends AbstractController
     #[Route('/la-vie-des-chocolateries/', name: 'app_la_vie_des_chocolateries')]
     public function index(CategoryRepository $categoryRepository, PostRepository $postRepository): Response
     {
-        $user = $this->getUser();
+         $user = $this->getUser();
         $categories = $categoryRepository->findAll();
         $posts = $postRepository->findAll();
 

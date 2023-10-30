@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -10,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         // Check if the user is already authenticated, redirect to appropriate page based on roles
         if ($this->getUser()) {
@@ -36,6 +37,11 @@ class SecurityController extends AbstractController
         if ($user) {
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
+        }
+
+        // Check if the admin_registered parameter is present in the URL
+        if ($request->query->get('admin_registered')) {
+            $this->addFlash('notice', 'Votre compte administrateur est en attente de validation par un super administrateur.');
         }
 
         return $this->render('security/login.html.twig', [

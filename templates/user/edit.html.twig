@@ -1,12 +1,77 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Modifier l'utilisateur{% endblock %}
 
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/form_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
 {% block body %}
-    <h1>Modifier l'utilisateur</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+<div class="container-body">
+    <div class="container-table">
 
-    <a href="{{ path('app_user_index') }}">Retour à la liste</a>
+        <h1>Modifier l'utilisateur</h1>
+
+        {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+
+            <div class="form-row">
+                <div class="form-cell-label yellow-background">
+                    {{ form_label(form.last_name, 'Nom') }}
+                </div>
+                <div class="form-cell">
+                    {{ form_widget(form.last_name, {'attr': {'class': 'custom-input'}}) }}
+                    {{ form_errors(form.last_name) }}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-cell-label yellow-background">
+                    {{ form_label(form.first_name, 'Prénom') }}
+                </div>
+                <div class="form-cell">
+                    {{ form_widget(form.first_name, {'attr': {'class': 'custom-input'}}) }}
+                    {{ form_errors(form.first_name) }}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-cell-label yellow-background">
+                    {{ form_label(form.job_title, 'Poste occupé') }}
+                </div>
+                <div class="form-cell">
+                    {{ form_widget(form.job_title, {'attr': {'class': 'custom-input'}}) }}
+                    {{ form_errors(form.job_title) }}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-cell-label yellow-background">
+                    {{ form_label(form.chocolate_shop, 'Chocolaterie') }}
+                </div>
+                <div class="form-cell">
+                    {{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input dropdown'}}) }}
+                    {{ form_errors(form.chocolate_shop) }}
+                </div>
+            </div>
+
+            <div class="container-button-create">
+            <button type="submit" class="btn-create">
+                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
+            </button>
+        </div>
+            
+        {{ form_end(form) }}
+        
+        <a href="{{ path('app_user_index') }}" class="btn-edit">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Retour à la liste</span>
+        </a>
+        
+        
+    </div>
+</div>
 
 {% endblock %}

@@ -2,6 +2,14 @@
   display: flex;
   flex-wrap: wrap;
 }
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/styles/includes/fonts/PlayfairDisplay-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/styles/includes/fonts/Montserrat-Medium.ttf') format('truetype');
+}
 * {
   margin: 0;
   box-sizing: border-box;
@@ -198,11 +206,11 @@ section .card .circle {
   align-items: center;
 }
 section .card .circle-number {
+  margin-bottom: 15px;
   text-align: center;
   font-family: 'Playfair Display';
   font-style: italic;
   font-size: 3em;
-  margin-bottom: 50px;
   color: #777;
 }
 section .card .card-text h3 {
@@ -341,6 +349,9 @@ section .card.center-card {
   }
   nav .nav-container ul li i {
     color: #000;
+  }
+  section {
+    height: unset;
   }
   .cards-section .card-row {
     display: flex;
@@ -496,6 +507,10 @@ section .card.center-card {
   }
   section .card.card-category {
     margin-bottom: 20px;
+  }
+  section .card.card-chocolate {
+    margin-bottom: 20px;
+    margin-top: -25px;
   }
   section .card .content-circle {
     width: auto;

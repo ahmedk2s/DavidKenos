@@ -88,12 +88,12 @@ class RegistrationController extends AbstractController
 
             $user->setRoles(['ROLE_ADMIN']);
 
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+        $user->setPassword(
+            $userPasswordHasher->hashPassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            )
+        );
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -101,10 +101,10 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('registration/admin_register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
+    return $this->render('registration/admin_register.html.twig', [
+        'registrationForm' => $form->createView(),
+    ]);
+}
 
     #[Route('/register/employe', name: 'app_register_employe')]
     public function registerEmployee(

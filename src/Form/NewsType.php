@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\News;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +23,11 @@ class NewsType extends AbstractType
                 'label' => 'Texte',
                 'attr' => ['placeholder' => 'Entrez le texte de l\'actualité'],
             ])
-            ->add('date_creation');
+             ->add('date_creation', DateType::class, [
+                'widget' => 'single_text', 
+                'label' => 'Date de création',
+                'required' => false, 
+             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
