@@ -36,36 +36,34 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/nouveau-post', name: 'app_post_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
-    {
-        $post = new Post();
-        $post->setUser($this->getUser());
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
+   #[Route('/nouveau-post', name: 'app_post_new', methods: ['GET', 'POST'])]
+public function new(Request $request, EntityManagerInterface $entityManager): Response
+{
+    $post = new Post();
+    $post->setUser($this->getUser());
+    $post->setDateCreation(new \DateTime()); 
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $slug = $this->slugService->createUniqueSlug($post->getTitle(), Post::class);
-            $post->setSlug($slug);
-            $category = $categoryRepository->find(1);
-            if ($category !== null) {
-                $post->setCategory($category);
-                $entityManager->persist($post);
-                $entityManager->flush();
+    $form = $this->createForm(PostType::class, $post);
+    $form->handleRequest($request);
 
-                $this->addFlash('success', 'Post ajouté.');
+    if ($form->isSubmitted() && $form->isValid()) {
+        $slug = $this->slugService->createUniqueSlug($post->getTitle(), Post::class);
+        $post->setSlug($slug);
 
-                return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
-            } else {
-                $this->addFlash('error', 'Le post spécifiée n\'existe pas.');
-            }
-        }
+        $entityManager->persist($post);
+        $entityManager->flush();
 
-        return $this->render('post/new.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
+        $this->addFlash('success', 'Post ajouté.');
+
+        return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    return $this->render('post/new.html.twig', [
+        'post' => $post,
+        'form' => $form->createView(),
+    ]);
+}
+
 
 
     private function formatDate(\DateTimeInterface $date = null): string
@@ -84,27 +82,28 @@ class PostController extends AbstractController
     }
 
     #[Route('/modifier-{slug}', name: 'app_post_edit', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
-    public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(PostType::class, $post);
-        $form->handleRequest($request);
+public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+{
+    $form = $this->createForm(PostType::class, $post);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $slug = $this->slugService->createUniqueSlug($post->getTitle(), Post::class);
-            $post->setSlug($slug);
-            $post->setDateEdition(new \DateTime());  
-            $entityManager->flush();  
+    if ($form->isSubmitted() && $form->isValid()) {
+        $slug = $this->slugService->createUniqueSlug($post->getTitle(), Post::class);
+        $post->setSlug($slug);
+        $post->setDateEdition(new \DateTime());
 
-            $this->addFlash('success', 'Post modifier.');
+        $entityManager->flush();
 
-            return $this->redirectToRoute('app_post_index');
-        }
+        $this->addFlash('success', 'Post modifié.');
 
-        return $this->render('post/edit.html.twig', [
-            'post' => $post,
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('app_post_index');
     }
+
+    return $this->render('post/edit.html.twig', [
+        'post' => $post,
+        'form' => $form->createView(),
+    ]);
+}
 
 
     #[Route('/supprimer-{id}', name: 'app_post_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
