@@ -4,10 +4,14 @@ namespace App\Form;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 class PostType extends AbstractType
 {
@@ -22,7 +26,17 @@ class PostType extends AbstractType
                 'label' => 'Texte',
                 'attr' => ['placeholder' => 'Entrez le texte du post'],
             ])
-             ->add('date_creation');
+            ->add('date_creation', DateType::class, [
+                'widget' => 'single_text', 
+                'label' => 'Date de création',
+                'required' => false, 
+            ])
+
+            ->add('category', EntityType::class, [
+            'class' => Category::class,
+            'choice_label' => 'name',
+            'label' => 'Catégorie',
+             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

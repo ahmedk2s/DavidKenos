@@ -47,6 +47,7 @@ body {
   a {
     font-family: "Montserrat", sans-serif;
     border-spacing: 0;
+    text-decoration: none;
   }
 
 
@@ -90,6 +91,7 @@ body {
     height: 40px;
     text-align: center;
 }
+
 
 .dropdown{
     cursor: pointer;
@@ -156,11 +158,13 @@ body {
   margin-left: -50px;
 }
 
+
 .btn-create span i{
     padding-right: 3px;
 }
 
-// mobile
+
+
 // mobile
 @media (min-width: 319px) and (max-width: 760px){
     .container-body {
@@ -173,9 +177,18 @@ body {
         margin-top: 80px;
     }
 
-    .container-table h1{
-      font-size: 24px;
+    .container-body h1{
+      font-size: 30px;
     }
+
+     .container-body h1,
+    .form-row,
+    .btn-edit,
+    .container-button-create .btn-create {
+        text-align: center;
+    }
+
+    
 
     .form-row {
         margin-bottom: 5px;
@@ -192,6 +205,7 @@ body {
       margin-left: 0;
     }
 }
+
 
 // tablet
 @media (min-width: 761px) and (max-width: 1920px){

@@ -50,6 +50,7 @@ h1 {
 a {
   font-family: "Montserrat", sans-serif;
   border-spacing: 0;
+  text-decoration: none;
 }
 .form-container {
   display: flex;
@@ -159,8 +160,14 @@ a {
     margin: auto;
     margin-top: 80px;
   }
-  .container-table h1 {
-    font-size: 24px;
+  .container-body h1 {
+    font-size: 30px;
+  }
+  .container-body h1,
+  .form-row,
+  .btn-edit,
+  .container-button-create .btn-create {
+    text-align: center;
   }
   .form-row {
     margin-bottom: 5px;

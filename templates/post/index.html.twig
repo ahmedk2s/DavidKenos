@@ -36,8 +36,8 @@
 					<tr>
 						<th>Titre</th>
 						<th>Texte</th>
-						{# <th>Date de création</th>
-												<th>Date d'édition</th> #}
+						{# <th>Date de création</th> #}
+												{# <th>Date d'édition</th> #}
 						<th>Catégories</th>
 						<th class="test">Actions</th>
 					</tr>
@@ -47,8 +47,8 @@
 						<tr>
 							<td data-label="Titre">{{ post.title }}</td>
 							<td data-label="Texte">{{ post.text }}</td>
-							{# <td data-label="Date création">{{ post.dateCreation|date('d/m/Y') }}</td>
-														<td data-label="Date édition">{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td> #}
+							{# <td data-label="Date création">{{ post.dateCreation|date('d/m/Y') }}</td> #}
+														{# <td data-label="Date édition">{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td> #}
 							<td data-label="Categorie">{{ post.category }}</td>
 							<td data-label="Actions" class="btns">
 								<a class="btn-edit" href="{{ path('app_post_edit', {'slug': post.slug}) }}">
