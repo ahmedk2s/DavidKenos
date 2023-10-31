@@ -2,8 +2,17 @@
 @import "../includes/mixins.less";
 
 body {
+  display: flex;
+  height: 100vh;
   background-color: @lightGray;
   font-family: "Montserrat", sans-serif;
+
+  .body-container {
+    .dflex();
+    width: 100%;
+    margin: 2%;
+    gap: 4%;
+  }
 
   header {
     .fullcenter();
@@ -11,12 +20,11 @@ body {
     margin-left: 20%;
     width: 80%;
     letter-spacing: 2px;
-    height: 20vh;
+    height: 10vh;
     padding-left: 6%;
 
     h1 {
       width: 100%;
-
       .part1 {
         font-weight: 900;
       }
@@ -30,18 +38,13 @@ body {
     }
   }
 
-  section {
-    width: 80%;
-    height: 80vh;
-    margin-left: 20%;
-    padding: 0 70px 0 50px;
-  }
-
   .grid-container {
     display: grid;
-    grid-template-columns: 20% 50% 26%;
-    grid-gap: 25px;
-    h4 {
+    grid-template-columns: 20% 54% 22%;
+    grid-gap: 2%;
+    height: 100%;
+    width: 100%;
+    #title {
       text-align: center;
     }
   }
@@ -49,13 +52,28 @@ body {
   .container-latest-registrants {
     background-color: white;
     border-top: 5px solid @colorYellow;
+    height: 70%;
+    #title {
+      height: 80px;
+      .fullcenter();
+    }
   }
 
-  // .container-post {
-
-  // }
+  .container-post {
+    height: auto;
+  }
 
   .container-categories {
-    background-color: @colorYellow;
+    height: auto;
+    ul {
+      li {
+        background-color: @colorYellow;
+        .dflex();
+        align-items: center;
+        padding-left: 15%;
+        list-style: none;
+        height: 60px;
+      }
+    }
   }
 }

@@ -1,53 +1,48 @@
 @import "../includes/variables.less";
-
+@import "../includes/mixins.less";
 body {
   font-family: "Montserrat", sans-serif;
 }
 
-.profile-container {
-    display: flex;
-}
-
-  .profile {
-    border-radius: 50%;
-    width: 400px;
-    height: 100px;
-    object-fit: cover; 
-    border: 2px solid black;
-    margin-top: 30px;
-    margin-left: 5%;
-}
-
-
-.right-part {
-    flex-grow: 1;
-}
-
-
-.example-wrapper {
+.post-container {
+  .dflex();
+  flex-direction: row;
   background-color: white;
-  font-size: 0.8em;
-  padding: 3px;
-  position: absolute;
-  margin: auto;
-  width: 100%;
-  height: auto;
-  margin-left: -10%;
-
-  ul li {
-    list-style-type: none;
+  margin-bottom: 15px;
+}
+  .profile-container {
+    .dflex();
+    justify-content: center;
+    width: 30%;
+    padding-top: 25px;
+    .profile {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 2px solid black;
+    }
   }
 
   .right-part {
-    margin-left: 5%;
-    margin-right: 5%;
+    font-size: 0.8em;
+    // position: absolute;
+    width: 70%;
+
+    ul {
+      padding-right: 10%;
+    }
+
+    ul li {
+      list-style-type: none;
+    }
 
     ul li:first-child {
       background-color: @colorYellow;
       text-align: center;
       width: 100px;
       position: relative;
-      left: 88%;
+      left: 90%;
       font-weight: bold;
       padding: 3px 5px;
       margin-top: 10px;
@@ -70,14 +65,14 @@ body {
     }
 
     ul p {
-      font-family: 'Montserrat' sans-serif;
+      font-family: "Montserrat" sans-serif;
       margin-top: 0px;
       font-weight: 500;
     }
-    .like a{
+    .like a {
       color: #483285;
       text-decoration: none;
       font-weight: 700;
     }
   }
-}
+

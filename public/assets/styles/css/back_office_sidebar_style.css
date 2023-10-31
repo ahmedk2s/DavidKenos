@@ -128,13 +128,15 @@
   font-weight: 500;
   width: 100%;
 }
+@media screen and (max-width: 1220px) {
+  .sidebar .circle-container {
+    display: none;
+  }
+}
 @media screen and (max-width: 1132px) {
   .sidebar .logo-container img {
     width: 100px;
     height: 100px;
-  }
-  .sidebar .circle-container {
-    display: none;
   }
 }
 .body-container a {

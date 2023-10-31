@@ -1,26 +1,28 @@
-<div class="example-wrapper">
-    <div class="profile-container">
-        <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile">
-        
-        <div class="right-part">
-            {% if posts is not empty %}
-                <ul>
-                    {% for post in posts %}
-                        <li>{{ post.category.name }}</li>
-                        <li><span class="firstname">{{ post.user.getFirstname }}</span> {{ post.user.getLastname }}</li>
-                        <li>Publié le {{ post.dateCreation|date('d/m/Y ') }}</li>
-                        <h4>{{ post.title }}</h4>
-                        <p>{{ post.text }}</p>
+{% if posts is not empty %}
+	{% for post in posts %}
+		<div class="post-container">
+			<div class="profile-container">
+				<img src="{{ asset('images/' ~ post.user.profilePicture) }}" alt="Photo de profil de {{ post.user.firstName }} {{ post.user.lastName }}" class="profile">
+			</div>
+			<div class="right-part">
+				<ul>
+					<li>{{ post.category.name }}</li>
+					<li>
+						<span class="firstname">{{ post.user.firstName }}</span>
+						{{ post.user.lastName }}
+					</li>
+					<li>Publié le
+						{{ post.dateCreation|date('d/m/Y ') }}</li>
+					<h4>{{ post.title }}</h4>
+					<p>{{ post.text }}</p>
+					<div class="like" style="margin-bottom: 15px; margin-top: 20px;">
+						{% include '_partials/_like.html.twig' %}
+					</div>
+				</ul>
+			</div>
+		</div>
+	{% endfor %}
+{% else %}
+	<p>Aucun post n'est disponible pour le moment.</p>
+{% endif %}
 
-                        <div class="like" style="margin-bottom: 15px; margin-top: 20px;">
-                            {% include '_partials/_like.html.twig' %}
-                        </div>
-
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Aucun posts n'est disponible pour le moment.</p>
-            {% endif %}
-        </div>
-    </div>
-</div>

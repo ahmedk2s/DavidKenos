@@ -10,86 +10,120 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ChocolateShopRepository::class)]
 class ChocolateShop
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column(type: 'integer')]
+private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $city = null;
+#[ORM\Column(length: 50)]
+private ?string $city = null;
 
-    #[ORM\OneToMany(mappedBy: 'chocolate_shop', targetEntity: User::class, orphanRemoval: true)]
-    private Collection $users;
+#[ORM\OneToMany(mappedBy: 'chocolateShop', targetEntity: News::class, orphanRemoval: true)]
+private Collection $news;
 
-    #[ORM\Column(length: 255, unique: true)]
-    private ?string $slug = null;
+#[ORM\OneToMany(mappedBy: 'chocolateShop', targetEntity: User::class, orphanRemoval: true)]
+private Collection $users;
 
-    public function __construct()
+#[ORM\Column(length: 255, unique: true)]
+private ?string $slug = null;
+
+public function __construct()
+{
+$this->news = new ArrayCollection();
+$this->users = new ArrayCollection();
+}
+
+// Getter and setter methods...
+
+public function getId(): ?int
+{
+return $this->id;
+}
+
+public function getCity(): ?string
+{
+return $this->city;
+}
+
+public function setCity(string $city): self
+{
+$this->city = $city;
+return $this;
+}
+
+/**
+* @return Collection<int, News>
+    */
+    public function getNews(): Collection
     {
-        $this->users = new ArrayCollection();
+    return $this->news;
     }
 
-    public function getId(): ?int
+    public function addNews(News $news): self
     {
-        return $this->id;
+    if (!$this->news->contains($news)) {
+    $this->news->add($news);
+    $news->setChocolateShop($this);
     }
 
-
-    public function getCity(): ?string
-    {
-        return $this->city;
+    return $this;
     }
 
-    public function setCity(string $city): static
+    public function removeNews(News $news): self
     {
-        $this->city = $city;
+    if ($this->news->removeElement($news)) {
+    // set the owning side to null (unless already changed)
+    if ($news->getChocolateShop() === $this) {
+    $news->setChocolateShop(null);
+    }
+    }
 
-        return $this;
+    return $this;
     }
 
     /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
+    * @return Collection<int, User>
+        */
+        public function getUsers(): Collection
+        {
         return $this->users;
-    }
+        }
 
-    public function addUser(User $user): static
-    {
+        public function addUser(User $user): self
+        {
         if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setChocolateShop($this);
+        $this->users->add($user);
+        $user->setChocolateShop($this);
         }
 
         return $this;
-    }
+        }
 
-    public function removeUser(User $user): static
-    {
+        public function removeUser(User $user): self
+        {
         if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getChocolateShop() === $this) {
-                $user->setChocolateShop(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($user->getChocolateShop() === $this) {
+        $user->setChocolateShop(null);
+        }
         }
 
         return $this;
-    }
+        }
 
-    public function getSlug(): ?string
-    {
+        public function getSlug(): ?string
+        {
         return $this->slug;
-    }
+        }
 
-    public function setSlug(?string $slug): self
-    {
+        public function setSlug(?string $slug): self
+        {
         $this->slug = $slug;
         return $this;
-    }
+        }
 
-    public function __toString(): string
-    {
+        public function __toString(): string
+        {
         return $this->city;
-    }
-}
+        }
+        }
