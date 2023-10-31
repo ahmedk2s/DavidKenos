@@ -1,3 +1,8 @@
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/alertes_style.css">
+{% endblock %}
+
+
 {% for message in app.flashes('success') %}
 	<div class="alert alert-success alert-dismissible fade show" id="success-alert">
 		{{ message }}
