@@ -26,14 +26,9 @@ class UserVoter extends Voter
             return false;
         }
 
-        // Autoriser le super administrateur à tout faire
-        if (in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
-            return true;
-        }
-
         switch ($attribute) {
             case self::EDIT:
-                return $this->canEdit($loggedInUser, $subject);
+                return $this->canEdit($loggedInUser);
             case self::VIEW:
                 return $this->canView();
             case self::ACCESS_ADMIN:
@@ -43,22 +38,32 @@ class UserVoter extends Voter
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canEdit(UserInterface $loggedInUser, User $userToManage): bool
+    private function canEdit(UserInterface $loggedInUser): bool
     {
-        return in_array('ROLE_ADMIN', $loggedInUser->getRoles()) && !$userToManage->getIsApproved();
+        // Seuls les super administrateurs peuvent éditer
+        return in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles());
     }
 
-    private function canView(): bool
-    {
+    private function canView(User $subject, UserInterface $loggedInUser): bool
+{
+    // Les super administrateurs peuvent voir tous les utilisateurs
+    if (in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
         return true;
     }
 
-   private function canAccessAdmin(UserInterface $loggedInUser): bool
-{
-    return in_array('ROLE_ADMIN', $loggedInUser->getRoles()) && $loggedInUser->getIsApproved();
+    // Les administrateurs peuvent voir les utilisateurs de leur propre chocolaterie, mais pas les super administrateurs
+    if (in_array('ROLE_ADMIN', $loggedInUser->getRoles())) {
+        return $loggedInUser->getChocolateShop() === $subject->getChocolateShop() 
+            && !in_array('ROLE_SUPER_ADMIN', $subject->getRoles());
+    }
+
+    return false;
 }
+
+
+    private function canAccessAdmin(UserInterface $loggedInUser): bool
+    {
+        // Les administrateurs et super administrateurs peuvent accéder à l'administration
+        return in_array('ROLE_ADMIN', $loggedInUser->getRoles()) || in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles());
+    }
 }
-
-
-
-

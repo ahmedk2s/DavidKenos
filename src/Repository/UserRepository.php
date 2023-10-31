@@ -6,14 +6,6 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<User>
- *
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,14 +13,77 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function countAllRegisteredUsers(): int
+    // Compte tous les utilisateurs filtrer par chocolaterie et rôle
+    public function countAllRegisteredUsers($chocolateShopId = null, $role = null): int
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+                             ->select('count(u.id)');
+                             
+        if ($chocolateShopId !== null) {
+            $queryBuilder->where('u.chocolate_shop = :chocolateShopId')
+                         ->setParameter('chocolateShopId', $chocolateShopId);
+        }
+        
+        if ($role !== null) {
+            $queryBuilder->andWhere('u.roles LIKE :role')
+                         ->setParameter('role', '%' . $role . '%');
+        }
+
+        return $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    // Trouve les utilisateurs par rôle
+    public function findByRole(string $role)
     {
         return $this->createQueryBuilder('u')
-        ->select('count(u.id)')
-        ->getQuery()
-            ->getSingleScalarResult();
+                    ->where('u.roles LIKE :role')
+                    ->setParameter('role', '%' . $role . '%')
+                    ->getQuery()
+                    ->getResult();
     }
+
+    // Trouve les employés par chocolaterie, excluant les super administrateurs
+    public function findEmployeesByChocolateShop($chocolateShopId)
+    {
+        return $this->createQueryBuilder('u')
+                    ->where('u.chocolate_shop = :chocolateShop')
+                    ->andWhere('u.roles NOT LIKE :roles')
+                    ->setParameter('chocolateShop', $chocolateShopId)
+                    ->setParameter('roles', '%ROLE_SUPER_ADMIN%')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    // Compte les utilisateurs par chocolaterie
+    public function countUsersByChocolateShop($chocolateShopId): int
+    {
+        return $this->createQueryBuilder('u')
+                    ->select('count(u.id)')
+                    ->where('u.chocolate_shop = :chocolateShop')
+                    ->setParameter('chocolateShop', $chocolateShopId)
+                    ->getQuery()
+                    ->getSingleScalarResult();
+    }
+
+    public function findUsersByRoleAndChocolateShop($role, $chocolateShop, $excludeRole = false)
+{
+    $queryBuilder = $this->createQueryBuilder('u')
+                        ->where('u.chocolate_shop = :chocolateShop')
+                        ->setParameter('chocolateShop', $chocolateShop);
+                        
+    if ($excludeRole) {
+        $queryBuilder->andWhere('u.roles NOT LIKE :role');
+    } else {
+        $queryBuilder->andWhere('u.roles LIKE :role');
+    }
+    
+    $queryBuilder->setParameter('role', '%' . $role . '%');
+    
+    return $queryBuilder->getQuery()->getResult();
 }
+
+}
+
 
 //    /**
 //     * @return User[] Returns an array of User objects

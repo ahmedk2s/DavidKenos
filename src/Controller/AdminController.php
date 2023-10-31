@@ -47,14 +47,15 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin', ['slug' => $slug]);
         }
         
-        $registeredUsersCount = $userRepository->countAllRegisteredUsers(); 
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            $registeredUsersCount = $userRepository->countAllRegisteredUsers(); 
+        } else {
+            $registeredUsersCount = $userRepository->countUsersByChocolateShop($user->getChocolateShop());
+        }
         
         $newsCount = $newsRepository->countAllNews([]);
-       
         $postsCount = $postRepository->countAllPosts();
-        
         $categoryCount = $categoryRepository->countAllCategory([]);
-
         $chocolateCount = $chocolateShopRepository->countAllChocolate([]);
 
         return $this->render('administration/admin.html.twig', [

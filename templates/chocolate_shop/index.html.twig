@@ -1,13 +1,11 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Gérer les chocolateries
-{% endblock %}
+{% block title %}Gérer les chocolateries{% endblock %}
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 {% endblock %}
-
 
 {% block body %}
 
@@ -15,13 +13,14 @@
 		<div class="container-table">
 			<h1>Gérer les chocolateries</h1>
 
-			<div class="container-button-create">
-				<a class="btn-create" href="{{ path('app_chocolate_shop_new') }}">
-
-					<i class="fa-solid fa-plus"></i>
-					<span>Ajouter</span>
-				</a>
-			</div>
+			{% if is_granted('ROLE_SUPER_ADMIN') %}
+				<div class="container-button-create">
+					<a class="btn-create" href="{{ path('app_chocolate_shop_new') }}">
+						<i class="fa-solid fa-plus"></i>
+						<span>Ajouter</span>
+					</a>
+				</div>
+			{% endif %}
 
 			{% include "_partials/_flash.html.twig" %}
 
@@ -37,11 +36,13 @@
 						<tr>
 							<td data-label="Ville">{{ chocolate_shop.city }}</td>
 							<td data-label="Actions" class="btns">
-								<a class="btn-edit" href="{{ path('app_chocolate_shop_edit', {'slug': chocolate_shop.slug}) }}">
-									<i class="fa-solid fa-pen-to-square"></i>
-									<span>Modifier</span>
-								</a>
-								{{ include('chocolate_shop/_delete_form.html.twig') }}
+								{% if is_granted('ROLE_SUPER_ADMIN') %}
+									<a class="btn-edit" href="{{ path('app_chocolate_shop_edit', {'slug': chocolate_shop.slug}) }}">
+										<i class="fa-solid fa-pen-to-square"></i>
+										<span>Modifier</span>
+									</a>
+									{{ include('chocolate_shop/_delete_form.html.twig') }}
+								{% endif %}
 							</td>
 						</tr>
 					{% else %}
