@@ -37,6 +37,7 @@ class CategoryController extends AbstractController
     #[Route('/nouveau', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('CATEGORY_CREATE');
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -60,8 +61,9 @@ class CategoryController extends AbstractController
 
 
     #[Route('/modifier-{slug}', name: 'app_category_edit', methods: ['GET', 'POST'])]
-public function edit(Request $request, Category $category, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
-{
+    public function edit(Request $request, Category $category, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
+    {
+        $this->denyAccessUnlessGranted('CATEGORY_EDIT', $category);
     $form = $this->createForm(CategoryType::class, $category);
     $form->handleRequest($request);
 
@@ -88,6 +90,7 @@ public function edit(Request $request, Category $category, EntityManagerInterfac
     #[Route('/supprimer-{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('CATEGORY_DELETE', $category);
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();

@@ -28,6 +28,7 @@ class PostController extends AbstractController
     #[Route('/index-des-posts', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
+        
         $user = $this->getUser();
 
         return $this->render('post/index.html.twig', [
@@ -39,6 +40,7 @@ class PostController extends AbstractController
    #[Route('/nouveau-post', name: 'app_post_new', methods: ['GET', 'POST'])]
 public function new(Request $request, EntityManagerInterface $entityManager): Response
 {
+    $this->denyAccessUnlessGranted('POST_CREATE');
     $post = new Post();
     $post->setUser($this->getUser());
     $post->setDateCreation(new \DateTime()); 
@@ -84,6 +86,7 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
     #[Route('/modifier-{slug}', name: 'app_post_edit', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
 public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
 {
+    $this->denyAccessUnlessGranted('POST_EDIT', $post);
     $form = $this->createForm(PostType::class, $post);
     $form->handleRequest($request);
 
@@ -107,8 +110,9 @@ public function edit(Request $request, Post $post, EntityManagerInterface $entit
 
 
     #[Route('/supprimer-{id}', name: 'app_post_delete', requirements: ['id' => '[a-zA-Z0-9\-_]+'], methods: ['POST'])]
-    public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
-    {
+public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted('POST_DELETE', $post);
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
             $entityManager->remove($post);
             $entityManager->flush();

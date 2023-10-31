@@ -131,6 +131,7 @@ body {
   height: 40px;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
+  cursor: pointer;
 }
 .table .include i {
   margin-right: 3px;

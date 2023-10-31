@@ -87,6 +87,9 @@ a {
   height: 40px;
   text-align: center;
 }
+textarea {
+  padding-top: 11px;
+}
 .dropdown {
   cursor: pointer;
 }

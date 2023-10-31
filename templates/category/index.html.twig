@@ -14,12 +14,14 @@
 		<div class="container-table">
 			<h1>Gérer les catégories</h1>
 
+		{% if is_granted('ROLE_SUPER_ADMIN') %}
 			<div class="container-button-create">
 				<a class="btn-create" href="{{ path('app_category_new') }}">
 					<i class="fa-solid fa-plus"></i>
 					<span>Ajouter</span>
 				</a>
 			</div>
+		{% endif %}
 
 			{% for message in app.flashes('success') %}
 				<div class="alert alert-success alert-dismissible fade show" id="success-alert">
@@ -44,12 +46,13 @@
 
 							<td data-label="Actions" class="btns">
 
-
+							{% if is_granted('ROLE_SUPER_ADMIN') %}
 								<a class="btn-edit" href="{{ path('app_category_edit', {'slug': category.slug}) }}">
 									<i class="fa-solid fa-pen-to-square"></i>
 									<span>Modifier</span>
 								</a>
 								{{ include('category/_delete_form.html.twig') }}
+								{% endif %}
 							</td>
 						</tr>
 					{% else %}

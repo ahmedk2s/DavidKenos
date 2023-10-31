@@ -21,23 +21,37 @@ class UserController extends AbstractController
 
     public function __construct(SlugService $slugService)
     {
-        $this->slugService = $slugService; // Injection du SlugService
+        $this->slugService = $slugService;
     }
 
     #[Route('/index-des-utilisateurs', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
-        $user = $this->getUser();
+#[Route('/index-des-utilisateurs', name: 'app_user_index', methods: ['GET'])]
+public function index(UserRepository $userRepository): Response
+{
+    $user = $this->getUser();
 
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-            'user' => $user,
-        ]);
+    if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+        $users = $userRepository->findAll();
+    } elseif ($this->isGranted('ROLE_ADMIN')) {
+        // Récupérer tous les utilisateurs de la chocolaterie sauf les super administrateurs
+        $users = $userRepository->findUsersByRoleAndChocolateShop('ROLE_SUPER_ADMIN', $user->getChocolateShop(), true);
+    } else {
+        throw $this->createAccessDeniedException('Vous n\'avez pas la permission de voir cette page.');
     }
+
+    return $this->render('user/index.html.twig', [
+        'users' => $users,
+        'user' => $user,
+    ]);
+}
+
+
 
     #[Route('/creer-utlisateur', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
         $user = new User();
         $form = $this->createForm(UserCreateType::class, $user);
         $form->handleRequest($request);
@@ -50,7 +64,6 @@ class UserController extends AbstractController
                 )
             );
 
-            // Génération et assignation du slug
             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class);
             $user->setSlug($slug);
 
@@ -67,15 +80,15 @@ class UserController extends AbstractController
         ]);
     }
 
-
     #[Route('/modifier-{slug}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
         $form = $this->createForm(UserUpdateType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Mise à jour du slug si nécessaire
             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
             $user->setSlug($slug);
 
@@ -94,6 +107,8 @@ class UserController extends AbstractController
     #[Route('/supprimer-{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
