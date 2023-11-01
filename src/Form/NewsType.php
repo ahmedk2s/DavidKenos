@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\ChocolateShop;
 
 class NewsType extends AbstractType
 {
@@ -22,6 +24,11 @@ class NewsType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Texte',
                 'attr' => ['placeholder' => 'Entrez le texte de l\'actualité'],
+            ])
+            ->add('chocolate_shop', EntityType::class, [
+                'class' => ChocolateShop::class,
+                'choice_label' => 'city',
+                'label' => 'Chocolaterie',
             ])
              ->add('date_creation', DateType::class, [
                 'widget' => 'single_text', 

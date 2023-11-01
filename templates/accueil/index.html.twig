@@ -11,12 +11,12 @@
 {% block body %}
 
 	{# <div class="sidebar-container">
-			
-				</div> #}
+					
+						</div> #}
 	<div class="body-container">
 		<div class="posts-container">
 			<div class="header-container-posts">
-				<h2>Bienvenue sur ton espace,</h2>
+				<h3>Bienvenue sur ton espace,</h3>
 				<p>voici les derniers posts publiés.</p>
 			</div>
 			<div class="grid-container">
@@ -31,35 +31,24 @@
 		</div>
 		<div class="news-container">
 			<div class="header-container-news">
-				<h2>Les dernières actualités</h2>
+				<h3>Les dernières actualités</h3>
 				<p>de l'entreprise</p>
 			</div>
-			<div class="body-container-news">
+			{% for news in news %}
 				<div class="block-news">
 					<div class="block-img">
-						<p class="ruban-jaune">
-							Nevers
-							{# {{ news.chocolateShop.city }} #}
-						</p>
+						{% if news.chocolateShop %}
+							<p class="ruban-jaune">
+								{{ news.chocolateShop.city }}
+							</p>
+						{% endif %}
 					</div>
 					<div class="block-text">
-						<h3>Title</h3>
-						<p>Text</p>
+						<h5>{{ news.title }}</h5>
+						<p>{{ news.content }}</p>
 					</div>
 				</div>
-				<div class="block-news">
-					<div class="block-img">
-						<p class="ruban-jaune">
-							Nevers
-						</p>
-					</div>
-					<div class="block-text">
-						<h3>Title</h3>
-						<p>Text</p>
-					</div>
-				</div>
-			</div>
+			{% endfor %}
 		</div>
 	</div>
-
-{% endblock %}
+</div>{% endblock %}
