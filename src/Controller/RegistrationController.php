@@ -68,43 +68,66 @@ class RegistrationController extends AbstractController
     // }
 
     #[Route('/register/admin', name: 'app_register_admin')]
-    public function registerAdmin(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->getUser()) {
-            if ($this->isGranted('ROLE_ADMIN')) {
-                return $this->redirectToRoute('app_admin');
-            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
-                return $this->redirectToRoute('app_accueil');
-            }
-        }
+    public function registerAdmin(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager,
+        MailerService $mailerService,
+        TokenGeneratorInterface $tokenGeneratorInterface
+    ): Response {
+        // if ($this->getUser()) {
+        //     if ($this->isGranted('ROLE_ADMIN')) {
+        //         return $this->redirectToRoute('app_admin');
+        //     } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+        //         return $this->redirectToRoute('app_accueil');
+        //     }
+        // }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $tokenRegistration = $tokenGeneratorInterface->generateToken();
+
             $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
             $user->setSlug($slug);
 
             $user->setRoles(['ROLE_ADMIN']);
 
-        $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            )
-        );
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+            $user->setTokenRegistration($tokenRegistration);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $mailerService->send(
+                $user->getEmail(),
+                'Activation de votre compte',
+                'Activation',
+                [
+                    'user' => $user,
+                    'token' => $tokenRegistration,
+                    'lifeTimeToken' => $user->getTokenRegistrationLifeTime()->format('d/m/y à H/hi')
+                ]
+            );
+
+            $this->addFlash('success', 'Votre compte a bien été créé, veuillez vérifier vos emails pour l\'activer.');
+
             return $this->redirectToRoute('app_login');
         }
 
-    return $this->render('registration/admin_register.html.twig', [
-        'registrationForm' => $form->createView(),
-    ]);
-}
+        return $this->render('registration/admin_register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
 
     #[Route('/register/employe', name: 'app_register_employe')]
     public function registerEmployee(
@@ -115,13 +138,13 @@ class RegistrationController extends AbstractController
         TokenGeneratorInterface $tokenGeneratorInterface
     ): Response {
 
-        if ($this->getUser()) {
-            if ($this->isGranted('ROLE_ADMIN')) {
-                return $this->redirectToRoute('app_admin');
-            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
-                return $this->redirectToRoute('app_accueil');
-            }
-        }
+        // if ($this->getUser()) {
+        //     if ($this->isGranted('ROLE_ADMIN')) {
+        //         return $this->redirectToRoute('app_admin');
+        //     } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+        //         return $this->redirectToRoute('app_accueil');
+        //     }
+        // }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -158,7 +181,7 @@ class RegistrationController extends AbstractController
                 ]
             );
 
-            $userId = $user->getId();
+            // $userId = $user->getId();
 
             $this->addFlash('success', 'Votre compte a bien été créé, veuillez vérifier vos emails pour l\'activer.');
 
@@ -171,15 +194,16 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify{token}/{id<\d+>}', name: 'user_verify', methods: ['GET'])]
-    public function verify (string $token, User $user, EntityManagerInterface $entityManager): Response {
+    public function verify(string $token, User $user, EntityManagerInterface $entityManager): Response
+    {
 
-        if($user->getTokenRegistration() !== $token) {
+        if ($user->getTokenRegistration() !== $token) {
             throw new AccessDeniedHttpException();
         }
-        if($user->getTokenRegistration() === null) {
+        if ($user->getTokenRegistration() === null) {
             throw new AccessDeniedHttpException();
         }
-        if(new DateTime('now') > $user->getTokenRegistrationLifeTime()) {
+        if (new DateTime('now') > $user->getTokenRegistrationLifeTime()) {
             throw new AccessDeniedHttpException();
         }
 
@@ -192,5 +216,4 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
-
 }

@@ -23,6 +23,11 @@ class NewsType extends AbstractType
                 'label' => 'Texte',
                 'attr' => ['placeholder' => 'Entrez le texte de l\'actualité'],
             ])
+            ->add('chocolate_shop', EntityType::class, [
+                'class' => ChocolateShop::class,
+                'choice_label' => 'city',
+                'label' => 'Chocolaterie',
+            ])
              ->add('date_creation', DateType::class, [
                 'widget' => 'single_text', 
                 'label' => 'Date de création',

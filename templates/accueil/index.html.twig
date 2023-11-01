@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_member.html.twig' %}
 
 {% block title %}Hello AccueilController!
 {% endblock %}
@@ -10,9 +10,9 @@
 
 {% block body %}
 
-	<div class="sidebar-container">
-		{% include "_partials/base_sidebar.html.twig" %}
-	</div>
+	{# <div class="sidebar-container">
+			
+				</div> #}
 	<div class="body-container">
 		<div class="posts-container">
 			<div class="header-container-posts">
@@ -36,14 +36,23 @@
 			</div>
 			<div class="body-container-news">
 				<div class="block-news">
-					<div class="block-img"></div>
+					<div class="block-img">
+						<p class="ruban-jaune">
+							Nevers
+							{# {{ news.chocolateShop.city }} #}
+						</p>
+					</div>
 					<div class="block-text">
 						<h3>Title</h3>
 						<p>Text</p>
 					</div>
 				</div>
 				<div class="block-news">
-					<div class="block-img"></div>
+					<div class="block-img">
+						<p class="ruban-jaune">
+							Nevers
+						</p>
+					</div>
 					<div class="block-text">
 						<h3>Title</h3>
 						<p>Text</p>

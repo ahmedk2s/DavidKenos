@@ -3,124 +3,137 @@
 namespace App\Entity;
 
 use App\Repository\NewsRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NewsRepository::class)]
 class News
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+#[ORM\Id]
+#[ORM\GeneratedValue]
+#[ORM\Column(type: Types::INTEGER)]
+private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    #[Assert\NotBlank(message: "Le titre ne peut pas être vide")]
-    #[Assert\Length(
-        min: 2,
-        max: 100,
-        minMessage: "Le titre doit contenir au moins {{ limit }} caractères",
-        maxMessage: "Le titre ne peut pas contenir plus de {{ limit }} caractères"
-    )]
-    private ?string $title = null;
+#[ORM\Column(length: 100)]
+#[Assert\NotBlank(message: "Le titre ne peut pas être vide")]
+#[Assert\Length(
+min: 2,
+max: 100,
+minMessage: "Le titre doit contenir au moins {{ limit }} caractères",
+maxMessage: "Le titre ne peut pas contenir plus de {{ limit }} caractères"
+)]
+private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message: "Le texte ne peut pas être vide")]
-    #[Assert\Length(
-        min: 2,
-        max: 5000,
-        minMessage: "Le texte doit contenir au moins {{ limit }} caractères",
-        maxMessage: "Le texte ne peut pas contenir plus de {{ limit }} caractères"
-    )]
-    private ?string $content = null;
+#[ORM\Column(type: Types::TEXT)]
+#[Assert\NotBlank(message: "Le texte ne peut pas être vide")]
+#[Assert\Length(
+min: 2,
+max: 5000,
+minMessage: "Le texte doit contenir au moins {{ limit }} caractères",
+maxMessage: "Le texte ne peut pas contenir plus de {{ limit }} caractères"
+)]
+private ?string $content = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_creation = null;
+#[ORM\Column(type: Types::DATETIME_MUTABLE)]
+private ?\DateTimeInterface $dateCreation = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date_edition = null;
+#[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+private ?\DateTimeInterface $dateEdition = null;
 
-    #[ORM\ManyToOne(inversedBy: 'news')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+#[ORM\ManyToOne(inversedBy: 'news')]
+#[ORM\JoinColumn(nullable: false)]
+private ?User $user = null;
 
-    #[ORM\Column(length: 255, unique: true)]
-    private ?string $slug = null;
+#[ORM\Column(length: 255, unique: true)]
+private ?string $slug = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+#[ORM\ManyToOne(inversedBy: 'news')]
+#[ORM\JoinColumn(nullable: false)]
+private ?ChocolateShop $chocolateShop = null;
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
+// Getter and setter methods...
 
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
+public function getId(): ?int
+{
+return $this->id;
+}
 
-        return $this;
-    }
+public function getTitle(): ?string
+{
+return $this->title;
+}
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
+public function setTitle(?string $title): self
+{
+$this->title = $title;
+return $this;
+}
 
-    public function setContent(string $content): static
-    {
-        $this->content = $content;
+public function getContent(): ?string
+{
+return $this->content;
+}
 
-        return $this;
-    }
+public function setContent(?string $content): self
+{
+$this->content = $content;
+return $this;
+}
 
-    public function getDateCreation(): ?\DateTimeInterface
-    {
-        return $this->date_creation;
-    }
+public function getDateCreation(): ?\DateTimeInterface
+{
+return $this->dateCreation;
+}
 
-    public function setDateCreation(\DateTimeInterface $date_creation): static
-    {
-        $this->date_creation = $date_creation;
+public function setDateCreation(\DateTimeInterface $dateCreation): self
+{
+$this->dateCreation = $dateCreation;
+return $this;
+}
 
-        return $this;
-    }
+public function getDateEdition(): ?\DateTimeInterface
+{
+return $this->dateEdition;
+}
 
-    public function getDateEdition(): ?\DateTimeInterface
-    {
-        return $this->date_edition;
-    }
+public function setDateEdition(?\DateTimeInterface $dateEdition): self
+{
+$this->dateEdition = $dateEdition;
+return $this;
+}
 
-    public function setDateEdition(?\DateTimeInterface $date_edition): static
-    {
-        $this->date_edition = $date_edition;
+public function getUser(): ?User
+{
+return $this->user;
+}
 
-        return $this;
-    }
+public function setUser(?User $user): self
+{
+$this->user = $user;
+return $this;
+}
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+public function getSlug(): ?string
+{
+return $this->slug;
+}
 
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
+public function setSlug(?string $slug): self
+{
+$this->slug = $slug;
+return $this;
+}
 
-        return $this;
-    }
+public function getChocolateShop(): ?ChocolateShop
+{
+return $this->chocolateShop;
+}
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
-        return $this;
-    }
+public function setChocolateShop(?ChocolateShop $chocolateShop): self
+{
+$this->chocolateShop = $chocolateShop;
+return $this;
+}
 }

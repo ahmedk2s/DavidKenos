@@ -21,10 +21,10 @@
     <div class="menu-vertical">
     <!-- Section de profil -->
     <div class="section-profil">
-        <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile-image">
+        {# <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile-image"> #}
         <div class="name-details">
-            <span class="firstname">{{ user.firstName }}</span>
-            <span class="lastname">{{ user.lastName }}</span>
+            {# <span class="firstname">{{ user.firstName }}</span>
+            <span class="lastname">{{ user.lastName }}</span> #}
         </div>
         <button class="voir-profil">
             <i class="fa-regular fa-user"></i> Voir mon profil
@@ -47,16 +47,6 @@
         </div>
     </div>
 </div>
-
-		{% if app.user and app.user.isVerified == false %}
-			<div class="alert alert-warning alert-dismissible" role="alert">
-				<div class="alert-message">
-					<strong>Votre compte n'est pas activé</strong>,
-					<a href="{{ path('resend_verif') }}">renvoyer le lien d'activation</a>
-				</div>
-			</div>
-
-		{% endif %}
 
 		{% block body %}{% endblock %}
 	</body>

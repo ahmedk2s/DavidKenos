@@ -30,9 +30,8 @@
 					<tr>
 						<th>Titre</th>
 						<th>Contenu</th>
-						
 						{# <th>Date de création</th>
-																		<th>Date d'édition</th> #}
+																														<th>Date d'édition</th> #}
 						<th class="test">Actions</th>
 					</tr>
 				</thead>
@@ -41,11 +40,10 @@
 						<tr>
 							<td data-label="Titre">{{ news.title }}</td>
 
-							<td data-label="Texte">{{ news.content }}</td>
-
+							<td class="overflow" data-label="Texte">{{ news.content }}</td>
 							{# <td data-label="Date de création">{{ news.dateCreation|date('d/m/Y') }}</td>
-														
-																					<td data-label="Date d'édition">{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td> #}
+																												
+																																			<td data-label="Date d'édition">{{ news.dateEdition ? news.dateEdition|date('d/m/Y') : '' }}</td> #}
 
 							<td data-label="Actions" class="btns">
 

@@ -39,7 +39,7 @@ body {
   margin-bottom: 15px;
 }
 .div {
-  background-color: aqua;
+  background-color: #1F2547;
   border: 1px solid black;
 }
 .grid-container {
@@ -88,8 +88,19 @@ body {
 }
 .block-img {
   height: 60%;
-  background-color: aqua;
+  background-color: #1F2547;
   border: 1px solid black;
+}
+.ruban-jaune {
+  background-color: #f2bf2c;
+  text-align: center;
+  width: 100px;
+  position: relative;
+  left: 63%;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 3px 5px;
+  margin-top: 10px;
 }
 .block-text {
   border: 1px solid black;
@@ -110,12 +121,6 @@ body {
   .grid-container #cinq,
   .grid-container #six {
     display: none;
-  }
-}
-@media screen and (max-width: 1000px) {
-  .sidebar-container {
-    width: 13%;
-    background-color: blue;
   }
 }
 @media screen and (max-width: 800px) {
