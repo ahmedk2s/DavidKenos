@@ -96,6 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
 
 
+
     public function __construct()
     {
         $this->news = new ArrayCollection();

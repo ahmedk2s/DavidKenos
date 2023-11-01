@@ -51,7 +51,7 @@ class UserVoter extends Voter
         return true;
     }
 
-    // Les administrateurs peuvent voir les utilisateurs de leur propre chocolaterie, mais pas les super administrateurs
+    // Les administrateurs peuvent voir les utilisateurs de leur propre chocolaterie, mais pas le super administrateurs
     if (in_array('ROLE_ADMIN', $loggedInUser->getRoles())) {
         return $loggedInUser->getChocolateShop() === $subject->getChocolateShop() 
             && !in_array('ROLE_SUPER_ADMIN', $subject->getRoles());
