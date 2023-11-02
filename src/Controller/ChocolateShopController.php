@@ -81,16 +81,16 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-    #[Route('/supprimer-{id}', name: 'app_chocolate_shop_delete', methods: ['POST'])]
-    public function delete(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted(ChocolateShopVoter::DELETE, $chocolateShop);
+   #[Route('/supprimer-{id}', name: 'app_chocolate_shop_delete', methods: ['POST'])]
+public function delete(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
+{
+    $this->denyAccessUnlessGranted(ChocolateShopVoter::DELETE, $chocolateShop);
 
-        if ($this->isCsrfTokenValid('delete' . $chocolateShop->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($chocolateShop);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_chocolate_shop_index');
+    if ($this->isCsrfTokenValid('delete' . $chocolateShop->getId(), $request->request->get('_token'))) {
+        $entityManager->remove($chocolateShop);
+        $entityManager->flush();
     }
+
+    return $this->redirectToRoute('app_chocolate_shop_index');
+}
 }

@@ -1,6 +1,6 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Modifier l'utilisateur{% endblock %}
+{% block title %}Modifier l'actualité{% endblock %}
 
 
 {% block stylesheets %}
@@ -13,7 +13,7 @@
 <div class="container-body">
     <div class="container-table">
 
-        <h1>Modifier l'utilisateur</h1>
+        <h1>Modifier l'actualité</h1>
 
         {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
 
@@ -46,8 +46,19 @@
                     {{ form_errors(form.date_creation) }}
                 </div>
             </div>
-            
+
+            {% if form.chocolate_shop is defined %}
+            <div class="form-row">
+                <div class="form-cell-label yellow-background">
+                    {{ form_label(form.chocolate_shop, 'Chocolaterie') }}
+                </div>
+                <div class="form-cell">
+                    {{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input'}}) }}
+                    {{ form_errors(form.chocolate_shop) }}
+                </div>
             </div>
+        {% endif %}
+            
 
             <div class="container-button-create">
             <button type="submit" class="btn-create">
