@@ -83,7 +83,7 @@ a {
   background-color: #f2bf2c;
 }
 .custom-input {
-  width: 100%;
+  width: 150px;
   height: 40px;
   text-align: center;
 }
@@ -91,6 +91,9 @@ textarea {
   padding-top: 11px;
 }
 .dropdown {
+  width: 150px;
+  height: 40px;
+  text-align: center;
   cursor: pointer;
 }
 .form-wrapper {

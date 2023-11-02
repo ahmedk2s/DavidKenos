@@ -24,7 +24,9 @@
                         <th>Titre</th>
                         <th>Contenu</th>
                         <th>Chocolaterie</th>
+                        {% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
                         <th class="test">Actions</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -33,8 +35,8 @@
                             <td data-label="Titre">{{ news.title }}</td>
                             <td class="overflow" data-label="Texte">{{ news.content }}</td>
                             <td class="overflow" data-label="Chocolaterie">{{ news.chocolateShop }}</td>
-                            <td data-label="Actions" class="btns">
                                 {% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                            <td data-label="Actions" class="btns">
                                     <a class="btn-edit" href="{{ path('app_news_edit', {'slug': news.slug}) }}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         <span>Modifier</span>

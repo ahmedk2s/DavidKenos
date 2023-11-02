@@ -152,9 +152,8 @@ section .cards-section {
 section .card-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 30px;
-  margin-left: 30px;
   min-height: max-content;
 }
 section .card {

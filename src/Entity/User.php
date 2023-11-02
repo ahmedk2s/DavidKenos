@@ -78,7 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: true)]
-    private ?ChocolateShop $chocolate_shop = null;
+    private ?ChocolateShop $chocolateShop = null;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
@@ -416,16 +416,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
     public function getChocolateShop(): ?ChocolateShop
-    {
-        return $this->chocolate_shop;
-    }
+{
+    return $this->chocolateShop;
+}
 
-    public function setChocolateShop(?ChocolateShop $chocolate_shop): static
-    {
-        $this->chocolate_shop = $chocolate_shop;
+public function setChocolateShop(?ChocolateShop $chocolateShop): self
+{
+    $this->chocolateShop = $chocolateShop;
 
-        return $this;
-    }
+    return $this;
+}
 
     public function getIsVerified(): ?bool
     {

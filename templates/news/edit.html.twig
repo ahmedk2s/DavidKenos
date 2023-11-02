@@ -37,13 +37,16 @@
 				</div>
 			</div>
 
-			<div class="form-cell-label yellow-background">
-				{{ form_label(form.chocolate_shop, 'Chocolaterie') }}
-			</div>
-			<div class="form-cell">
-				{{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input dropdown'}}) }}
-				{{ form_errors(form.chocolate_shop) }}
-			</div>
+			<div class="form-row">
+  <div class="form-cell-label yellow-background">
+    {{ form_label(form.chocolate_shop, 'Chocolaterie') }}
+  </div>
+  <div class="form-cell">
+    {{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input dropdown'}}) }}
+    {{ form_errors(form.chocolate_shop) }}
+  </div>
+</div>
+
 
 			<div class="form-row">
 				<div class="form-cell-label yellow-background">

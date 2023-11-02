@@ -28,15 +28,17 @@
 				<thead>
 					<tr>
 						<th>Ville</th>
+						{% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
 						<th class="test">Actions</th>
+						{% endif %}
 					</tr>
 				</thead>
 				<tbody>
 					{% for chocolate_shop in chocolate_shops %}
 						<tr>
 							<td data-label="Ville">{{ chocolate_shop.city }}</td>
+								{% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
 							<td data-label="Actions" class="btns">
-								{% if is_granted('ROLE_SUPER_ADMIN') %}
 									<a class="btn-edit" href="{{ path('app_chocolate_shop_edit', {'slug': chocolate_shop.slug}) }}">
 										<i class="fa-solid fa-pen-to-square"></i>
 										<span>Modifier</span>
