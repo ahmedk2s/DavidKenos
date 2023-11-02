@@ -48,7 +48,7 @@ body {
 }
 
 .div {
-  background-color: #1F2547;
+  background-color: #1f2547;
   border: 1px solid black;
 }
 
@@ -108,32 +108,42 @@ body {
 }
 
 .block-news {
-  height: 50%;
+  height: 45%;
   padding-bottom: 15px;
 }
 
 .block-img {
-  height: 60%;
-  background-color: #1F2547;
+  height: 150px;
+  background-color: #1f2547;
   border: 1px solid black;
-//   position: absolute;
+  width: 100%;
+  //   position: absolute;
 }
 
 .ruban-jaune {
-    background-color: @colorYellow;
-      text-align: center;
-      width: 100px;
-      position: relative;
-      left: 63%;
-      font-size: 1rem;
-      font-weight: bold;
-      padding: 3px 5px;
-      margin-top: 10px;
-} 
+  background-color: @colorYellow;
+  text-align: center;
+  width: 100px;
+  position: relative;
+  left: 73%;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 3px 5px;
+  margin-top: 10px;
+}
 
 .block-text {
-  border: 1px solid black;
-  height: 40%;
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+  h5 {
+    font-size: 0.9rem;
+    color: #0BAA9F;
+  }
+  p {
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -162,14 +172,14 @@ body {
 }
 
 @media screen and (max-width: 1000px) {
-//   .sidebar-container {
-//     width: 13%;
-//     background-color: blue;
-//   }
+  //   .sidebar-container {
+  //     width: 13%;
+  //     background-color: blue;
+  //   }
 }
 
 @media screen and (max-width: 800px) {
-    .posts-container {
+  .posts-container {
     width: 48%;
   }
   .news-container {

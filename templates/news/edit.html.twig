@@ -4,77 +4,74 @@
 
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="/assets/styles/css/form_style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="/assets/styles/css/form_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 {% endblock %}
 
 {% block body %}
 
-<div class="container-body">
-    <div class="container-table">
+	<div class="container-body">
+		<div class="container-table">
 
         <h1>Modifier l'actualité</h1>
 
-        {{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+			{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
 
-            <div class="form-row">
-                <div class="form-cell-label yellow-background">
-                    {{ form_label(form.title, 'Titre') }}
-                </div>
-                <div class="form-cell">
-                    {{ form_widget(form.title, {'attr': {'class': 'custom-input'}}) }}
-                    {{ form_errors(form.title) }}
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-cell-label yellow-background">
-                    {{ form_label(form.content, 'Contenu') }}
-                </div>
-                <div class="form-cell">
-                    {{ form_widget(form.content, {'attr': {'class': 'custom-input'}}) }}
-                    {{ form_errors(form.content) }}
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-cell-label yellow-background">
-                    {{ form_label(form.date_creation, 'Date de création') }}
-                </div>
-                <div class="form-cell">
-                    {{ form_widget(form.date_creation, {'attr': {'class': 'custom-input'}}) }}
-                    {{ form_errors(form.date_creation) }}
-                </div>
-            </div>
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.title, 'Titre') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.title, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.title) }}
+				</div>
+			</div>
 
-            {% if form.chocolate_shop is defined %}
-            <div class="form-row">
-                <div class="form-cell-label yellow-background">
-                    {{ form_label(form.chocolate_shop, 'Chocolaterie') }}
-                </div>
-                <div class="form-cell">
-                    {{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input'}}) }}
-                    {{ form_errors(form.chocolate_shop) }}
-                </div>
-            </div>
-        {% endif %}
-            
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.content, 'Contenu') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.content, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.content) }}
+				</div>
+			</div>
 
-            <div class="container-button-create">
-            <button type="submit" class="btn-create">
-                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
-            </button>
-        </div>
-            
-        {{ form_end(form) }}
-        
-        <a href="{{ path('app_news_index') }}" class="btn-edit">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Retour à la liste</span>
-        </a>
-        
-        
-    </div>
-</div>
+			<div class="form-cell-label yellow-background">
+				{{ form_label(form.chocolate_shop, 'Chocolaterie') }}
+			</div>
+			<div class="form-cell">
+				{{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input dropdown'}}) }}
+				{{ form_errors(form.chocolate_shop) }}
+			</div>
 
-{% endblock %}
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.date_creation, 'Date de création') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.date_creation, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.date_creation) }}
+				</div>
+			</div>
+
+		</div>
+
+		<div class="container-button-create">
+			<button type="submit" class="btn-create">
+				<span>
+					<i class="fa-solid fa-floppy-disk"></i>
+					{{ button_label|default('Enregistrer') }}</span>
+			</button>
+		</div>
+
+		{{ form_end(form) }}
+
+		<a href="{{ path('app_news_index') }}" class="btn-edit">
+			<i class="fa-solid fa-arrow-left"></i>
+			<span>Retour à la liste</span>
+		</a>
+
+
+	</div>
+</div>{% endblock %}
