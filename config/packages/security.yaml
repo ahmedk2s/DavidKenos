@@ -25,11 +25,10 @@ security:
                 always_remember_me: true
 
     access_control:
-    - { path: ^/super_admin, roles: ROLE_SUPER_ADMIN } # Accès à Super Admin pour les super administrateurs
     - { path: ^/admin, roles: ROLE_ADMIN } # Accès à l'inscription pour les administrateurs
     - { path: ^/profile, roles: ROLE_EMPLOYE } # Accès aux profils pour les employés
-    # - { path: ^/register, roles: ROLE_SUPER_ADMIN } # Accès à l'inscription uniquement pour le super administrateur 
-
+    - { path: ^/accueil, roles: ROLE_EMPLOYE }
+    - { path: ^/la-vie-des-chocolateries, roles: ROLE_EMPLOYE }
     role_hierarchy:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
         ROLE_ADMIN: ROLE_EMPLOYE

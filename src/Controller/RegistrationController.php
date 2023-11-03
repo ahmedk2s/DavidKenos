@@ -75,13 +75,13 @@ class RegistrationController extends AbstractController
         MailerService $mailerService,
         TokenGeneratorInterface $tokenGeneratorInterface
     ): Response {
-        // if ($this->getUser()) {
-        //     if ($this->isGranted('ROLE_ADMIN')) {
-        //         return $this->redirectToRoute('app_admin');
-        //     } elseif ($this->isGranted('ROLE_EMPLOYE')) {
-        //         return $this->redirectToRoute('app_accueil');
-        //     }
-        // }
+        if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+                return $this->redirectToRoute('app_accueil');
+            }
+        }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -138,13 +138,13 @@ class RegistrationController extends AbstractController
         TokenGeneratorInterface $tokenGeneratorInterface
     ): Response {
 
-        // if ($this->getUser()) {
-        //     if ($this->isGranted('ROLE_ADMIN')) {
-        //         return $this->redirectToRoute('app_admin');
-        //     } elseif ($this->isGranted('ROLE_EMPLOYE')) {
-        //         return $this->redirectToRoute('app_accueil');
-        //     }
-        // }
+        if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+                return $this->redirectToRoute('app_accueil');
+            }
+        }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
