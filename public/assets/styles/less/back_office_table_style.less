@@ -49,11 +49,15 @@ body {
       padding-left: 3%;
       border-bottom: 2px solid #0000002f;
     }
+    
   }
 }
 
 .test {
   width: 300px;
+}
+.test2 {
+  width: 180px;
 }
 
 .container-table {
@@ -148,6 +152,9 @@ body {
   .test {
     width: 250px;
   }
+  .test2 {
+  width: 150px;
+}
 
   .table,
   th,
@@ -166,7 +173,7 @@ body {
     }
     .btn-edit {
       text-align: center;
-      width: 100px;
+      width: 110px;
     }
     .include {
       font-size: 0.9rem;
@@ -184,6 +191,9 @@ body {
   .test {
     width: 110px;
   }
+  .test2 {
+  width: 70px;
+}
   .table,
   th,
   td {
@@ -260,28 +270,44 @@ body {
       thead {
         display: none;
       }
-      
+
       // th {
-      //   height: 50px;
+      //   height: 200px;
       // }
       td {
-        padding-left: 150px;
+        padding-left: 110px;
         position: relative;
         display: flex;
         justify-content: center;
         background-color: white;
         border-bottom: 2px solid #0000002f;
       }
+      .overflow {
+      overflow: hidden;
+      height: 200px;
+    }
       .btns {
         border: none;
       }
+      .bt {
+        .dflex();
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-right: 40px;
+        align-items: center;
+        gap: 10px;
+        padding-left: 7%;
+   
+        border: none;
+      }
+
 
       td::before {
         content: attr(data-label);
         position: absolute;
         top: 0;
         left: 0;
-        width: 100px;
+        width: 80px;
         bottom: 0;
         background-color: @colorYellow;
         display: flex;

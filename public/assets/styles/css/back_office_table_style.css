@@ -55,6 +55,9 @@ body {
 .test {
   width: 300px;
 }
+.test2 {
+  width: 180px;
+}
 .container-table {
   flex-direction: column;
   display: flex;
@@ -143,6 +146,9 @@ body {
   .test {
     width: 250px;
   }
+  .test2 {
+    width: 150px;
+  }
   .table,
   th,
   td {
@@ -156,7 +162,7 @@ body {
   }
   .table .btn-edit {
     text-align: center;
-    width: 100px;
+    width: 110px;
   }
   .table .include {
     font-size: 0.9rem;
@@ -170,6 +176,9 @@ body {
   }
   .test {
     width: 110px;
+  }
+  .test2 {
+    width: 70px;
   }
   .table,
   th,
@@ -250,12 +259,21 @@ body {
   .container-table tr td,
   .container-table th td,
   .container-table td td {
-    padding-left: 150px;
+    padding-left: 110px;
     position: relative;
     display: flex;
     justify-content: center;
     background-color: white;
     border-bottom: 2px solid #0000002f;
+  }
+  .container-table .table .overflow,
+  .container-table thead .overflow,
+  .container-table tbody .overflow,
+  .container-table tr .overflow,
+  .container-table th .overflow,
+  .container-table td .overflow {
+    overflow: hidden;
+    height: 200px;
   }
   .container-table .table .btns,
   .container-table thead .btns,
@@ -263,6 +281,22 @@ body {
   .container-table tr .btns,
   .container-table th .btns,
   .container-table td .btns {
+    border: none;
+  }
+  .container-table .table .bt,
+  .container-table thead .bt,
+  .container-table tbody .bt,
+  .container-table tr .bt,
+  .container-table th .bt,
+  .container-table td .bt {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 40px;
+    align-items: center;
+    gap: 10px;
+    padding-left: 7%;
     border: none;
   }
   .container-table .table td::before,
@@ -275,7 +309,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100px;
+    width: 80px;
     bottom: 0;
     background-color: #f2bf2c;
     display: flex;

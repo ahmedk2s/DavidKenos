@@ -31,21 +31,15 @@
 					<tr>
 						<th>Titre</th>
 						<th>Texte</th>
-						{# <th>Date de création</th> #}
-												{# <th>Date d'édition</th> #}
-						<th>Catégories</th>
-						<th class="test">Actions</th>
+						<th class="test test2">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for post in posts %}
 						<tr>
 							<td data-label="Titre">{{ post.title }}</td>
-							<td data-label="Texte">{{ post.text }}</td>
-							{# <td data-label="Date création">{{ post.dateCreation|date('d/m/Y') }}</td> #}
-														{# <td data-label="Date édition">{{ post.dateEdition ? post.dateEdition|date('d/m/Y') : '' }}</td> #}
-							<td data-label="Categorie">{{ post.category }}</td>
-							<td data-label="Actions" class="btns">
+							<td class="overflow" data-label="Texte">{{ post.text }}</td>
+							<td data-label="Actions" class="bt">
 							{% if is_granted('ROLE_SUPER_ADMIN') %}
 								<a class="btn-edit" href="{{ path('app_post_edit', {'slug': post.slug}) }}">
 									<i class="fa-solid fa-pen-to-square"></i>
