@@ -41,7 +41,7 @@
                             <td data-label="Nom">{{ user.lastName }}</td>
                             <td data-label="prénom">{{ user.firstName }}</td>
                             <td data-label="Poste">{{ user.jobTitle }}</td>
-                            <td data-label="Chocolaterie">{{ user.chocolateShop.city }}</td>
+                            <td data-label="Chocolaterie">{{ user.chocolateShop }}</td>
 
                             <td data-label="Actions" class="btns">
                                 {% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
