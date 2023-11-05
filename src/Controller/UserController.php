@@ -25,7 +25,6 @@ class UserController extends AbstractController
     }
 
     #[Route('/index-des-utilisateurs', name: 'app_user_index', methods: ['GET'])]
-#[Route('/index-des-utilisateurs', name: 'app_user_index', methods: ['GET'])]
 public function index(UserRepository $userRepository): Response
 {
     $user = $this->getUser();
