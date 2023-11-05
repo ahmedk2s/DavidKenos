@@ -28,6 +28,21 @@ class PostRepository extends ServiceEntityRepository
         ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function findPostsWithComments()
+{
+    return $this->createQueryBuilder('p')
+        ->innerJoin('p.comments', 'c')
+        ->addSelect('c')
+        ->innerJoin('p.user', 'u')
+        ->addSelect('u')
+        ->where('p.comments IS NOT EMPTY')
+        ->getQuery()
+        ->getResult();
+}
+
+
+
    
 
 
