@@ -21,6 +21,14 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    public function countAllComments(): int
+    {
+        return $this->createQueryBuilder('com')
+        ->select('count(com.id)')
+        ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */

@@ -10,6 +10,7 @@ use App\Repository\NewsRepository;
 use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ChocolateShopRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,7 +31,8 @@ class AdminController extends AbstractController
         NewsRepository $newsRepository,
         PostRepository $postRepository,
         CategoryRepository $categoryRepository,
-        ChocolateShopRepository $chocolateShopRepository
+        ChocolateShopRepository $chocolateShopRepository,
+        CommentRepository $commentRepository
     ): Response {
         $user = $this->getUser();
 
@@ -57,6 +59,7 @@ class AdminController extends AbstractController
         $postsCount = $postRepository->countAllPosts();
         $categoryCount = $categoryRepository->countAllCategory([]);
         $chocolateCount = $chocolateShopRepository->countAllChocolate([]);
+        $commentCount = $commentRepository->countAllComments();
 
         return $this->render('administration/admin.html.twig', [
             'controller_name' => 'AdminController',
@@ -65,7 +68,8 @@ class AdminController extends AbstractController
             'newsCount' => $newsCount,
             'postsCount' => $postsCount,
             'categoryCount' => $categoryCount,
-            'chocolateCount' => $chocolateCount
+            'chocolateCount' => $chocolateCount,
+            'commentCount' => $commentCount
         ]);
     }
 }
