@@ -13,7 +13,7 @@
 
 {% block body %}
 	{# {% if categories is not empty %}
-											            {% for category in categories %} #}
+																		            {% for category in categories %} #}
 	<div class="body-container">
 		<header>
 			<h1>
@@ -22,17 +22,26 @@
 				<span class="part3">
 					Animations
 					{# {% for category in categories %}
-																																								{{ category.name }}
-																																							{% endfor %} #}
+																																																																											{{ category.name }}
+																																																																										{% endfor %} #}
 				</span>
 			</h1>
 		</header>
 		<section class="grid-container">
 			<div class="container-latest-registrants">
 				<h4 id="title">Les derniers inscrits</h4>
-				{% for user in user %}
-					<span class="firstname">{{ user.firstName }}</span>
-					<span class="lastname">{{ user.lastName }}</span>
+				{% for user in users %}
+					<div class="container-inscrit">
+						<div class="photo-container">
+							<div class="photo">
+								<img src="{{ asset('images/' ~ user.profilePicture) }}" class="profile-image">
+							</div>
+						</div>
+						<div class="name">
+							<span class="firstname">{{ user.firstName }}</span>
+							<span class="lastname">{{ user.lastName }}</span>
+						</div>
+					</div>
 				{% endfor %}
 			</div>
 			<div class="container-post">
@@ -40,6 +49,7 @@
 			</div>
 			<div class="container-categories">
 				<ul>
+					<li>Tous les posts</li>
 					{% for category in categories %}
 						<li>{{ category.name }}</li>
 					{% endfor %}
