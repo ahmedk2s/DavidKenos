@@ -29,6 +29,15 @@ class NewsRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function findLatest(int $limit): array
+{
+    return $this->createQueryBuilder('n')
+        ->orderBy('n.dateCreation', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
+}
+
 //    /**
 //     * @return News[] Returns an array of News objects
 //     */

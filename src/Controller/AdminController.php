@@ -60,6 +60,7 @@ class AdminController extends AbstractController
         $categoryCount = $categoryRepository->countAllCategory([]);
         $chocolateCount = $chocolateShopRepository->countAllChocolate([]);
         $commentCount = $commentRepository->countAllComments();
+        $latestNews = $newsRepository->findLatest(3);
 
         return $this->render('administration/admin.html.twig', [
             'controller_name' => 'AdminController',
@@ -69,7 +70,8 @@ class AdminController extends AbstractController
             'postsCount' => $postsCount,
             'categoryCount' => $categoryCount,
             'chocolateCount' => $chocolateCount,
-            'commentCount' => $commentCount
+            'commentCount' => $commentCount,
+            'latestNews' => $latestNews,
         ]);
     }
 }
