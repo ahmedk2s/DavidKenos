@@ -153,7 +153,7 @@ section {
     .cards-section {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         width: 100%;
         margin-top: -30px;
         height: 25vh;
@@ -161,9 +161,12 @@ section {
     
     .card-row {
         .dflex();
-        justify-content: center;
+        justify-content: flex-start;
         gap: 30px;
+        margin-left: auto;
+        padding-left: 40px;
         min-height: max-content;
+        margin-right: auto;
     }
     
     .card {
@@ -175,12 +178,12 @@ section {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
         .dflex();
-        // flex-direction: column;
-        // justify-content: flex-start;
-        // align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
         margin-bottom: 30px;
         margin-top: -30px;
-        // height: 30%;
+        height: 30%;
         
         .content {
             display: flex;
@@ -188,13 +191,12 @@ section {
             justify-content: flex-start;
             align-items: center;
             width: 100%;
+
         }
 
         .content-circle{
             width: 26%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            .fullcenter();
         }
         
         .text-and-button {
@@ -203,6 +205,7 @@ section {
             justify-content: center;
             align-items: flex-start;
             margin-left: 20px;
+            margin-top: 10px;
         }
         
         .circle {
@@ -210,18 +213,18 @@ section {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            .fullcenter();
+            margin-bottom: 40px;
         }
 
         .circle-number{
-            margin-bottom: 15px;
-            text-align: center;
             font-family: 'Playfair Display';
             font-style: italic;
             font-size: 3em;
             color: #777;
+        }
+
+        .number-user{
+            margin-top: 5px;
         }
         
         .card-text {
@@ -265,14 +268,45 @@ section {
 
 .content-circle-news{
     width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .fullcenter();
 }
+
+.card-text.text-news{
+    margin-top: -40px;
+}
+
+.latest-news{
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.news-date{
+    margin-right: 20px;
+}
+
+.news-content{
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+.news-item {
+    align-self: start;
+
+}
+
+
 
 .button{
     display: flex;
     justify-content: flex-end;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .button-card{
@@ -283,6 +317,25 @@ section {
     a {
         text-decoration: none;
     }
+}
+
+.card.card-category, .card.card-category, .card.card-comment{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.card.card-category{
+    margin-left: 0;
+    margin-top: -200px;
+}
+
+.card.card-comment{
+    margin-right: 50px;
+    margin-top: -200px;
+}
+
+.card.card-chocolate{
+    margin-top: -40px;
 }
 
 .footer {
@@ -323,8 +376,151 @@ section {
    }
 }
 
+@media (min-width: 1275px) and (max-width: 1500px){
+
+    section{
+        height: unset;
+    }
+
+    .card.card-comment{
+        margin-right: 35px;
+        margin-top: -200px;
+    }
+
+    .card.card-category{
+        margin-top: -200px;
+    }
+}
+
+@media (min-width: 1274px) and (max-width: 1365px){
+    section{
+        height: unset;
+    }
+
+    .card.card-comment{
+        margin-right: 30px;
+        margin-top: -200px;
+    }
+
+    .card.card-category{
+        margin-top: -200px;
+    }
+}
+
+@media (min-width:600px) and (max-width: 720px){
+    .logo{
+        display: none;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 915px){
+    
+    .button-card .common-button{
+        font-size: 15px;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .card-row {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+    section .card {
+        width: 80%;
+    }
+
+    section .card.card-user{
+        margin: 0 auto;
+        margin-top: -30px;
+    }
+
+    section .card.center-card{
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    section .card.center-card .circle{
+        width: 60px;
+        height: 60px;
+        margin-top: 15px;
+    }
+
+    section .card.card-category,
+    section .card.card-post,
+    section .card.card-chocolate,
+    section .card.card-comment {
+        margin: 0 auto;
+}
+
+    section .card.card-comment {
+        margin-bottom: 30px;
+}
+
+.card-text.text-news {
+    margin-top: -25px;
+}
+
+section .latest-news {
+     margin-top: 0; 
+}
+
+
+    section .card .content-circle{
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+
+    }
+
+    section .card .content-circle .circle{
+        width: 60px;
+        height: 60px;
+    }
+
+    section .card .content-circle .circle-number{
+        font-size: 2.5em;
+        margin-top: 0;
+    }
+
+   section .card.center-card .circle .circle-number,
+section .card-category .circle .circle-number,
+section .card-chocolate .circle .circle-number,
+section .card-post .circle .circle-number,
+section .card-comment .circle .circle-number {
+    margin-top: -5px;
+}
+
+section .card.center-card .circle .circle-number {
+    font-size: 2.5em;
+}
+
+
+    .content-circle-news{
+        width: auto;
+    }
+
+    .footer p{
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 // tablet
-@media (min-width: 761px) and (max-width: 1274px) {
+@media (min-width: 600px) and (max-width: 1274px) {
+
     header {
         display: flex;
         flex-direction: column; 
@@ -399,10 +595,15 @@ section {
         justify-content: space-between;
     }
 
+    section .card-row{
+        padding-left: 30px;
+    }
+
     .cards-section .card {
         flex: 0 0 50%; /* Les cartes prendront environ 50% de la largeur de card-row */
         margin-bottom: 20px; 
         margin-left: -20px;
+       
     }
 
     .card.center-card, .card-category{
@@ -429,6 +630,28 @@ section {
         font-size: 17px;
     }
 
+    section .latest-news{
+        margin-top: 25px;
+    }
+
+    .card.card-post{
+        z-index: 3;
+        margin-top: -215px;
+    }
+
+    .card.card-chocolate{
+        z-index: 3;
+        margin-top: -213px;
+    }
+
+    .card.card-comment{
+        margin-top: -60px;
+
+    }
+
+   .card.card-category{
+    margin-top: -35px;
+   }
 
     .footer p{
         font-size: 20px;
@@ -436,7 +659,7 @@ section {
 }
 
 // mobile
-@media (min-width: 319px) and (max-width: 760px) {
+@media (min-width: 480px) and (max-width: 600px) {
     header .top-container {
         flex-direction: column;
         align-items: center; 
@@ -448,7 +671,7 @@ section {
         text-align: center;
         width: 100%;
         margin: auto;
-        margin-top: 30px;
+        margin-top: 10px;
         
         img {
             max-width: 150px;
@@ -466,11 +689,11 @@ section {
     }
 
     header .title h1{
-        font-size: 30px;
+        font-size: 35px;
     }
 
     header .title p{
-        font-size: 25px;
+        font-size: 20px;
         justify-content: center;
     }
 
@@ -483,7 +706,7 @@ section {
         display: block;
         position: fixed;
         top: 10px;
-        right: 10px;
+        right: 20px;
         background: none;
         border: none;
         font-size: 30px;
@@ -526,10 +749,12 @@ section {
 
     section{
         height: auto;
+        
     }
 
     section .card-text{
         width: 100%;
+        margin: auto auto;
     }
 
     section .content .card-text h3{
@@ -553,19 +778,28 @@ section {
         width: 100%;
         text-align: left;
     }
+
+    section .card-row{
+        padding-left: 10px;
+        padding-right: 10px;
+        gap: 0;
+        
+    }
     
     .card-row {
         flex-direction: column;
         align-items: center;
         margin-left: 0;
-        gap: 0;
     }
     
     section .card {
         width: 100%;
-        margin-top: 15px;
-        margin-left: -30px;
-        margin-bottom: -20px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    section .card.card-user{
+        margin-top: 10px;
     }
 
     section .card.center-card{
@@ -577,14 +811,17 @@ section {
         height: 60px;
     }
 
-    section .card.card-category{
-        margin-bottom: 20px;
-    }
+    section .card.card-category,
+    section .card.card-post,
+    section .card.card-chocolate,
+    section .card.card-comment {
+        margin: 0 auto;
+        margin-bottom: 10px;
+}
 
-    section .card.card-chocolate{
-        margin-bottom: 20px;
-        margin-top: -25px;
-    }
+    section .card.card-comment {
+        margin-bottom: 10px;
+}
 
     section .card .content-circle{
         width: auto;
@@ -599,12 +836,240 @@ section {
 
     section .card .content-circle .circle-number{
         font-size: 2.5em;
-        margin-top: -5px;
+        margin-top: 0;
     }
 
-    section .card.center-card .circle .circle-number{
+   section .card.center-card .circle .circle-number,
+section .card-category .circle .circle-number,
+section .card-chocolate .circle .circle-number,
+section .card-post .circle .circle-number,
+section .card-comment .circle .circle-number {
+    margin-top: -5px;
+}
+
+section .card.center-card .circle .circle-number {
+    font-size: 2.5em;
+}
+
+
+    .content-circle-news{
+        width: auto;
+    }
+
+    .footer p{
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px){
+    header .top-container {
+        flex-direction: column;
+        align-items: center; 
+        width: 100%; 
+    }
+    
+    header .logo {
+        order: 2;
+        text-align: center;
+        width: 100%;
+        margin: auto;
+        margin-top: 10px;
+        
+        img {
+            max-width: 150px;
+            display: block; 
+            margin: 0 auto; 
+        }
+    }
+    
+    header .title {
+        order: 1;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto; 
+        align-self: center;
+    }
+
+    header .title h1{
+        font-size: 35px;
+    }
+
+    header .title p{
+        font-size: 18px;
+        justify-content: center;
+    }
+
+    #nav-container {
+        display: none;
+    }
+
+    nav #burger-menu-button {
+        visibility: visible;
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 30px;
+        cursor: pointer;
+    }
+    
+    nav .nav-container {
+        display: none; 
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 85px;
+        right: 10px;
+        left: 15px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1000;
+    }
+    
+    nav .nav-container ul {
+        padding: 5px;
+        margin: 0;
+        gap: 0;
+        flex-wrap: wrap;
+        width: fit-content;
+        justify-content: center;
+        margin-bottom: -10px;
+    }
+    
+    nav .nav-container ul li {
+        margin-bottom: 10px;
+        text-align: center;
+        margin-left: 10px;
+    }
+    
+    nav .circle-container {
+        display: none; 
+    }
+
+    section{
+        height: auto;
+        
+    }
+
+    section .card-text{
+        width: 100%;
+        margin: auto auto;
+    }
+
+    section .content .card-text h3{
+        font-size: 18px;
+    }
+
+    section .content .card-text p{
+        font-size: 15px;
+    }
+
+    .button{
+        width: 90%;
+    }
+
+    .button-card .common-button{
+        font-size: 15px;
+        width: 100%;
+        text-align: left;
+    }
+
+     .card.center-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Cela pousse le contenu vers le haut et le bouton vers le bas */
+        height: 100%; /* Assurez-vous que la carte a une hauteur définie pour que space-between fonctionne */
+    }
+
+    .button-card {
+        align-self: stretch; /* Cela permet au bouton de prendre toute la largeur disponible */
+        margin-top: auto; /* Cela pousse le bouton vers le bas de la carte */
+    }
+
+    .card.center-card .button-card{
+        margin-left: 75px;
+        margin-top: -40px;
+    }
+
+    section .card-row{
+        padding-left: 10px;
+        padding-right: 10px;
+        gap: 0;
+        
+    }
+    
+    .card-row {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+    }
+    
+    section .card {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    section .card.card-user{
+        margin-top: 10px;
+    }
+
+    section .card.center-card{
+        width: 100%;
+        min-height: 150px;
+    }
+
+    section .card.center-card .circle{
+        width: 60px;
+        height: 60px;
+    }
+
+    section .card.card-category,
+    section .card.card-post,
+    section .card.card-chocolate,
+    section .card.card-comment {
+        margin: 0 auto;
+        margin-bottom: 10px;
+}
+
+    section .card.card-comment {
+        margin-bottom: 10px;
+}
+
+    section .card .content-circle{
+        width: auto;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    section .card .content-circle .circle{
+        width: 60px;
+        height: 60px;
+    }
+
+    section .card .content-circle .circle-number{
         font-size: 2.5em;
-        margin-top: -5px;
+        margin-top: 0;
+    }
+
+    section .card.center-card .circle .circle-number,
+section .card-category .circle .circle-number,
+section .card-chocolate .circle .circle-number,
+section .card-post .circle .circle-number,
+section .card-comment .circle .circle-number {
+    margin-top: -5px;
+}
+
+section .card.center-card .circle .circle-number {
+    font-size: 2.5em;
+}
+
+
+    section .latest-news{
+        display: none;
     }
 
     .content-circle-news{

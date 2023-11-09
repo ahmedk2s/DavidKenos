@@ -52,11 +52,11 @@
 
     <section class="cards-section">
         <div class="card-row">
-            <div class="card">
+            <div class="card card-user">
                 <div class="content">
                     <div class="content-circle">
                         <div class="circle">
-                            <p class="circle-number">{{ registeredUsersCount }}</p>
+                            <p class="circle-number number-user">{{ registeredUsersCount }}</p>
                         </div>
                     </div>
                     <div class="text-and-button">
@@ -73,29 +73,39 @@
                 </div>
             </div>
             <div class="card center-card">
-                <div class="content">
-                    <div class="content-circle-news">
-                        <div class="circle">
-                            <p class="circle-number">{{ newsCount }}</p>
-                        </div>
-                    </div>
-                    <div class="text-and-button">
-                        <div class="card-text">
-                            <h3>ACTUALITES</h3>
-                            <p>sont disponibles</p>
-                        </div>
-                        <div class="button">
-                        <div class="button-card">
-                            <a href="{{ path('app_news_index') }}">
-                                <button class="common-button">Gérer les actualités</button>
-                            </a>
-
-                        </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="content">
+        <div class="content-circle-news">
+            <div class="circle">
+                <p class="circle-number">{{ newsCount }}</p>
             </div>
-            <div class="card">
+        </div>
+        <div class="text-and-button">
+            <div class="card-text text-news">
+                <h3>ACTUALITÉS</h3>
+                <p>sont disponibles</p>
+            </div>
+        </div>
+    </div>
+    <!-- Section pour afficher les trois dernières actualités -->
+    <div class="latest-news">
+        {% for news in latestNews|slice(0, 3) %}
+        <div class="news-item">
+            <span class="news-date">Le {{ news.dateCreation | date('d/m/Y') }}</span>
+            <span> - </span>
+            <span class="news-content">{{ news.content | slice(0, 25) }}</span>
+        </div>
+        {% else %}
+        <p>Aucune actualité récente.</p>
+        {% endfor %}
+    </div>
+    <div class="button-card">
+        <a href="{{ path('app_news_index') }}">
+            <button class="common-button">Gérer les actualités</button>
+        </a>
+    </div>
+</div>
+
+            <div class="card card-post">
                 <div class="content">
                     <div class="content-circle">
                         <div class="circle">
@@ -156,17 +166,16 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card card-chocolate">
+                <div class="card card-comment">
                 <div class="content">
                     <div class="content-circle">
                         <div class="circle">
-                            {# <p class="circle-number">{{ chocolateCount }}</p> #}
+                            <p class="circle-number">{{ commentCount }}</p>
                         </div>
                     </div>
                     <div class="text-and-button">
                         <div class="card-text">
-                            <h3>COMMENTAIRES</h3>
+                            <h3>Commentaires</h3>
                             <p>sont disponibles</p>
                         </div>
                         <div class="button-card">
@@ -177,8 +186,6 @@
                     </div>
                 </div>
             </div>
-
-        </div>
     </section>
 
     <footer class="footer">
