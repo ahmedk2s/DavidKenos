@@ -20,3 +20,32 @@ document.addEventListener("DOMContentLoaded", function () {
   //   alert.style.display = "none";
   // }, 5000);
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   let icons = document.getElementById("icons");
+//   let links = document.getElementById("links");
+
+//   icons.addEventListener("click", function () {
+//     links.classList.toggle("activ");
+//     console.log(links.classList.contains("activ"));
+//   });
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+  let icons = document.getElementById("icons");
+  let links = document.getElementById("links");
+  let isActive = false;
+
+  icons.addEventListener("click", function () {
+    if (isActive) {
+      links.classList.remove("activ");
+    } else {
+      links.classList.add("activ");
+    }
+
+    isActive = !isActive; // Inversez l'état de isActive pour le prochain clic
+    console.log(links.classList.contains("activ"));
+  });
+});
+
+

@@ -52,6 +52,7 @@ class ChocolateShopController extends AbstractController
             return $this->redirectToRoute('app_chocolate_shop_index');
         }
 
+        $this->addFlash('success', 'Chocolaterie ajouté !');
         return $this->render('chocolate_shop/new.html.twig', [
             'chocolate_shop' => $chocolateShop,
             'form' => $form->createView(),
@@ -69,8 +70,9 @@ class ChocolateShopController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = $this->slugService->createUniqueSlug($chocolateShop->getCity(), ChocolateShop::class);
             $chocolateShop->setSlug($slug);
-
             $entityManager->flush();
+
+            $this->addFlash('success', 'Chocolaterie modifié !');
 
             return $this->redirectToRoute('app_chocolate_shop_index');
         }
@@ -81,16 +83,18 @@ class ChocolateShopController extends AbstractController
         ]);
     }
 
-   #[Route('/supprimer-{id}', name: 'app_chocolate_shop_delete', methods: ['POST'])]
-public function delete(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
-{
-    $this->denyAccessUnlessGranted(ChocolateShopVoter::DELETE, $chocolateShop);
+    #[Route('/supprimer-{id}', name: 'app_chocolate_shop_delete', methods: ['POST'])]
+    public function delete(Request $request, ChocolateShop $chocolateShop, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted(ChocolateShopVoter::DELETE, $chocolateShop);
 
-    if ($this->isCsrfTokenValid('delete' . $chocolateShop->getId(), $request->request->get('_token'))) {
-        $entityManager->remove($chocolateShop);
-        $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $chocolateShop->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($chocolateShop);
+            $entityManager->flush();
+        }
+
+        $this->addFlash('success', 'Actualité supprimé.');
+
+        return $this->redirectToRoute('app_chocolate_shop_index');
     }
-
-    return $this->redirectToRoute('app_chocolate_shop_index');
-}
 }

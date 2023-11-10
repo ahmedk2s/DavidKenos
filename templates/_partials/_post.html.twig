@@ -6,7 +6,9 @@
 			</div>
 			<div class="right-part">
 				<ul>
-					<li>{{ post.category.name }}</li>
+					<div class="category">
+						<li>{{ post.category.name }}</li>
+					</div>
 					<li>
 						<span class="firstname">{{ post.user.firstName }}</span>
 						{{ post.user.lastName }}
@@ -25,4 +27,3 @@
 {% else %}
 	<p>Aucun post n'est disponible pour le moment.</p>
 {% endif %}
-

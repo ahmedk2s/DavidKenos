@@ -23,8 +23,7 @@
                     <tr>
                         <th>Titre</th>
                         <th>Contenu</th>
-                        <th>Chocolaterie</th>
-                        <th class="test">Actions</th>
+                        <th class="test test2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,8 +31,7 @@
                         <tr>
                             <td data-label="Titre">{{ news.title }}</td>
                             <td class="overflow" data-label="Texte">{{ news.content }}</td>
-                            <td class="overflow" data-label="Chocolaterie">{{ news.chocolateShop }}</td>
-                            <td data-label="Actions" class="btns">
+                            <td class="bt" data-label="Actions">
                                 {% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
                                     <a class="btn-edit" href="{{ path('app_news_edit', {'slug': news.slug}) }}">
                                         <i class="fa-solid fa-pen-to-square"></i>

@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class NewsType extends AbstractType
 {
@@ -24,6 +25,9 @@ class NewsType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Texte',
                 'attr' => ['placeholder' => 'Entrez le texte de l\'actualité'],
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de l\'actualité',
             ])
             ->add('date_creation', DateType::class, [
                 'widget' => 'single_text', 

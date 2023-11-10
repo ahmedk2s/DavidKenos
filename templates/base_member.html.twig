@@ -8,46 +8,64 @@
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 
-		<link rel="stylesheets" href="/assets/styles/css/app.css"> 
-        <link rel="stylesheet" href="/assets/styles/css/sidebar_style.css">
-        {% block stylesheets %}{% endblock %}
+		<link rel="stylesheets" href="/assets/styles/css/app.css">
+		<link rel="stylesheet" href="/assets/styles/css/sidebar_style.css"> {% block stylesheets %}{% endblock %}
 
-			<script src="/assets/styles/js/scripts.js" defer></script>
+		<script src="/assets/styles/js/scripts.js" defer></script>
 		{% block javascripts %}{% endblock %}
 
 	</head>
 	<body>
 
-    <div class="menu-vertical">
-    <!-- Section de profil -->
-    <div class="section-profil">
-        {# <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile-image"> #}
-        <div class="name-details">
-            {# <span class="firstname">{{ user.firstName }}</span>
-            <span class="lastname">{{ user.lastName }}</span> #}
-        </div>
-        <button class="voir-profil">
-            <i class="fa-regular fa-user"></i> Voir mon profil
-        </button>
-    </div>
+		<div class="menu-vertical">
+			<div class="section-profil">
+				<div
+					class="photo-profil">
+					<img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile-image">
+				</div>
+				<div class="name-details">
+					<span class="firstname">{{ user.firstName }}</span>
+					<span class="lastname">{{ user.lastName }}</span>
+				</div>
+				<button class="voir-profil">
+					<i class="fa-regular fa-user"></i>
+					Voir mon profil
+				</button>
+				<div id="icons"></div>
+			</div>
 
-    <!-- Section des liens -->
-    <div class="section-liens">
-        <div class="links-container">
-            <a href="#" class="menu-link">Accueil</a>
-            <a href="#" class="menu-link">Actualités de l'entreprise</a>
-            <a href="#" class="menu-link">Trombinoscope</a>
-            <a href="#" class="menu-link">La vie des chocolateries</a>
-            <a href="{{ path('app_logout') }}" class="menu-link"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
-        </div>
+			<div id="links">
+				<ul class="links-container">
+					<li>
+						<a href="{{ path('app_accueil') }}" class="menu-link">Accueil</a>
+					</li>
+					<li>
+						<a href="#" class="menu-link">Actualités de l'entreprise</a>
+					</li>
 
-        <!-- Section du logo -->
-        <div class="section-logo">
-            <img src="{{ asset('images/logo-david-kenos-blanc.png') }}" alt="Logo de David Kenos" class="company-logo">
-        </div>
-    </div>
-</div>
+					<li>
+						<a href="#" class="menu-link">Trombinoscope</a>
+					</li>
 
+					<li>
+						<a href="{{ path('app_la_vie_des_chocolateries') }}" class="menu-link">La vie des chocolateries</a>
+					</li>
+					<li id="btn" class="menu-link">
+						<a href="{{ path('profile') }}">Voir mon profil</a>
+					</li>
+					<li>
+						<a href="{{ path('app_logout') }}" class="menu-link">
+							<i class="fa-solid fa-right-from-bracket"></i>
+							Déconnexion</a>
+					</li>
+				</ul>
+			</div>
+			<div class="section-logo">
+				<div class="img-container">
+					<img src="{{ asset('images/logo-david-kenos-blanc.png') }}" alt="Logo de David Kenos">
+				</div>
+			</div>
+		</div>
 		{% block body %}{% endblock %}
 	</body>
 </html>

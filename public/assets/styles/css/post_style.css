@@ -40,11 +40,14 @@ body {
   background-color: #f2bf2c;
   text-align: center;
   width: 100px;
-  position: relative;
-  left: 90%;
   font-weight: bold;
   padding: 3px 5px;
   margin-top: 10px;
+}
+.right-part .category {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -15%;
 }
 .right-part .firstname {
   font-family: "Playfair Display", serif;
@@ -68,4 +71,31 @@ body {
   color: #483285;
   text-decoration: none;
   font-weight: 700;
+}
+@media screen and (max-width: 600px) {
+  .post-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .profile-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+  .right-part {
+    font-size: 0.8em;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .right-part ul {
+    padding-right: 0;
+  }
+  .category {
+    width: 110%;
+  }
 }

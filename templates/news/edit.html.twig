@@ -1,6 +1,7 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Modifier l'actualité{% endblock %}
+{% block title %}Modifier l'actualité
+{% endblock %}
 
 
 {% block stylesheets %}
@@ -13,7 +14,7 @@
 	<div class="container-body">
 		<div class="container-table">
 
-        <h1>Modifier l'actualité</h1>
+			<h1>Modifier l'actualité</h1>
 
 			{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
 
@@ -34,6 +35,16 @@
 				<div class="form-cell">
 					{{ form_widget(form.content, {'attr': {'class': 'custom-input'}}) }}
 					{{ form_errors(form.content) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.imageFile, 'Image') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.imageFile, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.imageFile) }}
 				</div>
 			</div>
 

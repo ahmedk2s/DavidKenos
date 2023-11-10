@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 
 class PostType extends AbstractType
@@ -25,6 +26,9 @@ class PostType extends AbstractType
             ->add('text', TextareaType::class, [
                 'label' => 'Texte',
                 'attr' => ['placeholder' => 'Entrez le texte du post'],
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de l\'actualité',
             ])
             ->add('date_creation', DateType::class, [
                 'widget' => 'single_text', 

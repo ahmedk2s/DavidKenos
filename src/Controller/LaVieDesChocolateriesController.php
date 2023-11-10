@@ -23,7 +23,8 @@ class LaVieDesChocolateriesController extends AbstractController
             'categories' => $categories,
             'posts' => $posts,
             'user' => $user,
-            'user' => $users,
+            'users' => $users,
         ]);
     }
+
 }
