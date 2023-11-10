@@ -86,5 +86,21 @@
 
 		</div>
 	</div>
+            <div class="container-button-create">
+            <button type="submit" class="btn-create">
+                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
+            </button>
+        </div>
+            
+        {{ form_end(form) }}
+        
+        <a href="{{ path('app_post_index') }}" class="btn-edit">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Retour à la liste</span>
+        </a>
+        
+        
+    </div>
+</div>
 
 {% endblock %}

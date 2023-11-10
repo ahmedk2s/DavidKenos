@@ -20,7 +20,7 @@ class UserRepository extends ServiceEntityRepository
                              ->select('count(u.id)');
                              
         if ($chocolateShopId !== null) {
-            $queryBuilder->where('u.chocolate_shop = :chocolateShopId')
+            $queryBuilder->where('u.chocolateShop = :chocolateShopId')
                          ->setParameter('chocolateShopId', $chocolateShopId);
         }
         
@@ -46,7 +46,7 @@ class UserRepository extends ServiceEntityRepository
     public function findEmployeesByChocolateShop($chocolateShopId)
     {
         return $this->createQueryBuilder('u')
-                    ->where('u.chocolate_shop = :chocolateShop')
+                    ->where('u.chocolateShop = :chocolateShop')
                     ->andWhere('u.roles NOT LIKE :roles')
                     ->setParameter('chocolateShop', $chocolateShopId)
                     ->setParameter('roles', '%ROLE_SUPER_ADMIN%')
@@ -59,7 +59,7 @@ class UserRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('u')
                     ->select('count(u.id)')
-                    ->where('u.chocolate_shop = :chocolateShop')
+                    ->where('u.chocolateShop = :chocolateShop')
                     ->setParameter('chocolateShop', $chocolateShopId)
                     ->getQuery()
                     ->getSingleScalarResult();
@@ -68,7 +68,7 @@ class UserRepository extends ServiceEntityRepository
     public function findUsersByRoleAndChocolateShop($role, $chocolateShop, $excludeRole = false)
 {
     $queryBuilder = $this->createQueryBuilder('u')
-                        ->where('u.chocolate_shop = :chocolateShop')
+                        ->where('u.chocolateShop = :chocolateShop')
                         ->setParameter('chocolateShop', $chocolateShop);
                         
     if ($excludeRole) {
