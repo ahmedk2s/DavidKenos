@@ -110,7 +110,7 @@
   height: 100%;
   object-fit: contain;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .menu-vertical {
     height: 8vh;
     width: 100%;
@@ -140,7 +140,7 @@
     position: fixed;
     right: -100%;
     top: 8vh;
-    z-index: 100;
+    z-index: 4;
     transition: 0.25s;
     display: flex;
     justify-content: center;

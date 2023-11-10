@@ -8,16 +8,15 @@
 
 {% endblock %}
 {% block javascripts %}
-<script src="/assets/styles/js/scripts.js" defer></script>
+	<script src="/assets/styles/js/scripts.js" defer></script>
 {% endblock %}
-
 
 
 {% block body %}
 
 	{# <div class="sidebar-container">
-					
-						</div> #}
+										
+											</div> #}
 	<div class="body-container">
 		<div class="posts-container">
 			<div class="header-container-posts">
@@ -25,14 +24,14 @@
 				<p>voici les derniers posts publiés.</p>
 			</div>
 			<div class="grid-container">
-				<div class="div" id="un">1</div>
-				<div class="div" id="deux">2</div>
-				<div class="div" id="trois">3</div>
-				<div class="div" id="quatre">4</div>
-				<div class="div" id="cinq">5</div>
-				<div class="div" id="six">6</div>
+					{% for post in posts %}
+						<div class="div" id="{{ 'post-' ~ loop.index }}">
+							<img src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="image de {{ post.title }}">
+							<h3>{{ post.title }}</h3>
+							<p>{{ post.text }}</p>
+						</div>
+					{% endfor %}
 			</div>
-
 		</div>
 		<div class="news-container">
 			<div class="header-container-news">
@@ -42,6 +41,11 @@
 			{% for news in news %}
 				<div class="block-news">
 					<div class="block-img">
+						{% if news.imageName %}
+							<img src="{{ vich_uploader_asset(news, 'imageFile') }}" alt="image de {{ news.title }}">
+						{% else %}
+							<p>Aucune image disponible</p>
+						{% endif %}
 						{% if news.chocolateShop %}
 							<p class="ruban-jaune">
 								{{ news.chocolateShop.city }}
