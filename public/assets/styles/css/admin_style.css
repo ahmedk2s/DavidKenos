@@ -818,15 +818,11 @@ section .card.center-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* Cela pousse le contenu vers le haut et le bouton vers le bas */
     height: 100%;
-    /* Assurez-vous que la carte a une hauteur définie pour que space-between fonctionne */
   }
   .button-card {
     align-self: stretch;
-    /* Cela permet au bouton de prendre toute la largeur disponible */
     margin-top: auto;
-    /* Cela pousse le bouton vers le bas de la carte */
   }
   .card.center-card .button-card {
     margin-left: 75px;
