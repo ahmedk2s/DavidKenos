@@ -256,13 +256,12 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
-.body-container {
-  margin-top: 90px;
-}
+  .body-container {
+    margin-top: 90px;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-
   .posts-container {
     width: 62%;
   }
@@ -287,36 +286,34 @@ body {
   }
 }
 
-@media screen and (max-width: 1000px) {
-  //   .sidebar-container {
-  //     width: 13%;
-  //     background-color: blue;
-  //   }
-  body {
-    display: block;
-    overflow: hidden;
-  }
-  .body-container {
-    margin-top: 90px;
-    width: 100%;
-  }
+// @media screen and (max-width: 1000px) {
+//   //   .sidebar-container {
+//   //     width: 13%;
+//   //     background-color: blue;
+//   //   }
+//   body {
+//     display: block;
+//     overflow: hidden;
+//   }
+//   .body-container {
+//     margin-top: 90px;
+//     width: 100%;
+//   }
+//   .posts-container {
+//     width: 58%;
+//   }
+//   .news-container {
+//     width: 32%;
+//   }
+// }
+
+@media screen and (max-width: 716px) {
   .posts-container {
-    width: 58%;
+    width: 50%;
   }
   .news-container {
-    width: 32%;
+    width: 46%;
   }
-}
-
-@media screen and (max-width: 800px) {
-  .posts-container {
-    width: 45%;
-  }
-
-  .news-container {
-    width: 45%;
-  }
-
   .grid-container {
     grid-template-columns: (1fr);
     gap: 20px;
@@ -362,7 +359,7 @@ body {
     }
   }
 }
-@media screen and (max-width: 562px) {
+@media screen and (max-width: 500px) {
   body {
     height: auto;
     overflow-y: visible;
@@ -385,7 +382,7 @@ body {
   .grid-container {
     grid-template-columns: (1fr);
     gap: 20px;
-    height: 1800px;
+    height: 1500px;
     grid-template-areas:
       "post-1"
       "post-1"
@@ -394,9 +391,6 @@ body {
       "post-2"
       "post-3"
       "post-3"
-      "post-4"
-      "post-4"
-      "post-4"
       "post-5"
       "post-5"
       "post-5"
@@ -404,7 +398,6 @@ body {
       "post-6";
 
     #post-3,
-    #post-4,
     #post-5,
     #post-6 {
       display: flex;

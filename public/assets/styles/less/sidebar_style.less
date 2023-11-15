@@ -66,6 +66,10 @@
       display: none;
       cursor: pointer;
     }
+     button a {
+      text-decoration: none;
+      color: white;
+    }
   }
 
   #links {
@@ -78,8 +82,8 @@
         padding-left: 10px;
         list-style: none;
         &:hover {
-        background-color: @colorLightTeal;
-      }
+          background-color: @colorLightTeal;
+        }
       }
     }
 
@@ -121,6 +125,8 @@
     flex-direction: row-reverse;
     position: fixed;
     top: 0;
+    
+    z-index: 5;
     // justify-content: space-between;
 
     .section-logo {

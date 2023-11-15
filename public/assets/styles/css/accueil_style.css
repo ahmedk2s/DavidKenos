@@ -207,28 +207,12 @@ body {
     display: none;
   }
 }
-@media screen and (max-width: 1000px) {
-  body {
-    display: block;
-    overflow: hidden;
-  }
-  .body-container {
-    margin-top: 90px;
-    width: 100%;
-  }
+@media screen and (max-width: 716px) {
   .posts-container {
-    width: 58%;
+    width: 50%;
   }
   .news-container {
-    width: 32%;
-  }
-}
-@media screen and (max-width: 800px) {
-  .posts-container {
-    width: 45%;
-  }
-  .news-container {
-    width: 45%;
+    width: 46%;
   }
   .grid-container {
     grid-template-columns: 1fr;
@@ -265,7 +249,7 @@ body {
     font-size: 0.7rem;
   }
 }
-@media screen and (max-width: 562px) {
+@media screen and (max-width: 500px) {
   body {
     height: auto;
     overflow-y: visible;
@@ -288,11 +272,10 @@ body {
   .grid-container {
     grid-template-columns: 1fr;
     gap: 20px;
-    height: 1800px;
-    grid-template-areas: "post-1" "post-1" "post-1" "post-2" "post-2" "post-3" "post-3" "post-4" "post-4" "post-4" "post-5" "post-5" "post-5" "post-6" "post-6";
+    height: 1500px;
+    grid-template-areas: "post-1" "post-1" "post-1" "post-2" "post-2" "post-3" "post-3" "post-5" "post-5" "post-5" "post-6" "post-6";
   }
   .grid-container #post-3,
-  .grid-container #post-4,
   .grid-container #post-5,
   .grid-container #post-6 {
     display: flex;

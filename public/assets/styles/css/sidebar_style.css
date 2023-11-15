@@ -70,6 +70,10 @@
   display: none;
   cursor: pointer;
 }
+.menu-vertical .section-profil button a {
+  text-decoration: none;
+  color: white;
+}
 .menu-vertical #links {
   background-color: #191e39;
   height: 40%;
@@ -120,6 +124,7 @@
     flex-direction: row-reverse;
     position: fixed;
     top: 0;
+    z-index: 5;
   }
   .menu-vertical .section-logo {
     width: 25%;

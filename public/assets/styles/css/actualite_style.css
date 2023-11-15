@@ -1,0 +1,32 @@
+.dflex {
+  display: flex;
+  flex-wrap: wrap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/styles/includes/fonts/PlayfairDisplay-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/styles/includes/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+body {
+  display: flex;
+  height: 100vh;
+  background-color: #dfdfdf;
+  font-family: "Montserrat", sans-serif;
+  background-color: red;
+}
+.body-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 3%;
+  background-color: red;
+  gap: 4%;
+}
