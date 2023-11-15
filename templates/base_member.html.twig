@@ -21,7 +21,8 @@
 			<div class="section-profil">
 				<div
 					class="photo-profil">
-					<img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" class="profile-image">
+					<img src="{{ asset('images/' ~ user.profilePictureName) }}" alt="Photo de profil de {{ user.firstName }} {{ user.lastName }}" >
+
 				</div>
 				<div class="name-details">
 					<span class="firstname">{{ user.firstName }}</span>

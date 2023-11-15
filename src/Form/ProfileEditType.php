@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProfileEditType extends AbstractType
 {
@@ -19,20 +20,21 @@ class ProfileEditType extends AbstractType
             ->add('email')
             ->add('job_title')
             ->add('description')
-            ->add('profile_picture', FileType::class, [
-                'label' => 'Photo de profil (fichier image)',
-                'mapped' => false, // Le champ n'est pas directement lié à la propriété de l'entité
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/*',
-                        ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
-                    ])
-                ],
-            ])
+            ->add('profilePictureFile', VichImageType::class, [
+    'label' => 'Photo de profil (fichier image)',
+    'mapped' => true, // Maintenant, le champ est directement lié à la propriété de l'entité
+    'required' => false,
+    'constraints' => [
+        new File([
+            'maxSize' => '1024k',
+            'mimeTypes' => [
+                'image/*',
+            ],
+            'mimeTypesMessage' => 'Veuillez télécharger une image valide',
+        ])
+    ],
+])
+
             ->add('cover_picture', FileType::class, [
                 'label' => 'Image de couverture (fichier image)',
                 'mapped' => false, // Le champ n'est pas directement lié à la propriété de l'entité

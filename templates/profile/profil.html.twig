@@ -6,19 +6,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/assets/styles/css/profile_style.css">
     <link rel="stylesheet" href="/assets/styles/css/post_style.css">
-    {# <link rel="stylesheet" href="/assets/styles/css/sidebar_style.css"> #}
 {% endblock %}
 
 {% block body %}
-    {# header horizontal #}
-    
-    <header class="banner-container">
-        <img src="{{ user.coverPicture }}" alt="Image en bandeau" class="banner-image">
-        <img src="{{ user.profilePicture }}" alt="Photo de profil" class="profile-image">
-    </header>
-    
-    <section>
-    <div class="content-wrapped">
+    <div class="main-content">
+        <div class="banner-container">
+            <img src="{{ user.coverPicture }}" alt="Image en bandeau" class="banner-image">
+            <img src="{{ user.profilePictureName }}" alt="Photo de profil" class="profile-image">
+        </div>
+
+        <div class="content-container">
         <div class="card">
             <div class="name-details">
                 <span class="firstname">{{ user.firstName }}</span>
@@ -33,19 +30,19 @@
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
                 {% endif %}
-                
+
                 {% if user.instagramLink %}
                     <a href="{{ user.instagramLink }}" class="icon-instagram">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
                 {% endif %}
-                
+
                 {% if user.twitterLink %}
                     <a href="{{ user.twitterLink }}" class="icon-twitter">
-                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-twitter"></i>
                     </a>
                 {% endif %}
-                
+
                 {% if user.linkedinLink %}
                     <a href="{{ user.linkedinLink }}" class="icon-linkedin">
                         <i class="fa-brands fa-linkedin-in"></i>
@@ -55,22 +52,21 @@
 
             <a href="{{ user.email }}" class="email-button">Envoyer un mail</a>
         </div>
-    </section>
 
-    <div class="post-container">
-    <div class="post-header">
-        <h2>Les derniers</h2>
-            <p>posts publiés</p>
+        <div class="posts-container">
+            <div class="post-header">
+                <h2>Les derniers</h2>
+                <p>posts publiés</p>
             </div>
-    {% include '_partials/_post.html.twig' %}
+            {% include '_partials/_post.html.twig' %}
+        </div>
+        
+
+        <div class="button-container">
+            <a href="{{ path('profile_edit') }}" class="btn">Modifier mon profil</a>
+            <a href="#" class="btn">Publier un post</a>
+            <a href="#" class="btn trombinoscope">Trombinoscope</a>
+        </div>
     </div>
     </div>
-    
-
-    <div class="button-container">
-    <a href="{{ path('profile_edit') }}" class="btn">Modifier mon profil</a>
-    <a href="#" class="btn">Publier un post</a>
-    <a href="#" class="btn trombinoscope">Trombinoscope</a>
-</div>
-
 {% endblock %}
