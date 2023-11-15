@@ -1,12 +1,12 @@
 {% extends 'base_member.html.twig' %}
 
-{% block title %}Hello AccueilController!
-{% endblock %}
+{% block title %}Hello AccueilController!{% endblock %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/accueil_style.css">
 	<link rel="stylesheet" href="/assets/styles/css/sidebar_style.css">
-
 {% endblock %}
+
 {% block javascripts %}
 	<script src="/assets/styles/js/scripts.js" defer></script>
 {% endblock %}
@@ -14,9 +14,6 @@
 
 {% block body %}
 
-	{# <div class="sidebar-container">
-										
-											</div> #}
 	<div class="body-container">
 		<div class="posts-container">
 			<div class="header-container-posts">
@@ -24,13 +21,13 @@
 				<p>voici les derniers posts publiés.</p>
 			</div>
 			<div class="grid-container">
-					{% for post in posts %}
-						<div class="div" id="{{ 'post-' ~ loop.index }}">
-							<img src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="image de {{ post.title }}">
-							<h3>{{ post.title }}</h3>
-							<p>{{ post.text }}</p>
-						</div>
-					{% endfor %}
+				{% for post in posts %}
+					<div class="div" id="{{ 'post-' ~ loop.index }}">
+						<img src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="image de {{ post.title }}">
+						<h3>{{ post.title }}</h3>
+						<p>{{ post.text }}</p>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 		<div class="news-container">
@@ -60,4 +57,5 @@
 			{% endfor %}
 		</div>
 	</div>
-</div>{% endblock %}
+	
+{% endblock %}

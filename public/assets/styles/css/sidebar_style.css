@@ -19,6 +19,8 @@
   background-color: #f7f7f8;
   width: 23%;
   height: 100vh;
+  position: sticky;
+  top: 0;
 }
 .menu-vertical .section-profil {
   display: flex;
@@ -67,6 +69,10 @@
 .menu-vertical .section-profil #icons {
   display: none;
   cursor: pointer;
+}
+.menu-vertical .section-profil button a {
+  text-decoration: none;
+  color: white;
 }
 .menu-vertical #links {
   background-color: #191e39;
