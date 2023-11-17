@@ -12,19 +12,13 @@
 {% endblock %}
 
 {% block body %}
-	{# {% if categories is not empty %}
-																		            {% for category in categories %} #}
+
 	<div class="body-container">
 		<header>
 			<h1>
 				<span class="part1">La vie</span>
 				<span class="part2">des chocolateries,</span>
-				<span class="part3">
-					Animations
-					{# {% for category in categories %}
-																																																																											{{ category.name }}
-																																																																										{% endfor %} #}
-				</span>
+				<span class="part3" id="selected-category"></span>
 			</h1>
 		</header>
 		<section class="grid-container">
@@ -49,12 +43,17 @@
 			</div>
 			<div class="container-categories">
 				<ul>
-					<li>Tous les posts</li>
+					<li>
+						<a href="{{ path('app_la_vie_des_chocolateries') }}" class="category-link">Tous les posts</a>
+					</li>
 					{% for category in categories %}
-						<li>{{ category.name }}</li>
+						<li>
+							<a href="{{ path('app_la_vie_des_chocolateries', {'category': category.id}) }}" class="category-link">{{ category.name }}</a>
+						</li>
 					{% endfor %}
 				</ul>
 			</div>
+
 		</section>
 	</div>
 

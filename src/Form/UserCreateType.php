@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\ChocolateShop;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserCreateType extends AbstractType
 {
@@ -84,6 +85,9 @@ class UserCreateType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'Rôles',
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de l\'actualité',
             ]);
     }
 
