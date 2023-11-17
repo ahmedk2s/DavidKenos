@@ -1,0 +1,176 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+@import "../includes/fonts.less";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  text-decoration: none
+}
+
+body {
+  .dflex();
+  background-color: @lightGray;
+}
+
+.container-body {
+  display: flex;
+  flex-direction: row; // Changez la direction de flex pour être en ligne
+  flex-wrap: wrap; // Permet aux éléments de passer à la ligne suivante si nécessaire
+  justify-content: space-around; // Distribuez l'espace autour des éléments
+  max-width: 900px; // Définissez une largeur maximale pour le conteneur
+  margin: auto;
+  background-color: #fff;
+  margin-bottom: 80px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px; 
+  padding-top: 20px;
+  border-radius: 10px;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  letter-spacing: 3px;
+  font-weight: 500;
+  width: 100%; // Assurez-vous que le titre s'étend sur toute la largeur
+  text-align: center; // Centrez le titre
+  margin-bottom: 30px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row; // Changez la direction de flex pour être en ligne
+  flex-wrap: wrap; // Permet aux éléments de passer à la ligne suivante si nécessaire
+  justify-content: space-around; // Distribuez l'espace autour des éléments
+  width: 100%; // Assurez-vous que le conteneur de formulaire s'étend sur toute la largeur
+}
+
+.form-row {
+  flex-basis: 48%; // Chaque ligne prendra environ la moitié de l'espace disponible
+  display: flex;
+  justify-content: space-between; 
+  margin-bottom: 20px;
+}
+
+.form-cell-label {
+  width: 33%; 
+  .dflex();
+  align-items: center;
+  padding-left: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.yellow-background {
+  background-color: @colorYellow;
+}
+
+.custom-input, .dropdown {
+  width: 260px; 
+  height: 40px;
+  text-align: center;
+}
+
+textarea {
+  padding-top: 11px;
+  resize: none;
+}
+
+
+.dropdown {
+  cursor: pointer;
+}
+
+.container-button-create .btn-create {
+  border: solid 1px;
+  text-align: center;
+  width: auto;
+  border-radius: 5px;
+  background-color: #11a197;
+  color: white;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-direction: row; 
+  margin-top: 10px;
+}
+
+.container-button-create {
+  margin-top: auto;
+  align-self: center;
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+}
+
+.btn-edit {
+    font-family: 'Montserrat', sans-serif;
+  margin-top: 10px;
+  border: solid 2px;
+  padding: 8px 8px;
+  width: fit-content; 
+  border-radius: 5px;
+  background-color: #1a1e39;
+  color: white;
+  height: 40px;
+  text-align: center;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  align-self: flex-start;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.btn-create span i {
+  padding-right: 3px;
+}
+
+// mobile
+@media (max-width: 760px) {
+  .container-body {
+    flex-direction: column;
+    margin-top: 20px; // Réduisez la marge supérieure pour remonter le formulaire
+    padding: 10px; // Ajustez selon les besoins
+  }
+
+  .form-container, .form-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .form-cell-label, .custom-input, .dropdown {
+    width: 100%; // Assurez-vous que les éléments s'étendent sur toute la largeur
+  }
+
+  .container-button-create {
+    margin-top: 20px; // Ajustez la marge supérieure
+  }
+}
+
+
+// tablet
+@media (min-width: 761px) and (max-width: 1024px) {
+  .container-body {
+    padding: 15px; // Ajustez le padding pour plus d'espace
+  }
+
+  .form-row {
+    flex-basis: 100%; // Chaque ligne prend toute la largeur sur les écrans de tablette
+  }
+
+  .form-cell-label {
+    width: 100%; // Ajustez la largeur pour les tablettes
+  }
+}
+
