@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PostRepository;
 use App\Form\ProfileEditType;
 use Doctrine\ORM\EntityManagerInterface;
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ProfileController extends AbstractController
 {
@@ -31,33 +31,60 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/profil/edit', name: 'profile_edit')]
-public function editProfile(Request $request, EntityManagerInterface $entityManager): Response
-{
+public function editProfile(Request $request, EntityManagerInterface $entityManager): Response {
     $user = $this->getUser();
-
     if (!$user) {
         throw $this->createNotFoundException('Utilisateur non trouvé');
     }
 
-    // Création du formulaire
     $form = $this->createForm(ProfileEditType::class, $user);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        // Enregistrement des modifications
+        // /** @var UploadedFile $profilePictureFile */
+        $profilePictureFile = $form->get('profilePictureFilename')->getData();
+
+        if ($profilePictureFile) {
+            $newFilename = uniqid().'.'.$profilePictureFile->guessExtension();
+
+            try {
+                $profilePictureFile->move(
+                    $this->getParameter('products'), // Assurez-vous de configurer ce paramètre
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // Gérer l'exception si quelque chose se passe mal lors du téléchargement du fichier
+            }
+
+            $user->setProfilePictureFilename($newFilename);
+        }
+
+         $coverPictureFile = $form->get('coverPictureFilename')->getData();
+
+        if ($coverPictureFile) {
+            $newFilename = uniqid().'.'.$coverPictureFile->guessExtension();
+
+            try {
+                $coverPictureFile->move(
+                    $this->getParameter('products'), // Assurez-vous de configurer ce paramètre
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // Gérer l'exception si quelque chose se passe mal lors du téléchargement du fichier
+            }
+
+            $user->setCoverPictureFilename($newFilename);
+        }
+
         $entityManager->persist($user);
         $entityManager->flush();
 
-        // Message flash de succès
         $this->addFlash('success', 'Votre profil a été mis à jour.');
-
-        // Redirection vers la page du profil
         return $this->redirectToRoute('profile');
     }
 
-    // Affichage du formulaire
     return $this->render('profile/edit.html.twig', [
         'form' => $form->createView(),
     ]);
-  }
+}
 }

@@ -829,8 +829,8 @@ section .card.center-card {
     margin-top: -40px;
   }
   section .card-row {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
     gap: 0;
   }
   .card-row {

@@ -11,6 +11,7 @@
 body {
   .dflex();
   background-color: @lightGray;
+  overflow: hidden;
 }
 
 .container-body, .container-table {
@@ -21,24 +22,33 @@ body {
 
 
 .container-body {
-  width: 40%;
-  height: 100%;
-  margin: 10vh auto;
+  height: 95%;
+  width: 45%;
+  // margin: auto;
+  margin-left: auto;
+  margin-right: auto;
    display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
   margin-bottom: 30px;
-  border-radius: 10px; 
+  // border-radius: 10px; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px; 
+  margin-top: 10px;
+}
+
+img{
+  width: 150px;
+  height: 80px;
+  object-fit: cover;
 }
 
 
   h1 {
     font-family: "Playfair Display", serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     letter-spacing: 3px;
     font-weight: 500;
     margin-bottom: 10px;
@@ -53,23 +63,25 @@ body {
 
 
 .form-container {
-  display: flex;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;
     border-collapse: collapse;
-    width: auto;
 }
 
 .form-row {
-  width: 100%; 
+  // width: 100%; 
   display: flex;
+  flex-direction: column;
   justify-content: space-between; 
   margin-bottom: 10px;
 }
 
 .form-cell-label {
-  width: 150px; 
-  margin-right: 50px; 
+  width: 350px; 
+  height: 35px;
   .dflex();
   align-items: center;
   padding-left: 5px;
@@ -87,22 +99,40 @@ body {
 }
 
 .custom-input  {
-    width: 150px; 
+    width: 350px; 
     height: 40px;
     text-align: center;
+    border-radius: 3px;
+    margin-top: 10px;
+    border: 1px solid @colorNightBlue;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+ #user_create_roles_1{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#post_imageFile_file{
+  border: none;
+  box-shadow: none;
 }
 
 
 textarea{
   padding-top: 11px;
+  border-radius: 3px;
+  border: 1px solid @colorNightBlue;
+  resize: none;
 }
 
 
 .dropdown{
-    width: 150px;
+    width: 350px;
     height: 40px; 
     text-align: center;
     cursor: pointer;
+    border: 1px solid @colorNightBlue;
 }
 
 .form-wrapper {
@@ -112,15 +142,6 @@ textarea{
     height: auto;
 }
 
-.container-table {
-  display: flex;
-  flex-direction: column;
-  .fullcenter();
-
-  a {
-    text-decoration: none;
-  }
-}
 
 .container-button-create .btn-create {
     border: solid 1px;
@@ -217,9 +238,9 @@ textarea{
 
 // tablet
 @media (min-width: 761px) and (max-width: 1920px){
-    .container-body{
-      width: auto;
-    }
+    // .container-body{
+    //   width: auto;
+    // }
 
     .btn-edit{
       margin-left: 0;

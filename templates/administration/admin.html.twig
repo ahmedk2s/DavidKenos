@@ -1,18 +1,13 @@
 {# {% block title %}Accueil Administration{% endblock %} #}
-    
 {% block stylesheets %}
     <link rel="stylesheet" href="/assets/styles/css/admin_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 {% endblock %}
 
- {% block javascripts %}
+{% block javascripts %}
     <script src="/assets/styles/js/admin.js"></script>
 {% endblock %}
-
-
 
 {% block body %}
 <div class="content">
@@ -31,12 +26,17 @@
         <div id="burger-menu-button"><i class="fa-solid fa-bars"></i></div> 
         <div class="nav-container" id="nav-container">
             <ul>
-                <li><a href="{{ path('app_admin') }}">Accueil</a></li>
+                <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
                 <li class="li-flex">
                     <a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
                     <i class="fas fa-sign-out-alt"></i>
                 </li>
-                <li>Chocolaterie {{ user.chocolateShop }}</li>
+                <li>
+                    Chocolaterie 
+                    {% if 'ROLE_SUPER_ADMIN' not in app.user.roles %}
+                    {{ user.chocolateShop }}
+                {% endif %}
+                    </li>
             </ul>
             <div class="circle-container">
                     <div class="outer-circle">

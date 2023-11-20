@@ -11,8 +11,9 @@
 {% block body %}
     <div class="main-content">
         <div class="banner-container">
-            <img src="{{ user.coverPicture }}" alt="Image en bandeau" class="banner-image">
-            <img src="{{ user.profilePictureName }}" alt="Photo de profil" class="profile-image">
+            <img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profile" class="profile-image">
+            <img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+
         </div>
 
         <div class="content-container">

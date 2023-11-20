@@ -57,6 +57,7 @@ class UserUpdateType extends AbstractType
             'choice_label' => 'city',
             'label' => 'Chocolaterie',
         ]);
+        
             
     }
 

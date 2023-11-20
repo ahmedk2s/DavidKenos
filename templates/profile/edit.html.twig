@@ -9,6 +9,8 @@
 
 {% block body %}
 
+<div class="main-body">
+
 <div class="container-body">
     <div class="container-table">
 
@@ -63,15 +65,24 @@
         {# Champ profile_picture #}
         <div class="form-row">
             <div class="form-cell-label yellow-background">
-                {{ form_label(form.profilePictureFile, 'Photo de profil') }}
+                {{ form_label(form.profilePictureFilename, 'Photo de profil') }}
             </div>
             <div class="form-cell">
-                {{ form_widget(form.profilePictureFile, {'attr': {'class': 'custom-input'}}) }}
-                {{ form_errors(form.profilePictureFile) }}
+                {{ form_widget(form.profilePictureFilename, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.profilePictureFilename) }}
             </div>
         </div>
 
-        {# Champ description #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.coverPictureFilename, 'Image de couverture') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.coverPictureFilename, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.coverPictureFilename) }}
+            </div>
+        </div> 
+         {# Champ description #}
         <div class="form-row">
             <div class="form-cell-label yellow-background">
                 {{ form_label(form.description, 'Description') }}
@@ -83,15 +94,6 @@
         </div>
 
         {# Champ cover_picture #}
-        <div class="form-row">
-            <div class="form-cell-label yellow-background">
-                {{ form_label(form.cover_picture, 'Image de couverture') }}
-            </div>
-            <div class="form-cell">
-                {{ form_widget(form.cover_picture, {'attr': {'class': 'custom-input'}}) }}
-                {{ form_errors(form.cover_picture) }}
-            </div>
-        </div>
 
         {# Champ chocolateShop #}
         <div class="form-row">
@@ -164,6 +166,7 @@
         </a>
 
     </div>
+</div>
 </div>
 
 {% endblock %}

@@ -3,19 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateInterval;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -44,14 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-   #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'profilePictureName')]
-    private ?File $profilePictureFile = null;
+    #[ORM\Column(type: 'string')]
+    private ?string $profilePictureFilename = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $profilePictureName = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $cover_picture = null;
+   #[ORM\Column(type: 'string')]
+    private ?string $coverPictureFilename = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $facebook_link = null;
@@ -97,6 +94,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
 
 
 
@@ -201,51 +202,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $profilePictureFile
-     */
-    
-
-   public function setProfilePictureFile(?File $profilePictureFile = null): void
+    public function getProfilePictureFilename(): ?string
     {
-        $this->profilePictureFile = $profilePictureFile;
-
-        if (null !== $profilePictureFile) {
-            // Il est nécessaire que au moins un champ change si vous utilisez Doctrine
-            // sinon les écouteurs d'événements ne seront pas appelés et le fichier sera perdu
-            $this->updatedAt = new \DateTime('now');
-        }
+        return $this->profilePictureFilename;
     }
 
-    public function getProfilePictureFile(): ?File
+    public function setProfilePictureFilename(?string $profilePictureFilename): static
     {
-        return $this->profilePictureFile;
+        $this->profilePictureFilename = $profilePictureFilename;
+
+        return $this;
     }
 
-    public function setProfilePictureName(?string $profilePictureName): void
+
+    public function getCoverPictureFilename(): ?string
     {
-        $this->profilePictureName = $profilePictureName;
+        return $this->coverPictureFilename;
     }
 
-    public function getProfilePictureName(): ?string
+    public function setCoverPictureFilename(?string $coverPictureFilename): static
     {
-        return $this->profilePictureName;
-    }
-
-    public function getCoverPicture(): ?string
-    {
-        return $this->cover_picture;
-    }
-
-    public function setCoverPicture(?string $cover_picture): static
-    {
-        $this->cover_picture = $cover_picture;
+        $this->coverPictureFilename = $coverPictureFilename;
 
         return $this;
     }
@@ -530,7 +507,18 @@ public function setChocolateShop(?ChocolateShop $chocolateShop): self
         return $this;
     }
 
-    
+
+public function getUpdatedAt(): ?\DateTimeImmutable
+{
+    return $this->updatedAt;
+}
+
+public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+{
+    $this->updatedAt = new \DateTimeImmutable();
+
+    return $this;
+}
 
 }
 

@@ -19,17 +19,17 @@ body {
 .main-content {
     flex-grow: 1; // Permet au contenu principal de remplir l'espace restant
     width: 100%;
+      position: relative;
 }
 
 .banner-container {
-    border: 1px solid black;
     height: 180px;
     margin-left: auto;
     margin-right: auto;
     margin: 40px;
     background: lightblue;
-    position: relative;
     border-bottom: 5px solid @colorYellow;
+    overflow: hidden;
 }
 
 .profile-image {
@@ -38,10 +38,27 @@ body {
     border-radius: 50%;
     width: 120px; 
     height: 120px; 
-    top: 180px; 
+    top: 220px; 
     left: 50%;
-    transform: translateX(-50%) translateY(-65%); // Centrer horizontalement et déplacer vers le haut
+    transform: translateX(-50%) translateY(-65%); 
 }
+
+img{
+    
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-image{
+    width: 100%;
+    height: 275px;
+    object-fit: cover;
+    object-position: center center;
+
+}
+
+
 
 .card {
     flex-direction: column;
@@ -63,6 +80,7 @@ body {
 
 .lastname {
     font-size: 25px;
+    text-transform: uppercase;
 }
 
 .chocolate-shop {
@@ -112,7 +130,7 @@ body {
 
 .content-container {
     display: flex;
-    flex-direction: row; // Aligner la card et le post-container côte à côte
+    flex-direction: row; 
     justify-content: center;
     margin-top: 40px; 
     width: auto;
@@ -166,11 +184,73 @@ body {
 }
 
 
-// Petits écrans (320px - 600px)
-@media screen and (max-width: 600px) {
-    .card, .posts-container, .button-container {
-        width: 100%;
+
+@media screen and (max-width: 1200px) {
+    .main-content{
+        margin-top: 50px;
+    }
+}
+
+// Grand ecran
+@media screen and (max-width: 1000px) {
+
+    .banner-image{
+    width: 100%;
+    height: 275px;
+    object-fit: cover;
+
+}
+
+    .main-content {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .content-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        order: 2;
+    }
+
+    .posts-container {
+        margin: 0;
+        order: 3;
+        width: 80%;
+    }
+
+    .post-header {
+        justify-content: center;
+    }
+
+    .button-container {
+        display: flex; 
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: center; 
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        order: 1;
+    }
+
+}
+
+// Ecran moyen 
+@media screen and (max-width: 700px) {
+
+    .card, .posts-container{
+        width: 80%;
         margin: 10px 0;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .main-content{
@@ -184,44 +264,18 @@ body {
         align-items: center;
     }
 
-    .banner-container, .profile-image {
+    .button-container{
         width: 100%;
-        left: 0;
-        transform: translateY(-65%);
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column;
     }
 }
 
-// Écrans moyens (601px - 899px)
-@media screen and (min-width: 601px) and (max-width: 899px) {
-
-    .main-content{
-        margin-top: 50px;
-    }
-
-    .card {
-        width: 45%;
-    }
-
-    .posts-container {
-        width: 50%;
-    }
-
-    .content-container {
-        flex-direction: row;
-        justify-content: space-around;
-    }
-
-    .banner-container, .profile-image {
-        width: 90%;
-        left: 5%;
-        transform: translateY(-65%);
-    }
-}
-
-
-
-@media screen and (min-width: 900px) and (max-width: 1200px) {
-    .main-content{
-        margin-top: 50px;
+// Petit ecran
+@media screen and (max-width: 429px){
+    .post-header{
+        gap: 10px;
+        flex-direction: column;
     }
 }

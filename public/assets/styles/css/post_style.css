@@ -52,6 +52,13 @@ body {
 .right-part .firstname {
   font-family: "Playfair Display", serif;
 }
+.right-part .lastname,
+.right-part .firstname {
+  font-size: 17px;
+}
+.right-part .lastname {
+  text-transform: uppercase;
+}
 .right-part ul li:nth-child(3) {
   color: #0baa9f;
   font-weight: 900;

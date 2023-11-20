@@ -10,19 +10,27 @@
 }
 
 body {
-  .dflex();
+  display: flex;
   background-color: @lightGray;
+  height: 100vh;
+}
+
+.main-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .container-body {
   display: flex;
-  flex-direction: row; // Changez la direction de flex pour être en ligne
-  flex-wrap: wrap; // Permet aux éléments de passer à la ligne suivante si nécessaire
-  justify-content: space-around; // Distribuez l'espace autour des éléments
-  max-width: 900px; // Définissez une largeur maximale pour le conteneur
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: space-around;
+  max-width: 900px; 
   margin: auto;
   background-color: #fff;
-  margin-bottom: 30px; 
+  margin-bottom: 40px; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px; 
   padding-top: 20px;
@@ -62,6 +70,12 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 700;
+}
+
+img{
+  width: 150px;
+  height: 80px;
+  object-fit: cover;
 }
 
 .yellow-background {
