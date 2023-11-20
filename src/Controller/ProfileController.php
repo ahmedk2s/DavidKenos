@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,16 +11,33 @@ use App\Repository\PostRepository;
 use App\Form\ProfileEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Service\SlugService;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profil', name: 'profile')]
-    public function showProfile(PostRepository $postRepository): Response
+    private $slugService;
+
+    public function __construct(SlugService $slugService)
+    {
+        $this->slugService = $slugService;
+    }
+    
+    #[Route('/profil/{slug}', name: 'profile', defaults: ["slug" => ""])]
+    public function showProfile(string $slug, PostRepository $postRepository): Response
     {
         $user = $this->getUser();
 
         if (!$user) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
+        }
+
+        if (!$slug) {
+            $slug = $this->slugService->createUniqueSlug(
+                'profile-' . $user->getFirstName() . '-' . $user->getLastName(),
+                User::class,
+                $user->getId()
+            );
+            return $this->redirectToRoute('profile', ['slug' => $slug]);
         }
 
         $posts = $postRepository->findBy(['user' => $user]);
@@ -30,7 +48,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/profil/edit', name: 'profile_edit')]
+    #[Route('/modifier-{slug}', name: 'profile_edit')]
 public function editProfile(Request $request, EntityManagerInterface $entityManager): Response {
     $user = $this->getUser();
     if (!$user) {
@@ -75,6 +93,9 @@ public function editProfile(Request $request, EntityManagerInterface $entityMana
 
             $user->setCoverPictureFilename($newFilename);
         }
+
+            $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $user->setSlug($slug);
 
         $entityManager->persist($user);
         $entityManager->flush();
