@@ -28,6 +28,7 @@ class NewsType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image de l\'actualité',
+                'required' => false,
             ])
             ->add('date_creation', DateType::class, [
                 'widget' => 'single_text', 
