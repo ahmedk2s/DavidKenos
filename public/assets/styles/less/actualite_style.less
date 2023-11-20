@@ -19,16 +19,137 @@
 
 body {
   display: flex;
-  height: 100vh;
   background-color: @lightGray;
   font-family: "Montserrat", sans-serif;
-  background-color: red;
 }
 
 .body-container {
   .dflex();
+  flex-direction: column;
   width: 100%;
   margin: 3%;
-  background-color: red;
-  gap: 4%;
+  gap: 40px;
+}
+
+h2 {
+  height: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  width: 100%;
+}
+
+.nav-container {
+  height: 50px;
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.links-container {
+  height: 100%;
+  ul {
+    padding-left: 50px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+    li {
+      list-style: none;
+      span {
+        margin-left: 10px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 27%;
+  margin-right: 50px;
+}
+
+.icon-container {
+  background-color: #f2bf2c;
+  height: 35px;
+  width: 35px;
+  .fullcenter();
+}
+
+.search-box {
+  border: 2px solid #f2bf2c;
+  width: 100%;
+  height: 35px;
+}
+
+.search-box::placeholder {
+  padding-left: 10px;
+}
+
+.search-box:focus {
+   border: none;
+}
+
+.news-section {
+  width: 100%;
+  background-color: white;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.body-container-news {
+  height: 88%;
+  gap: 15px;
+  padding: 15px 5px 0 5px;
+}
+
+.block-news {
+  height: 45%;
+  padding-bottom: 15px;
+  width: 31%;
+  padding: 3%;
+}
+
+.block-img {
+  height: 150px;
+  background-color: #1f2547;
+  border: 1px solid black;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.ruban-jaune {
+  background-color: @colorYellow;
+  text-align: center;
+  width: 100px;
+  height: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 3px 5px;
+  margin-top: 10px;
+  margin-right: -10px;
+  position: absolute;
+}
+
+.block-text {
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+  h5 {
+    font-size: 0.9rem;
+    color: #0baa9f;
+  }
+  p {
+    font-size: 0.8rem;
+  }
 }

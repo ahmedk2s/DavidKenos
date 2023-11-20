@@ -1,6 +1,7 @@
 {% extends 'base_member.html.twig' %}
 
-{% block title %}Hello ActualiteController!{% endblock %}
+{% block title %}Hello ActualiteController!
+{% endblock %}
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/actualite_style.css">
@@ -14,9 +15,49 @@
 {% block body %}
 
 
-<div class="body-container">
-	<p>trjdgn</p>
-</div>
+	<div class="body-container">
+		<h2>Les actualités, des chocolateries</h2>
+		<div class="nav-container">
+			<div class="links-container">
+				<ul>
+					{% for chocolateShop in chocolateShops %}
+						<li>
+							{{ chocolateShop.city }}
+							<span>|</span>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="search-container">
+				<div class="icon-container">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</div>
+				<input type="text" class="search-box" placeholder="Rechercher...">
+			</div>
+		</div>
+		<div class="news-section">
+			{% for news in news %}
+				<div class="block-news">
+					<div class="block-img">
+						{% if news.imageName %}
+							<img src="{{ vich_uploader_asset(news, 'imageFile') }}" alt="image de {{ news.title }}">
+						{% else %}
+							<p>Aucune image disponible</p>
+						{% endif %}
+						{% if news.chocolateShop %}
+							<p class="ruban-jaune">
+								{{ news.chocolateShop.city }}
+							</p>
+						{% endif %}
+					</div>
+					<div class="block-text">
+						<h5>{{ news.title }}</h5>
+						<p>{{ news.content }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 
-    
+
 {% endblock %}
