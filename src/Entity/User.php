@@ -95,12 +95,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
-
-
-
     public function __construct()
     {
         $this->news = new ArrayCollection();
@@ -507,18 +501,6 @@ public function setChocolateShop(?ChocolateShop $chocolateShop): self
         return $this;
     }
 
-
-public function getUpdatedAt(): ?\DateTimeImmutable
-{
-    return $this->updatedAt;
-}
-
-public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-{
-    $this->updatedAt = new \DateTimeImmutable();
-
-    return $this;
-}
 
 }
 

@@ -8,7 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\NewsRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Post; // Assurez-vous d'importer l'entité Post ici
+use App\Entity\Post;
+use App\Entity\News; 
 
 class AccueilController extends AbstractController
 {
@@ -17,11 +18,13 @@ class AccueilController extends AbstractController
     {
         $user = $this->getUser();
 
-        // Récupérez les six derniers posts de la base de données, triés par ordre décroissant de la date de création
-        $postRepository = $entityManager->getRepository(Post::class); // Utilisez l'entité Post ici
+       
+        $postRepository = $entityManager->getRepository(Post::class); // 
         $posts = $postRepository->findBy([], ['date_creation' => 'DESC'], 6);
 
-        $news = $newsRepository->findAll();
+        
+        $newsRepository = $entityManager->getRepository(News::class); // 
+        $news = $newsRepository->findBy([], ['dateCreation' => 'DESC'], 2);
 
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',

@@ -24,7 +24,6 @@ body {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border: 2px solid black;
 }
 .right-part {
   font-size: 0.8em;

@@ -52,7 +52,7 @@ body .grid-container #title {
 body .container-latest-registrants {
   background-color: white;
   border-top: 5px solid #f2bf2c;
-  height: 70%;
+  height: 520px;
 }
 body .container-latest-registrants #title {
   height: 80px;
@@ -114,6 +114,10 @@ body .container-categories ul li {
 }
 body .container-categories ul li:hover {
   background-color: #ffd867;
+}
+body .container-categories ul li a {
+  text-decoration: none;
+  color: black;
 }
 @media screen and (max-width: 1000px) {
   body .body-container {
