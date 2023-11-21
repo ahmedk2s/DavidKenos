@@ -42,6 +42,7 @@ class NewsController extends AbstractController
 
         $news = new News();
         $news->setUser($user);
+        $news->setDateCreation(new \DateTime());
 
         if (!in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             // Assigner automatiquement la chocolaterie de l'admin à l'actualité

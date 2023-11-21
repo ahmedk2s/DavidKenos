@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -85,10 +87,22 @@ class UserCreateType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'Rôles',
-            ])
-            ->add('imageFile', VichImageType::class, [
-                'label' => 'Image de l\'actualité',
             ]);
+            // ->add('profilePictureFilename', FileType::class, [
+            //     'label' => 'Image de profil (JPEG/PNG)',
+            //     'required' => false,
+            //     'mapped' => false, // Ce champ n'est pas directement mappé sur l'attribut de l'entité
+            //     'constraints' => [
+            //         new File([
+            //             'maxSize' => '1024k',
+            //             'mimeTypes' => [
+            //                 'image/jpeg',
+            //                 'image/png',
+            //             ],
+            //             'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/PNG).',
+            //         ]),
+            //     ],
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

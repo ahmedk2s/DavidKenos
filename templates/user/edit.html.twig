@@ -57,6 +57,26 @@
                 </div>
             </div>
 
+             <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.profilePictureFilename, 'Photo de profil') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.profilePictureFilename, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.profilePictureFilename) }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.coverPictureFilename, 'Image de couverture') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.coverPictureFilename, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.coverPictureFilename) }}
+            </div>
+        </div> 
+
             <div class="container-button-create">
             <button type="submit" class="btn-create">
                 <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>

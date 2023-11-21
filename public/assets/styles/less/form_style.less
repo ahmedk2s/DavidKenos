@@ -22,7 +22,7 @@ body {
 
 
 .container-body {
-  height: 95%;
+  height: auto;
   width: 45%;
   // margin: auto;
   margin-left: auto;
@@ -108,6 +108,11 @@ img{
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.custom-input.user{
+  height: 30px;
+  margin-top: 5px;
+}
+
  #user_create_roles_1{
   margin-left: 10px;
   margin-top: 10px;
@@ -133,6 +138,10 @@ textarea{
     text-align: center;
     cursor: pointer;
     border: 1px solid @colorNightBlue;
+}
+
+.dropdown.dropdown-user{
+  height: 30px;
 }
 
 .form-wrapper {
@@ -204,27 +213,27 @@ textarea{
         justify-content: center;
         margin: auto; 
         margin-top: 80px;
+        padding: 0;
     }
 
     .container-body h1{
       font-size: 30px;
     }
-
-     .container-body h1,
-    .form-row,
-    .btn-edit,
-    .container-button-create .btn-create {
-        text-align: center;
-    }
-
     
-
     .form-row {
         margin-bottom: 5px;
     }
 
     .form-cell-label {
-        margin-right: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
+        width: 300px;
+    }
+
+    .custom-input{
+      width: 300px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
     .btn-edit{
