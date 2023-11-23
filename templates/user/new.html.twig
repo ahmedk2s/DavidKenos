@@ -62,7 +62,7 @@
 					{{ form_label(form.email, 'Email') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.email, {'attr': {'class': 'custom-input user'}}) }}
+					{{ form_row(form.email, {'label': false, 'attr': {'class': 'custom-input user', 'placeholder': 'Adresse e-mail', 'pattern': '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'title': 'Adresse e-mail invalide'}}) }}
 					{{ form_errors(form.email) }}
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 					{{ form_label(form.plainPassword, 'Mot de passe') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.plainPassword, {'attr': {'class': 'custom-input user'}}) }}
+					{{ form_row(form.plainPassword, {'label': false, 'attr': {'class': 'custom-input user', 'placeholder': 'Mot de passe', 'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{16,}$', 'title': 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et avoir au moins 16 caractères.'}}) }}
 					{{ form_errors(form.plainPassword) }}
 				</div>
 			</div>

@@ -60,21 +60,30 @@ class UserCreateType extends AbstractType
                 'label' => 'Chocolaterie',
             ])
             ->add('email', EmailType::class, [
-                'attr' => [
-                    'minlength' => '2',
-                    'maxlength' => '255',
+                'constraints' => [
+                    new Assert\Email(),
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\Regex([
+                        'pattern' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+                        'message' => 'Adresse e-mail invalide',
+                    ]),
                 ],
                 'label' => 'Adresse email',
             ])
-            ->add('plainPassword', PasswordType::class, [
+           ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank(['message' => 'Please enter a password']),
                     new Length([
-                        'min' => 6,
+                        'min' => 16,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         'max' => 4096,
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{16,}$/',
+                        'message' => 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et avoir au moins 16 caractères.',
                     ]),
                 ],
                 'label' => 'Mot de Passe',

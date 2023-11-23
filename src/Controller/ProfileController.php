@@ -12,7 +12,7 @@ use App\Form\ProfileEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Service\SlugService;
-
+use Symfony\Component\Filesystem\Filesystem;
 class ProfileController extends AbstractController
 {
     private $slugService;
@@ -54,8 +54,9 @@ public function showProfile(?string $slug, PostRepository $postRepository, Entit
     ]);
 }
 
-    #[Route('/modifier-{slug}', name: 'profile_edit')]
-    public function editProfile(Request $request, EntityManagerInterface $entityManager, string $slug): Response {
+   #[Route('/modifier-{slug}', name: 'profile_edit')]
+    public function editProfile(Request $request, EntityManagerInterface $entityManager, string $slug): Response 
+    {
         $loggedInUser = $this->getUser();
         if (!$loggedInUser) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
@@ -66,28 +67,69 @@ public function showProfile(?string $slug, PostRepository $postRepository, Entit
             throw $this->createNotFoundException('Profil non trouvé');
         }
 
-        // Vérifie si l'utilisateur connecté tente de modifier son propre profil
-        if ($loggedInUser->getId() !== $profileUser->getId()) {
-            // Vérifie si l'utilisateur connecté est un super administrateur
-            if (in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
-            } else {
-                throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce profil.');
-            }
+        if ($loggedInUser->getId() !== $profileUser->getId() && !in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
+            throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce profil.');
         }
 
         $form = $this->createForm(ProfileEditType::class, $profileUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $fileSystem = new Filesystem();
+            $productsDirectory = $this->getParameter('products');
+
+            if ($form->get('removeProfilePicture')->getData() && $profileUser->getProfilePictureFilename()) {
+                $profilePicturePath = $productsDirectory . '/' . $profileUser->getProfilePictureFilename();
+                if ($fileSystem->exists($profilePicturePath)) {
+                    $fileSystem->remove($profilePicturePath);
+                }
+                $profileUser->setProfilePictureFilename(null);
+            } else {
+                $profilePictureFile = $form->get('profilePictureFilename')->getData();
+                if ($profilePictureFile) {
+                    $newFilename = uniqid().'.'.$profilePictureFile->guessExtension();
+                    try {
+                        $profilePictureFile->move(
+                            $this->getParameter('products'),
+                            $newFilename
+                        );
+                        $profileUser->setProfilePictureFilename($newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image de profil.');
+                    }
+                }
+            }
+
+            if ($form->get('removeCoverPicture')->getData() && $profileUser->getCoverPictureFilename()) {
+                $coverPicturePath = $productsDirectory . '/' . $profileUser->getCoverPictureFilename();
+                if ($fileSystem->exists($coverPicturePath)) {
+                    $fileSystem->remove($coverPicturePath);
+                }
+                $profileUser->setCoverPictureFilename(null);
+            } else {
+                $coverPictureFile = $form->get('coverPictureFilename')->getData();
+                if ($coverPictureFile) {
+                    $newFilename = uniqid().'.'.$coverPictureFile->guessExtension();
+                    try {
+                        $coverPictureFile->move(
+                            $this->getParameter('products'),
+                            $newFilename
+                        );
+                        $profileUser->setCoverPictureFilename($newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image de couverture.');
+                    }
+                }
+            }
 
             $entityManager->flush();
-
             $this->addFlash('success', 'Votre profil a été mis à jour.');
             return $this->redirectToRoute('profile', ['slug' => $profileUser->getSlug()]);
         }
 
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
+            'profileUser' => $profileUser,
         ]);
     }
 }

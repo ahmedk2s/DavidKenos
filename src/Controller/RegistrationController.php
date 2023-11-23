@@ -181,8 +181,6 @@ class RegistrationController extends AbstractController
                 ]
             );
 
-            // $userId = $user->getId();
-
             $this->addFlash('success', 'Votre compte a bien été créé, veuillez vérifier vos emails pour l\'activer.');
 
             return $this->redirectToRoute('app_login');
