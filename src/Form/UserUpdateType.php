@@ -46,6 +46,7 @@ class UserUpdateType extends AbstractType
                     new Length(['min' => 2, 'max' => 100]),
                 ],
             ])
+            ->add('email')
             ->add('job_title', TextType::class, [
                 'attr' => [
                     'minlength' => '2',
@@ -53,6 +54,7 @@ class UserUpdateType extends AbstractType
                 ],
                 'label' => 'Poste occupé',
             ])
+            ->add('description')
             ->add('chocolate_shop', EntityType::class, [
                 'class' => ChocolateShop::class,
                 'choice_label' => 'city',
