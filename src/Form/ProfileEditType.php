@@ -20,24 +20,24 @@ class ProfileEditType extends AbstractType
             ->add('job_title')
             ->add('description')
             ->add('profilePictureFilename', FileType::class, [
-                'label' => 'Image de profil (JPEG/PNG)',
+                'label' => 'Image de profil (JPEG/SVG)',
                 'required' => false,
-                'mapped' => false, // Ce champ n'est pas directement mappé sur l'attribut de l'entité
+                'mapped' => false, 
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
-                            'image/png',
+                            'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/PNG).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/SVG).',
                     ]),
                 ],
             ])
              ->add('coverPictureFilename', FileType::class, [
                 'label' => 'Image de profil (JPEG/PNG)',
                 'required' => false,
-                'mapped' => false, // Ce champ n'est pas directement mappé sur l'attribut de l'entité
+                'mapped' => false, 
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

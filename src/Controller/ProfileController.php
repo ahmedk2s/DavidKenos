@@ -49,7 +49,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/modifier-{slug}', name: 'profile_edit')]
-public function editProfile(Request $request, EntityManagerInterface $entityManager): Response {
+    public function editProfile(Request $request, EntityManagerInterface $entityManager): Response {
     $user = $this->getUser();
     if (!$user) {
         throw $this->createNotFoundException('Utilisateur non trouvé');
@@ -67,11 +67,11 @@ public function editProfile(Request $request, EntityManagerInterface $entityMana
 
             try {
                 $profilePictureFile->move(
-                    $this->getParameter('products'), // Assurez-vous de configurer ce paramètre
+                    $this->getParameter('products'),
                     $newFilename
                 );
             } catch (FileException $e) {
-                // Gérer l'exception si quelque chose se passe mal lors du téléchargement du fichier
+                
             }
 
             $user->setProfilePictureFilename($newFilename);
@@ -84,11 +84,11 @@ public function editProfile(Request $request, EntityManagerInterface $entityMana
 
             try {
                 $coverPictureFile->move(
-                    $this->getParameter('products'), // Assurez-vous de configurer ce paramètre
+                    $this->getParameter('products'), 
                     $newFilename
                 );
             } catch (FileException $e) {
-                // Gérer l'exception si quelque chose se passe mal lors du téléchargement du fichier
+                
             }
 
             $user->setCoverPictureFilename($newFilename);
