@@ -15,14 +15,14 @@
 
 			<h1>Ajouter Utilisateur</h1>
 
-			{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+			{{ form_start(form, {'attr': {'class': 'form-container '}}) }}
 
 			<div class="form-row">
 				<div class="form-cell-label yellow-background">
 					{{ form_label(form.first_name, 'Prénom') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.first_name, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_widget(form.first_name, {'attr': {'class': 'custom-input user'}}) }}
 					{{ form_errors(form.first_name) }}
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 					{{ form_label(form.last_name, 'Nom') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.last_name, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_widget(form.last_name, {'attr': {'class': 'custom-input user'}}) }}
 					{{ form_errors(form.last_name) }}
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 					{{ form_label(form.job_title, 'poste occupé') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.job_title, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_widget(form.job_title, {'attr': {'class': 'custom-input user'}}) }}
 					{{ form_errors(form.job_title) }}
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 					{{ form_label(form.email, 'Email') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.email, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_row(form.email, {'label': false, 'attr': {'class': 'custom-input user', 'placeholder': 'Adresse e-mail', 'pattern': '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'title': 'Adresse e-mail invalide'}}) }}
 					{{ form_errors(form.email) }}
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 					{{ form_label(form.plainPassword, 'Mot de passe') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.plainPassword, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_row(form.plainPassword, {'label': false, 'attr': {'class': 'custom-input user', 'placeholder': 'Mot de passe', 'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{16,}$', 'title': 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et avoir au moins 16 caractères.'}}) }}
 					{{ form_errors(form.plainPassword) }}
 				</div>
 			</div>
@@ -82,7 +82,7 @@
 					{{ form_label(form.roles, 'roles') }}
 				</div>
 				<div class="form-cell">
-					{{ form_widget(form.roles, {'attr': {'class': 'custom-input '}}) }}
+					{{ form_widget(form.roles, {'attr': {'class': 'custom-input user'}}) }}
 					{{ form_errors(form.roles) }}
 				</div>
 			</div>

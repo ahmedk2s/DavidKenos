@@ -37,14 +37,13 @@ class NewsType extends AbstractType
             ]);
 
         // Ajoutez le champ chocolate_shop seulement si l'utilisateur n'est pas un super admin
-        if ($options['chocolate_shop_editable']) {
+        // if ($options['chocolate_shop_editable']) {
             $builder->add('chocolate_shop', EntityType::class, [
                 'class' => ChocolateShop::class,
                 'choice_label' => 'city', 
                 'label' => 'Chocolaterie',
                 'placeholder' => 'Sélectionnez une chocolaterie',
             ]);
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

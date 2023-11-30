@@ -201,7 +201,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->profilePictureFilename;
     }
 
-    public function setProfilePictureFilename(?string $profilePictureFilename): static
+    public function setProfilePictureFilename(?string $profilePictureFilename): self
     {
         $this->profilePictureFilename = $profilePictureFilename;
 
@@ -214,7 +214,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->coverPictureFilename;
     }
 
-    public function setCoverPictureFilename(?string $coverPictureFilename): static
+    public function setCoverPictureFilename(?string $coverPictureFilename): self
     {
         $this->coverPictureFilename = $coverPictureFilename;
 

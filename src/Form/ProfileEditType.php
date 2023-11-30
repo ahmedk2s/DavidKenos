@@ -20,9 +20,10 @@ class ProfileEditType extends AbstractType
             ->add('job_title')
             ->add('description')
             ->add('profilePictureFilename', FileType::class, [
-                'label' => 'Image de profil (JPEG/SVG)',
+                'label' => 'Image de profil (JPEG/PNG)',
                 'required' => false,
                 'mapped' => false, 
+                'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -38,6 +39,7 @@ class ProfileEditType extends AbstractType
                 'label' => 'Image de profil (JPEG/PNG)',
                 'required' => false,
                 'mapped' => false, 
+                'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
