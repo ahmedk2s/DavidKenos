@@ -28,7 +28,7 @@ class PostType extends AbstractType
                 'attr' => ['placeholder' => 'Entrez le texte du post'],
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image de l\'actualité',
+                'label' => 'Image du post',
                  'required' => false,
             ])
             ->add('date_creation', DateType::class, [

@@ -67,9 +67,10 @@ public function showProfile(?string $slug, PostRepository $postRepository, Entit
             throw $this->createNotFoundException('Profil non trouvé');
         }
 
-        if ($loggedInUser->getId() !== $profileUser->getId() && !in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
-            throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce profil.');
+        if ($loggedInUser->getId() !== $profileUser->getId()) {
+    throw $this->createAccessDeniedException('Vous n\'êtes pas autorisé à modifier ce profil.');
         }
+
 
         $form = $this->createForm(ProfileEditType::class, $profileUser);
         $form->handleRequest($request);

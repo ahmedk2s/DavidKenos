@@ -21,7 +21,7 @@ class ProfileEditType extends AbstractType
             ->add('job_title')
             ->add('description')
             ->add('profilePictureFilename', FileType::class, [
-                'label' => 'Image de profil (JPEG/PNG)',
+                'label' => 'Image de profil (JPEG/SVG)',
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
@@ -29,9 +29,9 @@ class ProfileEditType extends AbstractType
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
-                            'image/png',
+                            'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/PNG).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/SVG).',
                     ]),
                 ],
             ])
@@ -41,7 +41,7 @@ class ProfileEditType extends AbstractType
                 'label' => 'Supprimer',
             ])
             ->add('coverPictureFilename', FileType::class, [
-                'label' => 'Image de couverture (JPEG/PNG)',
+                'label' => 'Image de couverture (JPEG/SVG)',
                 'required' => false,
                 'mapped' => false,
                 'constraints' => [
@@ -49,9 +49,9 @@ class ProfileEditType extends AbstractType
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
-                            'image/png',
+                            'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/PNG).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/SVG).',
                     ]),
                 ],
             ])
@@ -77,4 +77,3 @@ class ProfileEditType extends AbstractType
         ]);
     }
 }
-

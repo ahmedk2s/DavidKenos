@@ -29,19 +29,19 @@ class CommentController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, PostRepository $postRepository, SlugService $slugService): Response
     {
         $comment = new Comment();
-        $comment->setUser($this->getUser()); // Assurez-vous que cette méthode existe dans votre entité Comment
-        $comment->setDateCreation(new \DateTime()); // Définir la date de création
+        $comment->setUser($this->getUser()); 
+        $comment->setDateCreation(new \DateTime()); // Définit la date de création
 
         $posts = $postRepository->findAll();
         $form = $this->createForm(CommentType::class, $comment, [
             'posts' => $posts,
-            'current_user' => $this->getUser(), // Passez l'utilisateur actuel
+            'current_user' => $this->getUser(), // Passe l'utilisateur actuel
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = $slugService->createUniqueSlug($comment->getText(), Comment::class);
-            $comment->setSlug($slug); // Assurez-vous que cette méthode existe dans votre entité Comment
+            $comment->setSlug($slug); 
 
             $entityManager->persist($comment);
             $entityManager->flush();
@@ -69,12 +69,12 @@ public function edit(Request $request, Comment $comment, EntityManagerInterface 
 
     $form = $this->createForm(CommentType::class, $comment, [
         'current_post' => $currentPost,
-        'current_user' => $currentUser, // Passez l'utilisateur actuel au formulaire
+        'current_user' => $currentUser, // Passe l'utilisateur actuel au formulaire
     ]);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-            // Si le texte du commentaire a changé, mettez à jour le slug
+            // Si le texte du commentaire a changé, mettre à jour le slug
             if ($comment->getText() !== $form->get('text')->getData()) {
                 $slug = $slugService->createUniqueSlug($comment->getText(), Comment::class, $comment->getId());
                 $comment->setSlug($slug);

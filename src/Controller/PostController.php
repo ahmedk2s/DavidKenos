@@ -68,20 +68,20 @@ public function new(Request $request, EntityManagerInterface $entityManager): Re
 
 
 
-    private function formatDate(\DateTimeInterface $date = null): string
-    {
-        if ($date === null) {
-            return '';
-        }
+    // private function formatDate(\DateTimeInterface $date = null): string
+    // {
+    //     if ($date === null) {
+    //         return '';
+    //     }
 
-        $formatter = new IntlDateFormatter(
-            'fr_FR',
-            IntlDateFormatter::LONG,
-            IntlDateFormatter::NONE
-        );
+    //     $formatter = new IntlDateFormatter(
+    //         'fr_FR',
+    //         IntlDateFormatter::LONG,
+    //         IntlDateFormatter::NONE
+    //     );
 
-        return $formatter->format($date->getTimestamp());  
-    }
+    //     return $formatter->format($date->getTimestamp());  
+    // }
 
     #[Route('/modifier-{slug}', name: 'app_post_edit', requirements: ['slug' => '[a-zA-Z0-9\-_]+'], methods: ['GET', 'POST'])]
 public function edit(Request $request, Post $post, EntityManagerInterface $entityManager): Response
