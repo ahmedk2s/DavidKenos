@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -20,9 +21,8 @@ class ProfileEditType extends AbstractType
             ->add('job_title')
             ->add('description')
             ->add('profilePictureFilename', FileType::class, [
-                'label' => 'Image de profil (JPEG/PNG)',
+                'label' => 'Image de profil (JPEG/SVG)',
                 'required' => false,
-                'mapped' => false, 
                 'mapped' => false,
                 'constraints' => [
                     new File([
@@ -35,24 +35,31 @@ class ProfileEditType extends AbstractType
                     ]),
                 ],
             ])
-             ->add('coverPictureFilename', FileType::class, [
-                'label' => 'Image de profil (JPEG/PNG)',
+            ->add('removeProfilePicture', CheckboxType::class, [
+                'mapped' => false,
                 'required' => false,
-                'mapped' => false, 
+                'label' => 'Supprimer',
+            ])
+            ->add('coverPictureFilename', FileType::class, [
+                'label' => 'Image de couverture (JPEG/SVG)',
+                'required' => false,
                 'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
-                            'image/png',
+                            'image/svg+xml',
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/PNG).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG/SVG).',
                     ]),
                 ],
             ])
-
-           
+            ->add('removeCoverPicture', CheckboxType::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Supprimer',
+            ])
             ->add('facebook_link')
             ->add('twitter_link')
             ->add('instagram_link')

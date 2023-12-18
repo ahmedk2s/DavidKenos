@@ -25,23 +25,23 @@ class ProfileController extends AbstractController
     #[Route('/profil/{slug}', name: 'profile', defaults: ['slug' => null])]
 public function showProfile(?string $slug, PostRepository $postRepository, EntityManagerInterface $entityManager): Response
 {
-    // Récupère l'utilisateur actuellement connecté
+  
     $loggedInUser = $this->getUser();
 
-    // Si aucun utilisateur n'est connecté, renvoie une erreur
+   
     if (!$loggedInUser) {
         throw $this->createNotFoundException('Utilisateur non trouvé');
     }
 
-    // Si aucun slug n'est fourni dans l'URL, utilise le slug de l'utilisateur connecté
+   
     if ($slug === null) {
         $slug = $loggedInUser->getSlug(); 
     }
 
-    // Récupère l'utilisateur correspondant au slug fourni
+   
     $user = $entityManager->getRepository(User::class)->findOneBy(['slug' => $slug]);
 
-    // Si aucun utilisateur n'est trouvé pour le slug donné, renvoie une erreur
+   
     if (!$user) {
         throw $this->createNotFoundException('Profil non trouvé');
     }
@@ -75,51 +75,58 @@ public function showProfile(?string $slug, PostRepository $postRepository, Entit
         $form = $this->createForm(ProfileEditType::class, $profileUser);
         $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        // /** @var UploadedFile $profilePictureFile */
-        $profilePictureFile = $form->get('profilePictureFilename')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $fileSystem = new Filesystem();
+            $productsDirectory = $this->getParameter('products');
 
-        if ($profilePictureFile) {
-            $newFilename = uniqid().'.'.$profilePictureFile->guessExtension();
-
-            try {
-                $profilePictureFile->move(
-                    $this->getParameter('products'), // Assurez-vous de configurer ce paramètre
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                // Gérer l'exception si quelque chose se passe mal lors du téléchargement du fichier
+            if ($form->get('removeProfilePicture')->getData() && $profileUser->getProfilePictureFilename()) {
+                $profilePicturePath = $productsDirectory . '/' . $profileUser->getProfilePictureFilename();
+                if ($fileSystem->exists($profilePicturePath)) {
+                    $fileSystem->remove($profilePicturePath);
+                }
+                $profileUser->setProfilePictureFilename(null);
+            } else {
+                $profilePictureFile = $form->get('profilePictureFilename')->getData();
+                if ($profilePictureFile) {
+                    $newFilename = uniqid().'.'.$profilePictureFile->guessExtension();
+                    try {
+                        $profilePictureFile->move(
+                            $this->getParameter('products'),
+                            $newFilename
+                        );
+                        $profileUser->setProfilePictureFilename($newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image de profil.');
+                    }
+                }
             }
 
-            $user->setProfilePictureFilename($newFilename);
-        }
-
-         $coverPictureFile = $form->get('coverPictureFilename')->getData();
-
-        if ($coverPictureFile) {
-            $newFilename = uniqid().'.'.$coverPictureFile->guessExtension();
-
-            try {
-                $coverPictureFile->move(
-                    $this->getParameter('products'), // Assurez-vous de configurer ce paramètre
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                // Gérer l'exception si quelque chose se passe mal lors du téléchargement du fichier
+            if ($form->get('removeCoverPicture')->getData() && $profileUser->getCoverPictureFilename()) {
+                $coverPicturePath = $productsDirectory . '/' . $profileUser->getCoverPictureFilename();
+                if ($fileSystem->exists($coverPicturePath)) {
+                    $fileSystem->remove($coverPicturePath);
+                }
+                $profileUser->setCoverPictureFilename(null);
+            } else {
+                $coverPictureFile = $form->get('coverPictureFilename')->getData();
+                if ($coverPictureFile) {
+                    $newFilename = uniqid().'.'.$coverPictureFile->guessExtension();
+                    try {
+                        $coverPictureFile->move(
+                            $this->getParameter('products'),
+                            $newFilename
+                        );
+                        $profileUser->setCoverPictureFilename($newFilename);
+                    } catch (FileException $e) {
+                        $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image de couverture.');
+                    }
+                }
             }
 
-            $user->setCoverPictureFilename($newFilename);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre profil a été mis à jour.');
+            return $this->redirectToRoute('profile', ['slug' => $profileUser->getSlug()]);
         }
-
-            $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
-            $user->setSlug($slug);
-
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Votre profil a été mis à jour.');
-        return $this->redirectToRoute('profile');
-    }
 
         return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
