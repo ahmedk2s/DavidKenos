@@ -9,13 +9,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use 
-Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Un compte avec cette adresse e-mail existe déjà')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -44,11 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $profile_picture = null;
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $profilePictureFilename = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $cover_picture = null;
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $coverPictureFilename = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $facebook_link = null;
@@ -94,8 +94,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
-
-
 
     public function __construct()
     {
@@ -198,26 +196,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getProfilePicture(): ?string
+    public function getProfilePictureFilename(): ?string
     {
-        return $this->profile_picture;
+        return $this->profilePictureFilename;
     }
 
-    public function setProfilePicture(?string $profile_picture): static
+    public function setProfilePictureFilename(?string $profilePictureFilename): self
     {
-        $this->profile_picture = $profile_picture;
+        $this->profilePictureFilename = $profilePictureFilename;
 
         return $this;
     }
 
-    public function getCoverPicture(): ?string
+
+    public function getCoverPictureFilename(): ?string
     {
-        return $this->cover_picture;
+        return $this->coverPictureFilename;
     }
 
-    public function setCoverPicture(?string $cover_picture): static
+    public function setCoverPictureFilename(?string $coverPictureFilename): self
     {
-        $this->cover_picture = $cover_picture;
+        $this->coverPictureFilename = $coverPictureFilename;
 
         return $this;
     }
@@ -501,6 +500,7 @@ public function setChocolateShop(?ChocolateShop $chocolateShop): self
 
         return $this;
     }
+
 
 }
 

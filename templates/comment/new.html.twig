@@ -1,12 +1,70 @@
 {% extends 'base_admin.html.twig' %}
 
-{% block title %}Nouveau commentaire{% endblock %}
+{% block title %}Ajouter Commentaire
+{% endblock %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/form_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
 
 {% block body %}
-    <h1>Nouveau commentaire</h1>
+
+	<div class="container-body com-new">
+		<div class="container-table">
+
+			<h1>Ajouter Commentaire</h1>
+
+			{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.post, 'Titre du post') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.post, {'attr': {'class': 'custom-input dropdown'}}) }}
+					{{ form_errors(form.post) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.text, 'Texte') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.text, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.text) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.user, 'Utilisateur') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.user, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.user) }}
+				</div>
+			</div>
+
+			<div class="container-button-create">
+				<button type="submit" class="btn-create">
+					<span>
+						<i class="fa-solid fa-floppy-disk"></i>
+						{{ button_label|default('Enregistrer') }}</span>
+				</button>
+			</div>
+
+			{{ form_end(form) }}
+
+			<a href="{{ path('app_comment_index') }}" class="btn-edit">
+				<i class="fa-solid fa-arrow-left"></i>
+				<span>Retour à la liste</span>
+			</a>
 
 
-    {{ include('comment/_form.html.twig') }}
-
-    <a href="{{ path('app_comment_index') }}">Retour à la liste</a>
+		</div>
+	</div>
+            
 {% endblock %}

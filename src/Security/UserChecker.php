@@ -23,7 +23,8 @@ class UserChecker implements UserCheckerInterface
         }
         if (!$user->getIsVerified()) {
             
-            throw new CustomUserMessageAccountStatusException("Votre compte n'est pas activé, veuillez l'activer");
+            throw new CustomUserMessageAccountStatusException
+            ("Votre compte n'est pas activé, veuillez l'activer");
         }
     }
     

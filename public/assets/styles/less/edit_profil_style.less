@@ -10,23 +10,35 @@
 }
 
 body {
-  .dflex();
+  display: flex;
   background-color: @lightGray;
+  height: 100vh;
+}
+
+.main-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .container-body {
   display: flex;
-  flex-direction: row; // Changez la direction de flex pour être en ligne
-  flex-wrap: wrap; // Permet aux éléments de passer à la ligne suivante si nécessaire
-  justify-content: space-around; // Distribuez l'espace autour des éléments
-  max-width: 900px; // Définissez une largeur maximale pour le conteneur
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: space-around;
+  max-width: 900px; 
   margin: auto;
   background-color: #fff;
-  margin-bottom: 80px; 
+  margin-bottom: 40px; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px; 
   padding-top: 20px;
   border-radius: 10px;
+}
+
+.user{
+  margin-bottom: 200px;
 }
 
 h1 {
@@ -34,17 +46,17 @@ h1 {
   font-size: 3rem;
   letter-spacing: 3px;
   font-weight: 500;
-  width: 100%; // Assurez-vous que le titre s'étend sur toute la largeur
-  text-align: center; // Centrez le titre
+  width: 100%; 
+  text-align: center; 
   margin-bottom: 30px;
 }
 
 .form-container {
   display: flex;
-  flex-direction: row; // Changez la direction de flex pour être en ligne
-  flex-wrap: wrap; // Permet aux éléments de passer à la ligne suivante si nécessaire
-  justify-content: space-around; // Distribuez l'espace autour des éléments
-  width: 100%; // Assurez-vous que le conteneur de formulaire s'étend sur toute la largeur
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+  width: 100%; 
 }
 
 .form-row {
@@ -63,6 +75,17 @@ h1 {
   font-size: 15px;
   font-weight: 700;
 }
+
+img{
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+}
+
+.hidden {
+    display: none;
+}
+
 
 .yellow-background {
   background-color: @colorYellow;
@@ -140,8 +163,8 @@ textarea {
 @media (max-width: 760px) {
   .container-body {
     flex-direction: column;
-    margin-top: 20px; // Réduisez la marge supérieure pour remonter le formulaire
-    padding: 10px; // Ajustez selon les besoins
+    margin-top: 800px; 
+    padding: 10px; 
   }
 
   .form-container, .form-row {
@@ -150,11 +173,11 @@ textarea {
   }
 
   .form-cell-label, .custom-input, .dropdown {
-    width: 100%; // Assurez-vous que les éléments s'étendent sur toute la largeur
+    width: 100%; 
   }
 
   .container-button-create {
-    margin-top: 20px; // Ajustez la marge supérieure
+    margin-top: 20px; 
   }
 }
 
@@ -162,15 +185,26 @@ textarea {
 // tablet
 @media (min-width: 761px) and (max-width: 1024px) {
   .container-body {
-    padding: 15px; // Ajustez le padding pour plus d'espace
+    padding: 15px; 
+    margin-top: 100px;
   }
 
   .form-row {
-    flex-basis: 100%; // Chaque ligne prend toute la largeur sur les écrans de tablette
+    flex-basis: 48%; 
   }
 
   .form-cell-label {
-    width: 100%; // Ajustez la largeur pour les tablettes
+    width: 100%; 
+  }
+
+  .custom-input{
+    width: 220px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px){
+  .container-body{
+    margin-top: 100px;
   }
 }
 

@@ -9,6 +9,8 @@
 
 {% block body %}
 
+<div class="main-body">
+
 <div class="container-body">
     <div class="container-table">
 
@@ -60,18 +62,59 @@
             </div>
         </div>
 
-        {# Champ profile_picture #}
-        <div class="form-row">
-            <div class="form-cell-label yellow-background">
-                {{ form_label(form.profile_picture, 'Photo de profil') }}
+       {# Champ profile_picture #}
+<div class="form-row">
+    <div class="form-cell-label yellow-background">
+        {{ form_label(form.profilePictureFilename, 'Photo de profil') }}
+    </div>
+    <div class="form-cell">
+        {% if profileUser.profilePictureFilename %}
+            <img src="{{ asset('images/products/' ~ profileUser.profilePictureFilename) }}" alt="Photo de profil" />
+            <div>
+                {{ form_widget(form.removeProfilePicture) }}
+                {{ form_label(form.removeProfilePicture, 'Supprimer') }}
             </div>
-            <div class="form-cell">
-                {{ form_widget(form.profile_picture, {'attr': {'class': 'custom-input'}}) }}
-                {{ form_errors(form.profile_picture) }}
+        {% else %}
+            <div class="hidden">
+                {{ form_widget(form.removeProfilePicture) }}
+                {{ form_label(form.removeProfilePicture, 'Supprimer') }}
             </div>
-        </div>
+        {% endif %}
+        {{ form_widget(form.profilePictureFilename, {'attr': {'class': 'custom-input'}}) }}
+        {{ form_errors(form.profilePictureFilename) }}
+    </div>
+</div>
 
-        {# Champ description #}
+
+{# Champ cover_picture #}
+<div class="form-row">
+    <div class="form-cell-label yellow-background">
+        {{ form_label(form.coverPictureFilename, 'Image de couverture') }}
+    </div>
+    <div class="form-cell">
+        {% if profileUser.coverPictureFilename %}
+            <img src="{{ asset('images/products/' ~ profileUser.coverPictureFilename) }}" alt="Image de couverture" />
+            <div>
+                {{ form_widget(form.removeCoverPicture) }}
+                {{ form_label(form.removeCoverPicture, 'Supprimer') }}
+            </div>
+        {% else %}
+            <div class="hidden">
+                {{ form_widget(form.removeCoverPicture) }}
+                {{ form_label(form.removeCoverPicture, 'Supprimer') }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.coverPictureFilename, {'attr': {'class': 'custom-input'}}) }}
+        {{ form_errors(form.coverPictureFilename) }}
+    </div>
+</div>
+
+
+
+
+
+
+         {# Champ description #}
         <div class="form-row">
             <div class="form-cell-label yellow-background">
                 {{ form_label(form.description, 'Description') }}
@@ -79,17 +122,6 @@
             <div class="form-cell">
                {{ form_widget(form.description, {'attr': {'class': 'custom-input textarea-description'}}) }}
                 {{ form_errors(form.description) }}
-            </div>
-        </div>
-
-        {# Champ cover_picture #}
-        <div class="form-row">
-            <div class="form-cell-label yellow-background">
-                {{ form_label(form.cover_picture, 'Image de couverture') }}
-            </div>
-            <div class="form-cell">
-                {{ form_widget(form.cover_picture, {'attr': {'class': 'custom-input'}}) }}
-                {{ form_errors(form.cover_picture) }}
             </div>
         </div>
 
@@ -154,7 +186,6 @@
                 <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
             </button>
         </div>
-
         {{ form_end(form) }}
 
         {# Lien de retour #}
@@ -164,6 +195,7 @@
         </a>
 
     </div>
+</div>
 </div>
 
 {% endblock %}

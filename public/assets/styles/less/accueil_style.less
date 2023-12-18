@@ -86,7 +86,6 @@ body {
 
 .div {
   position: relative;
-
   background-color: #1f2547;
   border: 1px solid black;
 
@@ -109,6 +108,7 @@ body {
 #post-2,
 #post-3,
 #post-6 {
+  height: 200px;
   h3 {
     position: absolute;
     top: 50%;
@@ -133,9 +133,10 @@ body {
 #post-1,
 #post-4,
 #post-5 {
+  height: 350px;
   h3 {
     position: absolute;
-    top: 77%;
+    top: 72.5%;
     left: 5%;
     font-size: 0.9rem;
     color: white;
@@ -143,7 +144,7 @@ body {
   }
   p {
     position: absolute;
-    top: 82%;
+    top: 77.5%;
     left: 5%;
     right: 5%;
     font-size: 0.8rem;
@@ -345,7 +346,7 @@ body {
   .grid-container {
     grid-template-columns: (1fr);
     gap: 20px;
-    height: 1500px;
+    height: 1800px;
     grid-template-areas:
       "post-1"
       "post-1"
@@ -354,12 +355,16 @@ body {
       "post-2"
       "post-3"
       "post-3"
+      "post-4"
+      "post-4"
+      "post-4"
       "post-5"
       "post-5"
       "post-5"
       "post-6"
       "post-6";
 
+    #post-4,
     #post-3,
     #post-5,
     #post-6 {

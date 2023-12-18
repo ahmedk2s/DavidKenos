@@ -26,7 +26,9 @@
 		<ul>
 			<li>
 				Chocolaterie
-				{{ user.chocolateShop }}
+				{% if 'ROLE_SUPER_ADMIN' not in app.user.roles %}
+                    {{ user.chocolateShop }}
+                {% endif %}
 				<div class="circle-container">
 					<div class="outer-circle">
 						<div class="inner-circle"></div>

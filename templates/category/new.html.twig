@@ -1,11 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
-{% block title %}Nouvelle catégorie{% endblock %}
+{% block title %}Ajouter Catégorie{% endblock %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/form_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
 
 {% block body %}
-    <h1>Créer une nouvelle catégorie</h1>
 
-    {{ include('category/_form.html.twig') }}
+	<div class="container-body cat">
+		<div class="container-table">
 
-    <a href="{{ path('app_category_index') }}">Retour à la liste</a>
+			<h1>Ajouter Catégorie</h1>
+
+			{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.name, 'Nom de la catégorie') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.name, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.name) }}
+				</div>
+			</div>
+
+			<div class="container-button-create">
+				<button type="submit" class="btn-create">
+					<span>
+						<i class="fa-solid fa-floppy-disk"></i>
+						{{ button_label|default('Enregistrer') }}</span>
+				</button>
+			</div>
+
+			{{ form_end(form) }}
+
+			<a href="{{ path('app_category_index') }}" class="btn-edit">
+				<i class="fa-solid fa-arrow-left"></i>
+				<span>Retour à la liste</span>
+			</a>
+
+		</div>
+	</div>
+    
 {% endblock %}

@@ -23,10 +23,11 @@ security:
                 lifetime: 604800
                 path: /
                 always_remember_me: true
+                
 
     access_control:
-    - { path: ^/admin, roles: ROLE_ADMIN } # Accès à l'inscription pour les administrateurs
-    - { path: ^/profile, roles: ROLE_EMPLOYE } # Accès aux profils pour les employés
+    - { path: ^/admin, roles: ROLE_ADMIN } 
+    - { path: ^/profile, roles: ROLE_EMPLOYE } 
     - { path: ^/accueil, roles: ROLE_EMPLOYE }
     - { path: ^/la-vie-des-chocolateries, roles: ROLE_EMPLOYE }
     role_hierarchy:

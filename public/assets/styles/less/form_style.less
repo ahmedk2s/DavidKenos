@@ -11,6 +11,7 @@
 body {
   .dflex();
   background-color: @lightGray;
+  overflow: hidden;
 }
 
 .container-body, .container-table {
@@ -21,24 +22,59 @@ body {
 
 
 .container-body {
-  width: 40%;
-  height: 100%;
-  margin: 10vh auto;
+  height: auto;
+  width: 45%;
+  // margin: auto;
+  margin-left: auto;
+  margin-right: auto;
    display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
   margin-bottom: 30px;
-  border-radius: 10px; 
+  // border-radius: 10px; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px; 
+  margin-top: 10px;
+}
+
+.container-body.cat{
+  height: 100%;
+}
+
+.container-body.cat-edit{
+  height: 100%;
+}
+
+.container-body.choco-new{
+  height: 100%;
+}
+
+.container-body.choco-edit{
+  height: 100%;
+}
+
+.container-body.com-edit{
+  height: 100%;
+}
+
+.container-body.com-new{
+  height: 100%;
+}
+
+
+
+img{
+  width: 150px;
+  height: 80px;
+  object-fit: cover;
 }
 
 
   h1 {
     font-family: "Playfair Display", serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     letter-spacing: 3px;
     font-weight: 500;
     margin-bottom: 10px;
@@ -53,23 +89,25 @@ body {
 
 
 .form-container {
-  display: flex;
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;
     border-collapse: collapse;
-    width: auto;
 }
 
 .form-row {
-  width: 100%; 
+  // width: 100%; 
   display: flex;
+  flex-direction: column;
   justify-content: space-between; 
   margin-bottom: 10px;
 }
 
 .form-cell-label {
-  width: 150px; 
-  margin-right: 50px; 
+  width: 350px; 
+  height: 35px;
   .dflex();
   align-items: center;
   padding-left: 5px;
@@ -87,22 +125,49 @@ body {
 }
 
 .custom-input  {
-    width: 150px; 
+    width: 350px; 
     height: 40px;
     text-align: center;
+    border-radius: 3px;
+    margin-top: 10px;
+    border: 1px solid @colorNightBlue;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-input.user{
+  height: 30px;
+  margin-top: 5px;
+}
+
+ #user_create_roles_1{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#post_imageFile_file{
+  border: none;
+  box-shadow: none;
 }
 
 
 textarea{
   padding-top: 11px;
+  border-radius: 3px;
+  border: 1px solid @colorNightBlue;
+  resize: none;
 }
 
 
 .dropdown{
-    width: 150px;
+    width: 350px;
     height: 40px; 
     text-align: center;
     cursor: pointer;
+    border: 1px solid @colorNightBlue;
+}
+
+.dropdown.dropdown-user{
+  height: 30px;
 }
 
 .form-wrapper {
@@ -112,15 +177,6 @@ textarea{
     height: auto;
 }
 
-.container-table {
-  display: flex;
-  flex-direction: column;
-  .fullcenter();
-
-  a {
-    text-decoration: none;
-  }
-}
 
 .container-button-create .btn-create {
     border: solid 1px;
@@ -183,27 +239,35 @@ textarea{
         justify-content: center;
         margin: auto; 
         margin-top: 80px;
+        padding: 0;
     }
 
     .container-body h1{
       font-size: 30px;
     }
 
-     .container-body h1,
-    .form-row,
-    .btn-edit,
-    .container-button-create .btn-create {
-        text-align: center;
+    .user-add{
+      margin-top: 100px;
     }
 
+    h1{
+      margin-left: 10px;
+    }
     
-
     .form-row {
         margin-bottom: 5px;
     }
 
     .form-cell-label {
-        margin-right: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
+        width: 300px;
+    }
+
+    .custom-input{
+      width: 300px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
     .btn-edit{
@@ -214,12 +278,72 @@ textarea{
     }
 }
 
+@media screen and (max-width:1200px){
+  .post-edit-profile{
+  margin-top: 90px;
+}
+
+.form-cell-label{
+  height: 30px;
+}
+
+.user-add{
+      margin-top: 10px;
+    }
+}
+
+@media (max-width:600px){
+  .user-add{
+      margin-top: 100px;
+    }
+
+    .container-body.cat{
+      margin-top: 100px;
+    }
+
+    .container-body.cat-edit{
+      margin-top: 100px;
+    }
+
+    .container-body.post-new{
+      margin-top: 100px;
+    }
+
+    .container-body.post-edit{
+      margin-top: 100px;
+    }
+
+    .container-body.actu-edit{
+      margin-top: 100px;
+    }
+
+    .container-body.actu-new{
+      margin-top: 100px;
+    }
+
+    .container-body.choco-new{
+      margin-top: 100px;
+    }
+
+    .container-body.choco-edit{
+      margin-top: 100px;
+    }
+
+    .container-body.com-new{
+      margin-top: 100px;
+    }
+
+    .container-body.com-edit{
+      margin-top: 100px;
+    }
+}
+
 
 // tablet
 @media (min-width: 761px) and (max-width: 1920px){
-    .container-body{
-      width: auto;
-    }
+    // .container-body{
+    //   width: auto;
+    // }
 
     .btn-edit{
       margin-left: 0;
