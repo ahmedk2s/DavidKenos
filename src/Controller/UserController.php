@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Filesystem\Filesystem;
 
 #[Route('/admin/utilisateurs')]
 class UserController extends AbstractController
@@ -81,27 +83,81 @@ public function index(UserRepository $userRepository): Response
 
     #[Route('/modifier-{slug}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+{
+    
+    $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
 
-        $form = $this->createForm(UserUpdateType::class, $user);
-        $form->handleRequest($request);
+    $form = $this->createForm(UserUpdateType::class, $user);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
-            $user->setSlug($slug);
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Début de la gestion des images
+        $fileSystem = new Filesystem();
+        $productsDirectory = $this->getParameter('products');
 
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Utilisateur modifié!');
-            return $this->redirectToRoute('app_user_index');
+        // Gestion de l'image de profil
+        if ($form->get('removeProfilePicture')->getData() && $user->getProfilePictureFilename()) {
+            $profilePicturePath = $productsDirectory . '/' . $user->getProfilePictureFilename();
+            if ($fileSystem->exists($profilePicturePath)) {
+                $fileSystem->remove($profilePicturePath);
+            }
+            $user->setProfilePictureFilename(null);
+        } else {
+            $profilePictureFile = $form->get('profilePictureFilename')->getData();
+            if ($profilePictureFile) {
+                $newFilename = uniqid().'.'.$profilePictureFile->guessExtension();
+                try {
+                    $profilePictureFile->move(
+                        $this->getParameter('products'),
+                        $newFilename
+                    );
+                    $user->setProfilePictureFilename($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image de profil.');
+                }
+            }
         }
 
-        return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        // Gestion de l'image de couverture
+        if ($form->get('removeCoverPicture')->getData() && $user->getCoverPictureFilename()) {
+            $coverPicturePath = $productsDirectory . '/' . $user->getCoverPictureFilename();
+            if ($fileSystem->exists($coverPicturePath)) {
+                $fileSystem->remove($coverPicturePath);
+            }
+            $user->setCoverPictureFilename(null);
+        } else {
+            $coverPictureFile = $form->get('coverPictureFilename')->getData();
+            if ($coverPictureFile) {
+                $newFilename = uniqid().'.'.$coverPictureFile->guessExtension();
+                try {
+                    $coverPictureFile->move(
+                        $this->getParameter('products'),
+                        $newFilename
+                    );
+                    $user->setCoverPictureFilename($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Une erreur est survenue lors du téléchargement de l\'image de couverture.');
+                }
+            }
+        }
+        // Fin de la gestion des images
+
+        // Mise à jour du slug et autres propriétés de l'utilisateur
+        $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+        $user->setSlug($slug);
+
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Utilisateur modifié!');
+        return $this->redirectToRoute('app_user_index');
     }
+
+    return $this->render('user/edit.html.twig', [
+        'user' => $user,
+        'form' => $form->createView(),
+    ]);
+}
+
 
     #[Route('/supprimer-{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response

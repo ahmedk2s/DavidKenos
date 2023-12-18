@@ -159,52 +159,147 @@ textarea {
   padding-right: 3px;
 }
 
-// mobile
-@media (max-width: 760px) {
-  .container-body {
-    flex-direction: column;
-    margin-top: 800px; 
+@media screen and (max-width: 1100px) {
+  .main-body {
     padding: 10px; 
   }
-
-  .form-container, .form-row {
-    flex-direction: column;
-    width: 100%;
+  .form-container {
+    flex-direction: column; 
   }
-
-  .form-cell-label, .custom-input, .dropdown {
-    width: 100%; 
-  }
-
-  .container-button-create {
-    margin-top: 20px; 
-  }
-}
-
-
-// tablet
-@media (min-width: 761px) and (max-width: 1024px) {
-  .container-body {
-    padding: 15px; 
-    margin-top: 100px;
-  }
-
   .form-row {
-    flex-basis: 48%; 
+    flex-basis: 100%;
   }
-
-  .form-cell-label {
-    width: 100%; 
+  .form-cell-label{
+    width: 45%;
   }
 
   .custom-input{
-    width: 220px;
+    width: 260px;
   }
 }
 
-@media (min-width: 1025px) and (max-width: 1200px){
+@media screen and (max-width: 900px) {
+  .main-body {
+    padding: 5px; /* Ajustez le padding pour les écrans de 900px et moins */
+  }
+  .form-cell-label {
+    font-size: 17px; /* Ajustez la taille des labels au millimètre près */
+  }
+  .custom-input,
+  .dropdown {
+    // width: 260px; /* Ajustez la largeur des inputs et dropdowns au millimètre près */
+    height: 36px; /* Ajustez la hauteur des inputs et dropdowns au millimètre près */
+    font-size: 17px; /* Ajustez la taille de la police au millimètre près */
+  }
+}
+
+@media screen and (max-width: 645px){
+    .custom-input,
+  .dropdown {
+    width: 240px;
+    height: 32px;
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-cell-label {
+    font-size: 17px;
+    width: 45%;
+  }
+  .custom-input,
+  .dropdown {
+    // width: 260px;
+    height: 32px;
+    font-size: 17px;
+  }
+
   .container-body{
+    display: flex;
+    flex-direction: column;
     margin-top: 100px;
+    height: auto;
+  }
+
+  .user{
+    margin-bottom: -80px;
   }
 }
 
+@media screen and (max-width: 545px){
+    .form-cell-label{
+        width: 45%;
+    }
+
+    // .custom-input{
+    //     width:250px;
+    // }
+}
+
+@media screen and (max-width: 500px) {
+  .form-cell-label {
+    font-size: 17px;
+    max-width: 220px;
+  }
+  .custom-input,
+  .dropdown {
+    max-width: 220px;
+    height: 28px;
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 460px){
+    .form-cell-label {
+    font-size: 17px;
+    width: 170px;
+  }
+
+  .custom-input,
+  .dropdown {
+    width: 180px;
+    height: 28px;
+    font-size: 17px;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .form-cell-label {
+    font-size: 17px;
+    width: 150px;
+  }
+  .custom-input,
+  .dropdown {
+    width: 150px;
+    height: 24px;
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 360px){
+    .form-cell-label {
+    font-size: 17px;
+    width: 130px;
+  }
+
+  .custom-input,
+  .dropdown {
+    width: 130px;
+    height: 20px;
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .form-cell-label {
+    font-size: 17px;
+    width: 120px;
+  }
+  .custom-input,
+  .dropdown {
+    width: 120px;
+    height: 20px;
+    font-size: 17px;
+  }
+}
