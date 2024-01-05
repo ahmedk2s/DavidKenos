@@ -81,5 +81,42 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  // Gérez le clic sur le lien de like
+  document.querySelectorAll(".like-link").forEach(function(likeLink) {
+      likeLink.addEventListener("click", function(event) {
+          event.preventDefault(); // Empêche le comportement par défaut du lien
+
+          var postId = likeLink.getAttribute("data-post-id");
+          var nbLikesElement = likeLink.querySelector("span");
+          var currentNbLikes = parseInt(likeLink.getAttribute("data-nb"), 10);
+
+          // Effectuez une requête Ajax pour ajouter ou supprimer le like
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/Like/post/" + postId, true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                      var response = JSON.parse(xhr.responseText);
+                      console.log(response);
+
+                      // Mettez à jour le nombre de likes sans recharger la page
+                      nbLikesElement.innerText = response.nbLike + ' J\'aime';
+
+                      // Mettez à jour l'attribut data-nb pour le prochain clic
+                      likeLink.setAttribute("data-nb", response.nbLike);
+                  } else {
+                      console.error("Erreur lors de la requête. Statut:", xhr.status);
+                  }
+              }
+          };
+
+          xhr.send();
+      });
+  });
+});
+
 
 

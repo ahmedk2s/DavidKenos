@@ -18,8 +18,14 @@
 }
 body {
   display: flex;
-  flex-wrap: wrap;
   background-color: #dfdfdf;
+  height: 100vh;
+}
+.main-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .container-body {
   display: flex;
@@ -29,11 +35,14 @@ body {
   max-width: 900px;
   margin: auto;
   background-color: #fff;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
   padding-top: 20px;
   border-radius: 10px;
+}
+.user {
+  margin-bottom: 200px;
 }
 h1 {
   font-family: "Playfair Display", serif;
@@ -66,6 +75,14 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 700;
+}
+img {
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+}
+.hidden {
+  display: none;
 }
 .yellow-background {
   background-color: #f2bf2c;
@@ -134,7 +151,7 @@ textarea {
 @media (max-width: 760px) {
   .container-body {
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 800px;
     padding: 10px;
   }
   .form-container,
@@ -154,11 +171,20 @@ textarea {
 @media (min-width: 761px) and (max-width: 1024px) {
   .container-body {
     padding: 15px;
+    margin-top: 100px;
   }
   .form-row {
-    flex-basis: 100%;
+    flex-basis: 48%;
   }
   .form-cell-label {
     width: 100%;
+  }
+  .custom-input {
+    width: 220px;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .container-body {
+    margin-top: 100px;
   }
 }
