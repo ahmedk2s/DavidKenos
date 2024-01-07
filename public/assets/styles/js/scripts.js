@@ -120,3 +120,45 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+document.addEventListener('DOMContentLoaded', function () {
+  let chocolateShopLinks = document.querySelectorAll('.chocolate-shop-link');
+
+  chocolateShopLinks.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+          event.preventDefault();
+          let chocolateShopId = link.dataset.chocolaterieId;
+
+          // Filtrer les actualités par chocolaterie
+          let blockNewsList = document.querySelectorAll('.block-news');
+          blockNewsList.forEach(function (blockNews) {
+              if (blockNews.dataset.chocolaterieId == chocolateShopId) {
+                  blockNews.style.display = 'block';
+              } else {
+                  blockNews.style.display = 'none';
+              }
+          });
+      });
+  });
+});
+
+// JavaScript pour gérer le clic sur les liens
+document.addEventListener('DOMContentLoaded', function () {
+  var chocolateShopLinks = document.querySelectorAll('.chocolate-shop-link');
+
+  chocolateShopLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+          // Retirez la classe 'selected' de tous les liens
+          chocolateShopLinks.forEach(function (otherLink) {
+              otherLink.classList.remove('selected');
+          });
+
+          // Ajoutez la classe 'selected' au lien cliqué
+          link.classList.add('selected');
+      });
+  });
+});
+
+
+
+
