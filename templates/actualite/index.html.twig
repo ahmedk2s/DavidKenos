@@ -24,11 +24,16 @@
                 </ul>
             </div>
             <div class="search-container">
-                <div class="icon-container">
+                {{ form_start(form, {'attr': {'class': 'search-form'}}) }}
+
+                <button type="submit" class="icon-container">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-                <input type="text" class="search-box" placeholder="Rechercher...">
-            </div>
+            	</button>
+
+    			{{ form_widget(form.q, {'attr': {'class': 'search-box', }}) }}
+
+    			{{ form_end(form) }}
+			</div>
         </div>
         <div class="news-section">
             {% for news in news %}
