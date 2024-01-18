@@ -91,11 +91,11 @@ public function index(UserRepository $userRepository): Response
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-        // Début de la gestion des images
+       
         $fileSystem = new Filesystem();
         $productsDirectory = $this->getParameter('products');
 
-        // Gestion de l'image de profil
+        
         if ($form->get('removeProfilePicture')->getData() && $user->getProfilePictureFilename()) {
             $profilePicturePath = $productsDirectory . '/' . $user->getProfilePictureFilename();
             if ($fileSystem->exists($profilePicturePath)) {
@@ -118,7 +118,7 @@ public function index(UserRepository $userRepository): Response
             }
         }
 
-        // Gestion de l'image de couverture
+        
         if ($form->get('removeCoverPicture')->getData() && $user->getCoverPictureFilename()) {
             $coverPicturePath = $productsDirectory . '/' . $user->getCoverPictureFilename();
             if ($fileSystem->exists($coverPicturePath)) {
@@ -140,9 +140,9 @@ public function index(UserRepository $userRepository): Response
                 }
             }
         }
-        // Fin de la gestion des images
+       
 
-        // Mise à jour du slug et autres propriétés de l'utilisateur
+       
         $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
         $user->setSlug($slug);
 
