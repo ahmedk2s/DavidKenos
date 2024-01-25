@@ -35,7 +35,7 @@ class UserVoter extends Voter
             case self::ACCESS_ADMIN:
                 return $this->canAccessAdmin($loggedInUser);
             case self::EDIT_PROFILE:
-                return $this->canEditProfile($subject, $loggedInUser); // Ajout de la logique pour l'édition de profil
+                return $this->canEditProfile($subject, $loggedInUser); 
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -43,18 +43,18 @@ class UserVoter extends Voter
 
     private function canEdit(UserInterface $loggedInUser): bool
     {
-        // Seuls les super administrateurs peuvent éditer
+
         return in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles());
     }
 
     private function canView(User $subject, UserInterface $loggedInUser): bool
 {
-    // Les super administrateurs peuvent voir tous les utilisateurs
+    
     if (in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
         return true;
     }
 
-    // Les administrateurs peuvent voir les utilisateurs de leur propre chocolaterie, mais pas le super administrateurs
+    
     if (in_array('ROLE_ADMIN', $loggedInUser->getRoles())) {
         return $loggedInUser->getChocolateShop() === $subject->getChocolateShop() 
             && !in_array('ROLE_SUPER_ADMIN', $subject->getRoles());
@@ -66,13 +66,12 @@ class UserVoter extends Voter
 
     private function canAccessAdmin(UserInterface $loggedInUser): bool
     {
-        // Les administrateurs et super administrateurs peuvent accéder à l'administration
         return in_array('ROLE_ADMIN', $loggedInUser->getRoles()) || in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles());
     }
 
     private function canEditProfile(User $subject, UserInterface $loggedInUser): bool
     {
-        // Un utilisateur peut éditer son propre profil
+        
         return $subject->getId() === $loggedInUser->getId();
     }
 }

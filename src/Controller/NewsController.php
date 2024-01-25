@@ -45,7 +45,7 @@ class NewsController extends AbstractController
         $news->setDateCreation(new \DateTime());
 
         if (!in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-            // Assigne automatiquement la chocolaterie de l'admin à l'actualité
+        
             $news->setChocolateShop($user->getChocolateShop());
         }
 
@@ -65,7 +65,7 @@ class NewsController extends AbstractController
 
             $slug = $this->slugService->createUniqueSlug($news->getTitle(), News::class);
             $news->setSlug($slug);
-            $news->setDateEdition(new \DateTime());
+            $news->setDateCreation(new \DateTime());
             $entityManager->persist($news);
             $entityManager->flush();
 

@@ -25,23 +25,18 @@ class ProfileController extends AbstractController
     #[Route('/profil/{slug}', name: 'profile', defaults: ['slug' => null])]
 public function showProfile(?string $slug, PostRepository $postRepository, EntityManagerInterface $entityManager): Response
 {
-    // Récupère l'utilisateur actuellement connecté
     $loggedInUser = $this->getUser();
 
-    // Si aucun utilisateur n'est connecté, renvoie une erreur
     if (!$loggedInUser) {
         throw $this->createNotFoundException('Utilisateur non trouvé');
     }
-
-    // Si aucun slug n'est fourni dans l'URL, utilise le slug de l'utilisateur connecté
+    
     if ($slug === null) {
         $slug = $loggedInUser->getSlug(); 
     }
 
-    // Récupère l'utilisateur correspondant au slug fourni
     $user = $entityManager->getRepository(User::class)->findOneBy(['slug' => $slug]);
 
-    // Si aucun utilisateur n'est trouvé pour le slug donné, renvoie une erreur
     if (!$user) {
         throw $this->createNotFoundException('Profil non trouvé');
     }

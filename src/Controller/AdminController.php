@@ -36,10 +36,8 @@ class AdminController extends AbstractController
     ): Response {
         $user = $this->getUser();
 
-        // Vérifiez si l'utilisateur a le droit d'accéder à la page d'administration
         $this->denyAccessUnlessGranted(UserVoter::ACCESS_ADMIN, $user);
 
-        // Si aucun slug n'est fourni, crée un slug unique pour l'accueil de l'administration
         if (!$slug) {
             $slug = $this->slugService->createUniqueSlug(
                 'accueil-administration-' . $user->getFirstName() . '-' . $user->getLastName(),
