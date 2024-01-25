@@ -1,193 +1,206 @@
 {# {% block title %}Accueil Administration{% endblock %} #}
 {% block stylesheets %}
-    <link rel="stylesheet" href="/assets/styles/css/admin_style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/assets/styles/css/admin_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/assets/styles/js/admin.js"></script>
+	<script src="/assets/styles/js/admin.js"></script>
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <header>
-        <div class="top-container">
-            <div class="logo">
-                <img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
-            </div>
+	<div class="content">
+		<header>
+			<div class="top-container">
+				<div class="logo">
+					<img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
+				</div>
 
-            <div class="title">
-                <h1>Bienvenue,</h1>
-                <p>dans votre administration</p>
-            </div>
-        </div>
-         <nav>
-        <div id="burger-menu-button"><i class="fa-solid fa-bars"></i></div>
-        <div class="nav-container" id="nav-container">
-            <ul>
-                <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
-                <li class="li-flex">
-                    <a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
-                    <i class="fas fa-sign-out-alt"></i>
-                </li>
-                <li>
-                    Chocolaterie
-                    {% if 'ROLE_SUPER_ADMIN' not in app.user.roles %}
-                    {{ user.chocolateShop }}
-                {% endif %}
-                    </li>
-            </ul>
-            <div class="circle-container">
-                    <div class="outer-circle">
-                        <div class="inner-circle"></div>
-                    </div>
-                </div>
-        </div>
-    </nav>
+				<div class="title">
+					<h1>Bienvenue,</h1>
+					<p>dans votre administration</p>
+				</div>
+			</div>
+			<nav>
+				<div id="burger-menu-button">
+					<i class="fa-solid fa-bars"></i>
+				</div>
+				<div class="nav-container" id="nav-container">
+					<ul>
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+							<li>
+								<a href="{{ path('approve_users') }}">Approbation Admin</a>
+							</li>
+						{% endif %}
 
-</header>
+						<li>
+							<a href="{{ path('app_accueil') }}">Accueil</a>
+						</li>
+						<li class="li-flex">
+							<a href="{{ path('app_logout') }}" style="margin-right: 8px;">Déconnexion</a>
+							<i class="fas fa-sign-out-alt"></i>
+						</li>
+						<li>
+							Chocolaterie
+							{% if 'ROLE_SUPER_ADMIN' not in app.user.roles %}
+								{{ user.chocolateShop }}
+							{% endif %}
+						</li>
+					</ul>
+					<div class="circle-container">
+						<div class="outer-circle">
+							<div class="inner-circle"></div>
+						</div>
+					</div>
+				</div>
+			</nav>
 
-    <section class="cards-section">
-        <div class="card-row">
-            <div class="card card-user">
-                <div class="content">
-                    <div class="content-circle">
-                        <div class="circle">
-                            <p class="circle-number number-user">{{ registeredUsersCount }}</p>
-                        </div>
-                    </div>
-                    <div class="text-and-button">
-                        <div class="card-text">
-                            <h3>UTILISATEURS</h3>
-                            <p>sont inscrits</p>
-                        </div>
-                        <div class="button-card">
-                        <a href="{{ path('app_user_index') }}">
-                            <button class="common-button">Gérer les utilisateurs</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card center-card">
-    <div class="content">
-        <div class="content-circle-news">
-            <div class="circle">
-                <p class="circle-number">{{ newsCount }}</p>
-            </div>
-        </div>
-        <div class="text-and-button">
-            <div class="card-text text-news">
-                <h3>ACTUALITÉS</h3>
-                <p>sont disponibles</p>
-            </div>
-        </div>
-    </div>
-    <!-- Section pour afficher les trois dernières actualités -->
-    <div class="latest-news">
-        {% for news in latestNews|slice(0, 3) %}
-        <div class="news-item">
-            <span class="news-date">Le {{ news.dateCreation | date('d/m/Y') }}</span>
-            <span> - </span>
-            <span class="news-content">{{ news.content | slice(0, 25) }}</span>
-        </div>
-        {% else %}
-        <p>Aucune actualité récente.</p>
-        {% endfor %}
-    </div>
-    <div class="button-card">
-        <a href="{{ path('app_news_index') }}">
-            <button class="common-button">Gérer les actualités</button>
-        </a>
-    </div>
-</div>
+		</header>
 
-            <div class="card card-post">
-                <div class="content">
-                    <div class="content-circle">
-                        <div class="circle">
-                            <p class="circle-number">{{ postsCount }}</p>
-                        </div>
-                    </div>
-                    <div class="text-and-button">
-                        <div class="card-text">
-                            <h3>POSTS</h3>
-                            <p>sont disponibles</p>
-                        </div>
-                        <div class="button-card">
-                        <a href="{{ path('app_post_index') }}">
-                            <button class="common-button">Gérer les posts</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card card-category">
-                <div class="content">
-                    <div class="content-circle">
-                        <div class="circle">
-                            <p class="circle-number">{{ categoryCount }}</p>
-                        </div>
-                    </div>
-                    <div class="text-and-button">
-                        <div class="card-text">
-                            <h3>CATEGORIES</h3>
-                            <p>de posts sont disponibles</p>
-                        </div>
-                        <div class="button-card">
-                        <a href="{{ path('app_category_index') }}">
-                            <button class="common-button category">Gérer les catégories</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		<section class="cards-section">
+			<div class="card-row">
+				<div class="card card-user">
+					<div class="content">
+						<div class="content-circle">
+							<div class="circle">
+								<p class="circle-number number-user">{{ registeredUsersCount }}</p>
+							</div>
+						</div>
+						<div class="text-and-button">
+							<div class="card-text">
+								<h3>UTILISATEURS</h3>
+								<p>sont inscrits</p>
+							</div>
+							<div class="button-card">
+								<a href="{{ path('app_user_index') }}">
+									<button class="common-button">Gérer les utilisateurs</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card center-card">
+					<div class="content">
+						<div class="content-circle-news">
+							<div class="circle">
+								<p class="circle-number">{{ newsCount }}</p>
+							</div>
+						</div>
+						<div class="text-and-button">
+							<div class="card-text text-news">
+								<h3>ACTUALITÉS</h3>
+								<p>sont disponibles</p>
+							</div>
+						</div>
+					</div>
+					<!-- Section pour afficher les trois dernières actualités -->
+					<div class="latest-news">
+						{% for news in latestNews|slice(0, 3) %}
+							<div class="news-item">
+								<span class="news-date">Le
+									{{ news.dateCreation | date('d/m/Y') }}</span>
+								<span>
+									-
+								</span>
+								<span class="news-content">{{ news.content | slice(0, 25) }}</span>
+							</div>
+						{% else %}
+							<p>Aucune actualité récente.</p>
+						{% endfor %}
+					</div>
+					<div class="button-card">
+						<a href="{{ path('app_news_index') }}">
+							<button class="common-button">Gérer les actualités</button>
+						</a>
+					</div>
+				</div>
 
-            <div class="card card-chocolate">
-                <div class="content">
-                    <div class="content-circle">
-                        <div class="circle">
-                            <p class="circle-number">{{ chocolateCount }}</p>
-                        </div>
-                    </div>
-                    <div class="text-and-button">
-                        <div class="card-text">
-                            <h3>CHOCOLATERIE</h3>
-                            <p>sont disponibles</p>
-                        </div>
-                        <div class="button-card">
-                        <a href="{{ path('app_chocolate_shop_index') }}">
-                            <button class="common-button">Gérer les chocolateries</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <div class="card card-comment">
-                <div class="content">
-                    <div class="content-circle">
-                        <div class="circle">
-                            <p class="circle-number">{{ commentCount }}</p>
-                        </div>
-                    </div>
-                    <div class="text-and-button">
-                        <div class="card-text">
-                            <h3>Commentaires</h3>
-                            <p>sont disponibles</p>
-                        </div>
-                        <div class="button-card">
-                        <a href="{{ path('app_comment_index') }}">
-                            <button class="common-button">Gérer les commentaires</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
+				<div class="card card-post">
+					<div class="content">
+						<div class="content-circle">
+							<div class="circle">
+								<p class="circle-number">{{ postsCount }}</p>
+							</div>
+						</div>
+						<div class="text-and-button">
+							<div class="card-text">
+								<h3>POSTS</h3>
+								<p>sont disponibles</p>
+							</div>
+							<div class="button-card">
+								<a href="{{ path('app_post_index') }}">
+									<button class="common-button">Gérer les posts</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card card-category">
+					<div class="content">
+						<div class="content-circle">
+							<div class="circle">
+								<p class="circle-number">{{ categoryCount }}</p>
+							</div>
+						</div>
+						<div class="text-and-button">
+							<div class="card-text">
+								<h3>CATEGORIES</h3>
+								<p>de posts sont disponibles</p>
+							</div>
+							<div class="button-card">
+								<a href="{{ path('app_category_index') }}">
+									<button class="common-button category">Gérer les catégories</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
-    <footer class="footer">
-    <p>Administration développé par EILEA - 2021</p>
-    </footer>
-</div>
-{% endblock %}
+				<div class="card card-chocolate">
+					<div class="content">
+						<div class="content-circle">
+							<div class="circle">
+								<p class="circle-number">{{ chocolateCount }}</p>
+							</div>
+						</div>
+						<div class="text-and-button">
+							<div class="card-text">
+								<h3>CHOCOLATERIE</h3>
+								<p>sont disponibles</p>
+							</div>
+							<div class="button-card">
+								<a href="{{ path('app_chocolate_shop_index') }}">
+									<button class="common-button">Gérer les chocolateries</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card card-comment">
+					<div class="content">
+						<div class="content-circle">
+							<div class="circle">
+								<p class="circle-number">{{ commentCount }}</p>
+							</div>
+						</div>
+						<div class="text-and-button">
+							<div class="card-text">
+								<h3>Commentaires</h3>
+								<p>sont disponibles</p>
+							</div>
+							<div class="button-card">
+								<a href="{{ path('app_comment_index') }}">
+									<button class="common-button">Gérer les commentaires</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="footer">
+				<p>Administration développé par EILEA - 2021</p>
+			</footer>
+		</div>
+	{% endblock %}

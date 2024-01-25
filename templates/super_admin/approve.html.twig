@@ -1,42 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Approuver les administrateurs{% endblock %}
+{% block title %}Approuver les administrateurs
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/approve_admin_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
 
 {% block body %}
 
-<h1>Approuver les administrateurs</h1>
+	<div class="body-container">
+		<h1>Approuver les administrateurs</h1>
 
-{% if admins|length > 0 %}
+		<!-- Bouton de Retour -->
+		<a href="{{ path('app_admin') }}" class="btn-return">Retour</a>
 
-<form action="{{ path('approve_users') }}" method="post" class="mt-4">
-    {{ form_start(form) }}
-    <div class="form-group">
-        {{ form_label(form.admins) }}
-        {{ form_widget(form.admins) }}
-    </div>
 
-    <div class="form-group mt-3">
-        {{ form_widget(form.approve) }}
-    </div>
-    {{ form_end(form) }}
-</form>
+		{% if admins|length > 0 %}
 
-{% else %}
+			<div class="form-container">
+				<form action="{{ path('approve_users') }}" method="post" class="mt-4">
+					{{ form_start(form) }}
+					<div class="form-group">
+						{{ form_label(form.admins) }}
+						{{ form_widget(form.admins) }}
+					</div>
 
-<p>Il n'y a actuellement aucun administrateur en attente d'approbation.</p>
+					<div class="form-group mt-3">
+						{{ form_widget(form.approve, {'attr': {'class': 'btn-approve'}}) }}
 
-{% endif %}
+					</div>
+					{{ form_end(form) }}
+				</form>
+			</div>
 
-{% for flashMessage in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ flashMessage }}
-    </div>
-{% endfor %}
+		{% else %}
 
-{% for flashMessage in app.flashes('error') %}
-    <div class="alert alert-danger">
-        {{ flashMessage }}
-    </div>
-{% endfor %}
+			<p>Il n'y a actuellement aucun administrateur en attente d'approbation.</p>
+
+		{% endif %}
+
+		{% for flashMessage in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ flashMessage }}
+			</div>
+		{% endfor %}
+
+		{% for flashMessage in app.flashes('error') %}
+			<div class="alert alert-danger">
+				{{ flashMessage }}
+			</div>
+		{% endfor %}
+	</div>
 
 {% endblock %}

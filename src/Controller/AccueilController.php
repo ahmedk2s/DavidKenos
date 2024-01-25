@@ -9,7 +9,7 @@ use App\Repository\NewsRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Post;
-use App\Entity\News; 
+use App\Entity\News;
 
 class AccueilController extends AbstractController
 {
