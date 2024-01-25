@@ -66,8 +66,19 @@ class UserVoter extends Voter
 
     private function canAccessAdmin(UserInterface $loggedInUser): bool
     {
-        return in_array('ROLE_ADMIN', $loggedInUser->getRoles()) || in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles());
+        // Vérifie si l'utilisateur est un super-admin
+        if (in_array('ROLE_SUPER_ADMIN', $loggedInUser->getRoles())) {
+            return true;
+        }
+
+        // Vérifie si l'utilisateur est un admin et s'il est approuvé
+        if (in_array('ROLE_ADMIN', $loggedInUser->getRoles())) {
+            return $loggedInUser instanceof User && $loggedInUser->getIsApproved();
+        }
+
+        return false;
     }
+
 
     private function canEditProfile(User $subject, UserInterface $loggedInUser): bool
     {
