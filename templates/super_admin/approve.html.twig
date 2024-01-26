@@ -33,6 +33,9 @@
 			<p>Il n'y a actuellement aucun administrateur en attente d'approbation.</p>
 		{% endif %}
 
+		<a href="{{ path('app_admin') }}" class="btn-return">Retour</a>
+
+
 		{% for flashMessage in app.flashes('success') %}
 			<div class="alert alert-success">
 				{{ flashMessage }}
@@ -46,4 +49,3 @@
 		{% endfor %}
 	</div>
 {% endblock %}
-

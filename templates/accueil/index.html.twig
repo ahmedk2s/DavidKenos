@@ -9,19 +9,16 @@
 {% endblock %}
 
 {% block javascripts %}
-
 	<script>
-		var isAdminNonApproved = {{ isAdminNonApproved ? 'true' : 'false' }};
+		var showApprovalPopup = {{ showApprovalPopup ? 'true' : 'false' }};
+var showNonApprovedAdminPopup = {{ showNonApprovedAdminPopup ? 'true' : 'false' }};
 	</script>
-
 
 	<script src="/assets/styles/js/scripts.js" defer></script>
 	<script src="/assets/styles/js/popup.js" defer></script>
 {% endblock %}
 
-
 {% block body %}
-
 	<div class="body-container">
 		<div class="posts-container">
 			<div class="header-container-posts">
@@ -52,9 +49,7 @@
 							<p>Aucune image disponible</p>
 						{% endif %}
 						{% if news.chocolateShop %}
-							<p class="ruban-jaune">
-								{{ news.chocolateShop.city }}
-							</p>
+							<p class="ruban-jaune">{{ news.chocolateShop.city }}</p>
 						{% endif %}
 					</div>
 					<div class="block-text">
@@ -65,5 +60,4 @@
 			{% endfor %}
 		</div>
 	</div>
-
 {% endblock %}
