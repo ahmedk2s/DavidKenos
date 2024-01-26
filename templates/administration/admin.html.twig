@@ -28,11 +28,16 @@
 				</div>
 				<div class="nav-container" id="nav-container">
 					<ul>
+
 						{% if is_granted('ROLE_SUPER_ADMIN') %}
 							<li>
 								<a href="{{ path('approve_users') }}">Approbation Admin</a>
+								{% if isAdminWaitingForApproval %}
+									<span class="admin-approval-count">{{ adminsWaitingForApproval | length }}</span>
+								{% endif %}
 							</li>
 						{% endif %}
+
 
 						<li>
 							<a href="{{ path('app_accueil') }}">Accueil</a>
@@ -55,7 +60,6 @@
 					</div>
 				</div>
 			</nav>
-
 		</header>
 
 		<section class="cards-section">

@@ -1,6 +1,12 @@
 @import "../includes/variables.less";
 @import "../includes/mixins.less";
 
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -25,11 +31,17 @@ h1 {
 }
 
 .form-container {
-  background-color: @colorYellow;
-  padding: 20px;
-  border-radius: 5px;
-  width: 50%; 
+    background-color: @colorYellow;
+    padding: 20px;
+    width: 50%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: auto; 
 }
+
+
 
 .alert-success, .alert-danger {
   margin-top: 20px;
@@ -61,6 +73,11 @@ h1 {
     margin-top: 10px;
 }
 
+.btn-approve-left {
+    align-self: flex-start; 
+}
+
+
 
 .btn-approve:hover {
     background-color: #08a58b; 
@@ -74,30 +91,27 @@ h1 {
 
 
 .btn-return {
-    background-color: #606060; 
+    background-color: @colorNightBlue; 
     color: white; 
     padding: 10px 20px; 
     font-size: 16px; 
     border-radius: 5px; 
     text-decoration: none; 
-    margin-bottom: 20px; 
     display: inline-block; 
-    cursor: pointer; 
+    cursor: pointer;
+    margin-top: 20px; 
 }
+
 
 .btn-return:hover {
-    background-color: #505050; 
+   background-color: #191e49;
 }
-
 
 
 
 @media screen and (max-width: 1000px) {
   .body-container {
-    margin-top: 90px;
-  }
-  h1 {
-    font-size: 1.5rem;
+    margin-top: 50px;
   }
 }
 
@@ -109,9 +123,9 @@ h1 {
 
 @media screen and (max-width: 600px) {
   h1 {
-    font-size: 1.1rem;
+    font-size: 1.8rem;
   }
   .form-container {
-    width: 100%;
+    width: auto;
   }
 }

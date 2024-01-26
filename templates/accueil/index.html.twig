@@ -1,6 +1,7 @@
 {% extends 'base_member.html.twig' %}
 
-{% block title %}Bienvenue dans l'accueil{% endblock %}
+{% block title %}Bienvenue dans l'accueil
+{% endblock %}
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/accueil_style.css">
@@ -12,6 +13,7 @@
 	<script>
 		var isAdminNonApproved = {{ isAdminNonApproved ? 'true' : 'false' }};
 	</script>
+
 
 	<script src="/assets/styles/js/scripts.js" defer></script>
 	<script src="/assets/styles/js/popup.js" defer></script>
@@ -63,5 +65,5 @@
 			{% endfor %}
 		</div>
 	</div>
-	
+
 {% endblock %}

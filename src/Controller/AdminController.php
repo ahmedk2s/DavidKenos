@@ -44,15 +44,14 @@ class AdminController extends AbstractController
         // Vérifiez si l'utilisateur a le droit d'accéder à l'administration
         $this->denyAccessUnlessGranted(UserVoter::ACCESS_ADMIN, $user);
 
-        // Vérifier si des administrateurs sont en attente de validation
+        // Initialisation de la variable
+        $adminsWaitingForApproval = [];
         $isAdminWaitingForApproval = false;
+
+        // Vérifier si des administrateurs sont en attente de validation
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
-            $adminsWaitingForApproval = $userRepository->findBy(['isApproved' => false, 'roles' => 'ROLE_ADMIN']);
+            $adminsWaitingForApproval = $userRepository->findAdminsWaitingForApproval();
             $isAdminWaitingForApproval = count($adminsWaitingForApproval) > 0;
-
-            // Après la requête
-            error_log(print_r($adminsWaitingForApproval, true));
-
         }
 
         if (!$slug) {
@@ -63,8 +62,6 @@ class AdminController extends AbstractController
             );
             return $this->redirectToRoute('app_admin', ['slug' => $slug]);
         }
-
-
 
         // Collecte des données pour l'affichage
         $registeredUsersCount = $this->isGranted('ROLE_SUPER_ADMIN')
@@ -78,8 +75,6 @@ class AdminController extends AbstractController
         $commentCount = $commentRepository->countAllComments();
         $latestNews = $newsRepository->findLatest(3);
 
-
-
         // Rendu de la vue avec les données collectées
         return $this->render('administration/admin.html.twig', [
             'controller_name' => 'AdminController',
@@ -92,6 +87,7 @@ class AdminController extends AbstractController
             'commentCount' => $commentCount,
             'latestNews' => $latestNews,
             'isAdminWaitingForApproval' => $isAdminWaitingForApproval,
+            'adminsWaitingForApproval' => $adminsWaitingForApproval,
         ]);
     }
 }
