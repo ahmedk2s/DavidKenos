@@ -27,45 +27,44 @@ class RegistrationController extends AbstractController
         $this->slugService = $slugService; // Injection du SlugService
     }
 
-    // #[Route('/register', name: 'app_register')]
-    // public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    // {
-    //     if ($this->getUser()) {
-    //         if ($this->isGranted('ROLE_ADMIN')) {
-    //             return $this->redirectToRoute('app_admin');
-    //         } elseif ($this->isGranted('ROLE_EMPLOYE')) {
-    //             return $this->redirectToRoute('app_accueil');
-    //         }
-    //     }
+    #[Route('/register', name: 'app_register')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->getUser()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app_admin');
+            } elseif ($this->isGranted('ROLE_EMPLOYE')) {
+                return $this->redirectToRoute('app_accueil');
+            }
+        }
 
-    //     $user = new User();
-    //     $form = $this->createForm(RegistrationFormType::class, $user);
-    //     $form->handleRequest($request);
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
-    //         $user->setSlug($slug);
-    //         // encode the plain password
-    //         $user->setRoles(['ROLE_SUPER_ADMIN']);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $this->slugService->createUniqueSlug($user->getFirstName() . ' ' . $user->getLastName(), User::class, $user->getId());
+            $user->setSlug($slug);
 
-    //         $user->setPassword(
-    //             $userPasswordHasher->hashPassword(
-    //                 $user,
-    //                 $form->get('plainPassword')->getData()
-    //             )
-    //         );
+            $user->setRoles(['ROLE_SUPER_ADMIN']);
 
-    //         $entityManager->persist($user);
-    //         $entityManager->flush();
-    //         // do anything else you need here, like send an email
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
 
-    //         return $this->redirectToRoute('app_login');
-    //     }
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-    //     return $this->render('registration/super_admin_register.html.twig', [
-    //         'registrationForm' => $form->createView(),
-    //     ]);
-    // }
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('registration/super_admin_register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
 
     #[Route('/register/admin', name: 'app_register_admin')]
     public function registerAdmin(

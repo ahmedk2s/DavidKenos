@@ -36,10 +36,24 @@ class AdminController extends AbstractController
     ): Response {
         $user = $this->getUser();
 
-        // Vérifiez si l'utilisateur a le droit d'accéder à la page d'administration
+        // Redirection si l'administrateur n'est pas approuvé
+        if ($this->isGranted('ROLE_ADMIN') && !$user->getIsApproved()) {
+            return $this->redirectToRoute('app_accueil');
+        }
+
+        // Vérifiez si l'utilisateur a le droit d'accéder à l'administration
         $this->denyAccessUnlessGranted(UserVoter::ACCESS_ADMIN, $user);
 
-        // Si aucun slug n'est fourni, crée un slug unique pour l'accueil de l'administration
+        // Initialisation de la variable
+        $adminsWaitingForApproval = [];
+        $isAdminWaitingForApproval = false;
+
+        // Vérifier si des administrateurs sont en attente de validation
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            $adminsWaitingForApproval = $userRepository->findAdminsWaitingForApproval();
+            $isAdminWaitingForApproval = count($adminsWaitingForApproval) > 0;
+        }
+
         if (!$slug) {
             $slug = $this->slugService->createUniqueSlug(
                 'accueil-administration-' . $user->getFirstName() . '-' . $user->getLastName(),
@@ -48,13 +62,12 @@ class AdminController extends AbstractController
             );
             return $this->redirectToRoute('app_admin', ['slug' => $slug]);
         }
-        
-        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
-            $registeredUsersCount = $userRepository->countAllRegisteredUsers(); 
-        } else {
-            $registeredUsersCount = $userRepository->countUsersByChocolateShop($user->getChocolateShop());
-        }
-        
+
+        // Collecte des données pour l'affichage
+        $registeredUsersCount = $this->isGranted('ROLE_SUPER_ADMIN')
+            ? $userRepository->countAllRegisteredUsers()
+            : $userRepository->countUsersByChocolateShop($user->getChocolateShop());
+
         $newsCount = $newsRepository->countAllNews([]);
         $postsCount = $postRepository->countAllPosts();
         $categoryCount = $categoryRepository->countAllCategory([]);
@@ -62,16 +75,19 @@ class AdminController extends AbstractController
         $commentCount = $commentRepository->countAllComments();
         $latestNews = $newsRepository->findLatest(3);
 
+        // Rendu de la vue avec les données collectées
         return $this->render('administration/admin.html.twig', [
             'controller_name' => 'AdminController',
             'user' => $user,
-            'registeredUsersCount' => $registeredUsersCount, 
+            'registeredUsersCount' => $registeredUsersCount,
             'newsCount' => $newsCount,
             'postsCount' => $postsCount,
             'categoryCount' => $categoryCount,
             'chocolateCount' => $chocolateCount,
             'commentCount' => $commentCount,
             'latestNews' => $latestNews,
+            'isAdminWaitingForApproval' => $isAdminWaitingForApproval,
+            'adminsWaitingForApproval' => $adminsWaitingForApproval,
         ]);
     }
 }

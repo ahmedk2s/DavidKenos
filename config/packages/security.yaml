@@ -26,10 +26,11 @@ security:
                 
 
     access_control:
-    - { path: ^/admin, roles: ROLE_ADMIN } 
-    - { path: ^/profile, roles: ROLE_EMPLOYE } 
-    - { path: ^/accueil, roles: ROLE_EMPLOYE }
-    - { path: ^/la-vie-des-chocolateries, roles: ROLE_EMPLOYE }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_EMPLOYE }
+        - { path: ^/accueil, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/la-vie-des-chocolateries, roles: ROLE_EMPLOYE }
+
     role_hierarchy:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
         ROLE_ADMIN: ROLE_EMPLOYE

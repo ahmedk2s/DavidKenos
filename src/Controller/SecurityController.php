@@ -13,23 +13,22 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
-        // Check if the user is already authenticated, redirect to appropriate page based on roles
         if ($this->getUser()) {
-            // Check roles and redirect accordingly
+            $user = $this->getUser();
             if ($this->isGranted('ROLE_ADMIN')) {
+                if (!$user->getIsApproved()) {
+                    return $this->redirectToRoute('app_accueil');
+                }
+                // Redirection pour les admins approuvés
                 return $this->redirectToRoute('app_admin');
             } elseif ($this->isGranted('ROLE_EMPLOYE')) {
                 return $this->redirectToRoute('app_accueil');
             }
         }
 
-        // Rest of your login logic
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        // Retrieve the user using security
         $user = $this->getUser();
         $firstName = '';
         $lastName = '';
@@ -39,7 +38,6 @@ class SecurityController extends AbstractController
             $lastName = $user->getLastName();
         }
 
-        // Check if the admin_registered parameter is present in the URL
         if ($request->query->get('admin_registered')) {
             $this->addFlash('notice', 'Votre compte administrateur est en attente de validation par un super administrateur.');
         }

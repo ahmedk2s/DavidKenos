@@ -9,7 +9,7 @@ use App\Repository\NewsRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Post;
-use App\Entity\News; 
+use App\Entity\News;
 
 class AccueilController extends AbstractController
 {
@@ -18,18 +18,20 @@ class AccueilController extends AbstractController
     {
         $user = $this->getUser();
 
-       
-        $postRepository = $entityManager->getRepository(Post::class); // 
+        // Déterminez si l'utilisateur est un administrateur non approuvé
+        $isAdminNonApproved = $user && $this->isGranted('ROLE_ADMIN') && !$user->getIsApproved();
+
+        $postRepository = $entityManager->getRepository(Post::class);
         $posts = $postRepository->findBy([], ['date_creation' => 'DESC'], 6);
 
-        
-        $newsRepository = $entityManager->getRepository(News::class); // 
+        $newsRepository = $entityManager->getRepository(News::class);
         $news = $newsRepository->findBy([], ['dateCreation' => 'DESC'], 2);
 
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
             'posts' => $posts,
             'news' => $news,
+            'isAdminNonApproved' => $isAdminNonApproved,
         ]);
     }
 }

@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-	</head>
-</html>
-
-{% block stylesheets %}
-	<link rel="stylesheet" href="/assets/styles/css/registration_form_style.css">
-{% endblock %}
-
-{{ form_errors(form) }}
-
-
+<head>
+    <meta charset="UTF-8">
+</head>
 <body>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/registration_form_style.css">
+    {% endblock %}
 
-	<div class="logo-container">
-		<div class="img-container">
-			<img src="{{ asset('/images/logo-david-kenos-blanc.png') }}" alt="Logo de l'entreprise">
-		</div>
-	</div>
+    {{ form_errors(form) }}
 
-	<div class="form-container">
+    <div class="logo-container">
+        <div class="img-container">
+            <img src="{{ asset('/images/logo-david-kenos-blanc.png') }}" alt="Logo de l'entreprise">
+        </div>
+    </div>
 
-		<h2>Inscris-toi !</h2>
+    <div class="form-container">
+        <h2>Inscris-toi !</h2>
 
-		{{ form_start(form) }}
-		{{ form_row(registrationForm.first_name, {'label': false, 'attr': {'class': 'custom-input', 'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées', 'placeholder': 'Prénom'}}) }}
-		{{ form_row(registrationForm.last_name, {'label': false, 'attr': {'class': 'custom-input', 'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées', 'placeholder': 'Nom'}}) }}
-		{{ form_row(form.job_title, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Poste'}}) }}
-		{{ form_row(form.email, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Adresse e-mail', 'pattern': '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'title': 'Adresse e-mail invalide'}}) }}
-		{{ form_row(registrationForm.plainPassword, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Mot de passe', 'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{16,}$', 'title': 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et avoir au moins 16 caractères.'}}) }}
-		{{ form_row(form.chocolate_shop, {'label': false, 'attr': {'class': 'custom-input'}}) }}
-		<div class="termes-contrat">
-			{{ form_label(form.agreeTerms, "Accepter les termes du contrat", {'label_attr': {'class': 'custom-label'}}) }}
-			{{ form_widget(form.agreeTerms, {'attr': {'class': 'custom-checkbox'}}) }}
-		</div>
-		<div class="button-container">
-			<button type="submit" class="custom-btn">Inscription</button>
-		</div>
-		{{ form_end(form) }}
-	</div>
+        {{ form_start(form) }}
+        {{ form_row(registrationForm.first_name, {'label': false, 'attr': {'class': 'custom-input', 'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées', 'placeholder': 'Prénom'}}) }}
+        {{ form_row(registrationForm.last_name, {'label': false, 'attr': {'class': 'custom-input', 'pattern': '^[a-zA-Z]+$', 'title': 'Seulement des lettres autorisées', 'placeholder': 'Nom'}}) }}
+        {{ form_row(form.job_title, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Poste'}}) }}
+        {{ form_row(form.email, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Adresse e-mail', 'pattern': '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'title': 'Adresse e-mail invalide'}}) }}
+        {{ form_row(registrationForm.plainPassword, {'label': false, 'attr': {'class': 'custom-input', 'placeholder': 'Mot de passe', 'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{16,}$', 'title': 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et avoir au moins 16 caractères.'}}) }}
+        {{ form_row(form.chocolate_shop, {'label': false, 'attr': {'class': 'custom-input'}}) }}
+        <div class="termes-contrat">
+            {{ form_label(form.agreeTerms, "Accepter les termes du contrat", {'label_attr': {'class': 'custom-label'}}) }}
+            {{ form_widget(form.agreeTerms, {'attr': {'class': 'custom-checkbox'}}) }}
+        </div>
+        <div class="button-container">
+            <button type="submit" class="custom-btn">Inscription</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
 </body>
-
-
-{# (?=.*[a-z]) assure la présence d'au moins une lettre minuscule.
-(?=.*[A-Z]) assure la présence d'au moins une lettre majuscule.
-(?=.*\\d) assure la présence d'au moins un chiffre.
-(?=.*[@$!%*?&]) assure la présence d'au moins un caractère spécial parmi ceux listés.
-[A-Za-z\\d@$!%*?&]{8,} spécifie une longueur d'au moins 16 caractères composés des types de caractères mentionnés. #}
+</html>
