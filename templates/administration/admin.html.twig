@@ -1,4 +1,8 @@
-{# {% block title %}Accueil Administration{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil Administration
+{% endblock %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/admin_style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -6,10 +10,20 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="/assets/styles/js/admin.js"></script>
+	<script>
+		var showApprovalPopup = {{ showApprovalPopup ? 'true' : 'false' }};
+	</script>
+
+
+	<script src="/assets/styles/js/admin.js" defer></script>
+	<script src="/assets/styles/js/popup.js" defer></script>
+
 {% endblock %}
 
+
 {% block body %}
+
+
 	<div class="content">
 		<header>
 			<div class="top-container">

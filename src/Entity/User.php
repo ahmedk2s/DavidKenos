@@ -95,6 +95,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
 
+    
+    #[ORM\Column(type: "boolean")]
+    private $hasSeenApprovalPopup = false;
+
     public function __construct()
     {
         $this->news = new ArrayCollection();
@@ -498,6 +502,17 @@ public function setChocolateShop(?ChocolateShop $chocolateShop): self
     {
         $this->tokenRegistrationLifeTime = $tokenRegistrationLifeTime;
 
+        return $this;
+    }
+
+    public function getHasSeenApprovalPopup(): bool
+    {
+        return $this->hasSeenApprovalPopup;
+    }
+
+    public function setHasSeenApprovalPopup(bool $hasSeenApprovalPopup): self
+    {
+        $this->hasSeenApprovalPopup = $hasSeenApprovalPopup;
         return $this;
     }
 

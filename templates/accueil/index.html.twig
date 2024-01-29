@@ -10,13 +10,12 @@
 
 {% block javascripts %}
 	<script>
-		var showApprovalPopup = {{ showApprovalPopup ? 'true' : 'false' }};
-var showNonApprovedAdminPopup = {{ showNonApprovedAdminPopup ? 'true' : 'false' }};
+		var showNonApprovedAdminPopup = {{ showNonApprovedAdminPopup ? 'true' : 'false' }};
 	</script>
-
 	<script src="/assets/styles/js/scripts.js" defer></script>
 	<script src="/assets/styles/js/popup.js" defer></script>
 {% endblock %}
+
 
 {% block body %}
 	<div class="body-container">

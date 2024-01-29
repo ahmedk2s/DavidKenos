@@ -155,6 +155,43 @@ header {
 }
 
 
+// Style du popup
+
+.adminApprovalPopup {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    background-color: @colorYellow;
+    color: #1f2547;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    transition: top 0.5s ease;
+
+    .close-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        cursor: pointer;
+        color: #1f2547;
+        font-size: 1.2rem;
+    }
+
+    &.showPopup {
+        top: 10%;
+    }
+
+    &.hidePopup {
+        top: -100%;
+    }
+}
+
+
 section {
     width: 100%;
     height: 60vh;
