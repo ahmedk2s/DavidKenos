@@ -1,48 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
-{% endblock %}
+{% block title %}Connexion !{% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="/assets/styles/css/login_form_style.css">
+    <link rel="stylesheet" href="/assets/styles/css/login_form_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 {% endblock %}
 
+{% block javascripts %}
+    <script src="/assets/styles/js/password.js" defer></script>
+{% endblock %}
 
 {% block body %}
-	<div class="custom-container">
+    <div class="custom-container">
+        <div class="logo-container">
+            <div class="img-container">
+                <img src="{{ asset('/images/logo-david-kenos-blanc.png') }}" alt="Logo de l'entreprise">
+            </div>
+        </div>
 
-		<div class="logo-container">
-			<div class="img-container">
-				<img src="{{ asset('/images/logo-david-kenos-blanc.png') }}" alt="Logo de l'entreprise">
-			</div>
-		</div>
+        <form method="post" class="custom-form">
+            <div class="title">
+                <p>Hâte de nous retrouver ?</p>
+                <h1>Connecte-toi !</h1>
+            </div>
 
-		<form method="post" class="custom-form">
+            {% if error %}
+                <div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-			<div class="title">
-				<p>Hâte de nous retrouver ?</p>
-				<h1>Connectes-toi !</h1>
-			</div>
+            <div class="input-group">
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="custom-input" autocomplete="email" required autofocus placeholder="Email">
+            </div>
 
-			{% if error %}
-				<div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
+            <div class="input-group">
+                <input type="password" name="password" id="inputPassword" class="custom-input" autocomplete="current-password" required placeholder="Mot de passe">
+                <i id="toggleIcon" class="far fa-eye" onclick="togglePasswordVisibility()" style="cursor:pointer;"></i>
+            </div>
 
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-			<div class="input-group">
-				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="custom-input" autocomplete="email" required autofocus placeholder="Email">
-			</div>
-			<div class="input-group">
-				<input type="password" name="password" id="inputPassword" class="custom-input" autocomplete="current-password" required placeholder="Mot de passe">
-			</div>
-
-
-			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-			<button type="submit" class="custom-button">
-				Connexion
-			</button>
-		</form>
-	</div>
-	{% include "_partials/_flash.html.twig" %}
+            <button type="submit" class="custom-button">Connexion</button>
+        </form>
+    </div>
+    {% include "_partials/_flash.html.twig" %}
 {% endblock %}
