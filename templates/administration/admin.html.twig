@@ -1,4 +1,8 @@
-{# {% block title %}Accueil Administration{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil Administration
+{% endblock %}
+
 {% block stylesheets %}
 	<link rel="stylesheet" href="/assets/styles/css/admin_style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -6,7 +10,12 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="/assets/styles/js/admin.js"></script>
+	<script>
+		var showApprovalPopup = {{ showApprovalPopup ? 'true' : 'false' }};
+	</script>
+
+	<script src="/assets/styles/js/admin.js" defer></script>
+	<script src="/assets/styles/js/popup.js" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -18,7 +27,7 @@
 				</div>
 
 				<div class="title">
-					<h1>Bienvenue,</h1>
+					<h1>Bienvenue</h1>
 					<p>dans votre administration</p>
 				</div>
 			</div>
@@ -28,7 +37,6 @@
 				</div>
 				<div class="nav-container" id="nav-container">
 					<ul>
-
 						{% if is_granted('ROLE_SUPER_ADMIN') %}
 							<li>
 								<a href="{{ path('approve_users') }}">Approbation Admin</a>
@@ -37,8 +45,6 @@
 								{% endif %}
 							</li>
 						{% endif %}
-
-
 						<li>
 							<a href="{{ path('app_accueil') }}">Accueil</a>
 						</li>
@@ -88,7 +94,7 @@
 					<div class="content">
 						<div class="content-circle-news">
 							<div class="circle">
-								<p class="circle-number">{{ newsCount }}</p>
+								<p class="circle-number number-ter">{{ newsCount }}</p>
 							</div>
 						</div>
 						<div class="text-and-button">
@@ -104,9 +110,7 @@
 							<div class="news-item">
 								<span class="news-date">Le
 									{{ news.dateCreation | date('d/m/Y') }}</span>
-								<span>
-									-
-								</span>
+								<span>-</span>
 								<span class="news-content">{{ news.content | slice(0, 25) }}</span>
 							</div>
 						{% else %}
@@ -119,12 +123,11 @@
 						</a>
 					</div>
 				</div>
-
 				<div class="card card-post">
 					<div class="content">
 						<div class="content-circle">
 							<div class="circle">
-								<p class="circle-number">{{ postsCount }}</p>
+								<p class="circle-number number-ter">{{ postsCount }}</p>
 							</div>
 						</div>
 						<div class="text-and-button">
@@ -142,14 +145,14 @@
 				</div>
 				<div class="card card-category">
 					<div class="content">
-						<div class="content-circle">
+						<div class "content-circle">
 							<div class="circle">
-								<p class="circle-number">{{ categoryCount }}</p>
+								<p class="circle-number number-ter">{{ categoryCount }}</p>
 							</div>
 						</div>
 						<div class="text-and-button">
 							<div class="card-text">
-								<h3>CATEGORIES</h3>
+								<h3>CATÉGORIES</h3>
 								<p>de posts sont disponibles</p>
 							</div>
 							<div class="button-card">
@@ -160,12 +163,11 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="card card-chocolate">
 					<div class="content">
 						<div class="content-circle">
 							<div class="circle">
-								<p class="circle-number">{{ chocolateCount }}</p>
+								<p class="circle-number number-bis">{{ chocolateCount }}</p>
 							</div>
 						</div>
 						<div class="text-and-button">
@@ -185,12 +187,12 @@
 					<div class="content">
 						<div class="content-circle">
 							<div class="circle">
-								<p class="circle-number">{{ commentCount }}</p>
+								<p class="circle-number number-ter">{{ commentCount }}</p>
 							</div>
 						</div>
 						<div class="text-and-button">
 							<div class="card-text">
-								<h3>Commentaires</h3>
+								<h3>COMMENTAIRES</h3>
 								<p>sont disponibles</p>
 							</div>
 							<div class="button-card">
@@ -201,10 +203,12 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</div>
+		</section>
 
-			<footer class="footer">
-				<p>Administration développé par EILEA - 2021</p>
-			</footer>
-		</div>
-	{% endblock %}
+		<footer class="footer">
+			<p>Administration développée par EILEA - 2021</p>
+		</footer>
+	</div>
+{% endblock %}
+

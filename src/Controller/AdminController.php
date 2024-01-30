@@ -14,6 +14,7 @@ use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 class AdminController extends AbstractController
 {
@@ -32,26 +33,28 @@ class AdminController extends AbstractController
         PostRepository $postRepository,
         CategoryRepository $categoryRepository,
         ChocolateShopRepository $chocolateShopRepository,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        EntityManagerInterface $entityManager
     ): Response {
         $user = $this->getUser();
 
-        // Redirection si l'administrateur n'est pas approuvé
         if ($this->isGranted('ROLE_ADMIN') && !$user->getIsApproved()) {
             return $this->redirectToRoute('app_accueil');
         }
 
-        // Vérifiez si l'utilisateur a le droit d'accéder à l'administration
         $this->denyAccessUnlessGranted(UserVoter::ACCESS_ADMIN, $user);
 
-        // Initialisation de la variable
-        $adminsWaitingForApproval = [];
         $isAdminWaitingForApproval = false;
+        $adminsWaitingForApproval = [];
 
-        // Vérifier si des administrateurs sont en attente de validation
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             $adminsWaitingForApproval = $userRepository->findAdminsWaitingForApproval();
             $isAdminWaitingForApproval = count($adminsWaitingForApproval) > 0;
+        }
+
+        $showApprovalPopup = false;
+        if ($user instanceof User && $user->getIsApproved() && !$user->getHasSeenApprovalPopup()) {
+            $showApprovalPopup = true;
         }
 
         if (!$slug) {
@@ -63,11 +66,9 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('app_admin', ['slug' => $slug]);
         }
 
-        // Collecte des données pour l'affichage
         $registeredUsersCount = $this->isGranted('ROLE_SUPER_ADMIN')
             ? $userRepository->countAllRegisteredUsers()
             : $userRepository->countUsersByChocolateShop($user->getChocolateShop());
-
         $newsCount = $newsRepository->countAllNews([]);
         $postsCount = $postRepository->countAllPosts();
         $categoryCount = $categoryRepository->countAllCategory([]);
@@ -75,7 +76,6 @@ class AdminController extends AbstractController
         $commentCount = $commentRepository->countAllComments();
         $latestNews = $newsRepository->findLatest(3);
 
-        // Rendu de la vue avec les données collectées
         return $this->render('administration/admin.html.twig', [
             'controller_name' => 'AdminController',
             'user' => $user,
@@ -86,8 +86,23 @@ class AdminController extends AbstractController
             'chocolateCount' => $chocolateCount,
             'commentCount' => $commentCount,
             'latestNews' => $latestNews,
+            'showApprovalPopup' => $showApprovalPopup,
             'isAdminWaitingForApproval' => $isAdminWaitingForApproval,
             'adminsWaitingForApproval' => $adminsWaitingForApproval,
         ]);
     }
+
+    #[Route('/confirm-approval-popup', name: 'confirm_approval_popup')]
+    public function confirmApprovalPopup(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if ($user instanceof User && $user->getIsApproved() && !$user->getHasSeenApprovalPopup()) {
+            $user->setHasSeenApprovalPopup(true);
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+        return new Response(null, Response::HTTP_OK);
+    }
 }
+

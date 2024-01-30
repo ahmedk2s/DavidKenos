@@ -36,25 +36,56 @@ body {
 }
 
 
+/* Style de base pour le popup */
 .adminApprovalPopup {
   position: fixed;
-  right: 20px;
-  top: 20%;
-  width: 300px;
+  top: -100%;
+  /* Commence en dehors de l'écran */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 400px;
   background-color: #1f2547;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   padding: 20px;
   z-index: 1000;
-  display: none;
-  color: white;
+  text-align: center;
+  opacity: 0;
+  transition: top 0.5s ease, opacity 0.5s ease;
+  color: #fff;
+}
 
-  .close-btn {
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-  }
+/* Animation pour faire descendre le popup */
+.showPopup {
+  top: 20px;
+  /* Position finale du popup */
+  opacity: 1;
+}
+
+/* Style pour le bouton de fermeture */
+.adminApprovalPopup .close-btn {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  cursor: pointer;
+  font-size: 25px;
+  color: #eeeeee;
+}
+
+/* Animation pour faire remonter le popup */
+.hidePopup {
+  top: -100%;
+  opacity: 0;
+  transition: top 0.8s ease, opacity 0.5s ease;
+}
+
+/* Style pour le message à l'intérieur du popup */
+.adminApprovalPopup p {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #333333;
 }
 
 
