@@ -1,0 +1,31 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}Trombinoscope{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/trombinoscope_style.css">
+{% endblock %}
+
+{% block body %}
+<div class="main-content">
+    <div class="banner-container">
+        <img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profil" class="profile-image">
+        <img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+    </div>
+    <div class="title">
+        <h1>Le trombinoscope</h1>   
+    </div>
+    <div class="search-container"> 
+        <div class="search-bar">
+            <button type="submit" class="icon-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>	
+            <input type="search" placeholder="Rechercher..." class="search-input">
+	    </div>
+    </div>    
+</div>
+
+
+
+
+{% endblock %}
