@@ -22,7 +22,23 @@
             </button>	
             <input type="search" placeholder="Rechercher..." class="search-input">
 	    </div>
-    </div>    
+    </div> 
+    <div class="cards-container">
+        <div class="card">
+            <div class="banner-card">
+                <img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profil" class="profile-img">
+                <img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+            </div>
+            <div class="body-container">
+            
+					<li>
+						<span class="firstname">{{ user.firstName }}</span>
+						{{ user.lastName }}
+					</li>
+
+        </div>
+    </div> 
+    
 </div>
 
 
