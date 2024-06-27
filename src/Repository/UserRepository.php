@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -66,7 +67,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
     public function findUsersByRoleAndChocolateShop($role, $chocolateShop, $excludeRole = false)
-{
+    {
     $queryBuilder = $this->createQueryBuilder('u')
                         ->where('u.chocolateShop = :chocolateShop')
                         ->setParameter('chocolateShop', $chocolateShop);
@@ -80,7 +81,16 @@ class UserRepository extends ServiceEntityRepository
     $queryBuilder->setParameter('role', '%' . $role . '%');
     
     return $queryBuilder->getQuery()->getResult();
-}
+    }
+
+    public function findLatestUsers($limit = 4)
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 
 }
 

@@ -21,6 +21,7 @@ body {
     background: lightblue;
     border-bottom: 5px solid @colorYellow;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .profile-image {
@@ -64,7 +65,7 @@ img{
     margin-left: 40px;
     margin-right: 40px;
     margin-top: 20px;
-    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
     .search-bar {
     width: 50px;
@@ -115,29 +116,47 @@ img{
 }
 
 .cards-container {
-    height: 43%;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-top: 40px;
+    height: 50vh;
+    margin: 10px 40px 0 40px;
     display: flex;
+    flex-wrap: nowrap; /* Empêche les cartes de descendre en dessous */
     justify-content: space-between;
+    overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
     position: relative;
+    padding-right: 20px;
 
     .card {
-        width: 25%;
-        height: 100%;
+        flex: 0 0 22%; /* Chaque carte prend 30% de la largeur du conteneur */
+        height: 80%;
         background-color: white;
         display: block;
-        margin: 30px;
+        margin-top: 30px;
         position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
         .banner-card {
-            height: 38%;
+            height: 40%;
             width: 100%;
             margin: 0;
             background: white;
-            overflow: hidden;
-            
+            overflow: visible;
+            position: relative;
+
+            .ruban-jaune {
+                background-color: @colorYellow;
+                text-align: center;
+                width: 100px;
+                height: 25px;
+                font-size: 1rem;
+                font-weight: bold;
+                padding: 3px 5px;
+                margin-top: 10px;
+                margin-right: -10px;
+                position: absolute;
+                top: 0;
+                right: -5px;
+                z-index: 10;
+            }
         }
 
         .profile-img {
@@ -159,19 +178,106 @@ img{
 
         .banner-image {
             width: 100%;
-            height: 70%;
+            height: 75%;
             object-fit: cover;
             object-position: center center;
         }
-    }
 
-    .body-container {
-    width: 100%;
-    height: 70%;
-    background-color: aqua;
-    position: relative;
+        .body-card {
+            width: 100%;
+            height: 70%;
+            background-color: white;
+            position: relative;
+
+            .name-job-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-top: 30px;
+
+                ul {
+                    padding: 0;
+                    list-style-type: none;
+                }
+
+                li {
+                    margin-bottom: 5px;
+                }
+
+                .firstname, .lastname {
+                    font-family: "Playfair Display", serif;
+                    font-style: italic;
+                    font-size: 20px;
+                }
+
+                .job-title {
+                    color: #40A89F;
+                }
+            }
+
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin: 30px 0;
+
+                a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50px;
+                    height: 50px;
+                    background-size: cover;
+                    background-position: center;
+                    color: black;
+                    border: 2px solid #CFC261;
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .footer-card {
+            display: flex;
+            justify-content: center;
+
+            .voir-profil {
+                margin-top: 20px;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 700;
+                width: 70%;
+                height: 40px;
+                background-color: #191F39;
+                color: @colorTextButton;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                i {
+                    margin-right: 5px; /* Espacement entre l'icône et le texte */
+                    color: @colorTextButton; /* Couleur de l'icône */
+                }
+
+                .menu-link {
+                    text-decoration: none; /* Supprime le soulignement */
+                    color: white; /* Couleur du lien en blanc */
+                }
+            }
+
+            #icons {
+                display: none;
+                cursor: pointer;
+            }
+        }
+    }
 }
-}
+
+
+
 
 
 
