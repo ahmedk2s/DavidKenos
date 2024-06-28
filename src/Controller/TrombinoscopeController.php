@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/TrombinoscopeController.php
 
 namespace App\Controller;
 
@@ -14,12 +13,13 @@ class TrombinoscopeController extends AbstractController
     #[Route('/trombinoscope', name: 'app_trombinoscope')]
     public function index(UserRepository $userRepository): Response
     {
-        // Récupérer les 4 derniers utilisateurs depuis le UserRepository
-        $users = $userRepository->findLatestUsers(4);
+        // Récupérer tous les utilisateurs depuis le UserRepository
+        $users = $userRepository->findAll();  // change here
 
         return $this->render('trombinoscope/index.html.twig', [
             'users' => $users,
         ]);
     }
 }
+
 

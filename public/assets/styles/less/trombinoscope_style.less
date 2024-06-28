@@ -10,7 +10,7 @@ body {
 
 .main-content {
     flex-grow: 1; // Permet au contenu principal de remplir l'espace restant
-    width: 100%;
+    width: 82%;
     position: relative;
 
 .banner-container {
@@ -123,13 +123,15 @@ img{
     justify-content: space-between;
     overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
     position: relative;
-    padding-right: 20px;
+    
+    padding-left: 20px;
 
     .card {
         flex: 0 0 22%; /* Chaque carte prend 30% de la largeur du conteneur */
-        height: 80%;
+        height: 85%;
         background-color: white;
         display: block;
+        margin-right: 3.3%;
         margin-top: 30px;
         position: relative;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -227,8 +229,8 @@ img{
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 50px;
-                    height: 50px;
+                    width: 45px;
+                    height: 45px;
                     background-size: cover;
                     background-position: center;
                     color: black;
@@ -275,6 +277,44 @@ img{
         }
     }
 }
+/* Styles de base pour les petits écrans */
+@media only screen and (max-width: 768px) {
+    .main-content {
+        width: 100%;
+    }
+
+    .banner-container {
+        height: 150px;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        top: 200px;
+    }
+
+    .banner-image {
+        height: 200px;
+    }
+
+    .cards-container {
+        flex-wrap: wrap; /* Permet aux cartes de descendre en dessous sur les petits écrans */
+        justify-content: center;
+        overflow-x: hidden; /* Évite le défilement horizontal sur les petits écrans */
+        padding-left: 10px;
+    }
+
+    .card {
+        flex: 0 0 45%; /* Ajustement de la largeur des cartes pour occuper moins d'espace */
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+
+    .body-card {
+        height: auto; /* Ajustement de la hauteur des cartes pour s'adapter au contenu */
+    }
+}
+
 
 
 
