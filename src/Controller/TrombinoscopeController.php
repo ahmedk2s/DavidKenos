@@ -13,13 +13,16 @@ class TrombinoscopeController extends AbstractController
     #[Route('/trombinoscope', name: 'app_trombinoscope')]
     public function index(UserRepository $userRepository): Response
     {
-        // Récupérer tous les utilisateurs depuis le UserRepository
-        $users = $userRepository->findAll();  // change here
+        $loggedInUser = $this->getUser(); // Récupérer l'utilisateur connecté
+
+        // Récupérer tous les utilisateurs sauf l'utilisateur connecté
+        $users = $userRepository->findAllExceptLoggedInUser($loggedInUser);
 
         return $this->render('trombinoscope/index.html.twig', [
             'users' => $users,
         ]);
     }
 }
+
 
 

@@ -83,13 +83,16 @@ class UserRepository extends ServiceEntityRepository
     return $queryBuilder->getQuery()->getResult();
     }
 
-    public function findLatestUsers($limit = 4)
+    public function findAllExceptLoggedInUser(?User $loggedInUser): array
     {
-        return $this->createQueryBuilder('u')
-            ->orderBy('u.id', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        if ($loggedInUser !== null) {
+            $queryBuilder->andWhere('u.id != :loggedInUserId')
+            ->setParameter('loggedInUserId', $loggedInUser->getId());
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
 }
