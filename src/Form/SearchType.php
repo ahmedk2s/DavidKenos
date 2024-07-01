@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Model\SearchData;
+use Symfony\Component\Form\Extension\Core\Type\SearchType as BaseSearchType;
 
 class SearchType extends AbstractType
 {
@@ -18,6 +19,11 @@ class SearchType extends AbstractType
                     'placeholder' => 'Rechercher par titre'
                 ]
             ]);
+        $builder
+        ->add('q', BaseSearchType::class, [
+            'label' => false,
+            'attr' => ['placeholder' => 'Rechercher ...'],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

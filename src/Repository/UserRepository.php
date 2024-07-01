@@ -94,6 +94,14 @@ class UserRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+    public function findByFirstnameOrLastname($query)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.firstName LIKE :query OR u.lastName LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
 
 }
 

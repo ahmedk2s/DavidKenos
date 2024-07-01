@@ -15,13 +15,13 @@
     <div class="title">
         <h1>Le trombinoscope</h1>   
     </div>
-    <div class="search-container"> 
-        <div class="search-bar">
-            <button type="submit" class="icon-container">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>	
-            <input type="search" placeholder="Rechercher..." class="search-input">
-	    </div>
+    <div class="search-container">
+        {{ form_start(form, {'attr': {'class': 'search-form'}}) }}
+        <button type="submit" class="icon-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        {{ form_widget(form.q, {'attr': {'class': 'search-box'}}) }}
+        {{ form_end(form) }}
     </div> 
     <div class="cards-container">
     {% for user in users %}
