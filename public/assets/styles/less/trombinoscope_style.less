@@ -1,17 +1,27 @@
 @import "../includes/variables.less";
 @import "../includes/mixins.less";
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   min-height: 100vh;
   background-color: @lightGray;
   font-family: "Montserrat", sans-serif;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
 }
 
 .main-content {
-    flex-grow: 1; // Permet au contenu principal de remplir l'espace restant
-    width: 100%;
-    position: relative;
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  overflow: auto;
 
 .banner-container {
     height: 220px;
