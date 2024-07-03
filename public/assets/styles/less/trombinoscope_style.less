@@ -82,7 +82,7 @@ img{
     display: flex;
     align-items: center;
     margin-right: 40px;
-    width: 30%;
+    width: 40%;
 }
 
 .icon-container {
@@ -98,7 +98,7 @@ img{
 
 .search-box {
     border: 2px solid #f2bf2c;
-    width: 100%;
+    width: 300px;
     height: 35px;
     padding-left: 10px;
 }
@@ -252,11 +252,11 @@ img{
             justify-content: center;
 
             .voir-profil {
-                margin-top: 20px;
+                margin-top: 10px;
                 font-family: "Montserrat", sans-serif;
                 font-weight: 700;
                 width: 70%;
-                height: 40px;
+                height: 50px;
                 background-color: #191F39;
                 color: @colorTextButton;
                 padding: 10px 20px;
@@ -282,8 +282,18 @@ img{
         }
     }
 }
-/* Styles de base pour les petits écrans */
-@media only screen and (max-width: 768px) {
+
+@media screen and (max-width: 1290px) {
+  .main-content {
+    margin-top: 60px;
+  }  
+
+  .cards-container {
+    height: 46vh;
+  }
+}
+
+@media only screen and (max-width: 1055px) {
     .main-content {
         width: 100%;
     }
@@ -307,18 +317,53 @@ img{
         justify-content: center;
         overflow-x: hidden; /* Évite le défilement horizontal sur les petits écrans */
         padding-left: 10px;
+        overflow-x: hidden;
     }
 
     .card {
-        flex: 0 0 45%; /* Ajustement de la largeur des cartes pour occuper moins d'espace */
-        margin-right: 20px;
-        margin-top: 20px;
+        flex: 0 0 28% !important;  /* Augmente la largeur des cartes à 48% */
+        margin-right: 2%; /* Ajuste la marge droite pour conserver l'espacement entre les cartes */
+        margin-top: 40px;
+        margin-bottom: 40px; /* Ajoute un peu d'espace entre les cartes sur la hauteur */
+        min-width: 250px; 
     }
 
     .body-card {
         height: auto; /* Ajustement de la hauteur des cartes pour s'adapter au contenu */
     }
 }
+
+@media screen and (max-width: 928px) {
+    .search-container {
+        justify-content: left; 
+        padding-left: 30px;
+    }
+
+    .search-form {
+        width: 100%; /* Ajuster la largeur de la barre de recherche */
+    }
+
+    .search-box {
+        width: 100%; /* Ajuster la largeur de l'input */
+        max-width: 300px; 
+        
+    }
+    .cards-container {
+        .card {
+            .body-card {
+                .social-icons {
+                    a {
+                        width: 35px; /* Réduit la largeur des icônes sociales */
+                        height: 35px; /* Réduit la hauteur des icônes sociales */
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
 
 
 
