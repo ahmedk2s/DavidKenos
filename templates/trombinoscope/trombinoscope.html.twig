@@ -1,0 +1,78 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}
+	Trombinoscope
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+	<link rel="stylesheet" href="/assets/styles/css/card_trombo_style.css">
+{% endblock %}
+
+{% block body %}
+	<div class="main-content">
+		<div class="banner-container">
+			<img src="{{ asset('images/products/' ~ app.user.profilePictureFilename) }}" alt="Photo de profil" class="profile-image">
+			<img src="{{ asset('images/products/' ~ app.user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+		</div>
+
+		<div class="title-trombi">
+			<h1>Le trombinoscope</h1>
+		</div>
+
+		<div class="search-background">
+			<div class="search-container">
+				<div class="icon-container">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</div>
+				<input type="text" class="search-box" placeholder="Rechercher...">
+			</div>
+		</div>
+
+		<div class="cards-container">
+			{% for user in users %}
+				<div class="card">
+					<div class="card-banner">
+						<img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Banner Image">
+						<p class="ruban-jaune">{{ user.chocolateShop }}</p>
+					</div>
+					<div class="card-profile-image">
+						<img src="{{ asset('images/products/' ~ user.profilePictureFilename) }}" alt="Profile Image">
+					</div>
+
+					<div class="card-content">
+						<div class="name">
+							<span class="firstname">{{ user.firstName }}</span>
+							<span class="lastname">{{ user.lastName }}</span>
+						</div>
+
+						<div class="card-social-icons">
+							{% if user.facebookLink %}
+								<a href="{{ user.facebookLink }}">
+									<i class="fa-brands fa-facebook-f"></i>
+								</a>
+							{% endif %}
+							{% if user.instagramLink %}
+								<a href="{{ user.instagramLink }}">
+									<i class="fa-brands fa-instagram"></i>
+								</a>
+							{% endif %}
+							{% if user.twitterLink %}
+								<a href="{{ user.twitterLink }}">
+									<i class="fa-brands fa-x-twitter"></i>
+								</a>
+							{% endif %}
+							{% if user.linkedinLink %}
+								<a href="{{ user.linkedinLink }}">
+									<i class="fa-brands fa-linkedin-in"></i>
+								</a>
+							{% endif %}
+						</div>
+						<a href="{{ path('profile', {'slug': user.slug}) }}" class="card-profile-link">Voir le profil</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+
