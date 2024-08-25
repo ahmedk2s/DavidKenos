@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use DateInterval;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Un compte avec cette adresse e-mail existe déjà')]
@@ -20,96 +18,94 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $first_name = null;
+    private ?string $firstName;
 
     #[ORM\Column(length: 100)]
-    private ?string $last_name = null;
+    private ?string $lastName;
+
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $email;
 
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    private ?string $password;
 
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    #[ORM\Column(length: 100)]
-    private ?string $job_title = null;
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $jobTitle;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $description;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $profilePictureFilename = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePictureFilename;
 
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $coverPictureFilename = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $coverPictureFilename;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $facebook_link = null;
+    private ?string $facebookLink;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $twitter_link = null;
+    private ?string $twitterLink;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $instagram_link = null;
+    private ?string $instagramLink;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $linkedin_link = null;
+    private ?string $linkedinLink;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: News::class, orphanRemoval: true)]
     private Collection $news;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
-    private Collection $comment;
+    private Collection $comments;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class, orphanRemoval: true)]
     private Collection $posts;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
     private Collection $likes;
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notification::class, orphanRemoval: true)]
-    private Collection $notification;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notification::class, orphanRemoval: true)]
+    private Collection $notifications;
+
+    #[ORM\ManyToOne(targetEntity: ChocolateShop::class, inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: true)]
-    private ?ChocolateShop $chocolateShop = null;
+    private ?ChocolateShop $chocolateShop;
 
     #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-    
-    #[ORM\Column(type: "boolean")]
-    private $isApproved = false;
+    private bool $isVerified = false;
 
-    #[ORM\Column(type: "string", length: 255, unique: true)]
-    private ?string $slug = null;
+    #[ORM\Column(type: 'boolean')]
+    private bool $isApproved = false;
+
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $slug;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $tokenRegistration = null;
+    private ?string $tokenRegistration;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $tokenRegistrationLifeTime = null;
-
-    
-    #[ORM\Column(type: "boolean")]
-    private $hasSeenApprovalPopup = false;
+    private ?DateTime $tokenRegistrationLifeTime;
 
     public function __construct()
     {
         $this->news = new ArrayCollection();
-        $this->comment = new ArrayCollection();
+        $this->comments = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->likes = new ArrayCollection();
-        $this->notification = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
         $this->isVerified = false;
-        $this->tokenRegistrationLifeTime = (new DateTime('now'))->add(new DateInterval('P1D'));
-
+        $this->tokenRegistrationLifeTime = new DateTime('now +1 day');
     }
+
+    // Getters and setters
 
     public function getId(): ?int
     {
@@ -118,25 +114,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): static
+    public function setFirstName(string $firstName): self
     {
-        $this->first_name = $first_name;
-
+        $this->firstName = $firstName;
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): static
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
-
+        $this->lastName = $lastName;
         return $this;
     }
 
@@ -145,10 +139,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -157,10 +150,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -169,22 +161,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->roles;
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
     public function getJobTitle(): ?string
     {
-        return $this->job_title;
+        return $this->jobTitle;
     }
 
-    public function setJobTitle(string $job_title): static
+    public function setJobTitle(?string $jobTitle): self
     {
-        $this->job_title = $job_title;
-
+        $this->jobTitle = $jobTitle;
         return $this;
     }
 
@@ -193,10 +183,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->description;
     }
 
-    public function setDescription(?string $description): static
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -208,10 +197,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilePictureFilename(?string $profilePictureFilename): self
     {
         $this->profilePictureFilename = $profilePictureFilename;
-
         return $this;
     }
-
 
     public function getCoverPictureFilename(): ?string
     {
@@ -221,55 +208,50 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCoverPictureFilename(?string $coverPictureFilename): self
     {
         $this->coverPictureFilename = $coverPictureFilename;
-
         return $this;
     }
 
     public function getFacebookLink(): ?string
     {
-        return $this->facebook_link;
+        return $this->facebookLink;
     }
 
-    public function setFacebookLink(?string $facebook_link): static
+    public function setFacebookLink(?string $facebookLink): self
     {
-        $this->facebook_link = $facebook_link;
-
+        $this->facebookLink = $facebookLink;
         return $this;
     }
 
     public function getTwitterLink(): ?string
     {
-        return $this->twitter_link;
+        return $this->twitterLink;
     }
 
-    public function setTwitterLink(?string $twitter_link): static
+    public function setTwitterLink(?string $twitterLink): self
     {
-        $this->twitter_link = $twitter_link;
-
+        $this->twitterLink = $twitterLink;
         return $this;
     }
 
     public function getInstagramLink(): ?string
     {
-        return $this->instagram_link;
+        return $this->instagramLink;
     }
 
-    public function setInstagramLink(?string $instagram_link): static
+    public function setInstagramLink(?string $instagramLink): self
     {
-        $this->instagram_link = $instagram_link;
-
+        $this->instagramLink = $instagramLink;
         return $this;
     }
 
     public function getLinkedinLink(): ?string
     {
-        return $this->linkedin_link;
+        return $this->linkedinLink;
     }
 
-    public function setLinkedinLink(?string $linkedin_link): static
+    public function setLinkedinLink(?string $linkedinLink): self
     {
-        $this->linkedin_link = $linkedin_link;
-
+        $this->linkedinLink = $linkedinLink;
         return $this;
     }
 
@@ -281,17 +263,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->news;
     }
 
-    public function addNews(News $news): static
+    public function addNews(News $news): self
     {
         if (!$this->news->contains($news)) {
-            $this->news->add($news);
+            $this->news[] = $news;
             $news->setUser($this);
         }
-
         return $this;
     }
 
-    public function removeNews(News $news): static
+    public function removeNews(News $news): self
     {
         if ($this->news->removeElement($news)) {
             // set the owning side to null (unless already changed)
@@ -299,37 +280,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $news->setUser(null);
             }
         }
-
         return $this;
     }
 
     /**
      * @return Collection<int, Comment>
      */
-    public function getComment(): Collection
+    public function getComments(): Collection
     {
-        return $this->comment;
+        return $this->comments;
     }
 
-    public function addComment(Comment $comment): static
+    public function addComment(Comment $comment): self
     {
-        if (!$this->comment->contains($comment)) {
-            $this->comment->add($comment);
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
             $comment->setUser($this);
         }
-
         return $this;
     }
 
-    public function removeComment(Comment $comment): static
+    public function removeComment(Comment $comment): self
     {
-        if ($this->comment->removeElement($comment)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
             }
         }
-
         return $this;
     }
 
@@ -341,52 +319,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->posts;
     }
 
-    public function addPost(Post $post): static
+    public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
-            $this->posts->add($post);
+            $this->posts[] = $post;
             $post->setUser($this);
         }
         return $this;
     }
-    /**
-     * @return Collection<int, Notification>
-     */
-    public function getNotification(): Collection
-    {
-        return $this->notification;
-    }
 
-    public function addNotification(Notification $notification): static
-    {
-        if (!$this->notification->contains($notification)) {
-            $this->notification->add($notification);
-            $notification->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removePost(Post $post): static
+    public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
             if ($post->getUser() === $this) {
                 $post->setUser(null);
             }
-            return $this;
         }
-    }
-
-    public function removeNotification(Notification $notification): static
-    {
-        if ($this->notification->removeElement($notification)) {
-            // set the owning side to null (unless already changed)
-            if ($notification->getUser() === $this) {
-                $notification->setUser(null);
-            }
-        }
-
         return $this;
     }
 
@@ -398,57 +347,82 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->likes;
     }
 
-    public function addLike(Like $like): static
+    public function addLike(Like $like): self
     {
         if (!$this->likes->contains($like)) {
-            $this->likes->add($like);
+            $this->likes[] = $like;
             $like->setUser($this);
         }
-
         return $this;
     }
 
-    public function removeLike(Like $like): static
+    public function removeLike(Like $like): self
     {
         if ($this->likes->removeElement($like)) {
             // set the owning side to null (unless already changed)
             if ($like->getUser() === $this) {
                 $like->setUser(null);
             }
-            return $this;
         }
+        return $this;
     }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
+            }
+        }
+        return $this;
+    }
+
     public function getChocolateShop(): ?ChocolateShop
-{
-    return $this->chocolateShop;
-}
+    {
+        return $this->chocolateShop;
+    }
 
-public function setChocolateShop(?ChocolateShop $chocolateShop): self
-{
-    $this->chocolateShop = $chocolateShop;
-
-    return $this;
-}
+    public function setChocolateShop(?ChocolateShop $chocolateShop): self
+    {
+        $this->chocolateShop = $chocolateShop;
+        return $this;
+    }
 
     public function getIsVerified(): ?bool
     {
         return $this->isVerified;
     }
 
-    // Setter pour définir la valeur de $is_verified
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
         return $this;
     }
 
-    public function getIsApproved(): bool
+    public function getIsApproved(): ?bool
     {
-    return $this->isApproved;
+        return $this->isApproved;
     }
 
-
-    public function setApproved(bool $isApproved): self
+    public function setIsApproved(bool $isApproved): self
     {
         $this->isApproved = $isApproved;
         return $this;
@@ -465,6 +439,28 @@ public function setChocolateShop(?ChocolateShop $chocolateShop): self
         return $this;
     }
 
+    public function getTokenRegistration(): ?string
+    {
+        return $this->tokenRegistration;
+    }
+
+    public function setTokenRegistration(?string $tokenRegistration): self
+    {
+        $this->tokenRegistration = $tokenRegistration;
+        return $this;
+    }
+
+    public function getTokenRegistrationLifeTime(): ?DateTime
+    {
+        return $this->tokenRegistrationLifeTime;
+    }
+
+    public function setTokenRegistrationLifeTime(DateTime $tokenRegistrationLifeTime): self
+    {
+        $this->tokenRegistrationLifeTime = $tokenRegistrationLifeTime;
+        return $this;
+    }
+
     public function eraseCredentials()
     {
         // Vous pouvez laisser cette méthode vide si vous n'avez pas de données sensibles à effacer
@@ -478,44 +474,6 @@ public function setChocolateShop(?ChocolateShop $chocolateShop): self
 
     public function __toString(): string
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->firstName . ' ' . $this->lastName;
     }
-
-    public function getTokenRegistration(): ?string
-    {
-        return $this->tokenRegistration;
-    }
-
-    public function setTokenRegistration(?string $tokenRegistration): static
-    {
-        $this->tokenRegistration = $tokenRegistration;
-
-        return $this;
-    }
-
-    public function getTokenRegistrationLifeTime(): ?\DateTimeInterface
-    {
-        return $this->tokenRegistrationLifeTime;
-    }
-
-    public function setTokenRegistrationLifeTime(\DateTimeInterface $tokenRegistrationLifeTime): static
-    {
-        $this->tokenRegistrationLifeTime = $tokenRegistrationLifeTime;
-
-        return $this;
-    }
-
-    public function getHasSeenApprovalPopup(): bool
-    {
-        return $this->hasSeenApprovalPopup;
-    }
-
-    public function setHasSeenApprovalPopup(bool $hasSeenApprovalPopup): self
-    {
-        $this->hasSeenApprovalPopup = $hasSeenApprovalPopup;
-        return $this;
-    }
-
-
 }
-

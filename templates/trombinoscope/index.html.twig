@@ -1,0 +1,90 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}Trombinoscope{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/trombinoscope_style.css">
+{% endblock %}
+
+{% block body %}
+<div class="main-content">
+    <div class="banner-container">
+        <img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profil" class="profile-image">
+        <img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+    </div>
+    <div class="title">
+        <h1>Le trombinoscope</h1>   
+    </div>
+    <div class="search-container">
+        {{ form_start(form, {'attr': {'class': 'search-form'}}) }}
+        <button type="submit" class="icon-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        {{ form_widget(form.q, {'attr': {'class': 'search-box'}}) }}
+        {{ form_end(form) }}
+    </div> 
+    <div class="cards-container">
+    {% for user in users %}
+        <div class="card">
+            <div class="banner-card">
+                <div class="ruban-jaune">
+                    {% if user.chocolateShop %}
+                        {{ user.chocolateShop.city }}
+                    {% endif %}
+                </div>
+                <img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profil" class="profile-img">
+                <img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+            </div>
+            <div class="body-card">
+                <div class="name-job-container">
+                    <ul>
+                        <li>
+                            <span class="firstname">{{ user.firstName }}</span>
+                            <span class="lastname">{{ user.lastName }}</span>
+                        </li>
+                        <li>
+                            <span class="job-title">{{ user.jobTitle }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="social-icons">
+                    {% if user.facebookLink %}
+                        <a href="{{ user.facebookLink }}" class="icon-facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    {% endif %}
+                    {% if user.instagramLink %}
+                        <a href="{{ user.instagramLink }}" class="icon-instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    {% endif %}
+                    {% if user.twitterLink %}
+                        <a href="{{ user.twitterLink }}" class="icon-twitter">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    {% endif %}
+                    {% if user.linkedinLink %}
+                        <a href="{{ user.linkedinLink }}" class="icon-linkedin">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="footer-card">
+                    <button class="voir-profil">
+                        <i class="fa-regular fa-eye"></i>
+                        <a href="{{ path('profile', {'slug': user.slug}) }}" class="menu-link">Voir mon profil</a>
+                    </button>
+                    <div id="icons"></div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+        
+    </div>
+</div>
+
+
+
+
+{% endblock %}

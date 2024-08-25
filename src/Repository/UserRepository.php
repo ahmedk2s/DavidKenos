@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -67,34 +68,40 @@ class UserRepository extends ServiceEntityRepository
 
     public function findUsersByRoleAndChocolateShop($role, $chocolateShop, $excludeRole = false)
     {
-        $queryBuilder = $this->createQueryBuilder('u')
-            ->where('u.chocolateShop = :chocolateShop')
-            ->setParameter('chocolateShop', $chocolateShop);
+    $queryBuilder = $this->createQueryBuilder('u')
+                        ->where('u.chocolateShop = :chocolateShop')
+                        ->setParameter('chocolateShop', $chocolateShop);
+                        
+    if ($excludeRole) {
+        $queryBuilder->andWhere('u.roles NOT LIKE :role');
+    } else {
+        $queryBuilder->andWhere('u.roles LIKE :role');
+    }
+    
+    $queryBuilder->setParameter('role', '%' . $role . '%');
+    
+    return $queryBuilder->getQuery()->getResult();
+    }
 
-        if ($excludeRole) {
-            $queryBuilder->andWhere('u.roles NOT LIKE :role');
-        } else {
-            $queryBuilder->andWhere('u.roles LIKE :role');
+    public function findAllExceptLoggedInUser(?User $loggedInUser): array
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        if ($loggedInUser !== null) {
+            $queryBuilder->andWhere('u.id != :loggedInUserId')
+            ->setParameter('loggedInUserId', $loggedInUser->getId());
         }
-
-        $queryBuilder->setParameter('role', '%' . $role . '%');
 
         return $queryBuilder->getQuery()->getResult();
     }
-
-    public function findAdminsWaitingForApproval()
+    public function findByFirstnameOrLastname($query)
     {
         return $this->createQueryBuilder('u')
-            ->where('u.roles LIKE :role')
-            ->andWhere('u.isApproved = :isApproved')
-            ->setParameter('role', '%"ROLE_ADMIN"%') // Notez les guillemets supplémentaires
-            ->setParameter('isApproved', false)
+            ->where('u.firstName LIKE :query OR u.lastName LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
             ->getQuery()
             ->getResult();
     }
-
-
-
 
 }
 

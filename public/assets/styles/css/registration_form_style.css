@@ -1,0 +1,121 @@
+.dflex {
+  display: flex;
+  flex-wrap: wrap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/styles/includes/fonts/PlayfairDisplay-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/styles/includes/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+body {
+  background: url("/images/connexion-fond.jpg") no-repeat center center;
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+}
+.logo-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+}
+.logo-container .img-container {
+  width: 150px;
+  height: 150px;
+}
+.logo-container .img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.form-container {
+  width: fit-content;
+  flex-wrap: wrap;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h2 {
+  font-family: "Playfair Display", serif;
+  color: #0aaa9e;
+  font-size: 2.7rem;
+  margin-bottom: 25px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.custom-input {
+  width: 400px;
+  margin-bottom: 8px;
+  height: 40px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #019e8979;
+  background-color: #111425;
+  padding-left: 20px;
+  outline: none;
+  color: #b4b4be;
+  font-family: "Montserrat", sans-serif;
+}
+.custom-input:focus {
+  border-color: #0aaa9e;
+}
+.termes-contrat {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #b4b4be;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+.custom-checkbox {
+  width: 20px;
+  margin-left: 5px;
+}
+.button-container {
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.custom-btn {
+  background-color: #0aaa9e;
+  color: black;
+  border: none;
+  width: 200px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+}
+@media screen and (max-width: 430px) {
+  .custom-input {
+    width: 280px;
+  }
+  .custom-btn {
+    width: 150px;
+  }
+}

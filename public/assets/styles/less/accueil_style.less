@@ -99,7 +99,6 @@ body {
 
 .header-container-posts {
   height: 10%;
-  margin-bottom: 15px;
 }
 
 .grid-container {
@@ -164,8 +163,7 @@ body {
 #post-2,
 #post-3,
 #post-6 {
-  height: 200px;
-
+  height: 250px;
   h3 {
     position: absolute;
     top: 50%;
@@ -183,7 +181,7 @@ body {
     font-size: 0.8rem;
     color: white;
     z-index: 2;
-    max-height: 3.6rem;
+    max-height: 3.9rem;
     overflow: hidden;
   }
 }
@@ -191,8 +189,7 @@ body {
 #post-1,
 #post-4,
 #post-5 {
-  height: 350px;
-
+  height: 450px;
   h3 {
     position: absolute;
     top: 72.5%;
@@ -224,7 +221,6 @@ body {
 
 .header-container-news {
   height: 10%;
-  margin-bottom: 15px;
 }
 
 .body-container-news {
@@ -239,7 +235,7 @@ body {
 }
 
 .block-img {
-  height: 150px;
+  height: 200px;
   background-color: #1f2547;
   border: 1px solid black;
   width: 100%;
@@ -282,19 +278,50 @@ body {
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1290px) {
   .body-container {
-    margin-top: 90px;
+    margin-top: 100px;
+  }
+  .posts-container {
+    padding-top: 20px;
+  }
+  .news-container {
+    padding-top: 20px;
+  }
+  .header-container-posts {
+    height: 9%;
+  }
+  .header-container-news {
+    height: 9%;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .posts-container {
     width: 62%;
+    h3 {
+      font-size: 0.5 rem;
+    }
   }
 
   .news-container {
     width: 34%;
+  }
+  .header-container-posts {
+    h3 {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+  }
+  .header-container-news {
+    h3 {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
   }
 
   .grid-container {
@@ -415,6 +442,7 @@ body {
 
   .posts-container {
     width: 80%;
+    height: 2330px;
   }
 
   .header-container-posts {
