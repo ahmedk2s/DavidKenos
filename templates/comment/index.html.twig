@@ -1,0 +1,67 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Gérer les commentaires{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container-body">
+        <div class="container-table">
+            <h1>Gérer les commentaires</h1>
+            {% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                <div class="container-button-create">
+                    <a class="btn-create" href="{{ path('app_comment_new') }}">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Ajouter</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% include "_partials/_flash.html.twig" %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Post</th>
+                        <th>Texte du Commentaire</th>
+                        {% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                            <th>Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                        {% for comment in post.comments %}
+                            <tr>
+                                <td data-label="Utilisateur">{{ comment.user.firstName }} {{ comment.user.lastName }}</td>
+                                <td data-label="Post">{{ post.title }}</td>
+                                <td data-label="Texte">{{ comment.text }}</td>
+                                {% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                                    <td data-label="Actions" class="btns">
+                                        <a class="btn-edit" href="{{ path('app_comment_edit', {'slug': comment.slug}) }}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            <span>Modifier</span>
+                                        </a>
+                                        {{ include('comment/_delete_form.html.twig') }}
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Aucun commentaire enregistré pour ce post</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4">Aucun post avec commentaires enregistré</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

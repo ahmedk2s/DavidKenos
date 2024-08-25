@@ -1,5 +1,16 @@
+# config/routes.yaml
+
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
-    type: attribute
+    type: annotation
+
+admin_register:
+    path: '/register/admin'
+    controller: 'RegistrationController::adminRegister'
+    
+employe_register:
+    path: '/register/employe'
+    controller: 'RegistrationController::employeRegister'
+

@@ -1,0 +1,61 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}Bienvenue dans l'accueil{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/accueil_style.css">
+	<link rel="stylesheet" href="/assets/styles/css/sidebar_style.css">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="/assets/styles/js/scripts.js" defer></script>
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="body-container">
+		<div class="posts-container">
+			<div class="header-container-posts">
+				<h3>Bienvenue sur ton espace,</h3>
+				<p>voici les derniers posts publiés.</p>
+			</div>
+			<div class="grid-container">
+				{% for post in posts %}
+					<div class="div" id="{{ 'post-' ~ loop.index }}">
+						<img src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="image de {{ post.title }}">
+						<h3>{{ post.title }}</h3>
+						<p>{{ post.text }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="news-container">
+			<div class="header-container-news">
+				<h3>Les dernières actualités</h3>
+				<p>de l'entreprise</p>
+			</div>
+			{% for news in news %}
+				<div class="block-news">
+					<div class="block-img">
+						{% if news.imageName %}
+							<img src="{{ vich_uploader_asset(news, 'imageFile') }}" alt="image de {{ news.title }}">
+						{% else %}
+							<p>Aucune image disponible</p>
+						{% endif %}
+						{% if news.chocolateShop %}
+							<p class="ruban-jaune">
+								{{ news.chocolateShop.city }}
+							</p>
+						{% endif %}
+					</div>
+					<div class="block-text">
+						<h5>{{ news.title }}</h5>
+						<p>{{ news.content }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	
+{% endblock %}

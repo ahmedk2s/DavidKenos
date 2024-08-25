@@ -1,0 +1,61 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Gérer les catégories
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container-body">
+		<div class="container-table">
+			<h1>Gérer les catégories</h1>
+
+		{% if is_granted('ROLE_SUPER_ADMIN') %}
+			<div class="container-button-create">
+				<a class="btn-create" href="{{ path('app_category_new') }}">
+					<i class="fa-solid fa-plus"></i>
+					<span>Ajouter</span>
+				</a>
+			</div>
+		{% endif %}
+
+			{% include "_partials/_flash.html.twig" %}
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nom</th>
+					{% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
+						<th class="test">Actions</th>
+						{% endif %}
+					</tr>
+				</thead>
+				<tbody>
+					{% for category in categories %}
+						<tr>
+							<td data-label="Nom">{{ category.name }}</td>
+
+							{% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
+							<td data-label="Actions" class="btns">
+								<a class="btn-edit" href="{{ path('app_category_edit', {'slug': category.slug}) }}">
+									<i class="fa-solid fa-pen-to-square"></i>
+									<span>Modifier</span>
+								</a>
+								{{ include('category/_delete_form.html.twig') }}
+							</td>
+							{% endif %}
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucun enregistrement trouvé</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

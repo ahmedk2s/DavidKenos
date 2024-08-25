@@ -1,0 +1,56 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Gérer les actualités{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/back_office_table_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container-body">
+        <div class="container-table">
+            <h1>Gérer les actualités</h1>
+            <div class="container-button-create">
+                <a class="btn-create" href="{{ path('app_news_new') }}">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Ajouter</span>
+                </a>
+            </div>
+            {% include "_partials/_flash.html.twig" %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Contenu</th>
+                        {% if app.user.roles is defined and 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                        <th class="test test2">Actions</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for news in news %}
+                        <tr>
+                            <td data-label="Titre">{{ news.title }}</td>
+                            <td class="overflow" data-label="Texte">{{ news.content }}</td>
+                                {% if 'ROLE_SUPER_ADMIN' in app.user.roles %}
+                            <td data-label="Actions" class="bt">
+                                    <a class="btn-edit" href="{{ path('app_news_edit', {'slug': news.slug}) }}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        <span>Modifier</span>
+                                    </a>
+                                    {{ include('news/_delete_form.html.twig') }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Pas d'actualités trouvées</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

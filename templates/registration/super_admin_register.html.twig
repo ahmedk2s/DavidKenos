@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% include 'registration/base_form.html.twig' with {'form': registrationForm} %}
+{% endblock %}

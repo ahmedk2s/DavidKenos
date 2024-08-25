@@ -1,0 +1,374 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: @lightGray;
+  font-family: "Montserrat", sans-serif;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  overflow: auto;
+
+.banner-container {
+    height: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 40px;
+    background: lightblue;
+    border-bottom: 5px solid @colorYellow;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image {
+    position: absolute;
+    border: 7px solid white;
+    border-radius: 50%;
+    width: 150px; 
+    height: 150px; 
+    top: 250px; 
+    left: 50%;
+    transform: translateX(-50%) translateY(-65%); 
+}
+
+img{
+    
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-image{
+    width: 100%;
+    height: 275px;
+    object-fit: cover;
+    object-position: center center;
+
+}
+}
+.title{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.search-container {
+    height: 55px;
+    background-color: white;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    width: 40%;
+}
+
+.icon-container {
+    background-color: #f2bf2c;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.search-box {
+    border: 2px solid #f2bf2c;
+    width: 300px;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.search-box:focus {
+    border-color: #f2bf2c;
+    outline: none;
+}
+
+.search-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.search-input::placeholder {
+    padding-left: 5%;
+    font-size: 15px;
+}
+
+
+.cards-container {
+    height: 50vh;
+    margin: 10px 40px 0 40px;
+    display: flex;
+    flex-wrap: nowrap; /* Empêche les cartes de descendre en dessous */
+    justify-content: space-between;
+    overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
+    position: relative;
+    
+    padding-left: 20px;
+
+    .card {
+        flex: 0 0 22%; /* Chaque carte prend 30% de la largeur du conteneur */
+        height: 85%;
+        background-color: white;
+        display: block;
+        margin-right: 3.3%;
+        margin-top: 30px;
+        position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        .banner-card {
+            height: 40%;
+            width: 100%;
+            margin: 0;
+            background: white;
+            overflow: visible;
+            position: relative;
+
+            .ruban-jaune {
+                background-color: @colorYellow;
+                text-align: center;
+                width: 100px;
+                height: 25px;
+                font-size: 1rem;
+                font-weight: bold;
+                padding: 3px 5px;
+                margin-top: 10px;
+                margin-right: -10px;
+                position: absolute;
+                top: 0;
+                right: -5px;
+                z-index: 10;
+            }
+        }
+
+        .profile-img {
+            position: absolute;
+            border: 3px solid white;
+            border-radius: 50%;
+            width: 85px;
+            height: 85px;
+            top: 130px;
+            left: 50%;
+            transform: translate(-50%, -65%);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 75%;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        .body-card {
+            width: 100%;
+            height: 70%;
+            background-color: white;
+            position: relative;
+
+            .name-job-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-top: 30px;
+
+                ul {
+                    padding: 0;
+                    list-style-type: none;
+                }
+
+                li {
+                    margin-bottom: 5px;
+                }
+
+                .firstname, .lastname {
+                    font-family: "Playfair Display", serif;
+                    font-style: italic;
+                    font-size: 20px;
+                }
+
+                .job-title {
+                    color: #40A89F;
+                }
+            }
+
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin: 30px 0;
+
+                a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 45px;
+                    height: 45px;
+                    background-size: cover;
+                    background-position: center;
+                    color: black;
+                    border: 2px solid #CFC261;
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .footer-card {
+            display: flex;
+            justify-content: center;
+
+            .voir-profil {
+                margin-top: 10px;
+                font-family: "Montserrat", sans-serif;
+                font-weight: 700;
+                width: 70%;
+                height: 50px;
+                background-color: #191F39;
+                color: @colorTextButton;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                i {
+                    margin-right: 5px; /* Espacement entre l'icône et le texte */
+                    color: @colorTextButton; /* Couleur de l'icône */
+                }
+
+                .menu-link {
+                    text-decoration: none; /* Supprime le soulignement */
+                    color: white; /* Couleur du lien en blanc */
+                }
+            }
+
+            #icons {
+                display: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1290px) {
+  .main-content {
+    margin-top: 60px;
+  }  
+
+  .cards-container {
+    height: 46vh;
+  }
+}
+
+@media only screen and (max-width: 1055px) {
+    .main-content {
+        width: 100%;
+    }
+
+    .banner-container {
+        height: 150px;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        top: 200px;
+    }
+
+    .banner-image {
+        height: 200px;
+    }
+
+    .cards-container {
+        flex-wrap: wrap; /* Permet aux cartes de descendre en dessous sur les petits écrans */
+        justify-content: center;
+        overflow-x: hidden; /* Évite le défilement horizontal sur les petits écrans */
+        padding-left: 10px;
+        overflow-x: hidden;
+    }
+
+    .card {
+        flex: 0 0 28% !important;  /* Augmente la largeur des cartes à 48% */
+        margin-right: 2%; /* Ajuste la marge droite pour conserver l'espacement entre les cartes */
+        margin-top: 40px;
+        margin-bottom: 40px; /* Ajoute un peu d'espace entre les cartes sur la hauteur */
+        min-width: 250px; 
+    }
+
+    .body-card {
+        height: auto; /* Ajustement de la hauteur des cartes pour s'adapter au contenu */
+    }
+}
+
+@media screen and (max-width: 928px) {
+    .search-container {
+        justify-content: left; 
+        padding-left: 30px;
+    }
+
+    .search-form {
+        width: 100%; /* Ajuster la largeur de la barre de recherche */
+    }
+
+    .search-box {
+        width: 100%; /* Ajuster la largeur de l'input */
+        max-width: 300px; 
+        
+    }
+    .cards-container {
+        .card {
+            .body-card {
+                .social-icons {
+                    a {
+                        width: 35px; /* Réduit la largeur des icônes sociales */
+                        height: 35px; /* Réduit la hauteur des icônes sociales */
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+    

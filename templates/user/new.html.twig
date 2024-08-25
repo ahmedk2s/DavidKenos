@@ -1,0 +1,108 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Ajouter Utilisateur{% endblock %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/form_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-body user-add">
+		<div class="container-table">
+
+			<h1>Ajouter Utilisateur</h1>
+
+			{{ form_start(form, {'attr': {'class': 'form-container '}}) }}
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.first_name, 'Prénom') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.first_name, {'attr': {'class': 'custom-input user'}}) }}
+					{{ form_errors(form.first_name) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.last_name, 'Nom') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.last_name, {'attr': {'class': 'custom-input user'}}) }}
+					{{ form_errors(form.last_name) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.job_title, 'poste occupé') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.job_title, {'attr': {'class': 'custom-input user'}}) }}
+					{{ form_errors(form.job_title) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.chocolate_shop, 'Chocolaterie') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.chocolate_shop, {'attr': {'class': 'custom-input dropdown'}}) }}
+					{{ form_errors(form.chocolate_shop) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.email, 'Email') }}
+				</div>
+				<div class="form-cell">
+					{{ form_row(form.email, {'label': false, 'attr': {'class': 'custom-input user', 'placeholder': 'Adresse e-mail', 'pattern': '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'title': 'Adresse e-mail invalide'}}) }}
+					{{ form_errors(form.email) }}
+				</div>
+			</div>
+
+            <div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.plainPassword, 'Mot de passe') }}
+				</div>
+				<div class="form-cell">
+					{{ form_row(form.plainPassword, {'label': false, 'attr': {'class': 'custom-input user', 'placeholder': 'Mot de passe', 'pattern': '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{16,}$', 'title': 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial et avoir au moins 16 caractères.'}}) }}
+					{{ form_errors(form.plainPassword) }}
+				</div>
+			</div>
+
+            <div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.roles, 'roles') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.roles, {'attr': {'class': 'custom-input user'}}) }}
+					{{ form_errors(form.roles) }}
+				</div>
+			</div>
+
+			<div class="container-button-create">
+				<button type="submit" class="btn-create">
+					<span>
+						<i class="fa-solid fa-floppy-disk"></i>
+						{{ button_label|default('Enregistrer') }}</span>
+				</button>
+			</div>
+
+			{{ form_end(form) }}
+
+			<a href="{{ path('app_user_index') }}" class="btn-edit">
+				<i class="fa-solid fa-arrow-left"></i>
+				<span>Retour à la liste</span>
+			</a>
+
+		</div>
+	</div>
+    
+{% endblock %}

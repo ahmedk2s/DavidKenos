@@ -1,0 +1,75 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/assets/styles/css/profile_style.css">
+    <link rel="stylesheet" href="/assets/styles/css/post_style.css">
+{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="banner-container">
+            <img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profil" class="profile-image">
+            <img src="{{ asset('images/products/' ~ user.coverPictureFilename) }}" alt="Image en bandeau" class="banner-image">
+        </div>
+
+        <div class="content-container">
+            <div class="card">
+                <div class="name-details">
+                    <span class="firstname">{{ user.firstName }}</span>
+                    <span class="lastname">{{ user.lastName }}</span>
+                </div>
+                <p class="header-card"> {{ user.jobTitle }} - <span class="chocolate-shop">{{ user.chocolateShop }}</span></p>
+                <p class="description">{{ user.description }}</p>
+
+                <div class="social-icons">
+                    {% if user.facebookLink %}
+                        <a href="{{ user.facebookLink }}" alt="Logo Facebook" class="icon-facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if user.instagramLink %}
+                        <a href="{{ user.instagramLink }}" alt="Logo Instagram" class="icon-instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if user.twitterLink %}
+                        <a href="{{ user.twitterLink }}" alt="Logo Twitter" class="icon-twitter">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if user.linkedinLink %}
+                        <a href="{{ user.linkedinLink }}" alt="Logo LinkedIn" class="icon-linkedin">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    {% endif %}
+                </div>
+
+                {% if app.user and user.id != app.user.id %}
+                    <a href="mailto:{{ user.email }}" class="email-button">Envoyer un mail</a>
+                {% endif %}
+            </div>
+
+            <div class="posts-container">
+                <div class="post-header">
+                    <h2>Les derniers</h2>
+                    <p>posts publiés</p>
+                </div>
+                {% include '_partials/_post.html.twig' %}
+            </div>
+            
+            {% if app.user and user.id == app.user.id %}
+                <div class="button-container">
+                    <a href="{{ path('profile_edit', {'slug': user.slug}) }}" class="btn">Modifier mon profil</a>
+                    <a href="{{ path('app_post_new_profil') }}" class="btn">Publier un post</a>
+                    <a href="#" class="btn trombinoscope">Trombinoscope</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}La Vie Des Chocolateries
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/la_vie_des_chocolateries_style.css">
+	<link rel="stylesheet" href="/assets/styles/css/post_style.css">
+{% endblock %}
+{% block javascripts %}
+	{# {{ encore_entry_script_tags('app') }} #}
+{% endblock %}
+
+{% block body %}
+
+	<div class="body-container">
+		<header>
+			<h1>
+				<span class="part1">La vie</span>
+				<span class="part2">des chocolateries,</span>
+				<span class="part3" id="selected-category"></span>
+			</h1>
+		</header>
+		<section class="grid-container">
+			<div class="container-latest-registrants">
+				<h4 id="title">Les derniers inscrits</h4>
+				{% for user in users %}
+					<div class="container-inscrit">
+						<div class="photo-container">
+							<div class="photo">
+								<img src="{{ asset('images/products/' ~ user.profilePictureFilename )}}" alt="Photo de profile">
+							</div>
+						</div>
+						<div class="name">
+							<span class="firstname">{{ user.firstName }}</span>
+							<span class="lastname">{{ user.lastName }}</span>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="container-post">
+				{% include '_partials/_post.html.twig' %}
+			</div>
+			<div class="container-categories">
+				<ul>
+					<li>
+						<a href="{{ path('app_la_vie_des_chocolateries') }}" class="category-link">Tous les posts</a>
+					</li>
+					{% for category in categories %}
+						<li>
+							<a href="{{ path('app_la_vie_des_chocolateries', {'category': category.id}) }}" class="category-link">{{ category.name }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+		</section>
+	</div>
+
+{% endblock %}

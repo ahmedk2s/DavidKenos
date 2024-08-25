@@ -1,0 +1,88 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}Ajouter Posts{% endblock %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="/assets/styles/css/form_style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-body post-edit-profile">
+		<div class="container-table">
+
+			<h1>Ajouter Post</h1>
+
+			{{ form_start(form, {'attr': {'class': 'form-container'}}) }}
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.title, 'Titre') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.title, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.title) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.text, 'Texte') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.text, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.text) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.imageFile, 'Image') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.imageFile, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.imageFile) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.date_creation, 'Date de création') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.date_creation, {'attr': {'class': 'custom-input'}}) }}
+					{{ form_errors(form.date_creation) }}
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-cell-label yellow-background">
+					{{ form_label(form.category, 'Catégorie') }}
+				</div>
+				<div class="form-cell">
+					{{ form_widget(form.category, {'attr': {'class': 'custom-input dropdown'}}) }}
+					{{ form_errors(form.category) }}
+				</div>
+			</div>
+
+			<div class="container-button-create">
+				<button type="submit" class="btn-create">
+					<span>
+						<i class="fa-solid fa-floppy-disk"></i>
+						{{ button_label|default('Enregistrer') }}</span>
+				</button>
+			</div>
+
+			{{ form_end(form) }}
+
+			<a href="{{ path('profile') }}" class="btn-edit">
+				<i class="fa-solid fa-arrow-left"></i>
+				<span>Retour à la liste</span>
+			</a>
+
+		</div>
+	</div>
+    
+{% endblock %}

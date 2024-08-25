@@ -1,0 +1,201 @@
+{% extends 'base_member.html.twig' %}
+
+{% block title %}Modifier profil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/assets/styles/css/edit_profil_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock %}
+
+{% block body %}
+
+<div class="main-body">
+
+<div class="container-body">
+    <div class="container-table">
+
+        <h1>Modifier profil</h1>
+
+        {{ form_start(form, {'attr': {'class': 'form-container'}, 'enctype':'multipart/form-data'}) }}
+
+        {# Champs nom #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.last_name, 'Nom') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.last_name, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.last_name) }}
+            </div>
+        </div>
+
+        {# Champs prénom #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.first_name, 'Prénom') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.first_name, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.first_name) }}
+            </div>
+        </div>
+
+        {# Champ email #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.email, 'Email') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.email, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+
+        {# Champ job_title #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.job_title, 'Poste occupé') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.job_title, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.job_title) }}
+            </div>
+        </div>
+
+       {# Champ profile_picture #}
+<div class="form-row">
+    <div class="form-cell-label yellow-background">
+        {{ form_label(form.profilePictureFilename, 'Photo de profil') }}
+    </div>
+    <div class="form-cell">
+        {% if profileUser.profilePictureFilename %}
+            <img src="{{ asset('images/products/' ~ profileUser.profilePictureFilename) }}" alt="Photo de profil" />
+            <div>
+                {{ form_widget(form.removeProfilePicture) }}
+                {{ form_label(form.removeProfilePicture, 'Supprimer') }}
+            </div>
+        {% else %}
+            <div class="hidden">
+                {{ form_widget(form.removeProfilePicture) }}
+                {{ form_label(form.removeProfilePicture, 'Supprimer') }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.profilePictureFilename, {'attr': {'class': 'custom-input'}}) }}
+        {{ form_errors(form.profilePictureFilename) }}
+    </div>
+</div>
+
+
+{# Champ cover_picture #}
+<div class="form-row">
+    <div class="form-cell-label yellow-background">
+        {{ form_label(form.coverPictureFilename, 'Image de couverture') }}
+    </div>
+    <div class="form-cell">
+        {% if profileUser.coverPictureFilename %}
+            <img src="{{ asset('images/products/' ~ profileUser.coverPictureFilename) }}" alt="Image de couverture" />
+            <div>
+                {{ form_widget(form.removeCoverPicture) }}
+                {{ form_label(form.removeCoverPicture, 'Supprimer') }}
+            </div>
+        {% else %}
+            <div class="hidden">
+                {{ form_widget(form.removeCoverPicture) }}
+                {{ form_label(form.removeCoverPicture, 'Supprimer') }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.coverPictureFilename, {'attr': {'class': 'custom-input'}}) }}
+        {{ form_errors(form.coverPictureFilename) }}
+    </div>
+</div>
+
+
+
+
+
+
+         {# Champ description #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.description, 'Description') }}
+            </div>
+            <div class="form-cell">
+               {{ form_widget(form.description, {'attr': {'class': 'custom-input textarea-description'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+        </div>
+
+        {# Champ chocolateShop #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.chocolateShop, 'Chocolaterie') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.chocolateShop, {'attr': {'class': 'custom-input dropdown'}}) }}
+                {{ form_errors(form.chocolateShop) }}
+            </div>
+        </div>
+
+        {# Champ facebook #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.facebook_link, 'Lien Facebook') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.facebook_link, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.facebook_link) }}
+            </div>
+        </div>
+
+        {# Champ twitter #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.twitter_link, 'Lien Twitter') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.twitter_link, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.twitter_link) }}
+            </div>
+        </div>
+
+        {# Champ instagram #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.instagram_link, 'Lien Instagram') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.instagram_link, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.instagram_link) }}
+            </div>
+        </div>
+
+        {# Champ linkedin #}
+        <div class="form-row">
+            <div class="form-cell-label yellow-background">
+                {{ form_label(form.linkedin_link, 'Lien LinkedIn') }}
+            </div>
+            <div class="form-cell">
+                {{ form_widget(form.linkedin_link, {'attr': {'class': 'custom-input'}}) }}
+                {{ form_errors(form.linkedin_link) }}
+            </div>
+        </div>
+
+        {# Bouton de soumission #}
+        <div class="container-button-create">
+            <button type="submit" class="btn-create">
+                <span><i class="fa-solid fa-floppy-disk"></i>{{ button_label|default('Enregistrer') }}</span>
+            </button>
+        </div>
+        {{ form_end(form) }}
+
+        {# Lien de retour #}
+        <a href="{{ path('profile') }}" class="btn-edit">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Retour au profil</span>
+        </a>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,233 @@
+@import "../includes/variables.less";
+@import "../includes/mixins.less";
+@import "../includes/fonts.less";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body{
+  font-family: 'Montserrat',sans-serif;
+}
+
+.menu-vertical {
+  background-color: #f7f7f8;
+  width: 23%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+
+  .section-profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 50px;
+    background-color: #1f2547;
+    height: 40%;
+    gap: 20px;
+    padding: 40px 20px 20px 20px;
+
+    .photo-profil {
+      background-color: #f2bf2c;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .name-details {
+      color: @colorTextButton;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.6rem;
+
+      .firstname {
+        font-family: "Playfair Display", serif;
+      }
+      .lastname {
+        font-family: "Playfair Display", serif;
+        text-transform: uppercase;
+      }
+    }
+
+    .voir-profil {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      width: 90%;
+      background-color: @colorTeal;
+      color: @colorTextButton;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #icons {
+      display: none;
+      cursor: pointer;
+    }
+     button a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+
+  #links {
+    background-color: @colorNightBlue;
+    height: 40%;
+
+    .links-container {
+      padding-top: 30px;
+      li {
+        padding-left: 10px;
+        list-style: none;
+        &:hover {
+          background-color: @colorLightTeal;
+        }
+      }
+    }
+
+    .menu-link {
+      display: block;
+      padding: 15px 20px;
+      color: @colorTextButton;
+      text-decoration: none;
+    }
+    #btn {
+      display: none;
+    }
+  }
+
+  .section-logo {
+    padding: 20px;
+    text-align: center;
+    height: 20%;
+    background-color: @colorNightBlue;
+    .fullcenter();
+
+    .img-container {
+      width: 130px;
+      height: 130px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1290px) {
+  .menu-vertical {
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    position: fixed;
+    top: 0;
+    
+    z-index: 5;
+    // justify-content: space-between;
+
+    .section-logo {
+      width: 25%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+
+      .img-container {
+        width: 60px;
+        height: 60px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+
+    #links {
+      position: fixed;
+      right: -100%;
+      top: 8vh;
+      z-index: 4;
+      width: 100%;
+      transition: 0.25s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .links-container {
+        display: flex;
+        height: 100%;
+        padding: 0;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        a {
+          text-decoration: none;
+          color: white;
+          width: 100%;
+        }
+      }
+
+      #btn {
+        display: block;
+      }
+    }
+    #links.activ {
+      right: 0;
+    }
+
+    .section-profil {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      padding: 0;
+      width: 75%;
+      height: 100%;
+      padding-right: 20px;
+      .photo-profil {
+        display: none;
+      }
+
+      .name-details {
+        font-size: 1rem;
+        height: 100%;
+        padding-top: 6px;
+        gap: 5px;
+        .firstname {
+          font-family: "Montserrat", sans-serif;
+        }
+      }
+
+      .voir-profil {
+        display: none;
+      }
+      #icons {
+        display: flex;
+      }
+      #icons:before {
+        content: "\2630";
+        color: #f7f7f8;
+        font-size: 1.5rem;
+      }
+      // .activ #icons:before {
+      //   content: "\2715";
+      // }
+    }
+  }
+}

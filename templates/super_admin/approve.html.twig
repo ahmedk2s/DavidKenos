@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Approuver les administrateurs{% endblock %}
+
+{% block body %}
+
+<h1>Approuver les administrateurs</h1>
+
+{% if admins|length > 0 %}
+
+<form action="{{ path('approve_users') }}" method="post" class="mt-4">
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.admins) }}
+        {{ form_widget(form.admins) }}
+    </div>
+
+    <div class="form-group mt-3">
+        {{ form_widget(form.approve) }}
+    </div>
+    {{ form_end(form) }}
+</form>
+
+{% else %}
+
+<p>Il n'y a actuellement aucun administrateur en attente d'approbation.</p>
+
+{% endif %}
+
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+{% for flashMessage in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+{% endblock %}
