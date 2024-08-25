@@ -52,10 +52,10 @@ class AdminController extends AbstractController
             $isAdminWaitingForApproval = count($adminsWaitingForApproval) > 0;
         }
 
-        $showApprovalPopup = false;
-        if ($user instanceof User && $user->getIsApproved() && !$user->getHasSeenApprovalPopup()) {
-            $showApprovalPopup = true;
-        }
+        // $showApprovalPopup = false;
+        // if ($user instanceof User && $user->getIsApproved() && !$user->getHasSeenApprovalPopup()) {
+        //     $showApprovalPopup = true;
+        // }
 
         if (!$slug) {
             $slug = $this->slugService->createUniqueSlug(
@@ -86,23 +86,23 @@ class AdminController extends AbstractController
             'chocolateCount' => $chocolateCount,
             'commentCount' => $commentCount,
             'latestNews' => $latestNews,
-            'showApprovalPopup' => $showApprovalPopup,
+            // 'showApprovalPopup' => $showApprovalPopup,
             'isAdminWaitingForApproval' => $isAdminWaitingForApproval,
             'adminsWaitingForApproval' => $adminsWaitingForApproval,
         ]);
     }
 
-    #[Route('/confirm-approval-popup', name: 'confirm_approval_popup')]
-    public function confirmApprovalPopup(EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-        if ($user instanceof User && $user->getIsApproved() && !$user->getHasSeenApprovalPopup()) {
-            $user->setHasSeenApprovalPopup(true);
-            $entityManager->persist($user);
-            $entityManager->flush();
-        }
+    // #[Route('/confirm-approval-popup', name: 'confirm_approval_popup')]
+    // public function confirmApprovalPopup(EntityManagerInterface $entityManager): Response
+    // {
+    //     $user = $this->getUser();
+    //     if ($user instanceof User && $user->getIsApproved() && !$user->getHasSeenApprovalPopup()) {
+    //         $user->setHasSeenApprovalPopup(true);
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
+    //     }
 
-        return new Response(null, Response::HTTP_OK);
-    }
+    //     return new Response(null, Response::HTTP_OK);
+    // }
 }
 

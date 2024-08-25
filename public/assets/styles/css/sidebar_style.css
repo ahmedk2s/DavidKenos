@@ -59,6 +59,10 @@ body {
 .menu-vertical .section-profil .name-details .firstname {
   font-family: "Playfair Display", serif;
 }
+.menu-vertical .section-profil .name-details .lastname {
+  font-family: "Playfair Display", serif;
+  text-transform: uppercase;
+}
 .menu-vertical .section-profil .voir-profil {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
@@ -120,7 +124,7 @@ body {
   height: 100%;
   object-fit: contain;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1290px) {
   .menu-vertical {
     height: 8vh;
     width: 100%;

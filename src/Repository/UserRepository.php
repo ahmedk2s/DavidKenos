@@ -103,6 +103,17 @@ class UserRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAdminsWaitingForApproval(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->andWhere('u.isApproved = :isApproved')
+            ->setParameter('role', '%ROLE_ADMIN%')
+            ->setParameter('isApproved', false)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
 
 
