@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\News;
+use App\Model\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<News>
@@ -37,6 +39,24 @@ class NewsRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
 }
+    public function findBySearch(SearchData $searchData)
+{
+    $data = $this->createQueryBuilder('p');
+        // ->addOrderBy('p.uptatedAt', 'DESC');
+
+    if (!empty($searchData->q)) {
+        $data = $data
+            ->andWhere('p.title LIKE :q')
+            ->setParameter('q', "%{$searchData->q}%");
+    }
+
+    $news = $data
+        ->getQuery()
+        ->getResult();
+
+    return $news;
+}
+
 
 //    /**
 //     * @return News[] Returns an array of News objects
@@ -63,3 +83,4 @@ class NewsRepository extends ServiceEntityRepository
 //        ;
 //    }
 }
+

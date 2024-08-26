@@ -16,14 +16,14 @@
             <div class="logo">
                 <img src="{{ asset('/images/logo-david-kenos.png') }}" alt="Logo de l'entreprise">
             </div>
-
+            
             <div class="title">
                 <h1>Bienvenue,</h1>
                 <p>dans votre administration</p>
             </div>
         </div>
          <nav>
-        <div id="burger-menu-button"><i class="fa-solid fa-bars"></i></div>
+        <div id="burger-menu-button"><i class="fa-solid fa-bars"></i></div> 
         <div class="nav-container" id="nav-container">
             <ul>
                 <li><a href="{{ path('app_accueil') }}">Accueil</a></li>
@@ -32,7 +32,7 @@
                     <i class="fas fa-sign-out-alt"></i>
                 </li>
                 <li>
-                    Chocolaterie
+                    Chocolaterie 
                     {% if 'ROLE_SUPER_ADMIN' not in app.user.roles %}
                     {{ user.chocolateShop }}
                 {% endif %}

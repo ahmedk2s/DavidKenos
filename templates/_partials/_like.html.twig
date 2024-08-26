@@ -1,14 +1,11 @@
-<div >
-	<div class="like">
-		{% if app.user %}
-			<a href="{{ path('like.post', {id: post.id}) }}" data-action="like" data-nb={{ post.likes|length }}>
-			{% endif %}
-
-			<span >{{ post.likes|length }}
-				J'aime</span>
-			{% if app.user %}
-			</a>
-		{% endif %}
-	</div>
+<div>
+    <div class="like">
+        {% if app.user %}
+            <a href="#" class="like-link" data-action="like" data-post-id="{{ post.id }}" data-nb="{{ post.likes|length }}" data-url="{{ path('like.post', { id: post.id }) }}">
+                <span>{{ post.likes|length }} J'aime</span>
+            </a>
+        {% else %}
+            <span>{{ post.likes|length }} J'aime</span>
+        {% endif %}
+    </div>
 </div>
-

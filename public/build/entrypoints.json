@@ -1,0 +1,22 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_css_all_css.css",
+        "/build/app.css"
+      ]
+    },
+    "css/profile": {
+      "js": [
+        "/build/runtime.js"
+      ],
+      "css": [
+        "/build/css/profile.css"
+      ]
+    }
+  }
+}

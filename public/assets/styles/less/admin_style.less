@@ -26,7 +26,7 @@ header {
     border-bottom: 1px solid black;
     z-index: 1;
     white-space: nowrap;
-    
+
     &:after {
         content: "";
         position: absolute;
@@ -37,7 +37,7 @@ header {
         background-color: #11a197;
         opacity: 0.9;
     }
-    
+
     .top-container {
         display: flex;
         align-items: center;
@@ -45,18 +45,18 @@ header {
         height: 40%;
         width: auto;
     }
-    
+
     .logo {
         margin-top: -30px;
         margin-left: 10%;
         z-index: 1;
-        
+
         img {
             width: 80%;
             height: auto;
         }
     }
-    
+
     .title {
         z-index: 1;
         text-align: center;
@@ -68,7 +68,7 @@ header {
         align-self: center;
         width: 100%;
         margin-left: 220px;
-        
+
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -76,7 +76,7 @@ header {
             font-size: 45px;
             font-weight: 400;
         }
-        
+
         p {
             font-family: 'Montserrat', sans-serif;
             color: #fff;
@@ -85,53 +85,53 @@ header {
             white-space: nowrap;
         }
     }
-    
+
     nav {
         position: relative;
         margin-right: 5%;
         z-index: 1;
         margin-top: -150px;
-        
+
         .nav-container {
             display: flex;
             align-items: center;
             align-self: flex-start;
             margin-top: -20px;
         }
-        
+
         ul {
             list-style-type: none;
             display: flex;
             align-items: center;
             gap: 15px;
             margin-top: 10px;
-            
+
             li {
                 margin-right: 20px;
                 font-size: 0.8em;
-                
+
                 a {
                     text-decoration: none;
                     color: #000;
                 }
-                
+
                 &.li-flex {
                     display: flex;
                     align-items: center;
                 }
             }
         }
-        
+
         .circle-container {
             margin-top: 10px;
-            
+
             .outer-circle {
                 width: 35px;
                 height: 35px;
                 border: 3px solid #fff;
                 border-radius: 50%;
                 .fullcenter();
-                
+
                 .inner-circle {
                     width: 30px;
                     height: 30px;
@@ -143,13 +143,62 @@ header {
     }
 }
 
+.admin-approval-count {
+    background-color: @colorYellow;
+    color: #777;
+    border-radius: 50%;
+    padding: 0.3em 0.6em;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+
+// Style du popup
+
+.adminApprovalPopup {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    background-color: @colorYellow;
+    color: #1f2547;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    transition: top 0.5s ease;
+
+    .close-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        cursor: pointer;
+        color: #1f2547;
+        font-size: 1.2rem;
+    }
+
+    &.showPopup {
+        top: 10%;
+    }
+
+    &.hidePopup {
+        top: -100%;
+    }
+}
+
+
 section {
     width: 100%;
     height: 60vh;
     background-color: #eee;
     z-index: 2;
     position: relative;
-    
+
     .cards-section {
         display: flex;
         flex-direction: column;
@@ -158,7 +207,7 @@ section {
         margin-top: -30px;
         height: 25vh;
     }
-    
+
     .card-row {
         .dflex();
         justify-content: flex-start;
@@ -168,7 +217,7 @@ section {
         min-height: max-content;
         margin-right: auto;
     }
-    
+
     .card {
         background-color: white;
         width: 28%;
@@ -184,7 +233,7 @@ section {
         margin-bottom: 40px;
         margin-top: -40px;
         height: 30%;
-        
+
         .content {
             display: flex;
             flex-direction: row;
@@ -194,11 +243,11 @@ section {
 
         }
 
-        .content-circle{
+        .content-circle {
             width: 26%;
             .fullcenter();
         }
-        
+
         .text-and-button {
             display: flex;
             flex-direction: column;
@@ -207,7 +256,7 @@ section {
             margin-left: 20px;
             margin-top: 10px;
         }
-        
+
         .circle {
             background-color: @colorYellow;
             width: 80px;
@@ -216,24 +265,35 @@ section {
             margin-bottom: 40px;
         }
 
-        .circle-number{
+        .circle-number {
             font-family: 'Playfair Display';
             font-style: italic;
             font-size: 3em;
             color: #777;
         }
 
-        .number-user{
-            margin-top: 5px;
+        .number-user {
+            margin-top: -5px;
+            margin-left: 5px;
         }
-        
+
+        .number-bis {
+            margin-top: 5px;
+            margin-left: 1px;
+        }
+
+        .number-ter {
+            margin-top: 0;
+            margin-left: 2px;
+        }
+
         .card-text {
             h3 {
                 margin: 0;
                 font-size: 24px;
                 text-align: left;
             }
-            
+
             p {
                 margin: 0;
                 margin-bottom: 20px;
@@ -242,7 +302,7 @@ section {
                 white-space: nowrap;
             }
         }
-        
+
         button {
             background-color: @colorNightBlue;
             color: white;
@@ -252,7 +312,7 @@ section {
             cursor: pointer;
             font-size: 16px;
             margin-left: auto;
-            
+
             &.common-button {
                 margin: 0 auto;
                 display: block;
@@ -260,24 +320,29 @@ section {
             }
         }
     }
-     
+
+}
+
+section .card .content-circle .circle-number.number-user {
+    margin-top: -3px;
+    margin-right: 3px;
 }
 
 .card.center-card {
-        width: 37%;
-        min-height: 300px;
-    }
+    width: 37%;
+    min-height: 300px;
+}
 
-.content-circle-news{
+.content-circle-news {
     width: 20%;
     .fullcenter();
 }
 
-.card-text.text-news{
+.card-text.text-news {
     margin-top: -40px;
 }
 
-.latest-news{
+.latest-news {
     display: flex;
     flex-direction: column;
     // flex-wrap: wrap;
@@ -288,11 +353,11 @@ section {
     gap: 20px;
 }
 
-.news-date{
+.news-date {
     margin-right: 20px;
 }
 
-.news-content{
+.news-content {
     font-weight: 600;
     margin-left: 20px;
 }
@@ -304,14 +369,14 @@ section {
 
 
 
-.button{
+.button {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.button-card{
+.button-card {
     display: flex;
     width: auto;
     justify-content: flex-start;
@@ -321,23 +386,25 @@ section {
     }
 }
 
-.card.card-category, .card.card-category, .card.card-comment{
+.card.card-category,
+.card.card-category,
+.card.card-comment {
     margin-right: auto;
     margin-left: auto;
 }
 
-.card.card-category{
+.card.card-category {
     margin-left: 0;
     margin-top: -200px;
 }
 
-.card.card-comment{
-    margin-right: 50px;
+.card.card-comment {
+    margin-right: 45px;
     margin-top: -200px;
 }
 
-.card.card-chocolate{
-    margin-top: -40px;
+.card.card-chocolate {
+    margin-top: -60px;
 }
 
 .footer {
@@ -346,15 +413,15 @@ section {
     width: 100%;
     min-height: 6.5vh;
 
-    p{
+    p {
         text-align: center;
         font-size: 13px;
     }
 }
 
 // desktop
-@media (min-width: 1275px) and (max-width: 1920px){
-   body nav #burger-menu-button {
+@media (min-width: 1275px) and (max-width: 1920px) {
+    body nav #burger-menu-button {
         display: none;
     }
 
@@ -371,58 +438,58 @@ section {
         margin-bottom: 5px;
     }
 
-   body nav .circle-container {
-        display: flex; 
+    body nav .circle-container {
+        display: flex;
         align-items: center;
         margin-bottom: 5px;
-   }
+    }
 }
 
-@media (min-width: 1275px) and (max-width: 1500px){
+@media (min-width: 1275px) and (max-width: 1500px) {
 
-    section{
+    section {
         height: unset;
     }
 
-    .card.card-comment{
+    .card.card-comment {
         margin-right: 35px;
         margin-top: -200px;
     }
 
-    .card.card-category{
+    .card.card-category {
         margin-top: -200px;
     }
 }
 
-@media (min-width: 1274px) and (max-width: 1365px){
-    section{
+@media (min-width: 1274px) and (max-width: 1365px) {
+    section {
         height: unset;
     }
 
-    .card.card-comment{
+    .card.card-comment {
         margin-right: 30px;
         margin-top: -200px;
     }
 
-    .card.card-category{
+    .card.card-category {
         margin-top: -200px;
     }
 }
 
-@media (min-width:600px) and (max-width: 720px){
-    .logo{
+@media (min-width:600px) and (max-width: 720px) {
+    .logo {
         display: none;
     }
 }
 
-@media (min-width: 600px) and (max-width: 915px){
-    
-    .button-card .common-button{
+@media (min-width: 600px) and (max-width: 915px) {
+
+    .button-card .common-button {
         font-size: 15px;
         width: 100%;
         text-align: left;
     }
-    
+
     .card-row {
         flex-direction: column;
         align-items: center;
@@ -430,22 +497,22 @@ section {
         margin: 0;
         padding: 0;
     }
-    
+
     section .card {
         width: 80%;
     }
 
-    section .card.card-user{
+    section .card.card-user {
         margin: 0 auto;
         margin-top: -30px;
     }
 
-    section .card.center-card{
+    section .card.center-card {
         width: 80%;
         margin: 0 auto;
     }
 
-    section .card.center-card .circle{
+    section .card.center-card .circle {
         width: 60px;
         height: 60px;
         margin-top: 15px;
@@ -456,56 +523,72 @@ section {
     section .card.card-chocolate,
     section .card.card-comment {
         margin: 0 auto;
-}
+    }
 
     section .card.card-comment {
         margin-bottom: 30px;
-}
+    }
 
-.card-text.text-news {
-    margin-top: -25px;
-}
+    .card-text.text-news {
+        margin-top: -25px;
+    }
 
-section .latest-news {
-     margin-top: 0; 
-}
+    section .latest-news {
+        margin-top: 0;
+    }
 
 
-    section .card .content-circle{
+    section .card .content-circle {
         width: auto;
         margin-left: 0;
         margin-right: 0;
 
     }
 
-    section .card .content-circle .circle{
+    section .card .content-circle .circle {
         width: 60px;
         height: 60px;
     }
 
-    section .card .content-circle .circle-number{
+    section .card .content-circle .circle-number {
         font-size: 2.5em;
+        // margin-top: 0;
+    }
+
+    section .card.center-card .circle .circle-number,
+    section .card-category .circle .circle-number,
+    section .card-chocolate .circle .circle-number,
+    section .card-post .circle .circle-number,
+    section .card-comment .circle .circle-number,
+    section .card-comment .circle .circle-number .number-ter {
+        margin-top: -2px;
+        margin-left: 2px;
+    }
+
+    section .card .number-user {
+        margin-top: -5px;
+    }
+
+
+    section .card.center-card .circle .circle-number {
+        font-size: 2.5em;
+        margin-top: -2px;
+    }
+
+    section .card-chocolate .circle .circle-number.number-bis {
         margin-top: 0;
     }
 
-   section .card.center-card .circle .circle-number,
-section .card-category .circle .circle-number,
-section .card-chocolate .circle .circle-number,
-section .card-post .circle .circle-number,
-section .card-comment .circle .circle-number {
-    margin-top: -5px;
-}
-
-section .card.center-card .circle .circle-number {
-    font-size: 2.5em;
-}
+    section .card-category .circle .circle-number.number-ter {
+        margin-top: -5px;
+    }
 
 
-    .content-circle-news{
+    .content-circle-news {
         width: auto;
     }
 
-    .footer p{
+    .footer p {
         font-size: 13px;
     }
 }
@@ -525,10 +608,10 @@ section .card.center-card .circle .circle-number {
 
     header {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
     }
 
-    header .logo{
+    header .logo {
         width: 25%;
         margin-right: -85px;
         margin-top: 85px;
@@ -542,22 +625,22 @@ section .card.center-card .circle .circle-number {
         margin-top: 80px;
     }
 
-    header .title h1{
+    header .title h1 {
         font-size: 65px;
     }
 
-    header .title p{
+    header .title p {
         font-size: 23px;
     }
 
     nav .nav-container {
         order: 2;
-        width: 100%; 
-        text-align: center; 
-        display: flex; 
-        flex-direction: row; 
-        justify-content: center; 
-        align-items: center; 
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 50px;
         margin-left: 30px;
     }
@@ -569,25 +652,25 @@ section .card.center-card .circle .circle-number {
     nav .nav-container ul {
         display: flex;
         flex-direction: row;
-        margin-right: 10px; 
+        margin-right: 10px;
         color: #fff;
     }
 
     nav .nav-container ul li {
-        display: inline-block; 
+        display: inline-block;
         margin-right: 20px;
         font-size: 15px;
     }
 
-    nav .nav-container ul li a{
+    nav .nav-container ul li a {
         color: #fff;
     }
 
-    nav .nav-container ul li i{
+    nav .nav-container ul li i {
         color: #000;
     }
 
-    section{
+    section {
         height: unset;
     }
 
@@ -597,65 +680,67 @@ section .card.center-card .circle .circle-number {
         justify-content: space-between;
     }
 
-    section .card-row{
+    section .card-row {
         padding-left: 30px;
     }
 
     .cards-section .card {
-        flex: 0 0 50%; /* Les cartes prendront environ 50% de la largeur de card-row */
-        margin-bottom: 20px; 
+        flex: 0 0 50%;
+        /* Les cartes prendront environ 50% de la largeur de card-row */
+        margin-bottom: 20px;
         margin-left: -20px;
-       
+
     }
 
-    .card.center-card, .card-category{
+    .card.center-card,
+    .card-category {
         margin-right: 10px;
     }
 
-    .content-circle-news{
+    .content-circle-news {
         width: auto;
     }
 
-    section .content .content-circle{
+    section .content .content-circle {
         width: auto;
     }
 
-    section .content .text-and-button .card-text h3{
+    section .content .text-and-button .card-text h3 {
         font-size: 25px;
     }
 
-    section .content .text-and-button .card-text p{
+    section .content .text-and-button .card-text p {
         font-size: 19px;
     }
 
-    section .button-card .common-button{
+    section .button-card .common-button {
         font-size: 17px;
     }
 
-    section .latest-news{
+    section .latest-news {
         margin-top: 25px;
     }
 
-    .card.card-post{
+    .card.card-post {
         z-index: 3;
-        margin-top: -215px;
+        margin-top: -172px;
     }
 
-    .card.card-chocolate{
+    .card.card-chocolate {
         z-index: 3;
-        margin-top: -213px;
+        margin-top: -172px;
     }
 
-    .card.card-comment{
-        margin-top: -60px;
+    .card.card-comment {
+        margin-top: -35px;
 
     }
 
-   .card.card-category{
-    margin-top: -35px;
-   }
+    .card.card-category {
+        margin-top: -35px;
+    }
 
-    .footer p{
+    .footer p {
         font-size: 20px;
     }
 }
@@ -664,37 +749,37 @@ section .card.center-card .circle .circle-number {
 @media (min-width: 480px) and (max-width: 600px) {
     header .top-container {
         flex-direction: column;
-        align-items: center; 
-        width: 100%; 
+        align-items: center;
+        width: 100%;
     }
-    
+
     header .logo {
         order: 2;
         text-align: center;
         width: 100%;
         margin: auto;
         margin-top: 10px;
-        
+
         img {
             max-width: 150px;
-            display: block; 
-            margin: 0 auto; 
+            display: block;
+            margin: 0 auto;
         }
     }
-    
+
     header .title {
         order: 1;
         text-align: center;
         width: 100%;
-        margin: 0 auto; 
+        margin: 0 auto;
         align-self: center;
     }
 
-    header .title h1{
+    header .title h1 {
         font-size: 35px;
     }
 
-    header .title p{
+    header .title p {
         font-size: 20px;
         justify-content: center;
     }
@@ -714,9 +799,9 @@ section .card.center-card .circle .circle-number {
         font-size: 30px;
         cursor: pointer;
     }
-    
+
     nav .nav-container {
-        display: none; 
+        display: none;
         flex-direction: column;
         align-items: center;
         position: fixed;
@@ -728,7 +813,7 @@ section .card.center-card .circle .circle-number {
         border-radius: 5px;
         z-index: 1000;
     }
-    
+
     nav .nav-container ul {
         padding: 5px;
         margin: 0;
@@ -738,77 +823,77 @@ section .card.center-card .circle .circle-number {
         justify-content: center;
         margin-bottom: -10px;
     }
-    
+
     nav .nav-container ul li {
         margin-bottom: 10px;
         text-align: center;
         margin-left: 10px;
     }
-    
+
     nav .circle-container {
-        display: none; 
+        display: none;
     }
 
-    section{
+    section {
         height: auto;
-        
+
     }
 
-    section .card-text{
+    section .card-text {
         width: 100%;
         margin: auto auto;
     }
 
-    section .content .card-text h3{
+    section .content .card-text h3 {
         font-size: 18px;
     }
 
-    section .content .card-text p{
+    section .content .card-text p {
         font-size: 15px;
     }
 
-    .button{
+    .button {
         width: 90%;
     }
 
-    section .card.center-card .button{
+    section .card.center-card .button {
         width: 95%;
     }
 
-    .button-card .common-button{
+    .button-card .common-button {
         font-size: 15px;
         width: 100%;
         text-align: left;
     }
 
-    section .card-row{
+    section .card-row {
         padding-left: 10px;
         padding-right: 10px;
         gap: 0;
-        
+
     }
-    
+
     .card-row {
         flex-direction: column;
         align-items: center;
         margin-left: 0;
     }
-    
+
     section .card {
         width: 100%;
         margin: 0;
         margin-bottom: 10px;
     }
 
-    section .card.card-user{
+    section .card.card-user {
         margin-top: 10px;
     }
 
-    section .card.center-card{
+    section .card.center-card {
         width: 100%;
     }
 
-    section .card.center-card .circle{
+    section .card.center-card .circle {
         width: 60px;
         height: 60px;
     }
@@ -819,84 +904,92 @@ section .card.center-card .circle .circle-number {
     section .card.card-comment {
         margin: 0 auto;
         margin-bottom: 10px;
-}
+    }
 
     section .card.card-comment {
         margin-bottom: 10px;
-}
+    }
 
-    section .card .content-circle{
+    section .card .content-circle {
         width: auto;
         margin-left: 0;
         margin-right: 0;
     }
 
-    section .card .content-circle .circle{
+    section .card .content-circle .circle {
         width: 60px;
         height: 60px;
     }
 
-    section .card .content-circle .circle-number{
+    section .card .content-circle .circle-number {
         font-size: 2.5em;
+        margin-top: -5px;
+    }
+
+
+    section .card.center-card .circle .circle-number,
+    section .card-category .circle .circle-number,
+    section .card-chocolate .circle .circle-number,
+    section .card-post .circle .circle-number,
+    section .card-comment .circle .circle-number {
+        margin-top: -2px;
+    }
+
+    section .card.center-card .circle .circle-number {
+        font-size: 2.5em;
+    }
+
+    section .card-chocolate .circle .circle-number.number-bis {
         margin-top: 0;
     }
 
-   section .card.center-card .circle .circle-number,
-section .card-category .circle .circle-number,
-section .card-chocolate .circle .circle-number,
-section .card-post .circle .circle-number,
-section .card-comment .circle .circle-number {
-    margin-top: -5px;
-}
+    section .card-category .circle .circle-number.number-ter {
+        margin-top: -5px;
+    }
 
-section .card.center-card .circle .circle-number {
-    font-size: 2.5em;
-}
-
-
-    .content-circle-news{
+    .content-circle-news {
         width: auto;
     }
 
-    .footer p{
+    .footer p {
         font-size: 13px;
     }
 }
 
-@media (min-width: 320px) and (max-width: 480px){
+@media (min-width: 320px) and (max-width: 480px) {
     header .top-container {
         flex-direction: column;
-        align-items: center; 
-        width: 100%; 
+        align-items: center;
+        width: 100%;
     }
-    
+
     header .logo {
         order: 2;
         text-align: center;
         width: 100%;
         margin: auto;
         margin-top: 10px;
-        
+
         img {
             max-width: 150px;
-            display: block; 
-            margin: 0 auto; 
+            display: block;
+            margin: 0 auto;
         }
     }
-    
+
     header .title {
         order: 1;
         text-align: center;
         width: 100%;
-        margin: 0 auto; 
+        margin: 0 auto;
         align-self: center;
     }
 
-    header .title h1{
+    header .title h1 {
         font-size: 35px;
     }
 
-    header .title p{
+    header .title p {
         font-size: 18px;
         justify-content: center;
     }
@@ -916,9 +1009,9 @@ section .card.center-card .circle .circle-number {
         font-size: 30px;
         cursor: pointer;
     }
-    
+
     nav .nav-container {
-        display: none; 
+        display: none;
         flex-direction: column;
         align-items: center;
         position: fixed;
@@ -930,7 +1023,7 @@ section .card.center-card .circle .circle-number {
         border-radius: 5px;
         z-index: 1000;
     }
-    
+
     nav .nav-container ul {
         padding: 5px;
         margin: 0;
@@ -940,91 +1033,91 @@ section .card.center-card .circle .circle-number {
         justify-content: center;
         margin-bottom: -10px;
     }
-    
+
     nav .nav-container ul li {
         margin-bottom: 10px;
         text-align: center;
         margin-left: 10px;
     }
-    
+
     nav .circle-container {
-        display: none; 
+        display: none;
     }
 
-    section{
+    section {
         height: auto;
-        
+
     }
 
-    section .card-text{
+    section .card-text {
         width: 100%;
         margin: auto auto;
     }
 
-    section .content .card-text h3{
+    section .content .card-text h3 {
         font-size: 18px;
     }
 
-    section .content .card-text p{
+    section .content .card-text p {
         font-size: 15px;
     }
 
-    .button{
+    .button {
         width: 90%;
     }
 
-    .button-card .common-button{
+    .button-card .common-button {
         font-size: 15px;
         width: 100%;
         text-align: left;
     }
 
-     .card.center-card {
+    .card.center-card {
         display: flex;
         flex-direction: column;
-        justify-content: space-between; 
-        height: 100%; 
+        justify-content: space-between;
+        height: 100%;
     }
 
     .button-card {
-        align-self: stretch; 
-        margin-top: auto; 
+        align-self: stretch;
+        margin-top: auto;
     }
 
-    .card.center-card .button-card{
+    .card.center-card .button-card {
         margin-left: 75px;
         margin-top: -40px;
     }
 
-    section .card-row{
+    section .card-row {
         padding-left: 0;
         padding-right: 0;
         gap: 0;
-        
+
     }
-    
+
     .card-row {
         flex-direction: column;
         align-items: center;
         // margin-left: 0;
     }
-    
+
     section .card {
         width: 100%;
         margin: 0;
         margin-bottom: 10px;
     }
 
-    section .card.card-user{
+    section .card.card-user {
         margin-top: 10px;
     }
 
-    section .card.center-card{
+    section .card.center-card {
         width: 100%;
         min-height: 150px;
     }
 
-    section .card.center-card .circle{
+    section .card.center-card .circle {
         width: 60px;
         height: 60px;
     }
@@ -1035,50 +1128,58 @@ section .card.center-card .circle .circle-number {
     section .card.card-comment {
         margin: 0 auto;
         margin-bottom: 10px;
-}
+    }
 
     section .card.card-comment {
         margin-bottom: 10px;
-}
+    }
 
-    section .card .content-circle{
+    section .card .content-circle {
         width: auto;
         margin-left: 0;
         margin-right: 0;
     }
 
-    section .card .content-circle .circle{
+    section .card .content-circle .circle {
         width: 60px;
         height: 60px;
     }
 
-    section .card .content-circle .circle-number{
+    section .card .content-circle .circle-number {
         font-size: 2.5em;
-        margin-top: 0;
+        margin-top: -5px;
     }
 
     section .card.center-card .circle .circle-number,
-section .card-category .circle .circle-number,
-section .card-chocolate .circle .circle-number,
-section .card-post .circle .circle-number,
-section .card-comment .circle .circle-number {
-    margin-top: -5px;
-}
+    section .card-category .circle .circle-number,
+    section .card-chocolate .circle .circle-number,
+    section .card-post .circle .circle-number,
+    section .card-comment .circle .circle-number {
+        margin-top: -2px;
+    }
 
-section .card.center-card .circle .circle-number {
-    font-size: 2.5em;
-}
+    section .card.center-card .circle .circle-number {
+        font-size: 2.5em;
+    }
+
+    section .card-chocolate .circle .circle-number.number-bis {
+        margin-top: 0;
+    }
+
+    section .card-category .circle .circle-number.number-ter {
+        margin-top: -5px;
+    }
 
 
-    section .latest-news{
+    section .latest-news {
         display: none;
     }
 
-    .content-circle-news{
+    .content-circle-news {
         width: auto;
     }
 
-    .footer p{
+    .footer p {
         font-size: 13px;
     }
 }

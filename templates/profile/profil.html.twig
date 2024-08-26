@@ -1,6 +1,6 @@
 {% extends 'base_member.html.twig' %}
 
-{% block title %} Profil {% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -38,7 +38,7 @@
                     {% endif %}
 
                     {% if user.twitterLink %}
-                        <a href="{{ user.twitterLink }}"alt="Logo Twitter" class="icon-twitter">
+                        <a href="{{ user.twitterLink }}" alt="Logo Twitter" class="icon-twitter">
                             <i class="fa-brands fa-x-twitter"></i>
                         </a>
                     {% endif %}
@@ -51,7 +51,7 @@
                 </div>
 
                 {% if app.user and user.id != app.user.id %}
-                    <a href="{{ user.email }}" class="email-button">Envoyer un mail</a>
+                    <a href="mailto:{{ user.email }}" class="email-button">Envoyer un mail</a>
                 {% endif %}
             </div>
 
@@ -63,11 +63,13 @@
                 {% include '_partials/_post.html.twig' %}
             </div>
             
-            <div class="button-container">
-                <a href="{{ path('profile_edit', {'slug': user.slug}) }}" class="btn">Modifier mon profil</a>
-                <a href="{{ path('app_post_new_profil') }}" class="btn">Publier un post</a>
-                <a href="#" class="btn trombinoscope">Trombinoscope</a>
-            </div>
+            {% if app.user and user.id == app.user.id %}
+                <div class="button-container">
+                    <a href="{{ path('profile_edit', {'slug': user.slug}) }}" class="btn">Modifier mon profil</a>
+                    <a href="{{ path('app_post_new_profil') }}" class="btn">Publier un post</a>
+                    <a href="#" class="btn trombinoscope">Trombinoscope</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
